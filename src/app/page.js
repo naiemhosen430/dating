@@ -57,7 +57,7 @@ export default function Home() {
             'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ4Hk-8m9Cl5hs6vUw5yHfz59sPO66UxI5pw&usqp=CAU")',
           backgroundRepeat: "no-repeat",
         }}
-        className=" h-screen w-scree n opacity-40 lg:bg-cover text-center bg-contain bg-bottom pt-20"
+        className=" h-screen w-scree lg:bg-cover text-center bg-contain bg-bottom pt-20"
       >
         {/* when meeting eatch other */}
         {searchpplbox && (
@@ -73,9 +73,6 @@ export default function Home() {
               <p className="text-lg text-slate-500 p-4">{displayText}</p>
               <h1 className="text-lg pt-20">Tap to cencel the searching</h1>
             </div>
-            <button className="inline-block mt-16 lg:hidden hover:bg-slate-900 text-xl rounded-lg py-2 px-4 bg-slate-600 text-white font-bold">
-              Action
-            </button>
           </div>
         )}
 
@@ -85,9 +82,6 @@ export default function Home() {
             onClick={searchPeople}
             className="h-screen w-scree cursor-pointer"
           >
-            <button className="lg:inline-block hidden hover:bg-slate-900 text-xl w-5/12 rounded-lg py-2 px-4 bg-slate-600 text-white font-bold">
-              Action
-            </button>
             <div className="p-5 text-2xl font-bold h-3/6 bg-slate-800 w-11/12 lg:w-5/12 rounded-lg border m-auto">
               <h1>Tap to chat</h1>
               <p className="text-lg text-slate-500 p-4">
