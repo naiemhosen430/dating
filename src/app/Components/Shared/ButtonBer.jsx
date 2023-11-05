@@ -11,7 +11,7 @@ export default function ButtonBer() {
         <div className="bg-slate-900 rounded-2xl w-full p-2 flex justify-center items-center">
           <div className="text-2xl w-4/12 text-center">
             <Link
-              href={"/"}
+              href={"/feed"}
               className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-sm"
             >
               <CgFeed /> <span>Feed</span>
@@ -27,7 +27,7 @@ export default function ButtonBer() {
           </div>
           <div className="text-2xl w-4/12 text-center">
             <Link
-              href={"/"}
+              href={"/chat"}
               className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-sm"
             >
               <MdChat /> <span>Chat</span>
