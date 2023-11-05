@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Menu from "./Components/Shared/Menu";
+import ButtonBer from "./Components/Shared/ButtonBer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Menu />
         {children}
+        <ButtonBer />
       </body>
     </html>
   );

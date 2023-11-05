@@ -20,7 +20,9 @@ export default function Menu() {
     <>
       <div className="bg-slate-900 flex items-center p-4 px-4 shadow-md">
         <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl">
-          <Link href={"/"}>Migo</Link>
+          <Link href={"/"} onClick={toggleMenu}>
+            Migo
+          </Link>
         </h1>
         <ul className="lg:w-3/12 hidden lg:flex items-center space-x-4">
           <Link
