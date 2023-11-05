@@ -9,7 +9,7 @@ export default function Post() {
     <>
       <div className="p-2">
         {/* header */}
-        <div className="flex items-center">
+        <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
             <img
               className="w-10 m-auto h-10 rounded-full block"
