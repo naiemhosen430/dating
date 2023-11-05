@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { AiOutlineMessage } from "react-icons/ai";
-import { MdOutlineNotificationsNone } from "react-icons/md";
+import { MdHelp, MdOutlineNotificationsNone } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 
@@ -44,7 +43,7 @@ export default function Menu() {
             className="text-slate-500 text-2xl hover:text-white px-4 py-2 rounded-md"
             href={"/"}
           >
-            <AiOutlineMessage />
+            <MdHelp />
           </Link>
 
           <Link
