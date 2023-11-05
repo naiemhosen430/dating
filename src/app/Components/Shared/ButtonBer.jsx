@@ -7,12 +7,12 @@ import { MdChat } from "react-icons/md";
 export default function ButtonBer() {
   return (
     <>
-      <div className="fixed bottom-0 w-full p-6">
+      <div className="fixed bottom-0 w-full lg:p-6 p-4 px-2">
         <div className="bg-slate-900 rounded-2xl w-full p-2 flex justify-center items-center">
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/"}
-              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl"
+              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-lg"
             >
               <CgFeed /> <span>Feed</span>
             </Link>
@@ -20,7 +20,7 @@ export default function ButtonBer() {
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/"}
-              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl"
+              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-lg"
             >
               <LiaUserFriendsSolid /> <span>Meet</span>
             </Link>
@@ -28,7 +28,7 @@ export default function ButtonBer() {
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/"}
-              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl"
+              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-lg"
             >
               <MdChat /> <span>Meet</span>
             </Link>
