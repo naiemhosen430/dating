@@ -1,5 +1,6 @@
 import React from "react";
 import { CgSearch } from "react-icons/cg";
+import Post from "../Components/Box/Post";
 
 export default function page() {
   return (
@@ -11,10 +12,19 @@ export default function page() {
             type="search"
             name="text"
             id="text"
+            placeholder="Search for person or post"
           />
           <div className="text-2xl block w-2/12 text-center">
             <CgSearch className="inline-block text-slate-600" />
           </div>
+        </div>
+
+        {/* post */}
+        <div className="lg:flex p-4 space-x-2">
+          <div className="lg:w-7/12">
+            <Post />
+          </div>
+          <div className="w-5/12 lg:inline-block hidden">Hello</div>
         </div>
       </div>
     </>

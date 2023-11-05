@@ -6,7 +6,7 @@ import ChatBox from "../Components/Box/ChatBox";
 export default function page() {
   return (
     <>
-      <div className="space-y-4 p-2">
+      <div className="space-y-4 p-2 w-12/12 lg:w-4/12">
         <RecentlyBox />
         <InterestBox />
         <ChatBox />
