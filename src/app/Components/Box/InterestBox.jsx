@@ -9,53 +9,130 @@ export default function InterestBox() {
         <div className="py-2 space-y-2">
           <div className="overflow-x-auto">
             <div className="flex items-center space-x-2">
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
             </div>
           </div>
-
           <div className="overflow-x-auto">
             <div className="flex items-center space-x-2">
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
-              <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
-                Anime
-              </span>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
+              <Link href={"/people/id"}>
+                <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+                  Anime
+                </span>
+              </Link>
             </div>
           </div>
         </div>
