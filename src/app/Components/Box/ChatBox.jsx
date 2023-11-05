@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function ChatBox() {
@@ -8,11 +9,13 @@ export default function ChatBox() {
         <div className="space-y-2">
           <div className="flex items-center p-2 px-1">
             <div className="w-2/12 rounded-full">
-              <img
-                className="w-20 h-14 rounded-full"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ43v0swxDseKQjPoEV3QHvzltyPL6pBVef_Jztx_pD&s"
-                alt=""
-              />
+              <Link href={"/profile/id"}>
+                <img
+                  className="w-20 h-14 rounded-full"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ43v0swxDseKQjPoEV3QHvzltyPL6pBVef_Jztx_pD&s"
+                  alt=""
+                />
+              </Link>
             </div>
             <div className="w-10/12">
               <h1 className="text-lg px-2">Mim Sultana</h1>

@@ -1,4 +1,5 @@
 import { Loved_by_the_King } from "next/font/google";
+import Link from "next/link";
 import React from "react";
 import { CgComment, CgHeart } from "react-icons/cg";
 import { LiaDoveSolid } from "react-icons/lia";
@@ -11,14 +12,18 @@ export default function Post() {
         {/* header */}
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
-            <img
-              className="w-10 m-auto h-10 rounded-full block"
-              src="https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-young-female-korean-girl-at-an-airport-with-backpack-image_2533889.jpg"
-              alt=""
-            />
+            <Link href={"/profile/id"}>
+              <img
+                className="w-10 m-auto h-10 rounded-full block"
+                src="https://png.pngtree.com/thumb_back/fh260/background/20230518/pngtree-young-female-korean-girl-at-an-airport-with-backpack-image_2533889.jpg"
+                alt=""
+              />
+            </Link>
           </div>
           <div className="w-8/12">
-            <h1 className="text-xl text-white font-bold">Rodela</h1>
+            <h1 className="text-xl text-white font-bold">
+              <Link href={"/profile/id"}>Rodela</Link>
+            </h1>
             <h1 className="text-sm text-slate-600 font-bold">2 days ago</h1>
           </div>
           <div className="w-2/12 text-2xl text-center">
