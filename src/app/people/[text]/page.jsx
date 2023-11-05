@@ -26,7 +26,7 @@ export default function page() {
           </div>
 
           {/* people */}
-          <div className="space-x-6 space-y-6 text-center">
+          <div className="space-x-4 space-y-4 text-center">
             <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
               <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
               <img

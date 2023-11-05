@@ -36,23 +36,23 @@ export default function page() {
           </div>
 
           {/* tag */}
-          <div className="w-10/12 py-5 lg:6/12 m-auto">
-            <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+          <div className="w-10/12 space-x-2 space-y-2 py-5 lg:6/12 m-auto">
+            <span className="inline-block p-1 px-4 rounded-2xl bg-slate-800">
               Anime
             </span>
-            <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+            <span className="inline-block p-1 px-4 rounded-2xl bg-slate-800">
               Anime
             </span>
-            <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+            <span className="inline-block p-1 px-4 rounded-2xl bg-slate-800">
               Anime
             </span>
-            <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+            <span className="inline-block p-1 px-4 rounded-2xl bg-slate-800">
               Anime
             </span>
-            <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+            <span className="inline-block p-1 px-4 rounded-2xl bg-slate-800">
               Anime
             </span>
-            <span className="inline-block p-2 px-4 rounded-2xl bg-slate-800">
+            <span className="inline-block p-1 px-4 rounded-2xl bg-slate-800">
               Anime
             </span>
           </div>

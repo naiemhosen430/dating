@@ -17,8 +17,8 @@ export default function ChatBox() {
                 />
               </Link>
             </div>
-            <Link href={"/converssion/id"}>
-              <div className="w-10/12">
+            <div className="w-10/12">
+              <Link href={"/converssion/id"}>
                 <h1 className="text-lg px-2">Mim Sultana</h1>
                 <h1 className="text-sm px-2 text-red-500">active 11 m ago</h1>
                 <h1 className="text-lg px-2 text-red-400 text-right flex">
@@ -27,8 +27,8 @@ export default function ChatBox() {
                     5 m ago
                   </span>
                 </h1>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
