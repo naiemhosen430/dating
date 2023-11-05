@@ -18,7 +18,7 @@ export default function Post() {
             />
           </div>
           <div className="w-8/12">
-            <h1 className="text-xl text-white font-bold">MD Naiem</h1>
+            <h1 className="text-xl text-white font-bold">Rodela</h1>
             <h1 className="text-sm text-slate-600 font-bold">2 days ago</h1>
           </div>
           <div className="w-2/12 text-2xl text-center">

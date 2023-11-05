@@ -15,7 +15,7 @@ export default function ChatBox() {
               />
             </div>
             <div className="w-10/12">
-              <h1 className="text-lg px-2">MD Naiem</h1>
+              <h1 className="text-lg px-2">Mim Sultana</h1>
               <h1 className="text-sm px-2 text-red-500">active 11 m ago</h1>
               <h1 className="text-lg px-2 text-red-400 text-right flex">
                 <span className="w-8/12 text-left block">Hello</span>
