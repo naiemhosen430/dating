@@ -12,7 +12,7 @@ export default function ButtonBer() {
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/"}
-              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-lg"
+              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-sm"
             >
               <CgFeed /> <span>Feed</span>
             </Link>
@@ -20,7 +20,7 @@ export default function ButtonBer() {
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/"}
-              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-lg"
+              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-sm"
             >
               <LiaUserFriendsSolid /> <span>Meet</span>
             </Link>
@@ -28,7 +28,7 @@ export default function ButtonBer() {
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/"}
-              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-lg"
+              className="flex items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-sm"
             >
               <MdChat /> <span>Meet</span>
             </Link>
