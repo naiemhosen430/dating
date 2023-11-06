@@ -273,9 +273,14 @@ export default function page() {
                 value={userInfo.country}
               >
                 {countries.map((country) => (
-                  <option key={country.cca2} value={country.name.common}>
-                    {country.name.common}
-                  </option>
+                  <>
+                    <option selected value="">
+                      Select
+                    </option>
+                    <option key={country.cca2} value={country.name.common}>
+                      {country.name.common}
+                    </option>
+                  </>
                 ))}
               </select>
 
@@ -297,6 +302,9 @@ export default function page() {
                   });
                 }}
               >
+                <option value="" selected>
+                  Select
+                </option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
