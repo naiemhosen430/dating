@@ -9,8 +9,8 @@ export default function Home() {
   // animation text
   const text = [
     "Wait, finding for you a best talk partner...",
-    "This is a longer text example...",
-    "You can continue with additional chunks of text...",
+    "I am bored, i am weak, come and chat with me....",
+    "Yes i am a the world, I am over the moon, I am perfect...",
   ];
   const [displayText, setDisplayText] = useState("");
   const [chunkIndex, setChunkIndex] = useState(0);
