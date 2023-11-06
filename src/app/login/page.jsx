@@ -93,6 +93,7 @@ export default function page() {
     name: "",
     age: 0,
     gender: "",
+    ip: "",
     country: "",
     interest: [],
   });
@@ -110,6 +111,13 @@ export default function page() {
     } else {
       seterrmessage("Name is required!");
     }
+
+    // get ip adress
+    const ipAdress = "5464546456454";
+    setUserInfo((preinfo) => ({
+      ...preinfo,
+      ip: ipAdress,
+    }));
   };
   const openGenCon = () => {
     if (userInfo.age !== 0) {
@@ -160,9 +168,19 @@ export default function page() {
   }, []);
 
   // create id
-  const createid = () => {
-    console.log(selectedOptions);
-    console.log(userInfo);
+  const createid = async () => {
+    try {
+      await axios
+        .post("/api/user/create", userInfo)
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
