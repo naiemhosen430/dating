@@ -3,8 +3,8 @@ import React from "react";
 export default function InterestBox() {
   return (
     <>
-      <div className="bg-slate-950 w-full rounded-2xl p-2">
-        <h1 className="text-slate-500 p-2 text-center">Interest</h1>
+      <div className="bg-slate-950 w-full rounded-2xl p-2 px-0">
+        <h1 className="text-slate-500 p-2 px-0 text-center">Interest</h1>
         <div className="py-2 space-y-2">
           <div className="overflow-x-auto">
             <div className="flex items-center space-x-2">

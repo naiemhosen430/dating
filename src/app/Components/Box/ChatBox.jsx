@@ -7,7 +7,7 @@ export default function ChatBox() {
         <h1 className="text-slate-500 p-2 text-center">Chat</h1>
         <div className="space-y-2">
           <div className="flex items-center p-2 px-1">
-            <div className="w-2/12 h-14 rounded-full">
+            <div className="w-2/12 rounded-full">
               <img
                 className="w-14 h-14 rounded-full"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ43v0swxDseKQjPoEV3QHvzltyPL6pBVef_Jztx_pD&s"
@@ -16,7 +16,7 @@ export default function ChatBox() {
             </div>
             <div className="w-10/12">
               <h1 className="text-xl px-2">MD Naiem</h1>
-              <h1 className="text-sm px-2 text-red-500">11 m ago</h1>
+              <h1 className="text-sm px-2 text-red-500">active 11 m ago</h1>
               <h1 className="text-lg px-2 text-red-400 text-right flex">
                 <span className="w-8/12 text-left block">Hello</span>
                 <span className="text-sm px-2 w-4/12 block text-red-500">

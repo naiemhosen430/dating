@@ -3,8 +3,8 @@ import React from "react";
 export default function RecentlyBox() {
   return (
     <>
-      <div className="bg-slate-950 w-screen rounded-2xl space-x-4 overflow-x-auto p-2">
-        <h1 className="text-slate-500 p-2 text-center">Recently</h1>
+      <div className="bg-slate-950 w-screen rounded-2xl space-x-4 overflow-x-auto p-2 px-0">
+        <h1 className="text-slate-500 p-2 px-0 text-center">Recently</h1>
         <div className=" space-x-4 flex">
           <div className="inline-block w-12 h-12 rounded-full">
             <img
