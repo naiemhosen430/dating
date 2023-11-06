@@ -8,7 +8,7 @@ export default function ButtonBer() {
   return (
     <>
       <div className="fixed bottom-0 w-full lg:p-6 p-4 px-2">
-        <div className="bg-slate-900 rounded-2xl w-full p-2 flex justify-center items-center">
+        <div className="bg-slate-900 rounded-2xl w-full lg:p-3 p-2 flex justify-center items-center">
           <div className="text-2xl w-4/12 text-center">
             <Link
               href={"/feed"}

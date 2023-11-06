@@ -17,8 +17,8 @@ export default function Menu() {
   };
   return (
     <>
-      <div className="bg-slate-900 flex items-center p-4 px-4 shadow-md">
-        <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl">
+      <div className="flex fixed top-2 w-full items-center p-4 px-4 shadow-md">
+        <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
           <Link href={"/"} onClick={toggleMenu}>
             Name
           </Link>
