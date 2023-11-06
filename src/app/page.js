@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Menu from "./Components/Shared/Menu";
 
 export default function Home() {
   const [searchpplbox, setSearchpplbox] = useState(false);
@@ -49,6 +50,7 @@ export default function Home() {
   };
   return (
     <>
+      <Menu />
       <div
         style={{
           backgroundImage:

@@ -1,10 +1,15 @@
 import React from "react";
+import RecentlyBox from "../Components/Box/RecentlyBox";
+import InterestBox from "../Components/Box/InterestBox";
+import ChatBox from "../Components/Box/ChatBox";
 
 export default function page() {
   return (
     <>
-      <div className="space-y-4">
-        <div className="">Hello chat</div>
+      <div className="space-y-4 p-2">
+        <RecentlyBox />
+        <InterestBox />
+        <ChatBox />
       </div>
     </>
   );
