@@ -232,7 +232,11 @@ export default function page() {
     axios
       .get("https://restcountries.com/v3.1/all")
       .then((response) => {
-        setCountries(response.data);
+        // Sort the countries array alphabetically by country name
+        const sortedCountries = response.data.sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        );
+        setCountries(sortedCountries);
       })
       .catch((error) => {
         console.error("Error fetching countries:", error);
