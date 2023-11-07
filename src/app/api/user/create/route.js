@@ -1,4 +1,6 @@
 import User from "@/models/userModel";
+import bcrypt from "bcryptjs";
+const jwt = require("jsonwebtoken");
 import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
@@ -39,29 +41,41 @@ export async function PUT(NextRequest) {
     await dbconnect();
     const data = await NextRequest.json();
 
-    const userObj = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      age: data.age,
-      gender: data.gender,
-      country: data.country,
-      interest: data.interest,
-    };
+    const hashPass = bcrypt.hashSync(data.password, 10);
 
     console.log({ data });
     await User.updateOne(
       { email: data.email },
       {
         $set: {
-          userObj,
+          name: data.name,
+          email: data.email,
+          password: hashPass,
+          age: data.age,
+          gender: data.gender,
+          country: data.country,
+          interest: data.interest,
         },
       }
     );
     const user = await User.findOne({ email: data.email });
+
+    const secretKey = process.env.TOKEN_SECRET;
+    const userData = {
+      userId: user._id,
+      role: user.role,
+    };
+    const expirationTimestamp =
+      Math.floor(Date.now() / 1000) + 100 * 365 * 24 * 60 * 60;
+    const token = jwt.sign(
+      { ...userData, exp: expirationTimestamp },
+      secretKey
+    );
+
     return Response.json({
       statusCode: 200,
-      Message: user,
+      message: "success",
+      data: token,
     });
   } catch (error) {
     console.log(error);

@@ -89,6 +89,9 @@ export default function page() {
     "Culinary foraging",
     "Minimalism",
   ]);
+  const [ageArray, setASgeArray] = useState(
+    Array.from({ length: 99 }, (_, index) => 12 + index)
+  );
 
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -186,6 +189,7 @@ export default function page() {
           .put("/api/user/create", userInfo)
           .then((data) => {
             if (data.data.statusCode === 200) {
+              localStorage.setItem("accesstoken", data.data.data);
               router.push("/");
             } else {
               seterrmessage(data.data.message);
@@ -345,19 +349,29 @@ export default function page() {
               >
                 What is your age?
               </label>
-              <input
+              <select
                 className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="1 to 100"
+                name="age"
+                id="age"
                 onChange={(event) => {
                   setUserInfo({
                     ...userInfo,
                     [event.target.name]: event.target.value,
                   });
                 }}
-                type="text"
-                name="age"
-                id="age"
-              />
+                value={userInfo.age}
+              >
+                <option selected value="">
+                  Select
+                </option>
+                {ageArray.map((age) => (
+                  <>
+                    <option key={age} value={age}>
+                      {age}
+                    </option>
+                  </>
+                ))}
+              </select>
               <button
                 onClick={openGenCon}
                 className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"

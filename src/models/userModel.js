@@ -42,6 +42,26 @@ const userSchema = Schema(
       required: false,
       default: "user",
     },
+    friends: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    rendom: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    blocklist: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    recent: {
+      type: Array,
+      required: false,
+      default: [],
+    },
     interest: {
       type: Array,
       required: false,
