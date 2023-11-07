@@ -2,22 +2,35 @@ import { model, models, Schema } from "mongoose";
 
 const userSchema = Schema(
   {
-    username: {
+    name: {
       type: String,
       required: true,
+      default: "",
     },
     email: {
       type: String,
       required: true,
+      default: "",
     },
-    phone: {
+    age: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    country: {
       type: String,
-      required: false,
+      required: true,
+      default: "",
+    },
+    gender: {
+      type: String,
+      required: true,
       default: "",
     },
     password: {
       type: String,
       required: true,
+      default: "",
     },
     verificationcode: {
       type: String,
@@ -29,12 +42,7 @@ const userSchema = Schema(
       required: false,
       default: "user",
     },
-    cetagory: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    question: {
+    interest: {
       type: Array,
       required: false,
       default: [],

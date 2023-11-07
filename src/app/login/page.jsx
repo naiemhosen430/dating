@@ -2,7 +2,9 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import GoogleButton from "react-google-button";
 
+import { useSession, signIn, signOut } from "next-auth/react";
 export default function page() {
   const [interestOption, setInterestOption] = useState([
     "Sustainable Living",
@@ -93,7 +95,6 @@ export default function page() {
     name: "",
     age: 0,
     gender: "",
-    ip: "",
     country: "",
     interest: [],
   });
@@ -101,6 +102,7 @@ export default function page() {
   const [ageBox, setageBox] = useState(false);
   const [gencon, setgencon] = useState(false);
   const [interest, setInterest] = useState(false);
+  const [Finish, setFinish] = useState(false);
   const [errmessage, seterrmessage] = useState("");
 
   // onclick
@@ -111,13 +113,6 @@ export default function page() {
     } else {
       seterrmessage("Name is required!");
     }
-
-    // get ip adress
-    const ipAdress = "5464546456454";
-    setUserInfo((preinfo) => ({
-      ...preinfo,
-      ip: ipAdress,
-    }));
   };
   const openGenCon = () => {
     if (userInfo.age !== 0) {
@@ -128,13 +123,28 @@ export default function page() {
     }
   };
   const openIntarest = () => {
-    if (userInfo.country !== "" || userInfo.gender !== "") {
+    if (userInfo.country !== "" && userInfo.gender !== "") {
       setInterest(true);
+      setFinish(false);
       setageBox(false);
       setgencon(false);
     } else {
       seterrmessage("Country and gender is required!");
     }
+  };
+
+  // create id
+  const createid = async () => {
+    if (userInfo.interest.length !== 0) {
+      setInterest(false);
+      setFinish(true);
+      setageBox(false);
+      setgencon(false);
+    } else {
+      seterrmessage("Choose interest!");
+    }
+
+    localStorage.setItem("userinfo", userInfo);
   };
 
   // for interest
@@ -167,8 +177,7 @@ export default function page() {
       });
   }, []);
 
-  // create id
-  const createid = async () => {
+  const finishId = async () => {
     try {
       await axios
         .post("/api/user/create", userInfo)
@@ -272,11 +281,11 @@ export default function page() {
                 }}
                 value={userInfo.country}
               >
+                <option selected value="">
+                  Select
+                </option>
                 {countries.map((country) => (
                   <>
-                    <option selected value="">
-                      Select
-                    </option>
                     <option key={country.cca2} value={country.name.common}>
                       {country.name.common}
                     </option>
@@ -347,7 +356,28 @@ export default function page() {
                   onClick={createid}
                   className="bg-slate-600 my-2 p-2 w-6/12 m-auto inline-block text-black font-bold rounded-md"
                 >
-                  Finish
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Finish */}
+          {Finish && (
+            <div className="p-2 lg:px-10 overflow-y-auto h-screen space-x-2 space-y-2 pb-52">
+              <h1 className="text-xl text-white font-bold p-4 text-center">
+                Choose login option
+              </h1>
+              <div className="text-center p-10">
+                <GoogleButton onClick={() => signIn("google")}></GoogleButton>
+                <GoogleButton onClick={() => signOut()}></GoogleButton>
+              </div>
+              <div className="block fixed bottom-0 pb-14 left-0 w-full bg-slate-900 text-center">
+                <button
+                  onClick={finishId}
+                  className="bg-slate-600 my-2 p-2 w-6/12 m-auto inline-block text-black font-bold rounded-md"
+                >
+                  Next
                 </button>
               </div>
             </div>
