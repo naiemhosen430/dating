@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function page() {
   const router = useRouter();
@@ -189,7 +190,7 @@ export default function page() {
           .put("/api/user/create", userInfo)
           .then((data) => {
             if (data.data.statusCode === 200) {
-              localStorage.setItem("accesstoken", data.data.data);
+              Cookies.set("accesstoken", data.data.data);
               router.push("/");
             } else {
               seterrmessage(data.data.message);
