@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ButtonBer from "./Components/Shared/ButtonBer";
-import provider from "./Components/provider";
+import Provider from "./Components/Shared/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +15,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div className="w-screen h-screen overflow-hidden">
-          <provider>
-            {children}
-            <ButtonBer />
-          </provider>
+          <Provider>
+            <>
+              {children}
+              <ButtonBer />
+            </>
+          </Provider>
         </div>
       </body>
     </html>
