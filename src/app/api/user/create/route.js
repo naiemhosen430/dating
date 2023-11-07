@@ -2,7 +2,7 @@ import User from "@/models/userModel";
 import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
-  dbconnect();
+  await dbconnect();
   try {
     const data = await NextRequest.json();
 
@@ -30,18 +30,18 @@ export async function PUT(NextRequest) {
     await dbconnect();
     const data = await NextRequest.json();
 
-    const checkUser = await User.findOne({ email: data.email });
-
-    if (!checkUser || checkUser.password == "") {
-      await User.create(data);
-      return Response.json({
-        statusCode: 404,
-        message: "You don't have account. Now set the password to continue",
-      });
-    }
+    await User.updateOne(
+      { _id: data._id },
+      {
+        $set: {
+          data,
+        },
+      }
+    );
+    const user = await User.findOne({ email: data.email });
     return Response.json({
       statusCode: 200,
-      Message: data,
+      Message: user,
     });
   } catch (error) {
     console.log(error);

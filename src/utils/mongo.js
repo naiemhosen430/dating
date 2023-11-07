@@ -5,7 +5,7 @@ const options = {
   useNewUrlParser: true,
 };
 
-export function dbconnect() {
+export async function dbconnect() {
   try {
     mongoose.connect(process.env.MONGODB_URL, options);
     const connection = mongoose.connection;
