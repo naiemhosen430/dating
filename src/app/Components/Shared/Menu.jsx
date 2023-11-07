@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { MdHelp, MdOutlineNotificationsNone } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Menu() {
   const [mobileBox, setMobileBox] = useState(false);
@@ -67,7 +67,7 @@ export default function Menu() {
             <Link
               className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
               onClick={toggleMenu}
-              href={"/"}
+              href={"/myprofile"}
             >
               Profile
             </Link>
