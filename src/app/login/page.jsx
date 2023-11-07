@@ -97,7 +97,7 @@ export default function page() {
     age: 0,
     gender: "",
     country: "",
-    _id: "",
+    id: "",
     interest: [],
   });
   const [Email, setEmail] = useState(true);
@@ -120,7 +120,7 @@ export default function page() {
               router.push("/login");
               setUserInfo((preData) => ({
                 ...preData,
-                _id: data.data.id,
+                id: data.data.id,
               }));
             } else {
               seterrmessage(data.data.message);

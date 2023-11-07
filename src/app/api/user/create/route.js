@@ -9,10 +9,19 @@ export async function POST(NextRequest) {
     const checkUser = await User.findOne({ email: data.email });
 
     if (!checkUser || checkUser.password == "") {
-      const id = await User.create(data);
+      const userObj = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        age: data.age,
+        gender: data.gender,
+        country: data.country,
+        interest: data.interest,
+      };
+      const user = await User.create(userObj);
       return Response.json({
         statusCode: 404,
-        id,
+        id: user._id,
         message: "You don't have account. Now set the password to continue",
       });
     }
@@ -30,11 +39,22 @@ export async function PUT(NextRequest) {
     await dbconnect();
     const data = await NextRequest.json();
 
+    const userObj = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      age: data.age,
+      gender: data.gender,
+      country: data.country,
+      interest: data.interest,
+    };
+
+    console.log({ data });
     await User.updateOne(
-      { _id: data._id },
+      { email: data.email },
       {
         $set: {
-          data,
+          userObj,
         },
       }
     );
