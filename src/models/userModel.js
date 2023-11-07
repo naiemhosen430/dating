@@ -4,7 +4,7 @@ const userSchema = Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
       default: "",
     },
     email: {
@@ -14,22 +14,22 @@ const userSchema = Schema(
     },
     age: {
       type: Number,
-      required: true,
+      required: false,
       default: 0,
     },
     country: {
       type: String,
-      required: true,
+      required: false,
       default: "",
     },
     gender: {
       type: String,
-      required: true,
+      required: false,
       default: "",
     },
     password: {
       type: String,
-      required: true,
+      required: false,
       default: "",
     },
     verificationcode: {

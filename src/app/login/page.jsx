@@ -1,11 +1,10 @@
 "use client";
-
 import axios from "axios";
 import { useEffect, useState } from "react";
-import GoogleButton from "react-google-button";
+import { useRouter } from "next/navigation";
 
-import { useSession, signIn, signOut } from "next-auth/react";
 export default function page() {
+  const router = useRouter();
   const [interestOption, setInterestOption] = useState([
     "Sustainable Living",
     "Mental Health and Wellness",
@@ -93,12 +92,17 @@ export default function page() {
 
   const [userInfo, setUserInfo] = useState({
     name: "",
+    email: "",
+    password: "",
     age: 0,
     gender: "",
     country: "",
+    id: "",
     interest: [],
   });
-  const [nameBox, setNameBox] = useState(true);
+  const [Email, setEmail] = useState(true);
+  const [Password, setPassword] = useState(false);
+  const [nameBox, setNameBox] = useState(false);
   const [ageBox, setageBox] = useState(false);
   const [gencon, setgencon] = useState(false);
   const [interest, setInterest] = useState(false);
@@ -106,6 +110,46 @@ export default function page() {
   const [errmessage, seterrmessage] = useState("");
 
   // onclick
+  const openEmail = async () => {
+    if (userInfo.email !== "") {
+      try {
+        await axios
+          .post("/api/user/create", userInfo)
+          .then((data) => {
+            if (data.data.statusCode === 200) {
+              router.push("/login");
+              setUserInfo((preData) => ({
+                ...preData,
+                id: data.data.id,
+              }));
+            } else {
+              seterrmessage(data.data.message);
+            }
+            console.log(data.data);
+            setEmail(false);
+            setPassword(true);
+            setNameBox(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      seterrmessage("Email is required!");
+    }
+  };
+  const openPassword = () => {
+    console.log(userInfo);
+    if (userInfo.password !== "") {
+      setEmail(false);
+      setPassword(false);
+      setNameBox(true);
+    } else {
+      seterrmessage("password is required!");
+    }
+  };
   const showagebox = () => {
     if (userInfo.name !== "") {
       setageBox(true);
@@ -137,9 +181,23 @@ export default function page() {
   const createid = async () => {
     if (userInfo.interest.length !== 0) {
       setInterest(false);
-      setFinish(true);
-      setageBox(false);
-      setgencon(false);
+      try {
+        await axios
+          .put("/api/user/create", userInfo)
+          .then((data) => {
+            if (data.data.statusCode === 200) {
+              router.push("/");
+            } else {
+              seterrmessage(data.data.message);
+            }
+            console.log(data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       seterrmessage("Choose interest!");
     }
@@ -177,27 +235,76 @@ export default function page() {
       });
   }, []);
 
-  const finishId = async () => {
-    try {
-      await axios
-        .post("/api/user/create", userInfo)
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
       <div className="lg:p-20 md:p-10">
         <div className="lg:w-4/12 md:w-8/12 h-screen lg:h-full m-auto bg-slate-900 shadow-xl">
           <h1 className="text-2xl font-bold p-5 text-center">Name</h1>
-          <h1 className="text-slate-700 text-center ">{errmessage}</h1>
+          <h1 className="text-slate-600 text-sm bg-slate-900 text-center ">
+            {errmessage}
+          </h1>
+          {/* email */}
+          {Email && (
+            <div className="p-2 lg:px-10 px-5">
+              <label
+                className="block p-2 text-xl text-slate-500"
+                htmlFor="email"
+              >
+                What is your email?
+              </label>
+              <input
+                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                placeholder="email"
+                onChange={(event) => {
+                  setUserInfo({
+                    ...userInfo,
+                    [event.target.name]: event.target.value,
+                  });
+                }}
+                type="email"
+                name="email"
+                id="email"
+              />
+              <button
+                onClick={openEmail}
+                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+              >
+                Next
+              </button>
+            </div>
+          )}
+
+          {/* password */}
+          {Password && (
+            <div className="p-2 lg:px-10 px-5">
+              <label
+                className="block p-2 text-xl text-slate-500"
+                htmlFor="password"
+              >
+                What is your password?
+              </label>
+              <input
+                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                placeholder="password"
+                onChange={(event) => {
+                  setUserInfo({
+                    ...userInfo,
+                    [event.target.name]: event.target.value,
+                  });
+                }}
+                type="text"
+                name="password"
+                id="password"
+              />
+              <button
+                onClick={openPassword}
+                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+              >
+                Next
+              </button>
+            </div>
+          )}
+
           {/* name */}
           {nameBox && (
             <div className="p-2 lg:px-10 px-5">
@@ -356,28 +463,7 @@ export default function page() {
                   onClick={createid}
                   className="bg-slate-600 my-2 p-2 w-6/12 m-auto inline-block text-black font-bold rounded-md"
                 >
-                  Next
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* Finish */}
-          {Finish && (
-            <div className="p-2 lg:px-10 overflow-y-auto h-screen space-x-2 space-y-2 pb-52">
-              <h1 className="text-xl text-white font-bold p-4 text-center">
-                Choose login option
-              </h1>
-              <div className="text-center p-10">
-                <GoogleButton onClick={() => signIn("google")}></GoogleButton>
-                <GoogleButton onClick={() => signOut()}></GoogleButton>
-              </div>
-              <div className="block fixed bottom-0 pb-14 left-0 w-full bg-slate-900 text-center">
-                <button
-                  onClick={finishId}
-                  className="bg-slate-600 my-2 p-2 w-6/12 m-auto inline-block text-black font-bold rounded-md"
-                >
-                  Next
+                  Filish
                 </button>
               </div>
             </div>

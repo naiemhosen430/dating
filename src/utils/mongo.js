@@ -12,7 +12,9 @@ export function dbconnect() {
     connection.on("connected", () => {
       console.log("db connected");
     });
+    return true;
   } catch (error) {
+    return false;
     console.log(err);
   }
 }
