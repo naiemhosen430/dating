@@ -40,17 +40,11 @@ export default function Menu() {
         </ul>
         <ul className="lg:w-4/12 w-4/12 justify-end flex items-center lg:space-x-4 space-x-2">
           <Link
-            className="text-slate-500 text-2xl hover:text-white px-4 py-2 rounded-md"
-            href={"/"}
+            className="text-slate-500 my-4 bg-slate-800 rounded-lg shadow-md hover:text-white px-4 py-2 block hover:bg-slate-500 text-center"
+            href={"/login"}
+            onClick={toggleMenu}
           >
-            <MdHelp />
-          </Link>
-
-          <Link
-            className="text-slate-500 text-2xl hover:text-white px-4 py-2 rounded-md"
-            href={"/"}
-          >
-            <MdOutlineNotificationsNone />
+            Log out
           </Link>
         </ul>
 
@@ -101,7 +95,7 @@ export default function Menu() {
             </Link>
             <Link
               className="text-slate-500 my-4 bg-slate-800 rounded-lg shadow-md hover:text-white px-4 py-2 block hover:bg-slate-500 text-center"
-              href={"/"}
+              href={"/login"}
               onClick={toggleMenu}
             >
               Log out
