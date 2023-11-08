@@ -23,6 +23,7 @@ export async function POST(NextRequest) {
     return Response.json({
       statusCode: 498,
       message: "Server error",
+      error,
     });
   }
 }
