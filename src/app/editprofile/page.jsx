@@ -26,6 +26,7 @@ export default function page() {
             name: data.data.data.name,
             age: data.data.data.age,
             country: data.data.data.country,
+            interest: data.data.data.interest,
           });
           setSelectedOptions(data.data.data.interest);
           console.log(data);
