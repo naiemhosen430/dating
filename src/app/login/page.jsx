@@ -234,7 +234,7 @@ export default function page() {
   const loginForPassword = async () => {
     try {
       await axios
-        .put("/api/user/login", loginuserInfo)
+        .post("/api/user/login", loginuserInfo)
         .then((data) => {
           if (data.data.statusCode === 200) {
             Cookies.set("accesstoken", data.data.data);
