@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Menu from "./Components/Shared/Menu";
+import ButtonBer from "./Components/Shared/ButtonBer";
 
 export default function Home() {
   const [searchpplbox, setSearchpplbox] = useState(false);
@@ -91,6 +92,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <ButtonBer />
     </>
   );
 }

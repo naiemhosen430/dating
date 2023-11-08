@@ -1,6 +1,7 @@
 import React from "react";
 import { CgSearch } from "react-icons/cg";
 import Post from "../Components/Box/Post";
+import ButtonBer from "../Components/Shared/ButtonBer";
 
 export default function page() {
   return (
@@ -27,6 +28,7 @@ export default function page() {
           <div className="w-5/12 lg:inline-block hidden">Hello</div>
         </div>
       </div>
+      <ButtonBer />
     </>
   );
 }

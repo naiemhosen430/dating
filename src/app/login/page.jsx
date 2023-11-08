@@ -254,7 +254,6 @@ export default function page() {
 
   // for interest
   const [selectedOptions, setSelectedOptions] = useState([]);
-
   const handleCheckboxChange = (option) => {
     if (selectedOptions.includes(option)) {
       setSelectedOptions(selectedOptions.filter((item) => item !== option));

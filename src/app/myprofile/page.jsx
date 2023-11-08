@@ -23,7 +23,7 @@ export default function page() {
     };
     fatchData();
   }, []);
-  console.log({ profileInfo });
+
   return (
     <>
       <div className="p-2">

@@ -2,6 +2,7 @@ import React from "react";
 import RecentlyBox from "../Components/Box/RecentlyBox";
 import InterestBox from "../Components/Box/InterestBox";
 import ChatBox from "../Components/Box/ChatBox";
+import ButtonBer from "../Components/Shared/ButtonBer";
 
 export default function page() {
   return (
@@ -11,6 +12,7 @@ export default function page() {
         <InterestBox />
         <ChatBox />
       </div>
+      <ButtonBer />
     </>
   );
 }

@@ -1,6 +1,9 @@
 "use client";
 import axios from "axios";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { CgArrowLeft } from "react-icons/cg";
+import { MdHelp } from "react-icons/md";
 
 export default function page() {
   const [errmessage, seterrmessage] = useState("");
@@ -39,7 +42,7 @@ export default function page() {
     if (selectedOptions.includes(option)) {
       setSelectedOptions(selectedOptions.filter((item) => item !== option));
     } else {
-      setSelectedOptions([...selectedOptions, option]);
+      -+setSelectedOptions([...selectedOptions, option]);
     }
 
     setUserInfo((preinfo) => ({
@@ -155,8 +158,47 @@ export default function page() {
         console.error("Error fetching countries:", error);
       });
   }, []);
+
+  console.log({ userInfo });
+
+  // editProfile
+  const editProfile = async () => {
+    if (userInfo.interest.length !== 0) {
+      try {
+        await axios
+          .post("/api/user/editprofile", userInfo)
+          .then((data) => {
+            if (data.data.statusCode === 200) {
+              router.push("/");
+            } else {
+              seterrmessage(data.data.message);
+            }
+            console.log(data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      seterrmessage("Choose interest!");
+    }
+
+    localStorage.setItem("userinfo", userInfo);
+  };
   return (
     <>
+      <div className="p-2 flex items-center text-3xl">
+        <div className="w-6/12">
+          <Link href={"/"}>
+            <CgArrowLeft />
+          </Link>
+        </div>
+        <div className="w-6/12 text-right">
+          <MdHelp className="inline-block" />
+        </div>
+      </div>
       <h1 className="text-slate-600 text-sm bg-slate-900 text-center ">
         {errmessage}
       </h1>
@@ -263,7 +305,14 @@ export default function page() {
             {item}
           </label>
         ))}
-        <div className="block fixed bottom-0 pb-14 left-0 w-full bg-slate-900 text-center"></div>
+        <div className="block fixed bottom-0 left-0 w-full bg-slate-900 text-center">
+          <button
+            onClick={editProfile}
+            className="block p-2 px-4 w-full bg-slate-600 my-2 text-black font-bold rounded-md"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </>
   );
