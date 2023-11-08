@@ -23,22 +23,8 @@ export default function Menu() {
             Name
           </Link>
         </h1>
-        <ul className="lg:w-3/12 hidden lg:flex items-center space-x-4">
-          <Link
-            className="text-slate-500 hover:text-white px-4 py-2 rounded-md"
-            href={"/"}
-          >
-            Person
-          </Link>
-
-          <Link
-            className="text-slate-500 hover:text-white px-4 py-2 rounded-md"
-            href={"/"}
-          >
-            Video
-          </Link>
-        </ul>
-        <ul className=" flex items-center">
+        
+        <ul className="lg:w-3/12 hidden lg:flex lg:items-center">
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
             onClick={toggleMenu}
