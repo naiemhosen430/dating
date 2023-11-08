@@ -27,7 +27,6 @@ export default function Menu() {
         <ul className="lg:w-5/12 hidden lg:flex lg:items-center lg:justify-end">
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
-            onClick={toggleMenu}
             href={"/myprofile"}
           >
             Profile
@@ -35,21 +34,18 @@ export default function Menu() {
 
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
-            onClick={toggleMenu}
-            href={"/"}
+            href={"/editprofile"}
           >
             Edit Profile
           </Link>
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
-            onClick={toggleMenu}
             href={"/"}
           >
             About Us
           </Link>
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
-            onClick={toggleMenu}
             href={"/"}
           >
             Help
@@ -57,15 +53,14 @@ export default function Menu() {
           <Link
             className="text-slate-500 my-4 bg-slate-800 rounded-lg shadow-md hover:text-white px-4 py-2 block hover:bg-slate-500 text-center"
             href={"/login"}
-            onClick={toggleMenu}
           >
             Log out
           </Link>
         </ul>
 
-        <ul className="lg:w-2/12 w-2/12 flex justify-end items-center space-x-4">
+        <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
           <h1
-            className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-center hover:text-white px-4 py-2 rounded-md"
+            className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-end hover:text-white py-2 rounded-md"
             onClick={toggleMenu}
           >
             <span className="text-white lg:inline-block hidden">
@@ -90,7 +85,7 @@ export default function Menu() {
             <Link
               className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
               onClick={toggleMenu}
-              href={"/"}
+              href={"/editprofile"}
             >
               Edit Profile
             </Link>
