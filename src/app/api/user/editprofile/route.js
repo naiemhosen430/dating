@@ -1,14 +1,15 @@
+import getDetaFromToken from "@/helper/getDetaFromToken";
 import User from "@/models/userModel";
 import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
+  await dbconnect();
   try {
-    await dbconnect();
     const data = await NextRequest.json();
 
-    console.log({ data });
+    const myInfo = getDetaFromToken();
     await User.updateOne(
-      { email: data.email },
+      { email: myInfo.email },
       {
         $set: {
           name: data.name,
