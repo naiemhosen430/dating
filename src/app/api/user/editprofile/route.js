@@ -11,7 +11,7 @@ export async function POST(NextRequest) {
     await User.updateOne(
       { email: myInfo.email },
       {
-        $push: data,
+        $set: data,
       }
     );
 
