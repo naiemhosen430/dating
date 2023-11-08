@@ -31,7 +31,6 @@ export default function page() {
             interest: data.data.data.interest,
           });
           setSelectedOptions(data.data.data.interest);
-          console.log(data);
         })
         .catch((err) => {
           console.log(err);
@@ -162,8 +161,6 @@ export default function page() {
       });
   }, []);
 
-  console.log({ userInfo });
-
   // editProfile
   const editProfile = async () => {
     if (userInfo.interest.length !== 0) {
@@ -171,14 +168,11 @@ export default function page() {
         await axios
           .post("/api/user/editprofile", userInfo)
           .then((data) => {
-            console.log(data);
             if (data.data.statusCode === 200) {
-              console.log(data);
               router.push("/");
             } else {
               seterrmessage(data.data.message);
             }
-            console.log(data.data);
           })
           .catch((error) => {
             console.log(error);

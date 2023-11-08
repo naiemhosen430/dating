@@ -146,7 +146,6 @@ export default function page() {
             } else {
               seterrmessage(data.data.message);
             }
-            console.log(data.data);
             setNameBox(false);
           })
           .catch((error) => {
@@ -160,7 +159,6 @@ export default function page() {
     }
   };
   const openPassword = () => {
-    console.log(userInfo);
     if (userInfo.password !== "") {
       setEmail(false);
       setPassword(false);
@@ -215,7 +213,6 @@ export default function page() {
             } else {
               seterrmessage(data.data.message);
             }
-            console.log(data.data);
           })
           .catch((error) => {
             console.log(error);
@@ -242,7 +239,6 @@ export default function page() {
           } else {
             seterrmessage(data.data.message);
           }
-          console.log(data.data);
         })
         .catch((error) => {
           console.log(error);
