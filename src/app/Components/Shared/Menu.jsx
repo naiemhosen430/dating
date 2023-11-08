@@ -17,7 +17,7 @@ export default function Menu() {
   };
   return (
     <>
-      <div className="flex fixed z-10 top-2 w-full items-center p-4 px-4 shadow-md">
+      <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center p-2 px-4 shadow-md">
         <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
           <Link href={"/"} onClick={toggleMenu}>
             Name
@@ -38,7 +38,36 @@ export default function Menu() {
             Video
           </Link>
         </ul>
-        <ul className="lg:w-4/12 w-4/12 justify-end flex items-center lg:space-x-4 space-x-2">
+        <ul className=" flex items-center">
+          <Link
+            className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
+            onClick={toggleMenu}
+            href={"/myprofile"}
+          >
+            Profile
+          </Link>
+
+          <Link
+            className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
+            onClick={toggleMenu}
+            href={"/"}
+          >
+            Edit Profile
+          </Link>
+          <Link
+            className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
+            onClick={toggleMenu}
+            href={"/"}
+          >
+            About Us
+          </Link>
+          <Link
+            className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
+            onClick={toggleMenu}
+            href={"/"}
+          >
+            Help
+          </Link>
           <Link
             className="text-slate-500 my-4 bg-slate-800 rounded-lg shadow-md hover:text-white px-4 py-2 block hover:bg-slate-500 text-center"
             href={"/login"}

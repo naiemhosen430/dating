@@ -6,7 +6,6 @@ export function middleware(request) {
   const isPublicPath = path === "/login";
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accesstoken");
-  console.log({ accessToken });
 
   if (isPublicPath && accessToken) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
@@ -26,6 +25,7 @@ export const config = {
     "/converssion",
     "/feed",
     "/people",
+    "/myprofile",
     "/profile",
   ],
 };

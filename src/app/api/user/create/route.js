@@ -63,6 +63,7 @@ export async function PUT(NextRequest) {
     const secretKey = process.env.TOKEN_SECRET;
     const userData = {
       userId: user._id,
+      email: user.email,
       role: user.role,
     };
     const expirationTimestamp =
