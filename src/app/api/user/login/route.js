@@ -8,7 +8,9 @@ export async function POST(NextRequest) {
   try {
     const data = await NextRequest.json();
 
-    const checkUser = await User.findOne({ email: data.email });
+    const checkUser = await User.findOne({ email: data.email }).select(
+      "password email _id email role"
+    );
 
     if (!checkUser || checkUser.password == "") {
       return Response.json({
@@ -43,7 +45,6 @@ export async function POST(NextRequest) {
     );
 
     return Response.json({
-      message: "You have an account. Now enter the password to continue",
       statusCode: 200,
       data: token,
     });

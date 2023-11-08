@@ -8,7 +8,9 @@ export async function POST(NextRequest) {
   try {
     const data = await NextRequest.json();
 
-    const checkUser = await User.findOne({ email: data.email });
+    const checkUser = await User.findOne({ email: data.email }).select(
+      "password email"
+    );
 
     if (!checkUser || checkUser.password == "") {
       const userObj = {
@@ -62,7 +64,9 @@ export async function PUT(NextRequest) {
         },
       }
     );
-    const user = await User.findOne({ email: data.email });
+    const user = await User.findOne({ email: data.email }).select(
+      "_id role email"
+    );
 
     const secretKey = process.env.TOKEN_SECRET;
     const userData = {
