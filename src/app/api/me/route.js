@@ -7,9 +7,7 @@ export async function GET() {
   await dbconnect();
   try {
     const data = getDetaFromToken();
-    console.log({ data });
-    const result = await User.findOne({ emaul: data.emaul }).exec();
-    console.log({ result });
+    const result = await User.findOne({ email: data.email }).exec();
     return Response.json({
       statusCode: 200,
       message: "success",
