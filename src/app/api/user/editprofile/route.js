@@ -12,10 +12,7 @@ export async function POST(NextRequest) {
       { email: myInfo.email },
       {
         $set: {
-          name: data.name,
-          age: data.age,
-          country: data.country,
-          interest: data.interest,
+          data,
         },
       }
     );
