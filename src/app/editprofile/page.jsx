@@ -169,7 +169,9 @@ export default function page() {
         await axios
           .post("/api/user/editprofile", userInfo)
           .then((data) => {
+            console.log(data);
             if (data.data.statusCode === 200) {
+              console.log(data);
               router.push("/");
             } else {
               seterrmessage(data.data.message);
