@@ -1,7 +1,7 @@
 import getDetaFromToken from "@/helper/getDetaFromToken";
 import User from "@/models/userModel";
 
-const { dbconnect } = require("@/utils/mongo");
+import { dbconnect } from "@/utils/mongo";
 
 export async function GET(NextResponse, NextRequest) {
   await dbconnect();
