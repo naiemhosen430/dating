@@ -18,13 +18,13 @@ export default function Menu() {
   return (
     <>
       <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center p-2 px-4 shadow-md">
-        <h1 className="text-white font-bold lg:w-6/12 w-6/12 text-3xl space-x-4">
+        <h1 className="text-white font-bold lg:w-5/12 w-6/12 text-3xl space-x-4">
           <Link href={"/"} onClick={toggleMenu}>
             Name
           </Link>
         </h1>
-        
-        <ul className="lg:w-3/12 hidden lg:flex lg:items-center">
+
+        <ul className="lg:w-5/12 hidden lg:flex lg:items-center lg:justify-end">
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
             onClick={toggleMenu}
@@ -63,7 +63,7 @@ export default function Menu() {
           </Link>
         </ul>
 
-        <ul className="lg:w-6/12 w-2/12 flex justify-end items-center space-x-4">
+        <ul className="lg:w-2/12 w-2/12 flex justify-end items-center space-x-4">
           <h1
             className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-center hover:text-white px-4 py-2 rounded-md"
             onClick={toggleMenu}

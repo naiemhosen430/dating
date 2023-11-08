@@ -104,8 +104,13 @@ export default function page() {
     id: "",
     interest: [],
   });
+  const [loginuserInfo, setLoginUserInfo] = useState({
+    email: "",
+    password: "",
+  });
   const [Email, setEmail] = useState(true);
   const [Password, setPassword] = useState(false);
+  const [loginPassword, setLoginPassword] = useState(false);
   const [nameBox, setNameBox] = useState(false);
   const [ageBox, setageBox] = useState(false);
   const [gencon, setgencon] = useState(false);
@@ -120,18 +125,28 @@ export default function page() {
         await axios
           .post("/api/user/create", userInfo)
           .then((data) => {
-            if (data.data.statusCode === 200) {
+            if (data.data.statusCode === 404) {
               router.push("/login");
               setUserInfo((preData) => ({
                 ...preData,
                 id: data.data.id,
+                email: data.data.email,
               }));
+              setEmail(false);
+              setPassword(true);
+              seterrmessage(data.data.message);
+            } else if (data.data.statusCode === 200) {
+              setLoginUserInfo((preData) => ({
+                ...preData,
+                email: data.data.email,
+              }));
+              setEmail(false);
+              setLoginPassword(true);
+              seterrmessage(data.data.message);
             } else {
               seterrmessage(data.data.message);
             }
             console.log(data.data);
-            setEmail(false);
-            setPassword(true);
             setNameBox(false);
           })
           .catch((error) => {
@@ -180,6 +195,10 @@ export default function page() {
       seterrmessage("Country and gender is required!");
     }
   };
+  const backToRegister = () => {
+    setEmail(true);
+    setLoginPassword(false);
+  };
 
   // create id
   const createid = async () => {
@@ -191,6 +210,7 @@ export default function page() {
           .then((data) => {
             if (data.data.statusCode === 200) {
               Cookies.set("accesstoken", data.data.data);
+              setInterest(false);
               router.push("/");
             } else {
               seterrmessage(data.data.message);
@@ -208,6 +228,28 @@ export default function page() {
     }
 
     localStorage.setItem("userinfo", userInfo);
+  };
+
+  // login
+  const loginForPassword = async () => {
+    try {
+      await axios
+        .put("/api/user/login", loginuserInfo)
+        .then((data) => {
+          if (data.data.statusCode === 200) {
+            Cookies.set("accesstoken", data.data.data);
+            router.push("/");
+          } else {
+            seterrmessage(data.data.message);
+          }
+          console.log(data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // for interest
@@ -310,6 +352,43 @@ export default function page() {
                 className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
               >
                 Next
+              </button>
+            </div>
+          )}
+
+          {/* login password */}
+          {loginPassword && (
+            <div className="p-2 lg:px-10 px-5">
+              <label
+                className="block p-2 text-xl text-slate-500"
+                htmlFor="password"
+              >
+                Enter your password to login
+              </label>
+              <input
+                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                placeholder="password"
+                onChange={(event) => {
+                  setLoginUserInfo({
+                    ...userInfo,
+                    [event.target.name]: event.target.value,
+                  });
+                }}
+                type="text"
+                name="password"
+                id="password"
+              />
+              <button
+                onClick={loginForPassword}
+                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+              >
+                Next
+              </button>
+              <button
+                onClick={backToRegister}
+                className="block p-2 px-4 w-full my-20 text-slate-500 font-bold rounded-md"
+              >
+                Back to register
               </button>
             </div>
           )}

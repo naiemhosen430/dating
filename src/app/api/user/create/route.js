@@ -24,12 +24,16 @@ export async function POST(NextRequest) {
       return Response.json({
         statusCode: 404,
         id: user._id,
-        message: "You don't have account. Now set the password to continue",
+        email: user.email,
+        message:
+          "You don't have account. Now set the password to create account",
       });
     }
+
     return Response.json({
+      message: "You have an account. Now enter the password to continue",
+      email: checkUser.email,
       statusCode: 200,
-      Message: data,
     });
   } catch (error) {
     console.log(error);
