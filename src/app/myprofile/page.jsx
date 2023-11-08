@@ -30,7 +30,7 @@ export default function page() {
         {/* header */}
         <div className="p-2 flex items-center text-3xl">
           <div className="w-6/12">
-            <Link href={"/chat"}>
+            <Link href={"/"}>
               <CgArrowLeft />
             </Link>
           </div>
@@ -62,7 +62,7 @@ export default function page() {
             {interesta.map((i) => (
               <span
                 key={i}
-                className="inline-block p-1 px-4 rounded-2xl bg-slate-800"
+                className="inline-block p-1 text-xs px-3 rounded-2xl bg-slate-800"
               >
                 {i}
               </span>

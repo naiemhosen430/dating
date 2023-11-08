@@ -291,7 +291,7 @@ export default function page() {
         {interestOption.map((item) => (
           <label
             key={item}
-            className={`p-1 px-3 inline-block rounded-3xl text-lg ${
+            className={`p-1 text-xs px-3 inline-block rounded-3xl ${
               selectedOptions.includes(item) ? "bg-red-500 " : "bg-slate-800"
             } text-slate-50`}
           >
