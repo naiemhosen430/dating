@@ -3,7 +3,7 @@ import User from "@/models/userModel";
 
 import { dbconnect } from "@/utils/mongo";
 
-export async function GET(NextResponse, NextRequest) {
+export async function GET() {
   await dbconnect();
   try {
     const data = getDetaFromToken();
