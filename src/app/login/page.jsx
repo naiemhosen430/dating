@@ -285,7 +285,7 @@ export default function page() {
     <>
       <div className="lg:p-20 md:p-10">
         <div className="lg:w-4/12 md:w-8/12 h-screen lg:h-full m-auto bg-slate-900 shadow-xl">
-          <h1 className="text-2xl font-bold p-5 text-center">Name</h1>
+          <h1 className="text-2xl font-bold p-5 text-center">Xana</h1>
           <h1 className="text-slate-600 text-sm bg-slate-900 text-center ">
             {errmessage}
           </h1>
