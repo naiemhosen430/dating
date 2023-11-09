@@ -207,7 +207,7 @@ export default function page() {
           .put("/api/user/create", userInfo)
           .then((data) => {
             if (data.data.statusCode === 200) {
-              Cookies.set("accesstoken", data.data.data);
+              Cookies.set("accesstoken", data.data.data, { expires: 36500 });
               setInterest(false);
               router.push("/");
             } else {
@@ -234,7 +234,7 @@ export default function page() {
         .post("/api/user/login", loginuserInfo)
         .then((data) => {
           if (data.data.statusCode === 200) {
-            Cookies.set("accesstoken", data.data.data);
+            Cookies.set("accesstoken", data.data.data, { expires: 36500 });
             router.push("/");
           } else {
             seterrmessage(data.data.message);
