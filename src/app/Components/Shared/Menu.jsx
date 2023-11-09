@@ -18,13 +18,13 @@ export default function Menu() {
   return (
     <>
       <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
-        <h1 className="text-white font-bold lg:w-5/12 w-6/12 text-3xl space-x-4">
+        <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
           <Link href={"/"} onClick={toggleMenu}>
             Name
           </Link>
         </h1>
 
-        <ul className="lg:w-5/12 hidden lg:flex lg:items-center lg:justify-end">
+        <ul className="lg:w-8/12 hidden lg:flex lg:items-center lg:justify-end">
           <Link
             className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
             href={"/myprofile"}
