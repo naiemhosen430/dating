@@ -47,7 +47,7 @@ export default function page() {
           <div className="text-center pb-10">
             {users.map((user) => (
               <Link key={user._id} href={`/profile/${user._id}`}>
-                <div className="inline-block m-2 rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
+                <div className="inline-block w-28 m-2 rounded-2xl shadow-lg p-3 bg-slate-950 text-center">
                   <h1 className="text-sm text-slate-600 font-bold p-1">
                     {user.name}
                   </h1>
