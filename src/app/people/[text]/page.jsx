@@ -41,13 +41,13 @@ export default function page() {
 
         <div className="overflow-y-auto h-screen">
           {/* name box */}
-          <div className="text-center text-2xl font-bold p-10">text</div>
+          <div className="text-center text-2xl font-bold p-10">{text}</div>
 
           {/* people */}
           <div className="text-center pb-10">
             {users.map((user) => (
               <Link key={user._id} href={`/profile/${user._id}`}>
-                <div className="inline-block w-28 m-2 rounded-2xl shadow-lg p-3 bg-slate-950 text-center">
+                <div className="inline-block w-28 m-4 rounded-2xl shadow-lg p-3 bg-slate-950 text-center">
                   <h1 className="text-sm text-slate-600 font-bold p-1">
                     {user.name}
                   </h1>
