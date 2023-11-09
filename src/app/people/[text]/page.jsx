@@ -1,9 +1,29 @@
+"use client";
+import axios from "axios";
 import Link from "next/link";
-import React from "react";
+import { useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function page() {
+  const { text } = useParams();
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fatchData = async () => {
+      axios
+        .get(`/api/people/${text}`)
+        .then((data) => {
+          setUsers(data.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fatchData();
+  }, [text]);
+
   return (
     <>
       <div className="p-2">
@@ -21,192 +41,39 @@ export default function page() {
 
         <div className="overflow-y-auto h-screen">
           {/* name box */}
-          <div className="text-center text-2xl font-bold p-10">
-            Intarest name
-          </div>
+          <div className="text-center text-2xl font-bold p-10">text</div>
 
           {/* people */}
-          <div className="space-x-4 space-y-4 text-center">
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
-            <div className="inline-block rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
-              <h1 className="text-xl font-bold p-1 text-white">Rodela</h1>
-              <img
-                className="inline-block w-24 h-24 rounded-full"
-                src="https://img.freepik.com/premium-photo/portrait-beautiful-korean-women-park_825367-1376.jpg"
-                alt=""
-              />
-              <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-                <span className="inline-block text-xs">South Korea</span>
-              </div>
-              <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
-                <span className="inline-block">17 / </span>
-                <span className="inline-block"> Female</span>
-              </div>
-            </div>
+          <div className="text-center pb-10">
+            {users.map((user) => (
+              <Link key={user._id} href={`/profile/${user._id}`}>
+                <div className="inline-block m-2 rounded-2xl shadow-lg p-5 bg-slate-950 text-center">
+                  <h1 className="text-sm text-slate-600 font-bold p-1">
+                    {user.name}
+                  </h1>
+                  {user.profilepicture == "undefined" ? (
+                    <img
+                      className="inline-block w-24 h-24 rounded-full"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjvJKg6aXJNnwv4EpwvCyU-E7gOXGlS_TCygX4YhPpQ4cObKtqPdn_OrDE_c5RwwCdYW0&usqp=CAU"
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className="inline-block w-24 h-24 rounded-full"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjvJKg6aXJNnwv4EpwvCyU-E7gOXGlS_TCygX4YhPpQ4cObKtqPdn_OrDE_c5RwwCdYW0&usqp=CAU"
+                      alt=""
+                    />
+                  )}
+                  <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
+                    <span className="inline-block text-xs">{user.country}</span>
+                  </div>
+                  <div className="flex w-full m-auto items-center py-2 text-slate-500 justify-center">
+                    <span className="inline-block">{user.age} / </span>
+                    <span className="inline-block"> {user.gender}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

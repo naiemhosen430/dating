@@ -3,9 +3,28 @@ import Link from "next/link";
 import { MdHelp, MdOutlineNotificationsNone } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Menu() {
   const [mobileBox, setMobileBox] = useState(false);
+
+  const [profileInfo, setProfileInfo] = useState([]);
+  const [interesta, setinteresta] = useState([]);
+  useEffect(() => {
+    const fatchData = async () => {
+      await axios
+        .get("/api/me")
+        .then((data) => {
+          setProfileInfo(data.data.data);
+          setinteresta(data.data.data.interest);
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fatchData();
+  }, []);
 
   // onclick functions
   const toggleMenu = () => {
@@ -77,7 +96,7 @@ export default function Menu() {
             onClick={toggleMenu}
           >
             <span className="text-white lg:inline-block hidden">
-              naiemhosen
+              {profileInfo.name}
             </span>
             <CgProfile />
           </h1>

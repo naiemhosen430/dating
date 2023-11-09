@@ -67,6 +67,13 @@ const userSchema = Schema(
       required: false,
       default: [],
     },
+    profilepicture: {
+      type: String,
+      required: false,
+      default:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjvJKg6aXJNnwv4EpwvCyU-E7gOXGlS_TCygX4YhPpQ4cObKtqPdn_OrDE_c5RwwCdYW0&usqp=CAU",
+      default: "",
+    },
   },
   {
     timestamps: true,
