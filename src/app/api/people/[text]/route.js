@@ -1,7 +1,7 @@
 import User from "@/models/userModel";
 import { dbconnect } from "@/utils/mongo";
 
-export async function GET() {
+export async function GET(req) {
   await dbconnect();
   const text = req.url.split("text/")[1];
   const users = await User.find({
@@ -9,6 +9,7 @@ export async function GET() {
   }).select(
     "-password -email -blocklist -friends -verificationcode -recent -rendom"
   );
+  console.log({ users });
   return Response.json({
     data: users,
     message: "success",
