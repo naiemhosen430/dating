@@ -64,8 +64,8 @@ export default function page() {
           ) : (
             users.map((user) => (
               <Link key={user._id} href={`/profile/${user._id}`}>
-                <div className="flex items-center">
-                  <div className="w-2/12 rounded-xl py-2 px-4 my-2 bg-slate-950 hover:bg-slate-900">
+                <div className="flex items-center rounded-xl py-2 px-4 my-2 bg-slate-950 hover:bg-slate-900 space-x-2">
+                  <div className="w-2/12">
                     {user.profilepicture == "undefined" ? (
                       <img
                         className="inline-block w-5 h-5 rounded-full"
