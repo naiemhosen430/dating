@@ -3,7 +3,8 @@ import { dbconnect } from "@/utils/mongo";
 
 export async function GET(req) {
   await dbconnect();
-  const text = req.url.split("text/")[1];
+  const text = req.url.split("people/")[1];
+  console.log(text);
   const users = await User.find({
     interest: { $regex: text, $options: "i" },
   }).select(
