@@ -1,5 +1,5 @@
 "use client";
-import Menu from "@/app/Components/Shared/Menu";
+import ButtonBer from "@/app/Components/Shared/ButtonBer";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -87,7 +87,7 @@ export default function page() {
           )}
         </div>
       </div>
-      <Menu />
+      <ButtonBer />
     </>
   );
 }
