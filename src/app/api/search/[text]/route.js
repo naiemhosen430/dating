@@ -6,7 +6,10 @@ export async function GET(req) {
   const text = req.url.split("search/")[1];
 
   const users = await User.find({
-    $or: [{ name: { $regex: text } }, { interest: { $in: text.split(",") } }],
+    $or: [
+      { name: { $regex: text, $options: "i" } },
+      { interest: { $regex: text, $options: "i" } },
+    ],
   }).select(
     "-password -email -blocklist -friends -verificationcode -recent -rendom"
   );
