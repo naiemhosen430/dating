@@ -17,7 +17,6 @@ export default function page() {
         .then((data) => {
           setProfileInfo(data.data.data);
           setinteresta(data.data.data.interest);
-          console.log(data);
         })
         .catch((err) => {
           console.log(err);

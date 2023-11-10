@@ -1,9 +1,15 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { CgSearch } from "react-icons/cg";
 import Post from "../Components/Box/Post";
 import ButtonBer from "../Components/Shared/ButtonBer";
+import Link from "next/link";
 
 export default function page() {
+  const [text, setText] = useState({
+    text: "",
+  });
+
   return (
     <>
       <div className="space-y-4 p-2">
@@ -13,11 +19,19 @@ export default function page() {
             type="search"
             name="text"
             id="text"
+            onChange={(event) => {
+              setText({
+                ...text, // Corrected from ...userInfo to ...text
+                [event.target.name]: event.target.value,
+              });
+            }}
             placeholder="Search for person or post"
           />
-          <div className="text-2xl block w-2/12 text-center">
-            <CgSearch className="inline-block text-slate-600" />
-          </div>
+          <Link href={`/search/${text.text}`}>
+            <div className="text-2xl block w-2/12 text-center">
+              <CgSearch className="inline-block text-slate-600" />
+            </div>
+          </Link>
         </div>
 
         {/* post */}
