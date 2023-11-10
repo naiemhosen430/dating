@@ -18,7 +18,7 @@ export default function page() {
       axios
         .get(`/api/search/${text}`)
         .then((data) => {
-          console.log(data.data.data);
+          setUsers(data.data.data);
         })
         .catch((err) => {
           console.log(err);
