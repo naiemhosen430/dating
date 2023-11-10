@@ -5,9 +5,17 @@ export default function RecentlyBox() {
   return (
     <>
       <div className="bg-slate-950 w-full rounded-2xl overflow-x-auto p-2 px-0">
-        <h1 className="text-slate-500 p-2 px-0 text-center">Recently</h1>
+        <h1 className="text-slate-500 p-1 pb-4 px-2 flex items-center">
+          <span className="block w-6/12">Recently</span>
+          <Link
+            className="block w-6/12 text-right text-slate-600"
+            href={"/recently"}
+          >
+            <span>See All</span>
+          </Link>
+        </h1>
         <div className=" space-x-4 flex">
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -16,7 +24,7 @@ export default function RecentlyBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -25,7 +33,7 @@ export default function RecentlyBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -34,7 +42,7 @@ export default function RecentlyBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -43,7 +51,7 @@ export default function RecentlyBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"

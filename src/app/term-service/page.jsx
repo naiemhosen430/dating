@@ -16,7 +16,7 @@ export default function page() {
           <MdHelp className="inline-block" />
         </div>
       </div>
-      <div className="p-5 overflow-y-auto h-screen">
+      <div className="p-5 overflow-y-auto h-screen pb-10">
         <h1 className="text-slate-500 text-center bg-slate-900 p-4 text-sm">
           Last updated: 10 November 2023
         </h1>
@@ -54,7 +54,7 @@ export default function page() {
         </div>
 
         <div className="py-5">
-          <h1 className="text-2xl text-white font-bold p-2">User Conduct::</h1>
+          <h1 className="text-2xl text-white font-bold p-2">User Conduct:</h1>
           <h1 className="text-slate-500 text-sm p-4">
             You are responsible for your use of Zane, including the content you
             create and share. You agree not to engage in any activity that may:
@@ -88,7 +88,7 @@ export default function page() {
 
         <div className="py-5">
           <h1 className="text-2xl text-white font-bold p-2">
-            Intellectual Property::
+            Intellectual Property:
           </h1>
           <h1 className="text-slate-500 text-sm p-4">
             Zane and its original content (excluding user-generated content) are

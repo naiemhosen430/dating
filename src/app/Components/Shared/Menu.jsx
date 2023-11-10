@@ -39,7 +39,7 @@ export default function Menu() {
       <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
         <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
           <Link href={"/"} onClick={toggleMenu}>
-            Xana
+            Zana
           </Link>
         </h1>
 

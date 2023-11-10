@@ -76,7 +76,15 @@ export default function InterestBox() {
   return (
     <>
       <div className="bg-slate-950 w-full rounded-2xl p-2 px-0">
-        <h1 className="text-slate-500 p-2 px-0 text-center">Interest</h1>
+        <h1 className="text-slate-500 p-1 px-2 flex items-center">
+          <span className="block w-6/12">Interests</span>
+          <Link
+            className="block w-6/12 text-right text-slate-600"
+            href={"/interests"}
+          >
+            <span>See All</span>
+          </Link>
+        </h1>
         <div className="py-2 space-y-2">
           <div className="overflow-x-auto" ref={containerRef}>
             <div
@@ -86,7 +94,7 @@ export default function InterestBox() {
               {shuffledInterest.map((item, index) => (
                 <div key={item} className="slide-item">
                   <Link href={`/people/${item}`}>
-                    <span className="block text-center w-52 p-1 px-3 rounded-2xl bg-slate-800">
+                    <span className="block text-center w-28 text-xs p-1 px-3 rounded-2xl bg-slate-800">
                       {item}
                     </span>
                   </Link>
@@ -102,7 +110,7 @@ export default function InterestBox() {
               {shuffledInterest2.map((item, index) => (
                 <div key={item} className="slide-item">
                   <Link href={`/people/${item}`}>
-                    <span className="block text-center w-52 p-1 px-3 rounded-2xl bg-slate-800">
+                    <span className="block text-center w-28 text-xs p-1 px-3 rounded-2xl bg-slate-800">
                       {item}
                     </span>
                   </Link>
@@ -114,7 +122,7 @@ export default function InterestBox() {
 
         {/* chat here */}
         <div className=" space-x-4 flex">
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -123,7 +131,7 @@ export default function InterestBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -132,7 +140,7 @@ export default function InterestBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -141,7 +149,7 @@ export default function InterestBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -150,7 +158,7 @@ export default function InterestBox() {
               />
             </Link>
           </div>
-          <div className="inline-block w-12 h-12 rounded-full">
+          <div className="inline-block w-8 h-8 rounded-full">
             <Link href={"/profile/id"}>
               <img
                 className="block h-full w-full rounded-full"
@@ -164,158 +172,3 @@ export default function InterestBox() {
     </>
   );
 }
-
-// "use client"; // for nextjs 13.4 user
-// import Link from "next/link";
-// import React from "react";
-// import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
-// import "./TrendingSlider.css";
-
-// const TrendingSlider = () => {
-
-//   return (
-//     <>
-//       <div className="trending">
-//         <div className="container">
-//           <div className="title-btns">
-//             <h3></h3>
-//             <div className="btns">
-//               <button title="scroll left" onClick={slideLeft}>
-//                 <AiOutlineArrowLeft />
-//               </button>
-//               <button title="scroll right" onClick={slideRight}>
-//                 <AiOutlineArrowRight />
-//               </button>
-//             </div>
-//           </div>
-//           <div className="row-container" id="slider">
-//             {filteredItems.map((item) => (
-//               <div key={item.id} className="row-item">
-//                 <Link href={`/`} className="link">
-
-//                 </Link>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-// export default TrendingSlider;
-// @import url("https://fonts.googleapis.com/css2?family=Blinker:wght@200;400;600;700&display=swap");
-
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-//   scroll-behavior: smooth;
-// }
-
-// body {
-//   font-family: "Blinker", sans-serif;
-//   position: relative;
-// }
-
-// html {
-//   font-size: 62.5%;
-// }
-
-// /* global */
-// .container {
-//   max-width: 1200px;
-//   margin: 0 auto;
-//   padding: 0 19px;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-// }
-
-// .row-item {
-//   outline: 2px solid rgba(0, 0, 0, 0.205);
-//   cursor: pointer;
-//   transition: all 0.15s ease-in;
-// }
-
-// .row-item:hover {
-//   outline: 2px solid rgba(0, 0, 0, 0.6);
-// }
-
-// .trending {
-//   height: 100vh;
-// }
-
-// .item-header img {
-//   width: 21rem;
-// }
-
-// .item-description {
-//   font-size: 1.7rem;
-//   padding: 1rem;
-// }
-
-// .trending h3 {
-//   font-size: 2.6rem;
-//   font-weight: 600;
-//   margin-bottom: 4.2rem !important;
-// }
-
-// .row-container {
-//   display: flex;
-//   gap: 2.2rem;
-//   overflow-x: scroll;
-//   overflow-y: hidden;
-//   white-space: nowrap;
-//   scroll-behavior: smooth;
-//   position: relative;
-//   padding: 1rem 0.6rem;
-// }
-
-// /* Hide scrollbar for Chrome, Safari and Opera */
-// .row-container::-webkit-scrollbar {
-//   display: none;
-
-//   /* Hide scrollbar for IE, Edge and Firefox */
-//   -ms-overflow-style: none;
-//   scrollbar-width: none;
-// }
-
-// .title-btns {
-//   display: flex;
-//   justify-content: space-between;
-// }
-
-// .btns button {
-//   color: white;
-//   background-color: #373737;
-//   padding: 1rem;
-//   font-size: 1.5rem;
-//   border: none;
-//   height: 4rem;
-//   width: 4rem;
-//   cursor: pointer;
-//   transition: all 0.1s ease-in;
-// }
-
-// .btns {
-//   display: flex;
-//   gap: 0.4rem;
-// }
-
-// .btns button:hover {
-//   background-color: black;
-// }
-// .item-price {
-//   font-weight: 600;
-//   font-size: 2.2rem;
-//   margin-top: 1.4rem;
-// }
-// .link {
-//   text-decoration: none;
-//   color: black;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-// }

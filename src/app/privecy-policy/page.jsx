@@ -16,7 +16,7 @@ export default function page() {
           <MdHelp className="inline-block" />
         </div>
       </div>
-      <div className="p-5 overflow-y-auto h-screen">
+      <div className="p-5 overflow-y-auto h-screen pb-10">
         <h1 className="text-slate-500 text-center bg-slate-900 p-4 text-sm">
           Last updated: 10 November 2023
         </h1>
