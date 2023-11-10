@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function page() {
   const router = useRouter();
@@ -156,6 +157,11 @@ export default function page() {
   const backToRegister = () => {
     setEmail(true);
     setLoginPassword(false);
+    setInterest(false);
+    setFinish(false);
+    setNameBox(false);
+    setageBox(false);
+    setgencon(false);
   };
 
   // create id
@@ -245,7 +251,7 @@ export default function page() {
     <>
       <div className="lg:p-20 md:p-10">
         <div className="lg:w-4/12 md:w-8/12 h-screen lg:h-full m-auto bg-slate-900 shadow-xl">
-          <h1 className="text-2xl font-bold p-5 text-center">Xana</h1>
+          <h1 className="text-2xl font-bold p-5 text-center">Zane</h1>
           <h1 className="text-slate-600 text-sm bg-slate-900 text-center ">
             {errmessage}
           </h1>
@@ -253,14 +259,17 @@ export default function page() {
           {Email && (
             <div className="p-2 lg:px-10 px-5">
               <label
-                className="block p-2 text-xl text-slate-500"
+                className="block p-2 text-lg text-slate-500"
                 htmlFor="email"
               >
-                What is your email?
+                <h1 className="text-xl text-white p-4 text-center">
+                  Welcome Back
+                </h1>
+                To continue write your email
               </label>
               <input
                 className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="email"
+                placeholder="Email"
                 onChange={(event) => {
                   setUserInfo({
                     ...userInfo,
@@ -277,6 +286,22 @@ export default function page() {
               >
                 Next
               </button>
+              <div className="p-4 mt-10 text-slate-500 text-sm">
+                Read Our{" "}
+                <Link
+                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                  href={"/privecy-policy"}
+                >
+                  Privecy-Policy{" "}
+                </Link>
+                and{" "}
+                <Link
+                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                  href={"/term-service"}
+                >
+                  Term-Service
+                </Link>
+              </div>
             </div>
           )}
 
@@ -291,14 +316,14 @@ export default function page() {
               </label>
               <input
                 className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="password"
+                placeholder="Password"
                 onChange={(event) => {
                   setUserInfo({
                     ...userInfo,
                     [event.target.name]: event.target.value,
                   });
                 }}
-                type="text"
+                type="password"
                 name="password"
                 id="password"
               />
@@ -308,6 +333,22 @@ export default function page() {
               >
                 Next
               </button>
+              <div className="p-4 mt-10 text-slate-500 text-sm">
+                Read Our{" "}
+                <Link
+                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                  href={"/privecy-policy"}
+                >
+                  Privecy-Policy{" "}
+                </Link>
+                and{" "}
+                <Link
+                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                  href={"/term-service"}
+                >
+                  Term-Service
+                </Link>
+              </div>
             </div>
           )}
 
@@ -339,12 +380,22 @@ export default function page() {
               >
                 Next
               </button>
-              <button
-                onClick={backToRegister}
-                className="block p-2 px-4 w-full my-20 text-slate-500 font-bold rounded-md"
-              >
-                Back to register
-              </button>
+              <div className="p-4 mt-10 text-slate-500 text-sm">
+                Read Our{" "}
+                <Link
+                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                  href={"/privecy-policy"}
+                >
+                  Privecy-Policy{" "}
+                </Link>
+                and{" "}
+                <Link
+                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                  href={"/term-service"}
+                >
+                  Term-Service
+                </Link>
+              </div>
             </div>
           )}
 
@@ -520,6 +571,15 @@ export default function page() {
                 </button>
               </div>
             </div>
+          )}
+
+          {!Email && (
+            <button
+              onClick={backToRegister}
+              className="block p-2 px-4 w-full my-20 text-slate-500 font-bold rounded-md"
+            >
+              Back to register
+            </button>
           )}
         </div>
       </div>
