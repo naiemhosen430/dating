@@ -13,8 +13,7 @@ export async function GET(req) {
   }).select(
     "-password -email -blocklist -friends -verificationcode -recent -rendom"
   );
-
-  console.log(users);
+  users = users.reverse();
 
   return Response.json({
     message: "success",
