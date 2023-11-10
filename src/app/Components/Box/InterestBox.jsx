@@ -1,8 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { shuffle } from "lodash";
 
 export default function InterestBox() {
+  const [shuffledInterest, setShuffledInterest] = useState([]);
+  const [shuffledInterest2, setShuffledInterest2] = useState([]);
   const [interestOption, setInterestOption] = useState([
     "Anime",
     "BTS",
@@ -59,33 +62,51 @@ export default function InterestBox() {
     slider.scrollLeft = slider.scrollLeft + 235;
   };
 
+  const containerRef = useRef(null);
+  useEffect(() => {
+    const shuffledArray = shuffle(interestOption);
+    setShuffledInterest(shuffledArray);
+
+    const shuffledArray2 = shuffle(interestOption);
+    setShuffledInterest2(shuffledArray2);
+
+    containerRef.current.classList.add("scroll-smooth");
+  }, []);
+
   return (
     <>
       <div className="bg-slate-950 w-full rounded-2xl p-2 px-0">
         <h1 className="text-slate-500 p-2 px-0 text-center">Interest</h1>
         <div className="py-2 space-y-2">
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" ref={containerRef}>
             <div
-              className="space-x-2 flex overflow-y-hidden overflow-x-scroll scroll-smooth relative"
+              className="space-x-2 flex justify-center overflow-y-hidden relative"
               id="slider"
             >
-              {interestOption.map((item) => (
-                <Link key={item} href={`/people/${item}`}>
-                  <span className="block text-center w-52 p-1 px-3 rounded-2xl bg-slate-800">
-                    {item}
-                  </span>
-                </Link>
+              {shuffledInterest.map((item, index) => (
+                <div key={item} className="slide-item">
+                  <Link href={`/people/${item}`}>
+                    <span className="block text-center w-52 p-1 px-3 rounded-2xl bg-slate-800">
+                      {item}
+                    </span>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
-          <div className="overflow-x-auto">
-            <div className="flex items-center space-x-2">
-              {interestOption.map((item) => (
-                <Link key={item} href={`/people/${item}`}>
-                  <span className="block text-center w-52 p-1 px-3 rounded-2xl bg-slate-800">
-                    {item}
-                  </span>
-                </Link>
+          <div className="overflow-x-auto" ref={containerRef}>
+            <div
+              className="space-x-2 flex justify-center overflow-y-hidden relative"
+              id="slider"
+            >
+              {shuffledInterest2.map((item, index) => (
+                <div key={item} className="slide-item">
+                  <Link href={`/people/${item}`}>
+                    <span className="block text-center w-52 p-1 px-3 rounded-2xl bg-slate-800">
+                      {item}
+                    </span>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>

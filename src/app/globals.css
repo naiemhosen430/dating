@@ -25,3 +25,18 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.slide-item {
+  margin-left: 0;
+  flex-shrink: 0;
+  animation: slideAnimation 14s linear infinite alternate;
+}
+
+@keyframes slideAnimation {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(calc(500vw));
+  }
+}
