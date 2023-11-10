@@ -5,7 +5,7 @@ export async function GET(req) {
   await dbconnect();
   const text = req.url.split("search/")[1];
 
-  const users = await User.find({
+  let users = await User.find({
     $or: [
       { name: { $regex: text, $options: "i" } },
       { interest: { $regex: text, $options: "i" } },
