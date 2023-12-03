@@ -40,3 +40,9 @@ body {
     transform: translateX(calc(500vw));
   }
 }
+
+.bg-image-container {
+  background-image: url("./assets/bg_image.png"); /* Update the path if needed */
+  background-repeat: no-repeat;
+  background-size: cover; /* Adjust this based on your needs */
+}

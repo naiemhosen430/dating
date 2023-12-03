@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Menu from "./Components/Shared/Menu";
 import ButtonBer from "./Components/Shared/ButtonBer";
+import bg_image from "./assets/bg_image.png";
 
 export default function Home() {
   const [searchpplbox, setSearchpplbox] = useState(false);
@@ -49,17 +50,11 @@ export default function Home() {
       setSearchpplbox(true);
     }
   };
+  console.log(bg_image);
   return (
     <>
       <Menu />
-      <div
-        style={{
-          backgroundImage:
-            'url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ4Hk-8m9Cl5hs6vUw5yHfz59sPO66UxI5pw&usqp=CAU")',
-          backgroundRepeat: "no-repeat",
-        }}
-        className=" h-screen w-scree lg:bg-cover text-center bg-contain bg-bottom pt-20"
-      >
+      <div className=" h-screen w-scree bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
         {/* when meeting eatch other */}
         {searchpplbox && (
           <div onClick={searchPeople} className="h-screen w-scree">
