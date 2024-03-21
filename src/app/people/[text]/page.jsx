@@ -77,6 +77,10 @@ export default function page() {
           </div>
         </div>
       </div>
+
+      <div className="fixed bottom-0">
+        <Link className="text-xl block w-12/12 m-auto font-bold text-black bg-slate-400" href={`/api/chat/${users._id}`}>Talk with {users.name}</Link>
+      </div>
     </>
   );
 }
