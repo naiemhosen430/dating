@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
