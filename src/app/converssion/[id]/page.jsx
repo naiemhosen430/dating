@@ -86,8 +86,8 @@ export default function Page() {
 
   return (
     <>
-      <div className="lg:w-6/12 w-12/12 m-auto z-30 h-screen bg-slate-950">
-        <div className="p-2 fixed top-0 w-full z-40 flex items-center text-3xl">
+      <div className="lg:w-6/12 w-12/12 m-auto z-40 h-screen bg-slate-950">
+        <div className="p-2 fixed top-0 w-full z-50 flex items-center text-3xl">
           <div className="w-2/12">
             <Link href={"/chat"}>
               <CgArrowLeft />
@@ -101,30 +101,32 @@ export default function Page() {
           </div>
         </div>
 
-        <div
-          className="overflow-y-auto z-40 custom-chat-field"
-        >
+        <div className="overflow-y-auto z-30 custom-chat-field">
           {chatData ? (
-            chatData.map((msg) => {
-              const date = new Date(msg.msgtime);
-              const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
-                date.getMonth() + 1
-              }/${date.getFullYear()}`;
+            chatData
+              .slice()
+              .reverse()
+              .map((msg) => {
+                // Use slice() to create a copy of the array before reversing
+                const date = new Date(msg.msgtime);
+                const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
+                  date.getMonth() + 1
+                }/${date.getFullYear()}`;
 
-              return (
-                <div
-                  className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
-                  key={msg._id}
-                >
-                  <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
-                    <h1 className="text-white py-1">{msg.message}</h1>
-                    <h6 className="text-slate-700 text-xs p-1">
-                      {formattedTime}
-                    </h6>
+                return (
+                  <div
+                    className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
+                    key={msg._id}
+                  >
+                    <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
+                      <h1 className="text-white py-1">{msg.message}</h1>
+                      <h6 className="text-slate-700 text-xs p-1">
+                        {formattedTime}
+                      </h6>
+                    </div>
                   </div>
-                </div>
-              );
-            })
+                );
+              })
           ) : (
             <h1 className="py-60 text-center">No chat. Start texting</h1>
           )}
