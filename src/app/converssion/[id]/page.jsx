@@ -24,31 +24,33 @@ export default function Page() {
         setFriend(friend);
         setMe(me);
         setMsgData(data)
-
+  
         const chatRef = ref(db, "conversations/" + data._id);
         const chatSnapshot = await get(chatRef);
-
+  
         if (chatSnapshot.exists()) {
           const chatObj = chatSnapshot.val();
           const chatArr = Object.values(chatObj);
           setChatData(chatArr);
         } else {
+          const newchatRef = ref(db, "conversations/" + data._id, "message");
           console.log("No chat data found. Creating new chat data.");
           const initialChatData = {
             message: `Hi, I am ${me.name}. Let's talk.`,
             id: me._id,
             msgtime: Date.now(),
           };
-          await set(chatRef, initialChatData);
+          await set(newchatRef, initialChatData);
           setChatData([initialChatData]);
         }
       } catch (error) {
         console.error("Error fetching chat data:", error);
       }
     };
-
+  
     fetchChatData();
   }, [id]);
+  
 
 
   const sendMessage = async () => {
