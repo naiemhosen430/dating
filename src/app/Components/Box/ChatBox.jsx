@@ -12,7 +12,7 @@ export default function ChatBox() {
     const fetchData = async () => {
       try {
         const userData = await axios.get("/api/me");
-        setUserInfo(userData.data.dat);
+        setUserInfo(userData?.data.data);
       } catch (err) {
         console.log(err);
       }
