@@ -1,17 +1,17 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
 import axios from "axios";
 import Link from "next/link";
 import { db } from "@/app/firebaseConfig";
-import { ref, get, set } from "firebase/database";
+import { ref, get, set, push } from "firebase/database"; // Import push for adding a new chat message
 import { usePathname } from "next/navigation";
 
 export default function Page() {
   const [me, setMe] = useState(null);
   const [friend, setFriend] = useState(null);
   const [chatData, setChatData] = useState(null);
+  const [messageInput, setMessageInput] = useState(""); // State variable to hold the message input value
   const id = usePathname().split("converssion/")[1];
 
   useEffect(() => {
@@ -27,7 +27,6 @@ export default function Page() {
 
         if (chatSnapshot.exists()) {
           const chatObj = chatSnapshot.val();
-          // Convert object to array
           const chatArr = Object.values(chatObj);
           setChatData(chatArr);
         } else {
@@ -37,7 +36,7 @@ export default function Page() {
             id: me._id,
             msgtime: Date.now(),
           };
-          await set(chatRef, { initialChatData });
+          await set(chatRef, initialChatData);
           setChatData([initialChatData]);
         }
       } catch (error) {
@@ -49,6 +48,22 @@ export default function Page() {
   }, [id]);
 
   console.log(chatData);
+
+  const sendMessage = async () => {
+    try {
+      const chatRef = ref(db, "conversations/" + id);
+      const newMessageRef = push(chatRef); // Generate a new unique key for the message
+      const newMessageData = {
+        message: messageInput,
+        id: me._id,
+        msgtime: Date.now(),
+      };
+      await set(newMessageRef, newMessageData);
+      setMessageInput(""); // Clear the message input field after sending
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   return (
     <>
@@ -69,9 +84,7 @@ export default function Page() {
 
         {chatData ? (
           chatData.map((msg) => {
-            // Convert timestamp to Date object
             const date = new Date(msg.msgtime);
-            // Format the time
             const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
               date.getMonth() + 1
             }/${date.getFullYear()}`;
@@ -100,8 +113,13 @@ export default function Page() {
               className="text-white bg-slate-900 text-lg p-2 px-4 rounded-2xl block lg:w-10/12 w-11/12 m-0"
               type="text"
               placeholder="Message"
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)} // Update message input value
             />
-            <div className="text-5xl cursor-pointer text-center rounded-3xl block lg:w-2/12 w-1/12 m-0">
+            <div
+              className="text-5xl cursor-pointer text-center rounded-3xl block lg:w-2/12 w-1/12 m-0"
+              onClick={sendMessage} // Call sendMessage function on button click
+            >
               <MdSend />
             </div>
           </div>
