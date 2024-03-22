@@ -48,7 +48,9 @@ export default function ChatBox() {
           {chats?.length === 0 ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map((chat) => <singlechatbox chat={chat} myid={userData?._id} />)
+            chats?.map((chat) => (
+              <singlechatbox chat={chat} myid={userInfo?._id} />
+            ))
           )}
         </div>
       </div>
