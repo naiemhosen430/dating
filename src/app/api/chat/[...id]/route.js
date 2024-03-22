@@ -13,12 +13,11 @@ export async function POST(NextRequest) {
 
     // Check if a chat with the given IDs exists
     const checkUser = await Chat.findOne({
-        $or: [
-          { chatids: { $all: [id, data.id] } },
-          { chatids: { $all: [data.id, id] } }
-        ]
-      });
-      
+      $or: [
+        { chatids: { $all: [id, data.id] } },
+        { chatids: { $all: [data.id, id] } },
+      ],
+    });
 
     if (checkUser) {
       // If the chat exists, return success message and data
@@ -37,10 +36,15 @@ export async function POST(NextRequest) {
     // Save the new chat object to the database
     await chatobject.save();
 
+    const me = await User.findOne({ _id: myData.id }).select("-password");
+    const friend = await User.findOne({ _id: id }).select("-password");
+
     // Return success message and newly created chat object
     return Response.json({
       message: "Successfull",
       data: chatobject,
+      me: chatobject,
+      friend,
       statusCode: 200,
     });
   } catch (error) {

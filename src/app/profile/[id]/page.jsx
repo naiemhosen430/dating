@@ -74,6 +74,14 @@ export default function page() {
           <div className="p-10 text-slate-600 text-lg">There is no post</div>
         </div>
       </div>
+      <div className="fixed w-full bottom-0">
+        <Link
+          className="text-xl block w-12/12 m-auto text-center p-2  font-bold text-black bg-slate-400"
+          href={`/converssion/${profileInfo?._id}`}
+        >
+          Talk with {profileInfo?.name}
+        </Link>
+      </div>
     </>
   );
 }

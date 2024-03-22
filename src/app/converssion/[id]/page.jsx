@@ -16,7 +16,7 @@ export default function Page() {
     const fetchChatData = async () => {
 
       const data = await axios.post(`/api/chat/${id}`)
-
+      console.log(data)
 
 
       try {
