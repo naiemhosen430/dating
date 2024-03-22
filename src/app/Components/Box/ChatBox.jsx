@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -54,7 +54,7 @@ export default function ChatBox() {
           ) : (
             chats?.map((chat) => {
               const otherPersonId = chat.chatids.find(
-                (id) => id !== userInfo._id
+                (id) => id !== userInfo?._id
               );
               return fetchDataUser(otherPersonId).then((udata) => (
                 <div
