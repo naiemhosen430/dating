@@ -52,7 +52,7 @@ export default function Page() {
 
   const sendMessage = async () => {
     try {
-      const chatRef = ref(db, "conversations/" + id);
+      const chatRef = ref(db, "conversations/" + me._id);
       const newMessageRef = push(chatRef); // Generate a new unique key for the message
       const newMessageData = {
         message: messageInput,
