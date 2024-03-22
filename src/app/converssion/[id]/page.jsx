@@ -102,8 +102,7 @@ export default function Page() {
         </div>
 
         <div
-          className="overflow-y-auto"
-          style={{ height: "calc(100vh - 200px)" }}
+          className="overflow-y-auto custom-chat-field"
         >
           {chatData ? (
             chatData.map((msg) => {
