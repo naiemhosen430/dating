@@ -247,6 +247,43 @@ export default function page() {
       });
   }, []);
 
+  // for quick login
+  const hundleQuickLogin = async () => {
+    try {
+      await axios
+        .post("/api/user/create", userInfo)
+        .then((data) => {
+          if (data.data.statusCode === 404) {
+            router.push("/login");
+            setUserInfo((preData) => ({
+              ...preData,
+              id: data.data.id,
+              email: data.data.email,
+            }));
+            setEmail(false);
+            setPassword(true);
+            seterrmessage(data.data.message);
+          } else if (data.data.statusCode === 200) {
+            setLoginUserInfo((preData) => ({
+              ...preData,
+              email: data.data.email,
+            }));
+            setEmail(false);
+            setLoginPassword(true);
+            seterrmessage(data.data.message);
+          } else {
+            seterrmessage(data.data.message);
+          }
+          setNameBox(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="lg:p-20 md:p-10">
@@ -282,9 +319,16 @@ export default function page() {
               />
               <button
                 onClick={openEmail}
-                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+                className="block p-2 px-4 w-full bg-slate-600 my-5 text-black font-bold rounded-md"
               >
                 Next
+              </button>
+              <h1 className="text-xl text-white p-4 text-center">Or</h1>
+              <button
+                onClick={hundleQuickLogin}
+                className="block p-2 px-4 w-full bg-slate-600 my-5 text-black font-bold rounded-md"
+              >
+                Quick Login
               </button>
               <div className="p-4 mt-10 text-slate-500 text-sm">
                 Read Our{" "}
