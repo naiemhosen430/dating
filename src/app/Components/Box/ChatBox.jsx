@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -8,17 +8,15 @@ export default function ChatBox() {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get("/api/me")
-        .then((data) => {
-          setUserInfo(data.data.dat);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    const fetchData = async () => {
+      try {
+        const data = await axios.get("/api/me");
+        setUserInfo(data.data.dat);
+      } catch (err) {
+        console.log(err);
+      }
     };
-    fatchData();
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -34,13 +32,11 @@ export default function ChatBox() {
     fetchData();
   }, []);
 
-  const fetchDataUser = async (id) => {
-    try {
-      const data = await axios.get(`/api/profile/${id}`);
-      return data.data.data;
-    } catch (err) {
-      console.log(err);
-    }
+  const fetchDataUser = (id) => {
+    return axios
+      .get(`/api/profile/${id}`)
+      .then((data) => data.data.data)
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -54,15 +50,13 @@ export default function ChatBox() {
         </h1>
         <div className="space-y-2">
           {chats?.length === 0 ? (
-            <h1>No chats found</h1>
+            <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map(async (chat) => {
+            chats?.map((chat) => {
               const otherPersonId = chat.chatids.find(
                 (id) => id !== userInfo._id
               );
-              const udata = await fetchDataUser(otherPersonId);
-
-              return (
+              return fetchDataUser(otherPersonId).then((udata) => (
                 <div
                   className="flex items-center justify-center p-2 px-1"
                   key={chat.id}
@@ -93,7 +87,7 @@ export default function ChatBox() {
                     </Link>
                   </div>
                 </div>
-              );
+              ));
             })
           )}
         </div>
