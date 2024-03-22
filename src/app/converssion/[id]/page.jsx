@@ -22,8 +22,9 @@ export default function Page() {
       setMe(data.data.me)
       try {
 
-        const docRef = doc(db, "chats", data.data.data._id);
+        const docRef = doc(db, "converssion", data.data.data._id);
         const docSnap = await getDoc(docRef);
+        console.log(docSnap)
         if (docSnap.exists()) {
           setChatData(docSnap.data());
         } else {
