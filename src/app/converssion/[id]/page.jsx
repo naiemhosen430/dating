@@ -1,11 +1,11 @@
-'use client'
+"use client";
 import axios from "axios"; // Import axios for making HTTP requests
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
 import { db } from "@/app/firebaseConfig";
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore"; 
+import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { usePathname } from "next/navigation";
 
 export default function Page() {
@@ -14,14 +14,12 @@ export default function Page() {
 
   useEffect(() => {
     const fetchChatData = async () => {
-
-      const data = await axios.post(`/api/chat/${id}`)
-      console.log(data)
-
+      const data = await axios.post(`/api/chat/${id}`);
+      console.log(data);
 
       try {
-a
-        const docRef = doc(db, "chats", data._id); 
+        a;
+        const docRef = doc(db, "chats", data._id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           // If document exists, set chatData state with retrieved data

@@ -7,17 +7,18 @@ export async function POST(NextRequest) {
   await dbconnect(); // Assuming this function connects to your MongoDB database
 
   try {
-    const myData = getDetaFromToken(); // Retrieve data from token
-    const data = await NextRequest.json(); // Get JSON data from the request body
-    const id = Request.url.split("chat/")[1]; // Extract chat ID from the URL
+    const myData = getDetaFromToken();
+    const id = Request.url.split("chat/")[1];
 
     // Check if a chat with the given IDs exists
     const checkUser = await Chat.findOne({
       $or: [
-        { chatids: { $all: [id, data.id] } },
-        { chatids: { $all: [data.id, id] } },
+        { chatids: { $all: [id, myData.id] } },
+        { chatids: { $all: [myData.id, id] } },
       ],
     });
+
+    console.log({ checkUser });
 
     if (checkUser) {
       // If the chat exists, return success message and data
@@ -30,7 +31,7 @@ export async function POST(NextRequest) {
 
     // If the chat does not exist, create a new chat object
     const chatobject = Chat({
-      chatids: [id, data.id],
+      chatids: [id, myData.id],
     });
 
     // Save the new chat object to the database
@@ -48,6 +49,9 @@ export async function POST(NextRequest) {
       statusCode: 200,
     });
   } catch (error) {
-    console.log(error); // Log any errors that occur
+    return Response.json({
+      message: "Something wrong",
+      statusCode: 498,
+    },{status: 498});
   }
 }
