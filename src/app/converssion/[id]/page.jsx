@@ -5,7 +5,7 @@ import { MdHelp, MdSend } from "react-icons/md";
 import axios from "axios";
 import Link from "next/link";
 import { db } from "@/app/firebaseConfig";
-import { ref, get, set, push } from "firebase/database"; 
+import { ref, get, set, push, off } from "firebase/database";
 import { usePathname } from "next/navigation";
 
 export default function Page() {
@@ -23,51 +23,61 @@ export default function Page() {
         const { friend, me, data } = response.data;
         setFriend(friend);
         setMe(me);
-        setMsgData(data)
-  
+        setMsgData(data);
+
         const chatRef = ref(db, "conversations/" + data._id);
         const chatSnapshot = await get(chatRef);
-  
+
         if (chatSnapshot.exists()) {
           const chatObj = chatSnapshot.val();
           const chatArr = Object.values(chatObj);
           setChatData(chatArr);
         } else {
-          const newchatRef = ref(db, "conversations/" + data._id, "message");
           console.log("No chat data found. Creating new chat data.");
-          const initialChatData = {
-            message: `Hi, I am ${me.name}. Let's talk.`,
-            id: me._id,
-            msgtime: Date.now(),
-          };
-          await set(newchatRef, initialChatData);
-          setChatData([initialChatData]);
+          setChatData([]);
         }
+
+        // Add event listener for changes in the chat data
+        chatRef.on("value", (snapshot) => {
+          if (snapshot.exists()) {
+            const chatObj = snapshot.val();
+            const chatArr = Object.values(chatObj);
+            setChatData(chatArr);
+          } else {
+            console.log("No chat data found.");
+            setChatData([]);
+          }
+        });
       } catch (error) {
         console.error("Error fetching chat data:", error);
       }
     };
-  
-    fetchChatData();
-  }, [id]);
-  
 
+    fetchChatData();
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      const chatRef = ref(db, "conversations/" + msgdata?._id);
+      off(chatRef, "value"); // Remove the event listener
+    };
+  }, [id, msgdata]);
 
   const sendMessage = async () => {
     try {
       const chatRef = ref(db, "conversations/" + msgdata._id);
-      const newMessageRef = push(chatRef); 
+      const newMessageRef = push(chatRef);
       const newMessageData = {
         message: messageInput,
         id: me._id,
         msgtime: Date.now(),
       };
       await set(newMessageRef, newMessageData);
-      setMessageInput(""); 
+      setMessageInput("");
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
+
 
   return (
     <>
@@ -118,11 +128,11 @@ export default function Page() {
               type="text"
               placeholder="Message"
               value={messageInput}
-              onChange={(e) => setMessageInput(e.target.value)} 
+              onChange={(e) => setMessageInput(e.target.value)} // Update message input value
             />
             <div
               className="text-5xl cursor-pointer text-center rounded-3xl block lg:w-2/12 w-1/12 m-0"
-              onClick={sendMessage} 
+              onClick={sendMessage} // Call sendMessage function on button click
             >
               <MdSend />
             </div>
