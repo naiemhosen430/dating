@@ -32,8 +32,8 @@ export default function ChatBox() {
     fetchData();
   }, []);
 
-  const fetchDataUser = (id) => {
-    return axios
+  const fetchDataUser = async (id) => {
+    await axios
       .get(`/api/profile/${id}`)
       .then((data) => data.data.data)
       .catch((err) => console.log(err));
