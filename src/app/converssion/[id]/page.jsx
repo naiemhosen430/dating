@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
 import axios from "axios";
@@ -15,6 +15,7 @@ export default function Page() {
   const [chatData, setChatData] = useState(null);
   const [messageInput, setMessageInput] = useState("");
   const id = usePathname().split("converssion/")[1];
+  const messagesEndRef = useRef(null); // Create a ref for the messages container
 
   useEffect(() => {
     const fetchChatData = async () => {
@@ -57,8 +58,10 @@ export default function Page() {
 
     // Cleanup function to remove the event listener when component unmounts
     return () => {
-      const chatRef = ref(db, "conversations/" + msgdata?._id);
-      off(chatRef, "value"); // Remove the event listener
+      if (msgdata) {
+        const chatRef = ref(db, "conversations/" + msgdata._id);
+        off(chatRef, "value"); // Remove the event listener
+      }
     };
   }, [id, msgdata]);
 
@@ -73,11 +76,13 @@ export default function Page() {
       };
       await set(newMessageRef, newMessageData);
       setMessageInput("");
+
+      // After sending the message, scroll to the bottom of the message container
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
-
 
   return (
     <>
@@ -96,30 +101,37 @@ export default function Page() {
           </div>
         </div>
 
-        {chatData ? (
-          chatData.map((msg) => {
-            const date = new Date(msg.msgtime);
-            const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
-              date.getMonth() + 1
-            }/${date.getFullYear()}`;
+        <div
+          className="overflow-y-auto"
+          style={{ height: "calc(100vh - 200px)" }}
+        >
+          {chatData ? (
+            chatData.map((msg) => {
+              const date = new Date(msg.msgtime);
+              const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
+                date.getMonth() + 1
+              }/${date.getFullYear()}`;
 
-            return (
-              <div
-                className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
-                key={msg.id}
-              >
-                <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
-                  <h1 className="text-white py-1">{msg.message}</h1>
-                  <h6 className="text-slate-700 text-xs p-1">
-                    {formattedTime}
-                  </h6>
+              return (
+                <div
+                  className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
+                  key={msg._id}
+                >
+                  <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
+                    <h1 className="text-white py-1">{msg.message}</h1>
+                    <h6 className="text-slate-700 text-xs p-1">
+                      {formattedTime}
+                    </h6>
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        ) : (
-          <h1 className="py-60 text-center">No chat. Start texting</h1>
-        )}
+              );
+            })
+          ) : (
+            <h1 className="py-60 text-center">No chat. Start texting</h1>
+          )}
+          <div ref={messagesEndRef} />{" "}
+          {/* Reference to the bottom of the message container */}
+        </div>
 
         <div className="fixed bottom-2 lg:w-6/12 w-12/12 m-auto mx-2">
           <div className="flex items-center justify-center bg-slate-950">
