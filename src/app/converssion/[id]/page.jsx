@@ -37,7 +37,7 @@ export default function Page() {
             id: me._id,
             msgtime: Date.now(),
           };
-          await set(chatRef, {initialChatData});
+          await set(chatRef, { initialChatData });
           setChatData([initialChatData]);
         }
       } catch (error) {
@@ -68,14 +68,28 @@ export default function Page() {
         </div>
 
         {chatData ? (
-          chatData.map((msg, index) => (
-            <div className="p-2" key={index}>
-              <div className="inline-block bg-slate-900 rounded-xl text-white">
-                <h1 className="text-white py-1">{msg.message}</h1>
-                <h5 className="text-slate-700 p-1">{msg.msgtime}</h5>
+          chatData.map((msg) => {
+            // Convert timestamp to Date object
+            const date = new Date(msg.msgtime);
+            // Format the time
+            const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
+              date.getMonth() + 1
+            }/${date.getFullYear()}`;
+
+            return (
+              <div
+                className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
+                key={msg.id}
+              >
+                <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
+                  <h1 className="text-white py-1">{msg.message}</h1>
+                  <h6 className="text-slate-700 text-xs p-1">
+                    {formattedTime}
+                  </h6>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <h1 className="py-60 text-center">No chat. Start texting</h1>
         )}
