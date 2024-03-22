@@ -10,8 +10,8 @@ export default function ChatBox() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axios.get("/api/me");
-        setUserInfo(data.data.dat);
+        const userData = await axios.get("/api/me");
+        setUserInfo(userData.data.dat);
       } catch (err) {
         console.log(err);
       }
@@ -22,8 +22,8 @@ export default function ChatBox() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axios.get("/api/chat");
-        setChats(data.data.data);
+        const chatData = await axios.get("/api/chat");
+        setChats(chatData.data.data);
       } catch (err) {
         setChats([]);
         console.log(err);
@@ -32,19 +32,33 @@ export default function ChatBox() {
     fetchData();
   }, []);
 
-  const fetchDataUser = async (id) => {
-    await axios
-      .get(`/api/profile/${id}`)
-      .then((data) => data.data.data)
-      .catch((err) => console.log(err));
-  };
+  useEffect(() => {
+    if (!chats || !userInfo) return;
+    const fetchDataForChats = async () => {
+      const promises = chats.map(async (chat) => {
+        const otherPersonId = chat.chatids.find((id) => id !== userInfo._id);
+        const userData = await axios.get(`/api/profile/${otherPersonId}`);
+        return userData.data.data;
+      });
+      Promise.all(promises)
+        .then((userDataArray) => {
+          const updatedChats = chats.map((chat, index) => ({
+            ...chat,
+            otherPersonData: userDataArray[index], // Add other person's data to each chat object
+          }));
+          setChats(updatedChats);
+        })
+        .catch((err) => console.log(err));
+    };
+    fetchDataForChats();
+  }, [chats, userInfo]);
 
   return (
     <>
       <div className="w-full rounded-2xl">
         <h1 className="text-slate-500 p-1 px-2 flex items-center">
           <span className="block w-6/12">Friend and chat</span>
-          <Link className="block w-6/12 text-right text-slate-600" href={""}>
+          <Link className="block w-6/12 text-right text-slate-600" href="">
             {/* Add correct href value */}
           </Link>
         </h1>
@@ -52,43 +66,40 @@ export default function ChatBox() {
           {chats?.length === 0 ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map((chat) => {
-              const otherPersonId = chat.chatids.find(
-                (id) => id !== userInfo?._id
-              );
-              return fetchDataUser(otherPersonId).then((udata) => (
-                <div
-                  className="flex items-center justify-center p-2 px-1"
-                  key={chat.id}
-                >
-                  <div className="w-2/12 flex items-center rounded-full pb-1">
-                    <Link className="block" href={`/profile/${otherPersonId}`}>
-                      <img
-                        className="w-12 h-12 rounded-full inline-block"
-                        src={chat.profilepicture}
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                  <div className="w-10/12">
-                    <Link href={`/converssion/${otherPersonId}`}>
-                      <h1 className="text-sm px-2">{udata?.name}</h1>
-                      <h1 className="text-xs px-2 text-red-500">
-                        active 11 m ago
-                      </h1>
-                      <h1 className="text-xs px-2 text-red-400 text-right flex">
-                        <span className="w-8/12 text-left text-base block">
-                          Hello
-                        </span>
-                        <span className="text-xs text-right w-4/12 block text-red-500">
-                          5 m ago
-                        </span>
-                      </h1>
-                    </Link>
-                  </div>
+            chats?.map((chat) => (
+              <div
+                className="flex items-center justify-center p-2 px-1"
+                key={chat.id}
+              >
+                <div className="w-2/12 flex items-center rounded-full pb-1">
+                  <Link className="block" href={`/profile/${otherPersonId}`}>
+                    <img
+                      className="w-12 h-12 rounded-full inline-block"
+                      src={chat.profilepicture}
+                      alt=""
+                    />
+                  </Link>
                 </div>
-              ));
-            })
+                <div className="w-10/12">
+                  <Link href={`/converssion/${otherPersonId}`}>
+                    <h1 className="text-sm px-2">
+                      {chat.otherPersonData?.name}
+                    </h1>
+                    <h1 className="text-xs px-2 text-red-500">
+                      active 11 m ago
+                    </h1>
+                    <h1 className="text-xs px-2 text-red-400 text-right flex">
+                      <span className="w-8/12 text-left text-base block">
+                        Hello
+                      </span>
+                      <span className="text-xs text-right w-4/12 block text-red-500">
+                        5 m ago
+                      </span>
+                    </h1>
+                  </Link>
+                </div>
+              </div>
+            ))
           )}
         </div>
       </div>
