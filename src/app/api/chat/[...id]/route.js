@@ -4,11 +4,15 @@ import User from "@/models/userModel";
 import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
-  await dbconnect(); // Assuming this function connects to your MongoDB database
-
+  await dbconnect();
+  console.log("hello");
   try {
     const myData = getDetaFromToken();
-    const id = Request.url.split("chat/")[1];
+    console.log({myData});
+    const id = NextRequest.url.split("chat/")[1];
+    console.log(Request);
+    console.log(myData.id);
+    console.log(id);
 
     // Check if a chat with the given IDs exists
     const checkUser = await Chat.findOne({
@@ -20,11 +24,17 @@ export async function POST(NextRequest) {
 
     console.log({ checkUser });
 
+    const me = await User.findOne({ _id: myData.id }).select("-password");
+    const friend = await User.findOne({ _id: id }).select("-password");
+
+
     if (checkUser) {
       // If the chat exists, return success message and data
       return Response.json({
         message: "Successfull",
         data: checkUser,
+        me: me,
+        friend,
         statusCode: 200,
       });
     }
@@ -37,21 +47,22 @@ export async function POST(NextRequest) {
     // Save the new chat object to the database
     await chatobject.save();
 
-    const me = await User.findOne({ _id: myData.id }).select("-password");
-    const friend = await User.findOne({ _id: id }).select("-password");
 
     // Return success message and newly created chat object
     return Response.json({
       message: "Successfull",
       data: chatobject,
-      me: chatobject,
+      me: me,
       friend,
       statusCode: 200,
     });
   } catch (error) {
-    return Response.json({
-      message: "Something wrong",
-      statusCode: 498,
-    },{status: 498});
+    return Response.json(
+      {
+        message: "Something wrong",
+        statusCode: 498,
+      },
+      { status: 498 }
+    );
   }
 }

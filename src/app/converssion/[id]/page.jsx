@@ -9,6 +9,8 @@ import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { usePathname } from "next/navigation";
 
 export default function Page() {
+  const [me,setMe]=useState(null)
+  const [friend,setFriend]=useState(null)
   const [chatData, setChatData] = useState(null);
   const id = usePathname().split("converssion/")[1];
 
@@ -16,17 +18,16 @@ export default function Page() {
     const fetchChatData = async () => {
       const data = await axios.post(`/api/chat/${id}`);
       console.log(data);
-
+      setFriend(data.data.friend)
+      setMe(data.data.me)
       try {
-        a;
-        const docRef = doc(db, "chats", data._id);
+
+        const docRef = doc(db, "chats", data.data.data._id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          // If document exists, set chatData state with retrieved data
           setChatData(docSnap.data());
         } else {
-          console.log("No chat found, creating new one...");
-          const initialChatData = { message: "Initial message" }; // Adjust this according to your structure
+          const initialChatData = { message: "Initial message" }; 
           await setDoc(docRef, initialChatData); // Create a new document with initial data
           setChatData(initialChatData); // Set chatData state with initial data
         }
@@ -37,6 +38,8 @@ export default function Page() {
 
     fetchChatData(); // Call the async function
   }, [id]);
+
+  console.log(chatData)
 
   return (
     <>
