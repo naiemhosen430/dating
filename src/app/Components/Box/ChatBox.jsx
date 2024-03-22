@@ -1,10 +1,25 @@
-'use client'
+"use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ChatBox() {
   const [chats, setChats] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    const fatchData = async () => {
+      await axios
+        .get("/api/me")
+        .then((data) => {
+          setUserInfo(data.data.dat);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fatchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,8 +43,6 @@ export default function ChatBox() {
     }
   };
 
-  const myId = "YOUR_ID_HERE"; // Replace "YOUR_ID_HERE" with your actual ID
-
   return (
     <>
       <div className="w-full rounded-2xl">
@@ -44,11 +57,16 @@ export default function ChatBox() {
             <h1>No chats found</h1>
           ) : (
             chats?.map(async (chat) => {
-              const otherPersonId = chat.chatids.find(id => id !== myId);
+              const otherPersonId = chat.chatids.find(
+                (id) => id !== userInfo._id
+              );
               const udata = await fetchDataUser(otherPersonId);
 
               return (
-                <div className="flex items-center justify-center p-2 px-1" key={chat.id}>
+                <div
+                  className="flex items-center justify-center p-2 px-1"
+                  key={chat.id}
+                >
                   <div className="w-2/12 flex items-center rounded-full pb-1">
                     <Link className="block" href={`/profile/${otherPersonId}`}>
                       <img
@@ -61,9 +79,13 @@ export default function ChatBox() {
                   <div className="w-10/12">
                     <Link href={`/converssion/${otherPersonId}`}>
                       <h1 className="text-sm px-2">{udata?.name}</h1>
-                      <h1 className="text-xs px-2 text-red-500">active 11 m ago</h1>
+                      <h1 className="text-xs px-2 text-red-500">
+                        active 11 m ago
+                      </h1>
                       <h1 className="text-xs px-2 text-red-400 text-right flex">
-                        <span className="w-8/12 text-left text-base block">Hello</span>
+                        <span className="w-8/12 text-left text-base block">
+                          Hello
+                        </span>
                         <span className="text-xs text-right w-4/12 block text-red-500">
                           5 m ago
                         </span>
