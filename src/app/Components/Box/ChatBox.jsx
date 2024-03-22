@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -72,16 +71,19 @@ export default function ChatBox() {
                 key={chat.id}
               >
                 <div className="w-2/12 flex items-center rounded-full pb-1">
-                  <Link className="block" href={`/profile/${otherPersonId}`}>
+                  <Link
+                    className="block"
+                    href={`/profile/${chat.otherPersonData?._id}`}
+                  >
                     <img
                       className="w-12 h-12 rounded-full inline-block"
-                      src={chat.profilepicture}
+                      src={chat.otherPersonData?.profilepicture}
                       alt=""
                     />
                   </Link>
                 </div>
                 <div className="w-10/12">
-                  <Link href={`/converssion/${otherPersonId}`}>
+                  <Link href={`/converssion/${chat.otherPersonData?._id}`}>
                     <h1 className="text-sm px-2">
                       {chat.otherPersonData?.name}
                     </h1>
