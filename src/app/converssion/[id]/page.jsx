@@ -1,51 +1,52 @@
 "use client";
-import axios from "axios"; // Import axios for making HTTP requests
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
+import axios from "axios";
+import Link from "next/link";
 import { db } from "@/app/firebaseConfig";
-import { collection, addDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { ref, get, set } from "firebase/database";
 import { usePathname } from "next/navigation";
 
 export default function Page() {
-  const [me,setMe]=useState(null)
-  const [friend,setFriend]=useState(null)
+  const [me, setMe] = useState(null);
+  const [friend, setFriend] = useState(null);
   const [chatData, setChatData] = useState(null);
   const id = usePathname().split("converssion/")[1];
 
   useEffect(() => {
     const fetchChatData = async () => {
-      const data = await axios.post(`/api/chat/${id}`);
-      console.log(data);
-      setFriend(data.data.friend)
-      setMe(data.data.me)
       try {
+        const response = await axios.post(`/api/chat/${id}`);
+        const { friend, me, data } = response.data;
+        setFriend(friend);
+        setMe(me);
 
-        const docRef = doc(db, "converssion", data.data.data._id);
-        const docSnap = await getDoc(docRef);
-        console.log(docSnap)
-        if (docSnap.exists()) {
-          setChatData(docSnap.data());
+        const chatRef = ref(db, "conversations/" + data._id);
+        const chatSnapshot = await get(chatRef);
+
+        if (chatSnapshot.exists()) {
+          const chatObj = chatSnapshot.val();
+          // Convert object to array
+          const chatArr = Object.values(chatObj);
+          setChatData(chatArr);
         } else {
-          const initialChatData = { message: "Initial message" }; 
-          await setDoc(docRef, initialChatData); // Create a new document with initial data
-          setChatData(initialChatData); // Set chatData state with initial data
+          console.log("No chat data found.");
+          setChatData([]); // Set chatData as an empty array
         }
       } catch (error) {
         console.error("Error fetching chat data:", error);
       }
     };
 
-    fetchChatData(); // Call the async function
+    fetchChatData();
   }, [id]);
 
-  console.log(chatData)
+  console.log(chatData);
 
   return (
     <>
       <div className="lg:w-6/12 w-12/12 m-auto z-30 h-screen bg-slate-950">
-        {/* header */}
         <div className="p-2 sticky top-0 flex items-center text-3xl">
           <div className="w-2/12">
             <Link href={"/chat"}>
@@ -60,18 +61,19 @@ export default function Page() {
           </div>
         </div>
 
-        {/* chat body  */}
         {chatData ? (
-          <div className="p-2">
-            <div className="inline-block bg-slate-900 rounded-xl text-white">
-              {chatData.message}
+          chatData.map((msg, index) => (
+            <div className="p-2" key={index}>
+              <div className="inline-block bg-slate-900 rounded-xl text-white">
+                <h1 className="text-white py-1">{msg.message}</h1>
+                <h5 className="text-slate-700 p-1">{msg.msgtime}</h5>
+              </div>
             </div>
-          </div>
+          ))
         ) : (
-          <h1 className="py-60 text-center">No chat. start texting</h1>
+          <h1 className="py-60 text-center">No chat. Start texting</h1>
         )}
 
-        {/* send chat */}
         <div className="fixed bottom-2 lg:w-6/12 w-12/12 m-auto mx-2">
           <div className="flex items-center justify-center bg-slate-950">
             <input
