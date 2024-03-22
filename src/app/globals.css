@@ -52,4 +52,6 @@ body {
   height: 100vh;
   position: fixed;
   bottom: 59px;
+  display: flex;
+  flex-direction: column-reverse;
 }

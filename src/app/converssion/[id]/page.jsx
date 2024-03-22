@@ -87,7 +87,7 @@ export default function Page() {
   return (
     <>
       <div className="lg:w-6/12 w-12/12 m-auto z-30 h-screen bg-slate-950">
-        <div className="p-2 sticky top-0 flex items-center text-3xl">
+        <div className="p-2 fixed top-0 w-full z-40 flex items-center text-3xl">
           <div className="w-2/12">
             <Link href={"/chat"}>
               <CgArrowLeft />
@@ -102,7 +102,7 @@ export default function Page() {
         </div>
 
         <div
-          className="overflow-y-auto custom-chat-field"
+          className="overflow-y-auto z-40 custom-chat-field"
         >
           {chatData ? (
             chatData.map((msg) => {
