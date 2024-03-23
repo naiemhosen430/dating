@@ -60,7 +60,7 @@ export default function page() {
                   ) : (
                     <img
                       className="inline-block w-24 h-24 rounded-full"
-                      src={user.profilepicture}
+                      src="https://t3.ftcdn.net/jpg/02/09/95/42/360_F_209954204_mHCvAQBIXP7C2zRl5Fbs6MEWOEkaX3cA.webp"
                       alt=""
                     />
                   )}
