@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
+import { AiFillLike } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import { db } from "@/app/firebaseConfig";
@@ -119,7 +120,9 @@ export default function Page() {
                     key={msg._id}
                   >
                     <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
-                      <h1 className="text-white py-1">{msg.message}</h1>
+                      <h1 className="text-white py-1">
+                        {msg.message ? msg.message : <AiFillLike />}
+                      </h1>
                       <h6 className="text-slate-700 text-xs p-1">
                         {formattedTime}
                       </h6>
@@ -147,7 +150,7 @@ export default function Page() {
               className="text-5xl cursor-pointer text-center rounded-3xl block lg:w-2/12 w-1/12 m-0"
               onClick={sendMessage} // Call sendMessage function on button click
             >
-              <MdSend />
+              {messageInput ? <MdSend /> : <AiFillLike />}
             </div>
           </div>
         </div>
