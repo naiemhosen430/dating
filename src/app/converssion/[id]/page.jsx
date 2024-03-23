@@ -142,7 +142,7 @@ export default function Page() {
         </div>
 
         <div className="p-2 fixed bottom-2 bg-black w-full z-50 flex items-center text-3xl">
-          <div className="flex items-center rounded-2xl justify-center bg-slate-900">
+          <div className="flex items-center rounded-2xl w-full justify-center bg-slate-900">
             <input
               className="text-white bg-slate-900 text-lg p-2 px-4 block m-0"
               type="text"
