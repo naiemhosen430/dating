@@ -54,3 +54,7 @@ body {
   display: flex;
   flex-direction: column-reverse;
 }
+
+.custom-windo-height{
+  height: 150px;
+}

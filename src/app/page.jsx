@@ -58,16 +58,9 @@ export default function Home() {
         {/* when meeting eatch other */}
         {searchpplbox && (
           <div onClick={searchPeople} className="h-screen w-scree">
-            <button className="lg:inline-block hidden hover:bg-slate-900 text-xl w-5/12 rounded-lg py-2 px-4 bg-slate-600 text-white font-bold">
-              Action
-            </button>
-            <div className="p-2 hidden text-left h-3/6 bg-slate-800 w-11/12 lg:w-5/12 rounded-lg border m-auto">
-              hello
-            </div>
-            <div className="p-5 text-2xl font-bold h-3/6 bg-slate-800 w-11/12 lg:w-5/12 rounded-lg border m-auto">
+            <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
               <h1>Searching....</h1>
-              <p className="text-lg text-slate-500 p-4">{displayText}</p>
-              <h1 className="text-lg pt-20">Tap to cencel the searching</h1>
+              <p className="text-sm text-slate-500 p-4">{displayText}</p>
             </div>
           </div>
         )}
@@ -78,9 +71,9 @@ export default function Home() {
             onClick={searchPeople}
             className="h-screen w-scree cursor-pointer"
           >
-            <div className="p-5 text-2xl font-bold h-3/6 bg-slate-800 w-11/12 lg:w-5/12 rounded-lg border m-auto">
+            <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
               <h1>Tap to chat</h1>
-              <p className="text-lg text-slate-500 p-4">
+              <p className="text-sm text-slate-500 p-4">
                 What i am thinking! Let's talk with someone.
               </p>
             </div>
