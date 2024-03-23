@@ -75,7 +75,7 @@ export default function Page() {
         msgtime: Date.now(),
       };
       await set(newMessageRef, newMessageData);
-      await axios.put(`/api/chat/updatelastmsg/${msgdata?._id}`, {
+      await axios.put(`/api/chat/update/${msgdata?._id}`, {
         lastmessage: messageInput,
       });
       setMessageInput("");
