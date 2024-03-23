@@ -142,19 +142,23 @@ export default function Page() {
         </div>
 
         <div className="fixed bottom-2 lg:w-6/12 w-12/12 m-auto px-2">
-          <div className="flex items-center justify-center bg-slate-950">
+          <div className="flex items-center rounded-2xl justify-center bg-slate-900">
             <input
-              className="text-white bg-slate-900 text-lg p-2 px-4 rounded-2xl block lg:w-10/12 w-11/12 m-0"
+              className="text-white  text-lg p-2 px-4 block m-0"
               type="text"
               placeholder="Message"
               value={messageInput}
               onChange={(e) => setMessageInput(e.target.value)} // Update message input value
             />
             <div
-              className="text-5xl cursor-pointer text-center rounded-3xl block lg:w-2/12 w-1/12 m-0"
+              className="text-5xl cursor-pointer text-center rounded-3xl block m-0"
               onClick={sendMessage} // Call sendMessage function on button click
             >
-              {messageInput ? <MdSend /> : <AiFillLike />}
+              {messageInput ? (
+                <MdSend className="text-white" />
+              ) : (
+                <AiFillLike className="text-white" />
+              )}
             </div>
           </div>
         </div>
