@@ -25,18 +25,8 @@ export default function Page() {
         setFriend(friend);
         setMe(me);
         setMsgData(data);
-      } catch (error) {
-        console.error("Error fetching chat data:", error);
-      }
-    };
 
-    fetchChatData();
-  }, [id]);
-
-  useEffect(() => {
-    const fetchChatData = async () => {
-      try {
-        const chatRef = ref(db, "conversations/" + msgdata._id);
+        const chatRef = ref(db, "conversations/" + data._id);
         const chatSnapshot = await get(chatRef);
 
         if (chatSnapshot.exists()) {
@@ -100,7 +90,7 @@ export default function Page() {
   return (
     <>
       <div className="lg:w-6/12 w-12/12 m-auto z-40 h-screen bg-slate-950">
-        <div className="p-2 fixed bg-black top-0 w-full z-50 flex items-center text-3xl">
+        <div className="p-2 fixed top-0 w-full z-50 flex items-center text-3xl">
           <div className="w-2/12">
             <Link href={"/chat"}>
               <CgArrowLeft />

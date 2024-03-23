@@ -5,7 +5,7 @@ export async function PUT(NextRequest, res) {
   // Assuming 'res' is your Express response object
   await dbconnect();
   try {
-    const msgdata = await NextRequest.json(); // Await the JSON parsing
+    const msgdata = await NextRequest.json();
     const id = NextRequest.url.split("updatelastmsg/")[1];
 
     // Check if a chat with the given IDs exists
