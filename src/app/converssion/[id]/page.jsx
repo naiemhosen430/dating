@@ -121,7 +121,11 @@ export default function Page() {
                   >
                     <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
                       <h1 className="text-white py-1">
-                        {msg.message ? msg.message : <AiFillLike />}
+                        {msg.message ? (
+                          msg.message
+                        ) : (
+                          <AiFillLike className="text-4xl text-white" />
+                        )}
                       </h1>
                       <h6 className="text-slate-700 text-xs p-1">
                         {formattedTime}
