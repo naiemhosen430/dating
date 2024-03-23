@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import singlechatbox from "./singlechatbox";
+import Singlechatbox from "./singlechatbox";
 
 export default function ChatBox() {
   const [chats, setChats] = useState(null);
@@ -33,7 +33,7 @@ export default function ChatBox() {
     fetchData();
   }, [userInfo]); // Make sure to add userInfo as a dependency
 
-  console.log(chats);
+  console.log({ chats });
 
   return (
     <>
@@ -49,7 +49,7 @@ export default function ChatBox() {
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
             chats?.map((chat) => (
-              <singlechatbox chat={chat} myid={userInfo?._id} />
+              <Singlechatbox chat={chat} myid={userInfo?._id} />
             ))
           )}
         </div>

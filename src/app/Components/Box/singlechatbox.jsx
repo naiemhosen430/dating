@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 
-export default function singlechatbox({ chat , myid}) {
+export default function Singlechatbox({ chat, myid }) {
   const [profileInfo, setProfileInfo] = useState(null);
-  const myfriendid = chat?.chatids.filter(item => item !== myid);
+  const myfriendid = chat?.chatids.filter((item) => item !== myid);
   useEffect(() => {
     const fatchData = async () => {
       await axios
