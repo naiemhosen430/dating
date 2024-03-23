@@ -144,20 +144,20 @@ export default function Page() {
         <div className="p-2 fixed bottom-2 bg-black w-full z-50 flex items-center text-3xl">
           <div className="flex items-center rounded-2xl w-full justify-center bg-slate-900">
             <input
-              className="text-white bg-slate-900 w-10/12 text-lg p-2 px-4 block m-0"
+              className="text-white focus:border-0 focu w-10/12 bg-transparent text-lg p-2 px-4 block m-0"
               type="text"
               placeholder="Message"
               value={messageInput}
               onChange={(e) => setMessageInput(e.target.value)} // Update message input value
             />
             <div
-              className="text-5xl cursor-pointer w-2/12 text-center rounded-3xl block m-0 pr-4"
+              className="text-5xl cursor-pointer w-2/12 text-center rounded-3xl block pb-2 pt-1"
               onClick={sendMessage} // Call sendMessage function on button click
             >
               {messageInput ? (
-                <MdSend className="text-white" />
+                <MdSend className="text-white inline-block" />
               ) : (
-                <AiFillLike className="text-white" />
+                <AiFillLike className="text-white inline-block" />
               )}
             </div>
           </div>
