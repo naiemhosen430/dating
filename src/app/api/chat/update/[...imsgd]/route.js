@@ -1,6 +1,4 @@
-import { Response } from "express"; // Assuming you're using Express.js
 import Chat from "@/models/chat.Model";
-import User from "@/models/userModel";
 import { dbconnect } from "@/utils/mongo";
 
 export async function PUT(NextRequest, res) {
