@@ -88,7 +88,7 @@ export default function Page() {
   return (
     <>
       <div className="lg:w-6/12 w-12/12 m-auto z-40 h-screen bg-slate-950">
-        <div className="p-2 fixed top-0 bg-black w-full z-50 flex items-center text-3xl">
+        <div className="p-2 fixed top-0 bg-black w-full lg:w-6/12 z-50 flex items-center text-3xl">
           <div className="w-2/12">
             <Link href={"/chat"}>
               <CgArrowLeft />
@@ -102,7 +102,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="overflow-y-auto z-30 custom-chat-field">
+        <div className="overflow-y w-full lg:w-6/12 m-auto z-30 custom-chat-field">
           {chatData ? (
             chatData
               .slice()
@@ -141,17 +141,17 @@ export default function Page() {
           {/* Reference to the bottom of the message container */}
         </div>
 
-        <div className="p-2 fixed bottom-2 bg-black w-full z-50 flex items-center text-3xl">
+        <div className="fixed bottom-2 px-2 w-full lg:w-6/12 z-50 flex items-center text-3xl">
           <div className="flex items-center rounded-2xl w-full justify-center bg-slate-900">
             <input
-              className="text-white focus:border-0 focu w-10/12 bg-transparent text-lg p-2 px-4 block m-0"
+              className="text-white focus:border-0 w-10/12 bg-transparent text-lg p-2 px-4 block m-0"
               type="text"
               placeholder="Message"
               value={messageInput}
               onChange={(e) => setMessageInput(e.target.value)} // Update message input value
             />
             <div
-              className="text-5xl cursor-pointer w-2/12 text-center rounded-3xl block pb-2 pt-1"
+              className="text-5xl cursor-pointer w-2/12 text-center rounded-3xl block pb-1"
               onClick={sendMessage} // Call sendMessage function on button click
             >
               {messageInput ? (
