@@ -5,14 +5,9 @@ import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
   await dbconnect();
-  console.log("hello");
   try {
     const myData = getDetaFromToken();
-    console.log({myData});
     const id = NextRequest.url.split("chat/")[1];
-    console.log(Request);
-    console.log(myData.id);
-    console.log(id);
 
     // Check if a chat with the given IDs exists
     const checkUser = await Chat.findOne({
@@ -26,7 +21,6 @@ export async function POST(NextRequest) {
 
     const me = await User.findOne({ _id: myData.id }).select("-password");
     const friend = await User.findOne({ _id: id }).select("-password");
-
 
     if (checkUser) {
       // If the chat exists, return success message and data
@@ -46,7 +40,6 @@ export async function POST(NextRequest) {
 
     // Save the new chat object to the database
     await chatobject.save();
-
 
     // Return success message and newly created chat object
     return Response.json({

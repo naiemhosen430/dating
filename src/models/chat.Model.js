@@ -7,6 +7,11 @@ const chatSchema = Schema(
       required: true,
       default: [],
     },
+    lastmessage: {
+      type: String,
+      required: true,
+      default: "Tap to chat",
+    },
   },
   {
     timestamps: true,

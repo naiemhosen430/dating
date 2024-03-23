@@ -75,10 +75,13 @@ export default function Page() {
         msgtime: Date.now(),
       };
       await set(newMessageRef, newMessageData);
+      await axios.put(`/api/chat/updatelastmsg/${msgdata._id}`, {
+        lastmessage: messageInput,
+      });
       setMessageInput("");
 
-      // After sending the message, scroll to the bottom of the message container
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      // // After sending the message, scroll to the bottom of the message container
+      // messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     } catch (error) {
       console.error("Error sending message:", error);
     }
