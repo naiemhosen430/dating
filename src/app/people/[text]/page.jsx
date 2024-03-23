@@ -48,19 +48,19 @@ export default function page() {
             {users.map((user) => (
               <Link key={user._id} href={`/profile/${user._id}`}>
                 <div className="inline-block w-32 m-4 rounded-2xl shadow-lg p-3 bg-slate-950 text-center">
-                  <h1 className="text-sm text-slate-600 font-bold p-1">
+                  <h1 className="text-sm text-white font-bold p-1">
                     {user.name}
                   </h1>
-                  {user.profilepicture == "undefined" ? (
+                  {user.profilepicture == "undefined" || "" ? (
                     <img
                       className="inline-block w-24 h-24 rounded-full"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjvJKg6aXJNnwv4EpwvCyU-E7gOXGlS_TCygX4YhPpQ4cObKtqPdn_OrDE_c5RwwCdYW0&usqp=CAU"
+                      src="https://t3.ftcdn.net/jpg/02/09/95/42/360_F_209954204_mHCvAQBIXP7C2zRl5Fbs6MEWOEkaX3cA.webp"
                       alt=""
                     />
                   ) : (
                     <img
                       className="inline-block w-24 h-24 rounded-full"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjvJKg6aXJNnwv4EpwvCyU-E7gOXGlS_TCygX4YhPpQ4cObKtqPdn_OrDE_c5RwwCdYW0&usqp=CAU"
+                      src={user.profilepicture}
                       alt=""
                     />
                   )}
