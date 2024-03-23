@@ -141,7 +141,7 @@ export default function Page() {
           {/* Reference to the bottom of the message container */}
         </div>
 
-        <div className="fixed bottom-2 lg:w-6/12 w-12/12 m-auto px-2">
+        <div className="p-2 fixed bottom-2 bg-black w-full z-50 flex items-center text-3xl">
           <div className="flex items-center rounded-2xl justify-center bg-slate-900">
             <input
               className="text-white bg-slate-900 text-lg p-2 px-4 block m-0"
