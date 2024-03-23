@@ -94,7 +94,7 @@ export default function Page() {
             </Link>
           </div>
           <div className="text-center w-8/12 text-2xl text-white font-bold">
-            {friend?.name}
+            <Link href={`/profile/${friend?._id}`}>{friend?.name}</Link>
           </div>
           <div className="w-2/12 text-right">
             <MdHelp className="inline-block" />
