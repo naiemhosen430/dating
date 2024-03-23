@@ -20,11 +20,13 @@ export default function Page() {
   useEffect(() => {
     const fetchChatData = async () => {
       try {
-        const response = await axios.post(`/api/chat/${id}`);
-        const { friend, me, data } = response.data;
-        setFriend(friend);
-        setMe(me);
-        setMsgData(data);
+        if (!msgdata) {
+          const response = await axios.post(`/api/chat/${id}`);
+          const { friend, me, data } = response.data;
+          setFriend(friend);
+          setMe(me);
+          setMsgData(data);
+        }
 
         const chatRef = ref(db, "conversations/" + data._id);
         const chatSnapshot = await get(chatRef);
@@ -79,9 +81,6 @@ export default function Page() {
         lastmessage: messageInput,
       });
       setMessageInput("");
-
-      // // After sending the message, scroll to the bottom of the message container
-      // messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     } catch (error) {
       console.error("Error sending message:", error);
     }
