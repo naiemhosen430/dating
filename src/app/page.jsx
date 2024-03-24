@@ -71,9 +71,14 @@ export default function Home() {
   }, [mymessage, data?._id]);
 
   useEffect(() => {
-    const chatRef = ref(db, "randommessage/" + newFriend?._id);
+    if (!newFriend || !newFriend._id) {
+      // Exit early if newFriend is null or undefined, or if newFriend._id is not available
+      return;
+    }
 
-    chatRef?.on("value", (snapshot) => {
+    const chatRef = ref(db, "randommessage/" + newFriend._id);
+
+    chatRef.on("value", (snapshot) => {
       const newMessage = snapshot.val();
       if (newMessage) {
         setFriendmessage(newMessage);
@@ -81,7 +86,12 @@ export default function Home() {
         setLeaveedboxshow(false);
       }
     });
-  }, [newFriend]); // Dependency array to trigger the effect when newFriend changes
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      chatRef.off("value"); // Remove the event listener
+    };
+  }, [newFriend]);
 
   useEffect(() => {
     const currentText = text[chunkIndex];
