@@ -17,6 +17,7 @@ import {
   onChildAdded,
   child,
   off,
+  onValue,
 } from "firebase/database";
 import { db } from "./firebaseConfig";
 import axios from "axios";
@@ -77,23 +78,21 @@ export default function Home() {
     }
 
     const chatRef = ref(db, "randommessage/" + newFriend._id);
-    if (!chatRef) {
-      console.error("Error: chatRef is not valid.");
-      return;
-    }
 
-    chatRef.on("value", (snapshot) => {
+    const handleValueChange = (snapshot) => {
       const newMessage = snapshot.val();
       if (newMessage) {
         setFriendmessage(newMessage);
       } else {
         setLeaveedboxshow(false);
       }
-    });
+    };
+
+    const chatRefListener = onValue(chatRef, handleValueChange);
 
     // Cleanup function to remove the event listener when component unmounts
     return () => {
-      chatRef.off("value"); // Remove the event listener
+      off(chatRef, "value", chatRefListener); // Remove the event listener
     };
   }, [newFriend]);
 
