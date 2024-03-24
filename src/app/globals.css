@@ -55,14 +55,17 @@ body {
   flex-direction: column-reverse;
 }
 
-.custom-windo-height{
+.custom-windo-height {
   height: 150px;
 }
 
-.padding-tophome{
+.padding-tophome {
   margin-top: -50px;
 }
 
-.text-10xl{
+.text-10xl {
   font-size: 200px;
+}
+.custom-windo-height-text {
+  height: 200px;
 }
