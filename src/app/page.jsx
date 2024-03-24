@@ -185,6 +185,10 @@ export default function Home() {
     remove(chatRef);
     const chatRefaa = ref(db, "randommessage/" + newFriendId);
     remove(chatRefaa);
+    const chatRefid = ref(db, "searching/" + data?._id);
+    remove(chatRefid);
+    const chatRefidd = ref(db, "searching/" + newFriendId);
+    remove(chatRefidd);
     setSearchpplbox(false);
     setMainlbox(true);
     setNewFriend(null);
@@ -193,6 +197,8 @@ export default function Home() {
   const closeMyChat = () => {
     const chatRef = ref(db, "randommessage/" + data?._id);
     remove(chatRef);
+    const chatRefid = ref(db, "searching/" + data?._id);
+    remove(chatRefid);
     setSearchpplbox(false);
     setMainlbox(true);
     setNewFriend(null);
