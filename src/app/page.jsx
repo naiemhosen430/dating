@@ -9,7 +9,7 @@ import { FaFemale } from "react-icons/fa";
 
 import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContext";
-import { push, ref, set, remove, onChildAdded } from "firebase/database";
+import { push, ref, set, remove, onChildAdded, child } from "firebase/database";
 import { db } from "./firebaseConfig";
 import axios from "axios";
 
@@ -97,9 +97,10 @@ export default function Home() {
   const searchPeople = async () => {
     const searchingRef = ref(db, "searching/");
     try {
-      await push(searchingRef, data._id);
+      // Set your ID directly under the "searching" directory
+      await set(child(searchingRef, data._id), true);
     } catch (error) {
-      console.error("Error pushing data to searching:", error.message);
+      console.error("Error setting data to searching:", error.message);
     }
 
     setMainlbox(false);
