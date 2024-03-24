@@ -113,8 +113,9 @@ export default function Home() {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const data = snapshot.val();
+        console.log(data);
 
-        if (data.id !== data._id) {
+        if (data.id != data._id) {
           setNewFriendId(data.id);
         }
       };
