@@ -14,7 +14,29 @@ import { db } from "./firebaseConfig";
 
 export default function Home() {
   const { data } = useContext(MineContext);
-  console.log(data);
+  if (!data){
+    return (
+      <>
+      <Menu /> 
+      <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
+        {/* Content when meeting each other or looking for others */}
+        <div
+
+          className="h-screen w-screen cursor-pointer"
+        >
+          <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
+            <h1> loading....</h1>
+            <p className="text-sm text-slate-500 p-4">
+             
+            </p>
+          </div>
+        </div>
+      </div>
+      <ButtonBer /> 
+    </>
+    );
+  }
+
   const [searchpplbox, setSearchpplbox] = useState(false);
   const [mainlbox, setMainlbox] = useState(true);
 
@@ -27,6 +49,8 @@ export default function Home() {
   const [displayText, setDisplayText] = useState("");
   const [chunkIndex, setChunkIndex] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [newFriend,setNewFriend]=useState(null)
+  const [newFriendId,setNewFriendId]=useState(null)
 
   useEffect(() => {
     const currentText = text[chunkIndex];
@@ -63,6 +87,35 @@ export default function Home() {
     setMainlbox(true);
     setSearchpplbox(false);
   };
+  
+
+  if (searchpplbox) {
+    const chatRef = ref(db, "searching/");
+    onChildAdded(chatRef, (snapshot) => {
+      const id = snapshot.val(); 
+      setNewFriendId(id);
+    });
+  }
+
+  useEffect(() => {
+    const fatchData = async () => {
+      if (newFriendId){
+
+        await axios
+          .get(`/api/profile/${newFriendId}`)
+          .then((data) => {
+            setNewFriend(data.data.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    };
+    fatchData();
+  }, [newFriendId]);
+
+  console.log(newFriendId)
+  console.log(newFriend)
   
 
   return (
