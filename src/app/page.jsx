@@ -48,6 +48,7 @@ export default function Home() {
   const [newFriend, setNewFriend] = useState(null);
   const [newFriendId, setNewFriendId] = useState(null);
   const [errorBox, setErrorBox] = useState(false);
+  const [leaveedboxshow, setLeaveedboxshow] = useState(false);
   const [mymessage, setMymessage] = useState("");
   const [friendmessage, setFriendmessage] = useState("");
   const handleTextareaChange = (e) => {
@@ -64,7 +65,11 @@ export default function Home() {
   const chatRef = ref(db, "randommessage/" + newFriendId);
   onChildAdded(chatRef, (snapshot) => {
     const newMessage = snapshot.val();
-    setFriendmessage(newMessage);
+    if (newMessage) {
+      setFriendmessage(newMessage);
+    } else {
+      setLeaveedboxshow(false);
+    }
   });
 
   useEffect(() => {
@@ -153,9 +158,32 @@ export default function Home() {
     setNewFriend(null);
   };
 
+  const closeMyChat = () => {
+    const chatRef = ref(db, "randommessage/" + data._id);
+    remove(chatRef);
+    setSearchpplbox(false);
+    setMainlbox(true);
+    setNewFriend(null);
+  };
+
   if (newFriend) {
     return (
       <>
+        {leaveedboxshow && (
+          <div className="fixed z-50 justify-center align-center top-0 left-0 bg-gradient-to-t from-black to-transparent h-screen w-screen">
+            <div className="lg:w-5/12 mt-10 my-5 w-10/12 text-center m-auto bg-black p-5 rounded-2xl shadow-2xl">
+              <h1 className="text-black text-2xl px-4">
+                Another one has leaved
+              </h1>
+              <button
+                onClick={closeMyChat}
+                className="p-2 bg-slate-600 mx-4 my-2 w-5/12 text-white m-auto inline-block font-bold rounded-md shadow-lg"
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        )}
         {errorBox && (
           <div className="fixed z-50 justify-center align-center top-0 left-0 bg-gradient-to-t from-black to-transparent h-screen w-screen">
             <div className="lg:w-5/12 mt-10 my-5 w-10/12 text-center m-auto bg-black p-5 rounded-2xl shadow-2xl">
