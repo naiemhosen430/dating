@@ -256,7 +256,7 @@ export default function Home() {
             <div className="flex justify-center">
               <textarea
                 className="p-5 text-lg font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-                // value={friendmessage}
+                value={friendmessage}
                 readOnly
                 placeholder={`here is ${newFriend.name}`}
               />
