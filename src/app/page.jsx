@@ -98,7 +98,7 @@ export default function Home() {
     const searchingRef = ref(db, "searching/");
     try {
       // Set your ID directly under the "searching" directory
-      await set(child(searchingRef, data._id), true);
+      await set(child(searchingRef, data._id), data._id);
     } catch (error) {
       console.error("Error setting data to searching:", error.message);
     }
@@ -131,7 +131,7 @@ export default function Home() {
           // Implement your logic here, such as picking a random child
           // For example:
           if (childId !== data._id) {
-            setNewFriendId(childId);
+            return setNewFriendId(childId);
           }
         });
       };
