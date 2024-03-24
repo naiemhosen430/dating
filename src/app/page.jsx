@@ -159,7 +159,7 @@ export default function Home() {
         )}
         <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
           <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
-            Zana
+            Zane
           </h1>
 
           <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
@@ -170,7 +170,7 @@ export default function Home() {
         </div>
         <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
           <div className="h-screen w-screen">
-            <div className="flex">
+            <div className="flex justify-center">
               <input
                 className="p-5 text-2xl font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
                 type="text"
@@ -220,7 +220,7 @@ export default function Home() {
         <>
           <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
             <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
-              Zana
+              Zane
             </h1>
 
             <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
