@@ -73,7 +73,7 @@ export default function Home() {
   useEffect(() => {
     const chatRef = ref(db, "randommessage/" + newFriend?._id);
 
-    chatRef.on("value", (snapshot) => {
+    chatRef?.on("value", (snapshot) => {
       const newMessage = snapshot.val();
       if (newMessage) {
         setFriendmessage(newMessage);
