@@ -11,7 +11,7 @@ import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContext";
 import { push, ref, set, remove, onChildAdded } from "firebase/database";
 import { db } from "./firebaseConfig";
-import axios from "axios"
+import axios from "axios";
 
 export default function Home() {
   const { data } = useContext(MineContext);
@@ -83,24 +83,24 @@ export default function Home() {
     setMainlbox(true);
     setSearchpplbox(false);
   };
-  
+
   useEffect(() => {
     if (searchpplbox) {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const data = snapshot.val();
-        if (data && data.id) {
+        if (data && data.id && data.id !== data._id) {
+          // Check if the ID is not equal to your own ID
           setNewFriendId(data.id);
         }
       };
       onChildAdded(chatRef, handleChildAdded);
 
       return () => {
-      
         chatRef.off("child_added", handleChildAdded);
       };
     }
-  }, [searchpplbox]);
+  }, [searchpplbox, data._id]); // Include data._id as a dependency to make sure the effect updates when your ID changes
 
   useEffect(() => {
     const fatchData = async () => {
