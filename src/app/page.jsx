@@ -184,6 +184,8 @@ export default function Home() {
   const leaveChat = () => {
     const chatRef = ref(db, "randommessage/" + data._id);
     remove(chatRef);
+    const chatRefaa = ref(db, "randommessage/" + newFriendId);
+    remove(chatRefaa);
     setSearchpplbox(false);
     setMainlbox(true);
     setNewFriend(null);
