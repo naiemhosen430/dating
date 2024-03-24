@@ -71,26 +71,27 @@ export default function Home() {
   }, [mymessage, data?._id]);
 
   useEffect(() => {
-    if (!newFriend || !newFriend._id) {
+    if (!newFriend) {
       // Exit early if newFriend is null or undefined, or if newFriend._id is not available
       return;
     }
 
     const chatRef = ref(db, "randommessage/" + newFriend._id);
+    if (chatRef) {
+      chatRef.on("value", (snapshot) => {
+        const newMessage = snapshot.val();
+        if (newMessage) {
+          setFriendmessage(newMessage);
+        } else {
+          setLeaveedboxshow(false);
+        }
+      });
 
-    chatRef.on("value", (snapshot) => {
-      const newMessage = snapshot.val();
-      if (newMessage) {
-        setFriendmessage(newMessage);
-      } else {
-        setLeaveedboxshow(false);
-      }
-    });
-
-    // Cleanup function to remove the event listener when component unmounts
-    return () => {
-      chatRef.off("value"); // Remove the event listener
-    };
+      // Cleanup function to remove the event listener when component unmounts
+      return () => {
+        chatRef.off("value"); // Remove the event listener
+      };
+    }
   }, [newFriend]);
 
   useEffect(() => {
