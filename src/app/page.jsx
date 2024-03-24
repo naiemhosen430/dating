@@ -9,7 +9,15 @@ import { FaFemale } from "react-icons/fa";
 
 import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContext";
-import { push, ref, set, remove, onChildAdded, child } from "firebase/database";
+import {
+  push,
+  ref,
+  set,
+  remove,
+  onChildAdded,
+  child,
+  off,
+} from "firebase/database";
 import { db } from "./firebaseConfig";
 import axios from "axios";
 
@@ -62,15 +70,33 @@ export default function Home() {
     }
   }, [mymessage, data._id]);
 
-  const chatRef = ref(db, "randommessage/" + newFriendId);
-  onChildAdded(chatRef, (snapshot) => {
-    const newMessage = snapshot.val();
-    if (newMessage) {
-      setFriendmessage(newMessage);
-    } else {
-      setLeaveedboxshow(false);
+  useEffect(() => {
+    const chatRef = ref(db, "randommessage/" + newFriend._id);
+    const handleChildAdded = (snapshot) => {
+      const newMessage = snapshot.val();
+      console.log(newMessage);
+      if (newMessage) {
+        setFriendmessage(newMessage);
+      } else {
+        setLeaveedboxshow(false);
+      }
+    };
+
+    try {
+      onChildAdded(chatRef, handleChildAdded);
+    } catch (error) {
+      console.error("Error attaching child added listener:", error);
     }
-  });
+
+    // Cleanup function to remove the listener when the component unmounts
+    return () => {
+      try {
+        off(chatRef, "child_added", handleChildAdded);
+      } catch (error) {
+        console.error("Error detaching child added listener:", error);
+      }
+    };
+  }, [newFriend]); // Dependency array to trigger the effect when newFriendId changes
 
   useEffect(() => {
     const currentText = text[chunkIndex];
@@ -120,7 +146,6 @@ export default function Home() {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const snapshotData = snapshot.val();
-        console.log(snapshotData);
 
         if (snapshotData !== data._id) {
           return setNewFriendId(snapshotData);
