@@ -82,15 +82,15 @@ export default function Home() {
     };
 
     try {
-      // Attach the event listener using the on method
-      on(chatRef, "value", handleChildAdded);
+      // Attach the event listener using the onChildAdded method
+      onChildAdded(chatRef, handleChildAdded);
     } catch (error) {
       console.error("Error attaching child added listener:", error);
     }
 
     // Cleanup function to remove the event listener when component unmounts
     return () => {
-      off(chatRef, "value", handleChildAdded);
+      off(chatRef, handleChildAdded);
     };
   }, [newFriend]); // Dependency array to trigger the effect when newFriend changes
 
