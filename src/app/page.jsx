@@ -96,7 +96,7 @@ export default function Home() {
   // onclick
   const searchPeople = async () => {
     const chatRef = ref(db, "searching/" + data._id);
-    await set(chatRef, { id: data._id });
+    await set(chatRef, data._id);
     setMainlbox(false);
     setSearchpplbox(true);
   };
