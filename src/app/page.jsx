@@ -97,10 +97,9 @@ export default function Home() {
   const searchPeople = async () => {
     const searchingRef = ref(db, "searching/");
     try {
-      const newChildRef = push(searchingRef);
-      await set(newChildRef, data._id);
+      await set(searchingRef, { [data._id]: true });
     } catch (error) {
-      console.error("Error pushing data to searching:", error.message);
+      console.error("Error setting data in searching:", error.message);
     }
 
     setMainlbox(false);
