@@ -109,21 +109,24 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (searchpplbox && !newFriendId) {
+    if (searchpplbox && !newFriendId && data._id) {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
-        const data = snapshot.val();
-        console.log(data);
+        const snapshotData = snapshot.val();
+        const ids = Object.keys(snapshotData); // Get all the keys (IDs) from the snapshot data
+        const randomIndex = Math.floor(Math.random() * ids.length); // Generate a random index
+        const randomId = ids[randomIndex]; // Pick a random ID from the snapshot data
+        console.log(randomId);
 
-        if (data && data.id !== data._id) {
-          setNewFriendId(data.id);
+        if (randomId !== data._id) {
+          setNewFriendId(randomId);
         }
       };
 
       // Attach the event listener to the chatRef
       onChildAdded(chatRef, handleChildAdded);
     }
-  }, [searchpplbox, newFriendId, data._id]); // Include data._id as a dependency to make sure the effect updates when your ID changes
+  }, [searchpplbox, newFriendId, data._id]);
 
   useEffect(() => {
     const fatchData = async () => {
