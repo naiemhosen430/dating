@@ -137,20 +137,20 @@ export default function Home() {
     return (
       <>
         {errorBox && (
-          <div className="fixed justify-center align-center top-0 left-0 bg-gradient-to-r from-blue-500 to-transparent h-screen w-screen">
-            <div className="lg:w-5/12 mt-60 w-10/12 text-center m-auto bg-white p-5 rounded-2xl shadow-2xl">
-              <h1 className="text-black text-2xl p-10 px-4">
+          <div className="fixed z-50 justify-center align-center top-0 left-0 bg-gradient-to-b from-black to-transparent h-screen w-screen">
+            <div className="lg:w-5/12 mt-60 w-10/12 text-center m-auto bg-black p-5 rounded-2xl shadow-2xl">
+              <h1 className="text-black text-2xl px-4">
                 Do you want to leave?
               </h1>
               <button
                 onClick={closeErrorBox}
-                className="p-2 px-20 bg-slate-900 mx-4 my-2 w-full text-white inline-block font-bold rounded-md shadow-lg"
+                className="p-2 px-20 bg-slate-600 mx-4 my-2 w-5/12 text-white m-auto inline-block font-bold rounded-md shadow-lg"
               >
                 Later
               </button>
               <button
                 onClick={leaveChat}
-                className="p-2 px-20 bg-slate-900 mx-4 my-2 w-full text-white inline-block font-bold rounded-md shadow-lg"
+                className="p-2 px-20 bg-slate-900 mx-4 my-2 w-5/12 text-white m-auto inline-block font-bold rounded-md shadow-lg"
               >
                 Leave
               </button>
