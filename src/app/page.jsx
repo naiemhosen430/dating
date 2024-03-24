@@ -9,31 +9,26 @@ import { FaFemale } from "react-icons/fa";
 
 import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContext";
-import { push, ref, set, remove } from "firebase/database";
+import { push, ref, set, remove, onChildAdded } from "firebase/database";
 import { db } from "./firebaseConfig";
 
 export default function Home() {
   const { data } = useContext(MineContext);
-  if (!data){
+  if (!data) {
     return (
       <>
-      <Menu /> 
-      <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
-        {/* Content when meeting each other or looking for others */}
-        <div
-
-          className="h-screen w-screen cursor-pointer"
-        >
-          <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
-            <h1> loading....</h1>
-            <p className="text-sm text-slate-500 p-4">
-             
-            </p>
+        <Menu />
+        <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
+          {/* Content when meeting each other or looking for others */}
+          <div className="h-screen w-screen cursor-pointer">
+            <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
+              <h1> loading....</h1>
+              <p className="text-sm text-slate-500 p-4"></p>
+            </div>
           </div>
         </div>
-      </div>
-      <ButtonBer /> 
-    </>
+        <ButtonBer />
+      </>
     );
   }
 
@@ -49,8 +44,8 @@ export default function Home() {
   const [displayText, setDisplayText] = useState("");
   const [chunkIndex, setChunkIndex] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [newFriend,setNewFriend]=useState(null)
-  const [newFriendId,setNewFriendId]=useState(null)
+  const [newFriend, setNewFriend] = useState(null);
+  const [newFriendId, setNewFriendId] = useState(null);
 
   useEffect(() => {
     const currentText = text[chunkIndex];
@@ -75,32 +70,30 @@ export default function Home() {
   }, [chunkIndex, currentIndex]);
   // onclick
   const searchPeople = async () => {
-    const chatRef = ref(db, "searching/" + data._id); 
-    await set(chatRef, { id: data._id }); 
+    const chatRef = ref(db, "searching/" + data._id);
+    await set(chatRef, { id: data._id });
     setMainlbox(false);
     setSearchpplbox(true);
   };
-  
+
   const cencelsearchPeople = async () => {
-    const chatRef = ref(db, "searching/" + data._id); 
+    const chatRef = ref(db, "searching/" + data._id);
     await remove(chatRef);
     setMainlbox(true);
     setSearchpplbox(false);
   };
-  
 
   if (searchpplbox) {
     const chatRef = ref(db, "searching/");
     onChildAdded(chatRef, (snapshot) => {
-      const id = snapshot.val(); 
+      const id = snapshot.val();
       setNewFriendId(id);
     });
   }
 
   useEffect(() => {
     const fatchData = async () => {
-      if (newFriendId){
-
+      if (newFriendId) {
         await axios
           .get(`/api/profile/${newFriendId}`)
           .then((data) => {
@@ -114,9 +107,8 @@ export default function Home() {
     fatchData();
   }, [newFriendId]);
 
-  console.log(newFriendId)
-  console.log(newFriend)
-  
+  console.log(newFriendId);
+  console.log(newFriend);
 
   return (
     <>
