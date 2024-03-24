@@ -70,7 +70,7 @@ export default function Home() {
     }
   }, [mymessage, data?._id]);
 
-  if (newFriend) {
+  useEffect(() => {
     const chatRef = ref(db, "randommessage/" + newFriend?._id);
     const handleChildAdded = (snapshot) => {
       const newMessage = snapshot.val();
@@ -80,8 +80,19 @@ export default function Home() {
         setLeaveedboxshow(false);
       }
     };
-    onChildAdded(chatRef, handleChildAdded);
-  }
+
+    try {
+      // Attach the event listener using the on method
+      onChildAdded(chatRef, "child_added", handleChildAdded);
+    } catch (error) {
+      console.error("Error attaching child added listener:", error);
+    }
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      off(chatRef, "child_added", handleChildAdded);
+    };
+  }, [newFriend]); // Dependency array to trigger the effect when newFriend changes
 
   useEffect(() => {
     const currentText = text[chunkIndex];
