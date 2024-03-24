@@ -48,6 +48,24 @@ export default function Home() {
   const [newFriend, setNewFriend] = useState(null);
   const [newFriendId, setNewFriendId] = useState(null);
   const [errorBox, setErrorBox] = useState(false);
+  const [mymessage, setMymessage] = useState("");
+  const [friendmessage, setFriendmessage] = useState("");
+  const handleTextareaChange = (e) => {
+    setMymessage(e.target.value);
+  };
+
+  useEffect(() => {
+    if (mymessage) {
+      const chatRef = ref(db, "randommessage/" + data._id);
+      set(chatRef, { mymessage });
+    }
+  }, [mymessage, data._id]);
+
+  const chatRef = ref(db, "randommessage/" + newFriendId);
+  onChildAdded(chatRef, (snapshot) => {
+    const newMessage = snapshot.val();
+    setFriendmessage(newMessage);
+  });
 
   useEffect(() => {
     const currentText = text[chunkIndex];
@@ -138,7 +156,7 @@ export default function Home() {
       <>
         {errorBox && (
           <div className="fixed z-50 justify-center align-center top-0 left-0 bg-gradient-to-t from-black to-transparent h-screen w-screen">
-            <div className="lg:w-5/12 my-5 w-10/12 text-center m-auto bg-black p-5 rounded-2xl shadow-2xl">
+            <div className="lg:w-5/12 mt-10 my-5 w-10/12 text-center m-auto bg-black p-5 rounded-2xl shadow-2xl">
               <h1 className="text-black text-2xl px-4">
                 Do you want to leave?
               </h1>
@@ -173,12 +191,13 @@ export default function Home() {
             <div className="flex justify-center">
               <textarea
                 className="p-5 text-lg font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-                value={""}
+                value={friendmessage}
                 readOnly
               />
               <textarea
                 className="p-5 text-lg font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-                value={""}
+                value={mymessage}
+                onChange={handleTextareaChange}
               />
             </div>
 
