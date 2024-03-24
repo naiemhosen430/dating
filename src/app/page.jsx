@@ -229,6 +229,7 @@ export default function Home() {
                 className="p-5 text-lg font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
                 value={friendmessage}
                 readOnly
+                placeholder={`here is ${newFriend.name}`}
               />
               <textarea
                 className="p-5 text-lg font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
