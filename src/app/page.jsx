@@ -128,10 +128,10 @@ export default function Home() {
   };
 
   const leaveChat = () => {
+    setSearchpplbox(false);
+    setMainlbox(true);
     setNewFriend(null);
   };
-  console.log(newFriendId);
-  console.log(newFriend);
 
   if (newFriend) {
     return (
@@ -144,13 +144,13 @@ export default function Home() {
               </h1>
               <button
                 onClick={closeErrorBox}
-                className="p-2 px-20 bg-slate-900 text-white inline-block font-bold rounded-md shadow-lg"
+                className="p-2 px-20 bg-slate-900 mx-4 my-2 w-full text-white inline-block font-bold rounded-md shadow-lg"
               >
                 Later
               </button>
               <button
                 onClick={leaveChat}
-                className="p-2 px-20 bg-slate-900 text-white inline-block font-bold rounded-md shadow-lg"
+                className="p-2 px-20 bg-slate-900 mx-4 my-2 w-full text-white inline-block font-bold rounded-md shadow-lg"
               >
                 Leave
               </button>
