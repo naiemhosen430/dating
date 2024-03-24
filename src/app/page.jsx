@@ -87,11 +87,6 @@ export default function Home() {
     } catch (error) {
       console.error("Error attaching child added listener:", error);
     }
-
-    // Cleanup function to remove the event listener when component unmounts
-    return () => {
-      off(chatRef, handleChildAdded);
-    };
   }, [newFriend]); // Dependency array to trigger the effect when newFriend changes
 
   useEffect(() => {
