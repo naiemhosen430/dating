@@ -72,26 +72,29 @@ export default function Home() {
 
   useEffect(() => {
     if (!newFriend) {
-      // Exit early if newFriend is null or undefined, or if newFriend._id is not available
+      // Exit early if newFriend is null or undefined
       return;
     }
 
     const chatRef = ref(db, "randommessage/" + newFriend._id);
-    if (chatRef) {
-      chatRef.on("value", (snapshot) => {
-        const newMessage = snapshot.val();
-        if (newMessage) {
-          setFriendmessage(newMessage);
-        } else {
-          setLeaveedboxshow(false);
-        }
-      });
-
-      // Cleanup function to remove the event listener when component unmounts
-      return () => {
-        chatRef.off("value"); // Remove the event listener
-      };
+    if (!chatRef) {
+      console.error("Error: chatRef is not valid.");
+      return;
     }
+
+    chatRef.on("value", (snapshot) => {
+      const newMessage = snapshot.val();
+      if (newMessage) {
+        setFriendmessage(newMessage);
+      } else {
+        setLeaveedboxshow(false);
+      }
+    });
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      chatRef.off("value"); // Remove the event listener
+    };
   }, [newFriend]);
 
   useEffect(() => {
