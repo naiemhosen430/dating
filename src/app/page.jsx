@@ -86,8 +86,10 @@ export default function Home() {
   if (searchpplbox) {
     const chatRef = ref(db, "searching/");
     onChildAdded(chatRef, (snapshot) => {
-      const id = snapshot.val();
-      setNewFriendId(id);
+      const data = snapshot.val(); 
+      if (data && data.id) {
+        setNewFriendId(data.id);
+      }
     });
   }
 
