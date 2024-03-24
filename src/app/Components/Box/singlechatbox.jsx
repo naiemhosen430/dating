@@ -9,7 +9,7 @@ export default function Singlechatbox({ chat, myid }) {
 
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
   setMyfriendid(myfriendid[0]);
-  console.log({ aaaa: setMyfriendid });
+  console.log({ aaaa: myfriendid[0] });
 
   if (!profileInfo || !myfriendid[0]) {
     return (
