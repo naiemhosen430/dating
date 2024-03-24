@@ -171,13 +171,14 @@ export default function Home() {
         <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
           <div className="h-screen w-screen">
             <div className="flex justify-center">
-              <input
-                className="p-5 text-2xl font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-                type="text"
+              <textarea
+                className="p-5 text-lg font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
+                value={""}
+                readOnly
               />
-              <input
-                className="p-5 text-2xl font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-                type="text"
+              <textarea
+                className="p-5 text-lg font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
+                value={""}
               />
             </div>
 
