@@ -121,6 +121,65 @@ export default function Home() {
   console.log(newFriendId);
   console.log(newFriend);
 
+  if (newFriend) {
+    <>
+      <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
+        <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
+          Zana
+        </h1>
+
+        <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
+          <h1 className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-end hover:text-white py-2 rounded-md">
+            <FaPowerOff onClick={cencelsearchPeople} />
+          </h1>
+        </ul>
+      </div>
+      <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
+        <div className="h-screen w-screen">
+          <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
+            <h1>Searching....</h1>
+            <p className="text-sm text-slate-500 p-4">{displayText}</p>
+          </div>
+
+          <div className="fixed bottom-5 w-full">
+            <div className="flex justify-center">
+              <div className="w-6/12 text-center">
+                {newFriend?.gender === "male" ? (
+                  <FaMale className="text-10xl text-slate-200 inline-block" />
+                ) : (
+                  <FaFemale className="text-10xl text-slate-200 inline-block" />
+                )}
+              </div>
+              <div className="w-6/12 text-center">
+                {newFriend?.gender === "male" ? (
+                  <FaMale className="text-10xl text-slate-200 inline-block" />
+                ) : (
+                  <FaFemale className="text-10xl text-slate-200 inline-block" />
+                )}
+              </div>
+            </div>
+
+            <div className="flex padding-tophome justify-center">
+              <div className="w-6/12 text-center">
+                <GiBarStool className="text-10xl text-white inline-block" />
+              </div>
+              <div className="w-6/12 text-center">
+                <GiBarStool className="text-10xl text-white inline-block" />
+              </div>
+            </div>
+
+            <div className="text-center">
+              <IoClose
+                onClick={cencelsearchPeople}
+                className="p-2 text-5xl rounded-full inline-block bg-black"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>;
+  }
+
   return (
     <>
       {searchpplbox && (
