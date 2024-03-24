@@ -203,6 +203,8 @@ export default function Home() {
     setNewFriend(null);
   };
 
+  console.log(friendmessage);
+
   if (newFriend) {
     return (
       <>
