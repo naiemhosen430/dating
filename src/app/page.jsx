@@ -127,87 +127,91 @@ export default function Home() {
     setErrorBox(false);
   };
 
-  const leaveChat = () => {};
+  const leaveChat = () => {
+    setNewFriend(null);
+  };
   console.log(newFriendId);
   console.log(newFriend);
 
   if (newFriend) {
-    <>
-      {errorBox && (
-        <div className="fixed justify-center align-center top-0 left-0 bg-gradient-to-r from-blue-500 to-transparent h-screen w-screen">
-          <div className="lg:w-5/12 mt-60 w-10/12 text-center m-auto bg-white p-5 rounded-2xl shadow-2xl">
-            <h1 className="text-black text-2xl p-10 px-4">
-              Do you want to leave?
-            </h1>
-            <button
-              onClick={closeErrorBox}
-              className="p-2 px-20 bg-slate-900 text-white inline-block font-bold rounded-md shadow-lg"
-            >
-              Later
-            </button>
-            <button
-              onClick={leaveChat}
-              className="p-2 px-20 bg-slate-900 text-white inline-block font-bold rounded-md shadow-lg"
-            >
-              Leave
-            </button>
+    return (
+      <>
+        {errorBox && (
+          <div className="fixed justify-center align-center top-0 left-0 bg-gradient-to-r from-blue-500 to-transparent h-screen w-screen">
+            <div className="lg:w-5/12 mt-60 w-10/12 text-center m-auto bg-white p-5 rounded-2xl shadow-2xl">
+              <h1 className="text-black text-2xl p-10 px-4">
+                Do you want to leave?
+              </h1>
+              <button
+                onClick={closeErrorBox}
+                className="p-2 px-20 bg-slate-900 text-white inline-block font-bold rounded-md shadow-lg"
+              >
+                Later
+              </button>
+              <button
+                onClick={leaveChat}
+                className="p-2 px-20 bg-slate-900 text-white inline-block font-bold rounded-md shadow-lg"
+              >
+                Leave
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-      <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
-        <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
-          Zana
-        </h1>
-
-        <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
-          <h1 className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-end hover:text-white py-2 rounded-md">
-            <FaPowerOff onClick={openLeavepopup} />
+        )}
+        <div className="flex bg-slate-900 fixed z-10 top-0 w-full items-center px-4 shadow-md">
+          <h1 className="text-white font-bold lg:w-2/12 w-6/12 text-3xl space-x-4">
+            Zana
           </h1>
-        </ul>
-      </div>
-      <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
-        <div className="h-screen w-screen">
-          <div className="flex">
-            <input
-              className="p-5 text-2xl font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-              type="text"
-            />
-            <input
-              className="p-5 text-2xl font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
-              type="text"
-            />
-          </div>
 
-          <div className="fixed bottom-5 w-full">
-            <div className="flex justify-center">
-              <div className="w-6/12 text-center">
-                {newFriend?.gender === "male" ? (
-                  <FaMale className="text-10xl text-slate-200 inline-block" />
-                ) : (
-                  <FaFemale className="text-10xl text-slate-200 inline-block" />
-                )}
-              </div>
-              <div className="w-6/12 text-center">
-                {newFriend?.gender === "male" ? (
-                  <FaMale className="text-10xl text-slate-200 inline-block" />
-                ) : (
-                  <FaFemale className="text-10xl text-slate-200 inline-block" />
-                )}
-              </div>
+          <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
+            <h1 className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-end hover:text-white py-2 rounded-md">
+              <FaPowerOff onClick={openLeavepopup} />
+            </h1>
+          </ul>
+        </div>
+        <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
+          <div className="h-screen w-screen">
+            <div className="flex">
+              <input
+                className="p-5 text-2xl font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
+                type="text"
+              />
+              <input
+                className="p-5 text-2xl font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
+                type="text"
+              />
             </div>
 
-            <div className="flex padding-tophome justify-center">
-              <div className="w-6/12 text-center">
-                <GiBarStool className="text-10xl text-white inline-block" />
+            <div className="fixed bottom-5 w-full">
+              <div className="flex justify-center">
+                <div className="w-6/12 text-center">
+                  {newFriend?.gender === "male" ? (
+                    <FaMale className="text-10xl text-slate-200 inline-block" />
+                  ) : (
+                    <FaFemale className="text-10xl text-slate-200 inline-block" />
+                  )}
+                </div>
+                <div className="w-6/12 text-center">
+                  {newFriend?.gender === "male" ? (
+                    <FaMale className="text-10xl text-slate-200 inline-block" />
+                  ) : (
+                    <FaFemale className="text-10xl text-slate-200 inline-block" />
+                  )}
+                </div>
               </div>
-              <div className="w-6/12 text-center">
-                <GiBarStool className="text-10xl text-white inline-block" />
+
+              <div className="flex padding-tophome justify-center">
+                <div className="w-6/12 text-center">
+                  <GiBarStool className="text-10xl text-white inline-block" />
+                </div>
+                <div className="w-6/12 text-center">
+                  <GiBarStool className="text-10xl text-white inline-block" />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </>;
+      </>
+    );
   }
 
   return (
