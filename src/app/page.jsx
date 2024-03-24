@@ -65,13 +65,13 @@ export default function Home() {
 
   useEffect(() => {
     if (mymessage) {
-      const chatRef = ref(db, "randommessage/" + data._id);
+      const chatRef = ref(db, "randommessage/" + data?._id);
       set(chatRef, { mymessage });
     }
-  }, [mymessage, data._id]);
+  }, [mymessage, data?._id]);
 
   useEffect(() => {
-    const chatRef = ref(db, "randommessage/" + newFriend._id);
+    const chatRef = ref(db, "randommessage/" + newFriend?._id);
     const handleChildAdded = (snapshot) => {
       const newMessage = snapshot.val();
       console.log(newMessage);
@@ -124,7 +124,7 @@ export default function Home() {
     const searchingRef = ref(db, "searching/");
     try {
       // Set your ID directly under the "searching" directory
-      await set(child(searchingRef, data._id), data._id);
+      await set(child(searchingRef, data?._id), data?._id);
     } catch (error) {
       console.error("Error setting data to searching:", error.message);
     }
@@ -134,7 +134,7 @@ export default function Home() {
   };
 
   const cencelsearchPeople = async () => {
-    const chatRef = ref(db, "searching/" + data._id);
+    const chatRef = ref(db, "searching/" + data?._id);
     await remove(chatRef);
 
     setMainlbox(true);
@@ -142,12 +142,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (searchpplbox && !newFriendId && data._id) {
+    if (searchpplbox && !newFriendId && data?._id) {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const snapshotData = snapshot.val();
 
-        if (snapshotData !== data._id) {
+        if (snapshotData !== data?._id) {
           return setNewFriendId(snapshotData);
         }
       };
@@ -155,7 +155,7 @@ export default function Home() {
       // Attach the event listener to the chatRef
       onChildAdded(chatRef, handleChildAdded);
     }
-  }, [searchpplbox, newFriendId, data._id]);
+  }, [searchpplbox, newFriendId, data?._id]);
 
   useEffect(() => {
     const fatchData = async () => {
@@ -182,7 +182,7 @@ export default function Home() {
   };
 
   const leaveChat = () => {
-    const chatRef = ref(db, "randommessage/" + data._id);
+    const chatRef = ref(db, "randommessage/" + data?._id);
     remove(chatRef);
     const chatRefaa = ref(db, "randommessage/" + newFriendId);
     remove(chatRefaa);
@@ -192,7 +192,7 @@ export default function Home() {
   };
 
   const closeMyChat = () => {
-    const chatRef = ref(db, "randommessage/" + data._id);
+    const chatRef = ref(db, "randommessage/" + data?._id);
     remove(chatRef);
     setSearchpplbox(false);
     setMainlbox(true);
