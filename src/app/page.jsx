@@ -115,10 +115,14 @@ export default function Home() {
         const data = snapshot.val();
         console.log(data);
 
-        if (data.id != data._id) {
+        if (data && data.id !== data._id) {
           setNewFriendId(data.id);
         }
       };
+
+      // Attach the event listener to the chatRef
+      onChildAdded(chatRef, handleChildAdded);
+
       // onChildAdded(chatRef, handleChildAdded);
 
       // return () => {
