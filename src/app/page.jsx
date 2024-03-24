@@ -82,16 +82,24 @@ export default function Home() {
     setMainlbox(true);
     setSearchpplbox(false);
   };
+  
+  useEffect(() => {
+    if (searchpplbox) {
+      const chatRef = ref(db, "searching/");
+      const handleChildAdded = (snapshot) => {
+        const data = snapshot.val();
+        if (data && data.id) {
+          setNewFriendId(data.id);
+        }
+      };
+      onChildAdded(chatRef, handleChildAdded);
 
-  if (searchpplbox) {
-    const chatRef = ref(db, "searching/");
-    onChildAdded(chatRef, (snapshot) => {
-      const data = snapshot.val(); 
-      if (data && data.id) {
-        setNewFriendId(data.id);
-      }
-    });
-  }
+      return () => {
+      
+        chatRef.off("child_added", handleChildAdded);
+      };
+    }
+  }, [searchpplbox]);
 
   useEffect(() => {
     const fatchData = async () => {
