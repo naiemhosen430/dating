@@ -51,7 +51,7 @@ export default function Home() {
   }, [chunkIndex, currentIndex]);
   // onclick
   const searchPeople = async () => {
-    const chatRef = ref(db, "searching/" = "id");
+    const chatRef = ref(db, "searching/" + "id"); 
     const newMessageRef = push(chatRef);
     await set(newMessageRef, data._id);
     setMainlbox(false);
@@ -59,13 +59,13 @@ export default function Home() {
   };
 
   const cencelsearchPeople = async () => {
-    const chatRef = ref(db, "searching/" = "id");
+    const chatRef = ref(db, "searching/" + "id"); 
     const newMessageRef = push(chatRef);
-    await remove(newMessageRef); 
+    await remove(newMessageRef);
     setMainlbox(true);
     setSearchpplbox(false);
   };
-  
+
   return (
     <>
       {searchpplbox && (
