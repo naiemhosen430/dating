@@ -113,18 +113,18 @@ export default function Home() {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const data = snapshot.val();
-        if (data && data.id && data.id !== data._id) {
-          // Check if the ID is not equal to your own ID
+
+        if (data.id !== data._id) {
           setNewFriendId(data.id);
         }
       };
-      const unsubscribe = onChildAdded(chatRef, handleChildAdded);
+      // onChildAdded(chatRef, handleChildAdded);
 
-      return () => {
-        unsubscribe();
-      };
+      // return () => {
+      //   chatRef.off("child_added", handleChildAdded);
+      // };
     }
-  }, [searchpplbox, data._id]);
+  }, [searchpplbox, data._id]); // Include data._id as a dependency to make sure the effect updates when your ID changes
 
   useEffect(() => {
     const fatchData = async () => {
