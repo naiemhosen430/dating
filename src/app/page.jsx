@@ -72,18 +72,17 @@ export default function Home() {
 
   useEffect(() => {
     const chatRef = ref(db, "randommessage/" + newFriend?._id);
-    const handleChildAdded = (snapshot) => {
-      const newMessage = snapshot.val();
-      if (newMessage) {
-        setFriendmessage(newMessage);
-      } else {
-        setLeaveedboxshow(false);
-      }
-    };
 
     try {
-      // Attach the event listener using the onChildAdded method
-      onChildAdded(chatRef, handleChildAdded);
+      // Attach the event listener using the on method
+      on(chatRef, "child_added", (snapshot) => {
+        const newMessage = snapshot.val();
+        if (newMessage) {
+          setFriendmessage(newMessage);
+        } else {
+          setLeaveedboxshow(false);
+        }
+      });
     } catch (error) {
       console.error("Error attaching child added listener:", error);
     }
