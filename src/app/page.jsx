@@ -113,8 +113,10 @@ export default function Home() {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const snapshotData = snapshot.val();
-        const ids = Object.keys(snapshotData); // Get all the keys (IDs) from the snapshot data
+        const ids = Object.keys(snapshotData);
+        console.log(ids);
         const randomIndex = Math.floor(Math.random() * ids.length); // Generate a random index
+        console.log(randomIndex);
         const randomId = ids[randomIndex]; // Pick a random ID from the snapshot data
         console.log(randomId);
 
