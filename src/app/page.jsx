@@ -97,8 +97,7 @@ export default function Home() {
   const searchPeople = async () => {
     const searchingRef = ref(db, "searching/");
     try {
-      const newChildRef = push(searchingRef);
-      await set(newChildRef, data._id);
+      await push(searchingRef, data._id);
     } catch (error) {
       console.error("Error pushing data to searching:", error.message);
     }
@@ -109,7 +108,7 @@ export default function Home() {
 
   const cencelsearchPeople = async () => {
     const chatRef = ref(db, "searching/" + data._id);
-    await set(chatRef, null);
+    await remove(chatRef);
 
     setMainlbox(true);
     setSearchpplbox(false);
