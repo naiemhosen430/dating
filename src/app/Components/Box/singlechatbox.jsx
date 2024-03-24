@@ -31,58 +31,7 @@ export default function Singlechatbox({ chat, myid }) {
             </h1>
           </div>
         </div>
-        <div className="flex items-center loadingbig justify-center p-2 px-1">
-          <div className="w-2/12 flex items-center rounded-full pb-1">
-            <img
-              className="w-12 h-12 loading rounded-full inline-block"
-              src={""}
-              alt=""
-            />
-          </div>
-          <div className="w-10/12">
-            <h1 className="text-sm loading px-2"></h1>
-            <h1 className="text-xs loading px-2 text-red-500"></h1>
-            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
-              <span className="w-8/12 loading text-left text-base block"></span>
-              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
-            </h1>
-          </div>
-        </div>
-        <div className="flex items-center loadingbig justify-center p-2 px-1">
-          <div className="w-2/12 flex items-center rounded-full pb-1">
-            <img
-              className="w-12 h-12 loading rounded-full inline-block"
-              src={""}
-              alt=""
-            />
-          </div>
-          <div className="w-10/12">
-            <h1 className="text-sm loading px-2"></h1>
-            <h1 className="text-xs loading px-2 text-red-500"></h1>
-            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
-              <span className="w-8/12 loading text-left text-base block"></span>
-              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
-            </h1>
-          </div>
-        </div>
 
-        <div className="flex items-center loadingbig justify-center p-2 px-1">
-          <div className="w-2/12 flex items-center rounded-full pb-1">
-            <img
-              className="w-12 h-12 loading rounded-full inline-block"
-              src={""}
-              alt=""
-            />
-          </div>
-          <div className="w-10/12">
-            <h1 className="text-sm loading px-2"></h1>
-            <h1 className="text-xs loading px-2 text-red-500"></h1>
-            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
-              <span className="w-8/12 loading text-left text-base block"></span>
-              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
-            </h1>
-          </div>
-        </div>
       </>
     );
   }
