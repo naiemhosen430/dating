@@ -74,7 +74,6 @@ export default function Home() {
     const chatRef = ref(db, "randommessage/" + newFriend?._id);
     const handleChildAdded = (snapshot) => {
       const newMessage = snapshot.val();
-      console.log(newMessage);
       if (newMessage) {
         setFriendmessage(newMessage);
       } else {
@@ -198,8 +197,6 @@ export default function Home() {
     setMainlbox(true);
     setNewFriend(null);
   };
-
-  console.log({ friendmessage });
 
   if (newFriend) {
     return (
