@@ -109,7 +109,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (!newFriendId) {
+    if (searchpplbox && !newFriendId) {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const data = snapshot.val();
