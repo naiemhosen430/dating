@@ -9,10 +9,12 @@ import { FaFemale } from "react-icons/fa";
 
 import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContext";
+import { push, ref, set, remove } from "firebase/database";
+import { db } from "./firebaseConfig";
 
 export default function Home() {
   const { data } = useContext(MineContext);
-  console.log(data)
+  console.log(data);
   const [searchpplbox, setSearchpplbox] = useState(false);
   const [mainlbox, setMainlbox] = useState(true);
 
@@ -41,22 +43,29 @@ export default function Home() {
 
           // Move to the next chunk of text
           setChunkIndex((prevIndex) => (prevIndex + 1) % text.length);
-        }, 500); // Wait for 500ms before clearing and moving to the next chunk
+        }, 500);
       }
-    }, 100); // Adjust the interval to control the typing speed
+    }, 100);
 
     return () => clearInterval(typingInterval);
   }, [chunkIndex, currentIndex]);
   // onclick
-  const searchPeople = () => {
-    if (searchpplbox === true && mainlbox === false) {
-      setSearchpplbox(false);
-      setMainlbox(true);
-    } else {
-      setMainlbox(false);
-      setSearchpplbox(true);
-    }
+  const searchPeople = async () => {
+    const chatRef = ref(db, "searching/");
+    const newMessageRef = push(chatRef);
+    await set(newMessageRef, data._id);
+    setMainlbox(false);
+    setSearchpplbox(true);
   };
+
+  const cencelsearchPeople = async () => {
+    const chatRef = ref(db, "searching/");
+    const newMessageRef = push(chatRef);
+    await remove(newMessageRef); 
+    setMainlbox(true);
+    setSearchpplbox(false);
+  };
+  
   return (
     <>
       {searchpplbox && (
@@ -68,7 +77,7 @@ export default function Home() {
 
             <ul className="lg:w-2/12 w-6/12 flex justify-end items-center space-x-4">
               <h1 className="text-slate-500 cursor-pointer text-2xl space-x-2 flex items-center justify-end hover:text-white py-2 rounded-md">
-                <FaPowerOff onClick={searchPeople} />
+                <FaPowerOff onClick={cencelsearchPeople} />
               </h1>
             </ul>
           </div>
@@ -79,36 +88,34 @@ export default function Home() {
                 <p className="text-sm text-slate-500 p-4">{displayText}</p>
               </div>
 
-<div className="fixed bottom-5 w-full">
-<div className="flex justify-center">
-                <div className="w-6/12 text-center">
-
+              <div className="fixed bottom-5 w-full">
+                <div className="flex justify-center">
+                  <div className="w-6/12 text-center"></div>
+                  <div className="w-6/12 text-center">
+                    {data?.gender === "male" ? (
+                      <FaMale className="text-10xl text-slate-200 inline-block" />
+                    ) : (
+                      <FaFemale className="text-10xl text-slate-200 inline-block" />
+                    )}
+                  </div>
                 </div>
-                <div className="w-6/12 text-center">
-                  {data?.gender === "male" ? (
-                    <FaMale className="text-10xl text-slate-200 inline-block" />
-                  ) : (
-                    <FaFemale className="text-10xl text-slate-200 inline-block" />
-                  )}
+
+                <div className="flex padding-tophome justify-center">
+                  <div className="w-6/12 text-center">
+                    <GiBarStool className="text-10xl text-white inline-block" />
+                  </div>
+                  <div className="w-6/12 text-center">
+                    <GiBarStool className="text-10xl text-white inline-block" />
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <IoClose
+                    onClick={cencelsearchPeople}
+                    className="p-2 text-5xl rounded-full inline-block bg-black"
+                  />
                 </div>
               </div>
-
-              <div className="flex padding-tophome justify-center">
-                <div className="w-6/12 text-center">
-                  <GiBarStool className="text-10xl text-white inline-block" />
-                </div>
-                <div className="w-6/12 text-center">
-                  <GiBarStool className="text-10xl text-white inline-block" />
-                </div>
-              </div>
-
-              <div className="text-center">
-                <IoClose
-                  onClick={searchPeople}
-                  className="p-2 text-5xl rounded-full inline-block bg-black"
-                />
-              </div>
-</div>
             </div>
           </div>
         </>
