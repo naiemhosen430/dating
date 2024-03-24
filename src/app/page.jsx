@@ -11,6 +11,7 @@ import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContext";
 import { push, ref, set, remove, onChildAdded } from "firebase/database";
 import { db } from "./firebaseConfig";
+import axios from "axios"
 
 export default function Home() {
   const { data } = useContext(MineContext);
