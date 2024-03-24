@@ -16,11 +16,10 @@ export default function Singlechatbox({ chat, myid }) {
       <>
         <div className="flex items-center loadingbig justify-center p-2 px-1">
           <div className="w-2/12 flex items-center rounded-full pb-1">
-            <img
+            <div
               className="w-12 h-12 loading rounded-full inline-block"
-              src={""}
-              alt=""
-            />
+
+            ></div>
           </div>
           <div className="w-10/12">
             <h1 className="text-sm loading px-2"></h1>
@@ -31,7 +30,6 @@ export default function Singlechatbox({ chat, myid }) {
             </h1>
           </div>
         </div>
-
       </>
     );
   }
