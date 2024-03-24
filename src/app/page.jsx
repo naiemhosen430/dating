@@ -121,16 +121,19 @@ export default function Home() {
       const handleChildAdded = (snapshot) => {
         const snapshotData = snapshot.val();
         console.log(snapshotData);
-        const ids = Object.keys(snapshotData);
-        console.log(ids);
-        const randomIndex = Math.floor(Math.random() * ids.length); // Generate a random index
-        console.log(randomIndex);
-        const randomId = ids[randomIndex]; // Pick a random ID from the snapshot data
-        console.log(randomId);
 
-        if (randomId !== data._id) {
-          setNewFriendId(randomId);
-        }
+        // Iterate over each child in the snapshot
+        Object.entries(snapshotData).forEach(([childId, childData]) => {
+          console.log("Child ID:", childId);
+          console.log("Child Data:", childData);
+
+          // Here you can access each child's ID and data
+          // Implement your logic here, such as picking a random child
+          // For example:
+          if (childId !== data._id) {
+            setNewFriendId(childId);
+          }
+        });
       };
 
       // Attach the event listener to the chatRef
