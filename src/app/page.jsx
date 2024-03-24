@@ -109,7 +109,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (searchpplbox) {
+    if (newFriendId) {
       const chatRef = ref(db, "searching/");
       const handleChildAdded = (snapshot) => {
         const data = snapshot.val();
@@ -122,14 +122,8 @@ export default function Home() {
 
       // Attach the event listener to the chatRef
       onChildAdded(chatRef, handleChildAdded);
-
-      // onChildAdded(chatRef, handleChildAdded);
-
-      // return () => {
-      //   chatRef.off("child_added", handleChildAdded);
-      // };
     }
-  }, [searchpplbox, data._id]); // Include data._id as a dependency to make sure the effect updates when your ID changes
+  }, [searchpplbox, newFriendId, data._id]); // Include data._id as a dependency to make sure the effect updates when your ID changes
 
   useEffect(() => {
     const fatchData = async () => {
