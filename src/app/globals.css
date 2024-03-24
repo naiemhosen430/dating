@@ -58,3 +58,11 @@ body {
 .custom-windo-height{
   height: 150px;
 }
+
+.padding-tophome{
+  margin-top: -50px;
+}
+
+.text-10xl{
+  font-size: 200px;
+}

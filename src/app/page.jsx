@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Menu from "./Components/Shared/Menu";
 import ButtonBer from "./Components/Shared/ButtonBer";
 import { IoClose } from "react-icons/io5";
@@ -8,9 +8,11 @@ import { FaMale } from "react-icons/fa";
 import { FaFemale } from "react-icons/fa";
 
 import { FaPowerOff } from "react-icons/fa6";
+import { MineContext } from "@/Context/MineContext";
 
 export default function Home() {
-  // const { data } = useContext(MainContext);
+  const { data } = useContext(MineContext);
+  console.log(data)
   const [searchpplbox, setSearchpplbox] = useState(false);
   const [mainlbox, setMainlbox] = useState(true);
 
@@ -77,12 +79,26 @@ export default function Home() {
                 <p className="text-sm text-slate-500 p-4">{displayText}</p>
               </div>
 
-              <div className="flex justify-center">
+<div className="fixed bottom-5 w-full">
+<div className="flex justify-center">
                 <div className="w-6/12 text-center">
-                  <GiBarStool className="text-9xl text-white inline-block" />
+
                 </div>
                 <div className="w-6/12 text-center">
-                  <GiBarStool className="text-9xl text-white inline-block" />
+                  {data?.gender === "male" ? (
+                    <FaMale className="text-10xl text-slate-200 inline-block" />
+                  ) : (
+                    <FaFemale className="text-10xl text-slate-200 inline-block" />
+                  )}
+                </div>
+              </div>
+
+              <div className="flex padding-tophome justify-center">
+                <div className="w-6/12 text-center">
+                  <GiBarStool className="text-10xl text-white inline-block" />
+                </div>
+                <div className="w-6/12 text-center">
+                  <GiBarStool className="text-10xl text-white inline-block" />
                 </div>
               </div>
 
@@ -92,6 +108,7 @@ export default function Home() {
                   className="p-2 text-5xl rounded-full inline-block bg-black"
                 />
               </div>
+</div>
             </div>
           </div>
         </>

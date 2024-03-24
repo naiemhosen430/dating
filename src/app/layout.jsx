@@ -1,20 +1,17 @@
-'use client'
+"use client";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { MineContext } from "@/Context/MineContext";
-import {useState, useEffect}from "react"
-import axios from "axios"
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
- const metadata = {
+const metadata = {
   title: "Meet New People",
   description: "Here is a new world",
 };
 export default function RootLayout({ children }) {
-
-
-
   // contex value
   const [data, setData] = useState(null);
 
@@ -37,11 +34,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <div className="w-screen overflow-hidden">
-        <MineContext.Provider value={{ data, setData }}>
-
-          {children}
-        </MineContext.Provider>
-          </div>
+          <MineContext.Provider value={{ data, setData }}>
+            {children}
+          </MineContext.Provider>
+        </div>
       </body>
     </html>
   );
