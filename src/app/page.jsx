@@ -118,13 +118,13 @@ export default function Home() {
           setNewFriendId(data.id);
         }
       };
-      onChildAdded(chatRef, handleChildAdded);
+      const unsubscribe = onChildAdded(chatRef, handleChildAdded);
 
       return () => {
-        chatRef.off("child_added", handleChildAdded);
+        unsubscribe();
       };
     }
-  }, [searchpplbox, data._id]); // Include data._id as a dependency to make sure the effect updates when your ID changes
+  }, [searchpplbox, data._id]);
 
   useEffect(() => {
     const fatchData = async () => {
