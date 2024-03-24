@@ -95,15 +95,22 @@ export default function Home() {
   }, [chunkIndex, currentIndex]);
   // onclick
   const searchPeople = async () => {
-    const chatRef = ref(db, "searching/");
-    await set(chatRef, data._id);
+    const searchingRef = ref(db, "searching/");
+    try {
+      const newChildRef = push(searchingRef);
+      await set(newChildRef, data._id);
+    } catch (error) {
+      console.error("Error pushing data to searching:", error.message);
+    }
+
     setMainlbox(false);
     setSearchpplbox(true);
   };
 
   const cencelsearchPeople = async () => {
     const chatRef = ref(db, "searching/" + data._id);
-    await remove(chatRef);
+    await set(chatRef, null);
+
     setMainlbox(true);
     setSearchpplbox(false);
   };
