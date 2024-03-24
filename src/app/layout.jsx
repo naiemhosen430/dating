@@ -14,6 +14,9 @@ const metadata = {
 export default function RootLayout({ children }) {
   // contex value
   const [data, setData] = useState(null);
+  const [chats, setChats] = useState(null);
+  const [profileInfo, setProfileInfo] = useState(null);
+  const [myfriendid, setMyfriendid] = useState(null);
 
   // Fetch website information on component mount
   useEffect(() => {
@@ -30,11 +33,54 @@ export default function RootLayout({ children }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const chatData = await axios.get("/api/chat");
+        setChats(chatData.data.data);
+      } catch (err) {
+        setChats([]);
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+
+    if (myfriendid){
+    const fatchData = async () => {
+      await axios
+        .get(`/api/profile/${myfriendid}`)
+        .then((data) => {
+          setProfileInfo(data.data.data);
+        })
+        .catch((err) => {
+          setProfileInfo("none");
+          console.log(err);
+        });
+    };
+
+      fatchData();
+    }
+
+  }, [myfriendid]);
+  console.log({myfriendid})
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="w-screen overflow-hidden">
-          <MineContext.Provider value={{ data, setData }}>
+          <MineContext.Provider
+            value={{
+              data,
+              setData,
+              chats,
+              setChats,
+              profileInfo,
+              setMyfriendid,
+            }}
+          >
             {children}
           </MineContext.Provider>
         </div>

@@ -1,25 +1,91 @@
 "use client";
+import { MineContext } from "@/Context/MineContext";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export default function Singlechatbox({ chat, myid }) {
-  const [profileInfo, setProfileInfo] = useState(null);
+  const { profileInfo, setMyfriendid } = useContext(MineContext);
+
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/profile/${myfriendid[0]}`)
-        .then((data) => {
-          setProfileInfo(data.data.data);
-        })
-        .catch((err) => {
-          setProfileInfo([]);
-          console.log(err);
-        });
-    };
-    fatchData();
-  }, []);
+  setMyfriendid(myfriendid[0]);
+  console.log({ aaaa: setMyfriendid });
+
+  if (!profileInfo || !myfriendid[0]) {
+    return (
+      <>
+        <div className="flex items-center loadingbig justify-center p-2 px-1">
+          <div className="w-2/12 flex items-center rounded-full pb-1">
+            <img
+              className="w-12 h-12 loading rounded-full inline-block"
+              src={""}
+              alt=""
+            />
+          </div>
+          <div className="w-10/12">
+            <h1 className="text-sm loading px-2"></h1>
+            <h1 className="text-xs loading px-2 text-red-500"></h1>
+            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
+              <span className="w-8/12 loading text-left text-base block"></span>
+              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
+            </h1>
+          </div>
+        </div>
+        <div className="flex items-center loadingbig justify-center p-2 px-1">
+          <div className="w-2/12 flex items-center rounded-full pb-1">
+            <img
+              className="w-12 h-12 loading rounded-full inline-block"
+              src={""}
+              alt=""
+            />
+          </div>
+          <div className="w-10/12">
+            <h1 className="text-sm loading px-2"></h1>
+            <h1 className="text-xs loading px-2 text-red-500"></h1>
+            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
+              <span className="w-8/12 loading text-left text-base block"></span>
+              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
+            </h1>
+          </div>
+        </div>
+        <div className="flex items-center loadingbig justify-center p-2 px-1">
+          <div className="w-2/12 flex items-center rounded-full pb-1">
+            <img
+              className="w-12 h-12 loading rounded-full inline-block"
+              src={""}
+              alt=""
+            />
+          </div>
+          <div className="w-10/12">
+            <h1 className="text-sm loading px-2"></h1>
+            <h1 className="text-xs loading px-2 text-red-500"></h1>
+            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
+              <span className="w-8/12 loading text-left text-base block"></span>
+              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
+            </h1>
+          </div>
+        </div>
+
+        <div className="flex items-center loadingbig justify-center p-2 px-1">
+          <div className="w-2/12 flex items-center rounded-full pb-1">
+            <img
+              className="w-12 h-12 loading rounded-full inline-block"
+              src={""}
+              alt=""
+            />
+          </div>
+          <div className="w-10/12">
+            <h1 className="text-sm loading px-2"></h1>
+            <h1 className="text-xs loading px-2 text-red-500"></h1>
+            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
+              <span className="w-8/12 loading text-left text-base block"></span>
+              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
+            </h1>
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <div className="flex items-center justify-center p-2 px-1" key={chat.id}>
       <div className="w-2/12 flex items-center rounded-full pb-1">
