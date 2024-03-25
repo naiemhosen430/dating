@@ -97,11 +97,11 @@ export default function Post({ post }) {
         {/* footer */}
         <div className="flex items-center space-x-5">
           <div className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
-            <span>{post?.reactions.length}</span>
+            <span>{post?.reactions?.length}</span>
             <CgHeart className="inline-block" />
           </div>
           <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
-            <span>{post?.reactions.length}</span>
+            <span>{post?.comments?.length}</span>
             <CgComment className="inline-block" />
           </div>
         </div>
