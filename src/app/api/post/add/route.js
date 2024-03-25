@@ -19,7 +19,7 @@ export async function POST(NextRequest) {
       textcolor: data.textcolor,
     });
 
-    await newPost.save()
+    await newPost.save();
 
     return Response.json({
       statusCode: 200,
