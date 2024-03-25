@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { CgArrowLeft, CgHeart } from "react-icons/cg";
+import { CgArrowLeft, CgComment, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function page() {
