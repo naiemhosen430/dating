@@ -1,4 +1,4 @@
-import mongoose, { connection } from "mongoose";
+import mongoose from "mongoose";
 
 const options = {
   useUnifiedTopology: true,
@@ -7,6 +7,7 @@ const options = {
 
 export async function dbconnect() {
   try {
+    mongoose.connection.setMaxListeners(15); // Adjust the limit as needed
     mongoose.connect(process.env.MONGODB_URL, options);
     const connection = mongoose.connection;
     connection.on("connected", () => {
@@ -14,7 +15,7 @@ export async function dbconnect() {
     });
     return true;
   } catch (error) {
+    console.error(error);
     return false;
-    console.log(err);
   }
 }
