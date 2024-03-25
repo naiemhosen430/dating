@@ -7,7 +7,9 @@ export async function POST(NextRequest) {
   await dbconnect();
   try {
     const myData = getDetaFromToken();
-    const id = NextRequest.url.split("chat/")[1];
+    const idwithparams = NextRequest.url.split("chat/")[1];
+    const id = idwithparams.split("/")[0];
+    const recently = idwithparams.split("/")[1].split("recently=")[1] || "";
 
     // Check if a chat with the given IDs exists
     const checkUser = await Chat.findOne({
@@ -36,6 +38,7 @@ export async function POST(NextRequest) {
     // If the chat does not exist, create a new chat object
     const chatobject = Chat({
       chatids: [id, myData.id],
+      type: recently ? "recently" : "random",
     });
 
     // Save the new chat object to the database

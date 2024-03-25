@@ -12,6 +12,12 @@ const chatSchema = Schema(
       required: true,
       default: "Tap to chat",
     },
+    type: {
+      type: String,
+      enum: ["random", "recently", "friend"],
+      required: true,
+      default: "random",
+    },
   },
   {
     timestamps: true,

@@ -78,7 +78,11 @@ export default function Singlechatbox({ chat, myid }) {
         <Link className="block" href={`/profile/${profileInfo?._id}`}>
           <img
             className="w-12 h-12 rounded-full inline-block"
-            src={profileInfo?.profilepicture}
+            src={
+              profileInfo?.profilepicture
+                ? profileInfo?.profilepicture
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCqu8BOhvKFDaFMAnjpAbK4o0VTGqo9BbeqTOvoWuVVfSqvqgG6hY5dc52EpEf5QTdBKY&usqp=CAU"
+            }
             alt=""
           />
         </Link>
