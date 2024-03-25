@@ -100,7 +100,11 @@ export default function Post({ post }) {
         {/* content */}
         <Link href={`/post/${post?._id}`}>
           <div className="py-14 text-white rounded-lg text-center my-2 p-4 bg-slate-800">
-            <p>{post.postcontent}</p>
+            <p>
+              {post.postcontent.slice(0, 100)}
+              {post.postcontent.length > 100 ? "..." : ""}
+              {post.postcontent.length > 100 ? " Read more" : ""}
+            </p>
           </div>
         </Link>
 
