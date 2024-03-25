@@ -52,7 +52,7 @@ export default function CommentBox({ singleComment }) {
       <div className="bg-slate-950 p-5">
         <div className="flex items-center p-4">
           <div className="w-/12 text-center">
-            <Link href={`/profile/${singleComment.userid}`}>
+            <Link href={`/profile/${singleComment?.userid}`}>
               <img
                 className="w-8 h-8 rounded-full inline-block"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhHGR8bTVzFRi4LjAKEbCXe3Nm7wSxh3H3g&usqp=CAU"
@@ -61,7 +61,7 @@ export default function CommentBox({ singleComment }) {
             </Link>
           </div>
           <div className="w-10/12">
-            <Link href={`/profile/${singleComment.userid}`}>
+            <Link href={`/profile/${singleComment?.userid}`}>
               <h5 className="text-slate-400">{profile?.name}</h5>
             </Link>
             <p className="py-2 text-white">{singleComment?.message}</p>

@@ -114,8 +114,11 @@ export default function Post({ post }) {
             <span>{post?.reactions?.length}</span>
             <CgHeart className="inline-block" />
           </div>
-          <Link href={`/post/${post?._id}`}>
-            <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+          <Link
+            className="w-6/12 hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"
+            href={`/post/${post?._id}`}
+          >
+            <div className="text-xl flex justify-center items-center cursor-pointer">
               <span>{post?.comments?.length}</span>
               <CgComment className="inline-block" />
             </div>
