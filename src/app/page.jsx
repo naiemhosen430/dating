@@ -258,13 +258,13 @@ export default function Home() {
           <div className="h-screen w-screen">
             <div className="flex justify-center">
               <textarea
-                className="p-5 text-lg font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
+                className="p-2 text-sm font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
                 value={friendmessage.mymessage}
                 readOnly
                 placeholder={`here is ${newFriend.name}`}
               />
               <textarea
-                className="p-5 text-lg font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
+                className="p-2 text-sm font-bold custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
                 value={mymessage}
                 onChange={handleTextareaChange}
               />

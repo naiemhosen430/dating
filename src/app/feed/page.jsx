@@ -4,6 +4,7 @@ import { CgSearch } from "react-icons/cg";
 import Post from "../Components/Box/Post";
 import ButtonBer from "../Components/Shared/ButtonBer";
 import Link from "next/link";
+import { IoMdAdd } from "react-icons/io";
 
 export default function page() {
   const [text, setText] = useState({
@@ -12,6 +13,14 @@ export default function page() {
 
   return (
     <>
+      {/* options  */}
+      <div className="fixed bottom-32 right-4">
+        <Link href="/addpost">
+
+        <IoMdAdd  className="text-6xl block text-teal-50 p-2 rounded-full shadow-lg" />
+        </Link>
+      </div>
+      {/* options  */}
       <div className="space-y-4 p-2">
         <div className="rounded-full bg-slate-900 flex items-center justify-center sticky top-1">
           <input
