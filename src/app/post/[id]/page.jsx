@@ -3,12 +3,14 @@ import CommentBox from "@/app/Components/Box/CommentBox";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft, CgComment, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
+import { MineContext } from "@/Context/MineContext";
 
 export default function page() {
+  const { data } = useContext(MineContext);
   const { id } = useParams();
   const [postInfo, setPostInfo] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -42,8 +44,6 @@ export default function page() {
     };
     fatchData();
   }, [postInfo]);
-
-  console.log({ postInfo });
 
   if (!profile) {
     return (
@@ -119,6 +119,22 @@ export default function page() {
 
   const formattedDate = `${year}-${month}-${day}`;
 
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    const checkReaction = async () => {
+      if (!post || !post.reactions) return;
+
+      const foundReaction = post.reactions.find(
+        (reaction) => reaction.userid === data._id
+      );
+
+      setIsLiked(foundReaction ? true : false);
+    };
+
+    checkReaction();
+  }, [post, data._id]);
+
   return (
     <>
       <div className="p-2">
@@ -166,9 +182,14 @@ export default function page() {
 
         {/* footer */}
         <div className="flex items-center space-x-5">
-          <div className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+          <div
+            onClick={hundleLike}
+            className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"
+          >
             <span>{postInfo?.reactions?.length}</span>
-            <CgHeart className="inline-block" />
+            <CgHeart
+              className={`inline-block ${isLiked ? "text-red-500" : ""}`}
+            />
           </div>
           <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
             <span>{postInfo?.comments?.length}</span>

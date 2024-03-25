@@ -86,6 +86,16 @@ export default function Post({ post }) {
 
     checkReaction();
   }, [post, data._id]);
+
+  const hundleLike = async () => {
+    try {
+      const data = await axios.post(`/api/post/like/${post?._id}`);
+
+      setPostInfo(data.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <div className="p-0">
@@ -128,7 +138,10 @@ export default function Post({ post }) {
 
         {/* footer */}
         <div className="flex items-center space-x-5">
-          <div className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+          <div
+            onClick={hundleLike}
+            className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"
+          >
             <span className="px-4 text-lg">{post?.reactions?.length}</span>
 
             <CgHeart
