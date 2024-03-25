@@ -90,7 +90,7 @@ export default function Post({ post }) {
         </div>
 
         {/* content */}
-        <div className="py-4 text-slate-600">
+        <div className="py-14 text-white bg-slate-700">
           <p>{post.postcontent}</p>
         </div>
 
