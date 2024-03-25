@@ -1,73 +1,56 @@
-"use client";
-import { MineContext } from "@/Context/MineContext";
-import { db } from "@/app/firebaseConfig";
+'use client'
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ref } from "firebase/database";
+import { ref, onValue } from "firebase/database"; // Import onValue from Firebase
+import { db } from "@/app/firebaseConfig"; // Assuming db is your Firebase Realtime Database instance
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
 
 export default function Singlechatbox({ chat, myid }) {
   const [profileInfo, setProfileInfo] = useState(null);
   const [outChat, setOutChat] = useState(null);
-
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
 
   useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/profile/${myfriendid}`)
-        .then((data) => {
-          setProfileInfo(data.data.data);
-        })
-        .catch((err) => {
-          setProfileInfo("none");
-          console.log(err);
-        });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/profile/${myfriendid}`);
+        setProfileInfo(response.data.data);
+      } catch (err) {
+        setProfileInfo(null);
+        console.error(err);
+      }
     };
 
-    fatchData();
-  }, [myfriendid]);
-  console.log({ aaaa: profileInfo });
-
-  if (!profileInfo || !myfriendid[0]) {
-    return (
-      <>
-        <div className="flex items-center loadingbig justify-center p-2 px-1">
-          <div className="w-2/12 flex items-center rounded-full pb-1">
-            <div className="w-12 h-12 loading rounded-full inline-block"></div>
-          </div>
-          <div className="w-10/12">
-            <h1 className="text-sm loading px-2"></h1>
-            <h1 className="text-xs loading px-2 text-red-500"></h1>
-            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
-              <span className="w-8/12 loading text-left text-base block"></span>
-              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
-            </h1>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  const chatRef = ref(db, "conversations/" + chat._id);
-
-  // Add event listener for changes in the chat data
-  chatRef.on("value", (snapshot) => {
-    if (snapshot.exists()) {
-      const chatObj = snapshot.val();
-      const chatArr = Object.values(chatObj);
-      setOutChat(chatArr);
-    } else {
-      console.log("No chat data found.");
-      setOutChat([]);
+    if (myfriendid) {
+      fetchData();
     }
-  });
+  }, [myfriendid]);
 
-  const lastMessage = outChat[-1];
+  useEffect(() => {
+    if (!chat) return; // Check if chat exists
+    const chatRef = ref(db, "conversations/" + chat._id);
+
+    const unsubscribe = onValue(chatRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const chatObj = snapshot.val();
+        const chatArr = Object.values(chatObj);
+        setOutChat(chatArr);
+      } else {
+        console.log("No chat data found.");
+        setOutChat([]);
+      }
+    });
+
+    // Clean up function
+    return () => unsubscribe();
+  }, [chat]);
+
+  const lastMessage = outChat ? outChat[outChat.length - 1] : null;
+
   return (
     <div className="flex items-center justify-center p-2 px-1" key={chat.id}>
       <div className="w-2/12 flex items-center rounded-full pb-1">
-        <Link className="block" href={`/profile/${chat[0]?._id}`}>
+        <Link className="block" href={`/profile/${profileInfo?._id}`}>
           <img
             className="w-12 h-12 rounded-full inline-block"
             src={profileInfo?.profilepicture}
