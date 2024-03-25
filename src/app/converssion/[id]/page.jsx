@@ -20,6 +20,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchChatData = async () => {
+      let chatidd = ""
       try {
         if (!friend || !me || !msgdata) {
           const response = await axios.post(`/api/chat/${id}`);
@@ -27,9 +28,10 @@ export default function Page() {
           setFriend(friend);
           setMe(me);
           setMsgData(data);
+          chatidd = data._id
         }
 
-        const chatRef = ref(db, "conversations/" + msgdata?._id);
+        const chatRef = ref(db, "conversations/" + msgdata?._id || chatidd);
         const chatSnapshot = await get(chatRef);
 
         if (chatSnapshot.exists()) {
