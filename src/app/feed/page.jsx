@@ -55,12 +55,12 @@ export default function page() {
                     <div className="w-2/12 text-center">
                       <Link
                         className="w-10 m-auto h-10 loading rounded-full block"
-                        href={"/profile/id"}
+                        href={""}
                       ></Link>
                     </div>
                     <div className="w-8/12">
                       <h1 className="text-xl loading text-white font-bold">
-                        <Link href={"/profile/id"}></Link>
+                        <Link href={""}></Link>
                       </h1>
                       <h1 className="text-sm loading text-slate-600 font-bold"></h1>
                     </div>
@@ -77,19 +77,19 @@ export default function page() {
                     <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
                     <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
                   </div>
-                </div>{" "}
+                </div>
                 <div className="p-2 my-5 loadingbig">
                   {/* header */}
                   <div className="flex items-center space-x-2">
                     <div className="w-2/12 text-center">
                       <Link
                         className="w-10 m-auto h-10 loading rounded-full block"
-                        href={"/profile/id"}
+                        href={""}
                       ></Link>
                     </div>
                     <div className="w-8/12">
                       <h1 className="text-xl loading text-white font-bold">
-                        <Link href={"/profile/id"}></Link>
+                        <Link href={""}></Link>
                       </h1>
                       <h1 className="text-sm loading text-slate-600 font-bold"></h1>
                     </div>
@@ -106,19 +106,19 @@ export default function page() {
                     <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
                     <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
                   </div>
-                </div>{" "}
+                </div>
                 <div className="p-2 my-5 loadingbig">
                   {/* header */}
                   <div className="flex items-center space-x-2">
                     <div className="w-2/12 text-center">
                       <Link
                         className="w-10 m-auto h-10 loading rounded-full block"
-                        href={"/profile/id"}
+                        href={""}
                       ></Link>
                     </div>
                     <div className="w-8/12">
                       <h1 className="text-xl loading text-white font-bold">
-                        <Link href={"/profile/id"}></Link>
+                        <Link href={""}></Link>
                       </h1>
                       <h1 className="text-sm loading text-slate-600 font-bold"></h1>
                     </div>
@@ -135,19 +135,19 @@ export default function page() {
                     <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
                     <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
                   </div>
-                </div>{" "}
+                </div>
                 <div className="p-2 my-5 loadingbig">
                   {/* header */}
                   <div className="flex items-center space-x-2">
                     <div className="w-2/12 text-center">
                       <Link
                         className="w-10 m-auto h-10 loading rounded-full block"
-                        href={"/profile/id"}
+                        href={""}
                       ></Link>
                     </div>
                     <div className="w-8/12">
                       <h1 className="text-xl loading text-white font-bold">
-                        <Link href={"/profile/id"}></Link>
+                        <Link href={""}></Link>
                       </h1>
                       <h1 className="text-sm loading text-slate-600 font-bold"></h1>
                     </div>
