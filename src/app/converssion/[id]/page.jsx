@@ -29,7 +29,7 @@ export default function Page() {
           setMsgData(data);
         }
 
-        const chatRef = ref(db, "conversations/" + data._id);
+        const chatRef = ref(db, "conversations/" + msgdata._id);
         const chatSnapshot = await get(chatRef);
 
         if (chatSnapshot.exists()) {
