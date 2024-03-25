@@ -1,4 +1,5 @@
 "use client";
+import CommentBox from "@/app/Components/Box/CommentBox";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -140,6 +141,19 @@ export default function page() {
             <span>{postInfo?.comments?.length}</span>
             <CgComment className="inline-block" />
           </div>
+        </div>
+
+        {/* comment box  */}
+        <div className="p-4 py-10">
+          {postInfo?.length === 0 ? (
+            <h1 className="text-2xl text-white py-20 text-center">
+              No comment yet !
+            </h1>
+          ) : (
+            postInfo?.map((singleComment) => (
+              <CommentBox comment={singleComment} />
+            ))
+          )}
         </div>
       </div>
     </>
