@@ -63,11 +63,6 @@ export default function page() {
     } else {
       -+setSelectedOptions([...selectedOptions, option]);
     }
-
-    setUserInfo((preinfo) => ({
-      ...preinfo,
-      interest: selectedOptions,
-    }));
   };
 
   const handleAddPost = async () => {
