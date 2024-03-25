@@ -1,11 +1,12 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgSearch } from "react-icons/cg";
 import Post from "../Components/Box/Post";
 import ButtonBer from "../Components/Shared/ButtonBer";
 import Link from "next/link";
 import { IoMdAdd } from "react-icons/io";
 import { MineContext } from "@/Context/MineContext";
+import axios from "axios";
 
 export default function page() {
   const { data } = useContext(MineContext);
