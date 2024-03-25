@@ -5,7 +5,7 @@ import { dbconnect } from "@/utils/mongo";
 export async function POST(Request) {
   await dbconnect();
   const mydata = getDetaFromToken();
-  const id = Request.url.split("comment/")[1];
+  const id = Request.url.split("like/")[1];
 
   const existingReaction = await Post.findOne({
     _id: id,
