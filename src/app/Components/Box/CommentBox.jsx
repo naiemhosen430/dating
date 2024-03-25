@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 export default function CommentBox({ singleComment }) {
   const [profile, setProfile] = useState(null);
+  console.log(singleComment);
 
   useEffect(() => {
     const fatchData = async () => {
