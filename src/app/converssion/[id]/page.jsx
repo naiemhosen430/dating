@@ -22,13 +22,13 @@ export default function Page() {
     const fetchChatData = async () => {
       let chatidd = ""
       try {
+        const response = await axios.post(`/api/chat/${id}`);
+        const { friend, me, data } = response.data;
+        setFriend(friend);
+        setMe(me);
+        setMsgData(data);
+        chatidd = data._id
         if (!friend || !me || !msgdata) {
-          const response = await axios.post(`/api/chat/${id}`);
-          const { friend, me, data } = response.data;
-          setFriend(friend);
-          setMe(me);
-          setMsgData(data);
-          chatidd = data._id
         }
 
         const chatRef = ref(db, "conversations/" + msgdata?._id || chatidd);
