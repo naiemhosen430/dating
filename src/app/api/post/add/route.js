@@ -1,9 +1,10 @@
-import Post from "@/app/Components/Box/Post";
 import getDetaFromToken from "@/helper/getDetaFromToken";
+import Post from "@/models/post.model";
 import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
-  await dbconnect();
+  console.log("hello");
+  dbconnect();
   try {
     const data = await NextRequest.json();
 

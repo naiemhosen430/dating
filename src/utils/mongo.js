@@ -7,7 +7,7 @@ const options = {
 
 export async function dbconnect() {
   try {
-    mongoose.connection.setMaxListeners(15); // Adjust the limit as needed
+    mongoose.connection.setMaxListeners(500);
     mongoose.connect(process.env.MONGODB_URL, options);
     const connection = mongoose.connection;
     connection.on("connected", () => {
