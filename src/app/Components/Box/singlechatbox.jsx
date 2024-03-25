@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ref, onValue } from "firebase/database"; // Import onValue from Firebase
-import { db } from "@/app/firebaseConfig"; // Assuming db is your Firebase Realtime Database instance
+import { ref, onValue, off } from "firebase/database";
+import { db } from "@/app/firebaseConfig";
 import Link from "next/link";
 
 export default function Singlechatbox({ chat, myid }) {
@@ -28,10 +28,10 @@ export default function Singlechatbox({ chat, myid }) {
 
   useEffect(() => {
     if (!chat) return;
-    console.log(chat._id);
+
     const chatRef = ref(db, "conversations/" + chat._id);
 
-    const unsubscribe = onValue(chatRef, (snapshot) => {
+    const handleSnapshot = (snapshot) => {
       if (snapshot.exists()) {
         const chatObj = snapshot.val();
         const chatArr = Object.values(chatObj);
@@ -40,8 +40,15 @@ export default function Singlechatbox({ chat, myid }) {
         console.log("No chat data found.");
         setOutChat([]);
       }
-    });
-  }, []);
+    };
+
+    onValue(chatRef, handleSnapshot);
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      off(chatRef, "value", handleSnapshot);
+    };
+  }, [chat]);
 
   const lastMessage = outChat ? outChat[outChat.length - 1] : null;
 
