@@ -145,7 +145,7 @@ export default function page() {
 
         {/* comment box  */}
         <div className="p-4 py-10">
-          {postInfo?.length === 0 ? (
+          {postInfo?.comments?.length === 0 ? (
             <h1 className="text-2xl text-white py-20 text-center">
               No comment yet !
             </h1>
