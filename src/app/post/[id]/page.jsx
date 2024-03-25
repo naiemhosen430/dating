@@ -11,6 +11,7 @@ export default function page() {
   const { id } = useParams();
   const [postInfo, setPostInfo] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [commentText, setCommentText] = useState("");
   useEffect(() => {
     const fatchData = async () => {
       await axios
@@ -76,6 +77,26 @@ export default function page() {
       </>
     );
   }
+
+  // Event handler for input change
+  const handleCommentChange = (event) => {
+    setCommentText(event.target.value);
+  };
+
+  const sendComment = async () => {
+    try {
+      await axios.post(`/api/post/comment/${postInfo?._id}`, {
+        message: commentText,
+      });
+
+      setCommentText("");
+
+      const postData = await axios.get(`/api/post/${id}`);
+      setPostInfo(postData.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   //   format time
   const createdAt = new Date(postInfo?.createdAt);
@@ -146,7 +167,7 @@ export default function page() {
         {/* comment box  */}
         <div className="p-4 py-10">
           {postInfo?.comments?.length === 0 ? (
-            <h1 className="text-2xl text-white py-20 text-center">
+            <h1 className="text-2xl text-white py-14 text-center">
               No comment yet !
             </h1>
           ) : (
@@ -155,6 +176,23 @@ export default function page() {
             ))
           )}
           {/* h */}
+        </div>
+
+        {/* Comment Input */}
+        <div className="fixed bottom-1 flex justify-center items-center p-2 w-full bg-black">
+          <input
+            className="p-2 px-4 rounded-l-2xl bg-black text-white w-10/12"
+            type="text"
+            placeholder="Write about the post"
+            value={commentText}
+            onChange={handleCommentChange}
+          />
+          <button
+            onClick={sendComment}
+            className="p-2 rounded-r-2xl bg-slate-950 text-slate-400 w-2/12"
+          >
+            Send
+          </button>
         </div>
       </div>
     </>
