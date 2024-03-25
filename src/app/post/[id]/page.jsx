@@ -119,22 +119,6 @@ export default function page() {
 
   const formattedDate = `${year}-${month}-${day}`;
 
-  const [isLiked, setIsLiked] = useState(false);
-
-  useEffect(() => {
-    const checkReaction = async () => {
-      if (!post || !post.reactions) return;
-
-      const foundReaction = post.reactions.find(
-        (reaction) => reaction.userid === data._id
-      );
-
-      setIsLiked(foundReaction ? true : false);
-    };
-
-    checkReaction();
-  }, [post, data._id]);
-
   return (
     <>
       <div className="p-2">
@@ -184,13 +168,16 @@ export default function page() {
         <div className="flex items-center space-x-5">
           <div
             onClick={hundleLike}
-            className="w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl"
+            className={`w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
+              post?.reactions?.some((reaction) => reaction.userid === data?._id)
+                ? "text-red-500"
+                : ""
+            }`}
           >
-            <span>{postInfo?.reactions?.length}</span>
-            <CgHeart
-              className={`inline-block ${isLiked ? "text-red-500" : ""}`}
-            />
+            <span className="px-4 text-lg">{post?.reactions?.length}</span>
+            <CgHeart className="inline-block" />
           </div>
+
           <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer text-center bg-slate-950 p-1 rounded-xl">
             <span>{postInfo?.comments?.length}</span>
             <CgComment className="inline-block" />

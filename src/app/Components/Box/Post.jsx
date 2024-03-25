@@ -71,22 +71,6 @@ export default function Post({ post }) {
 
   const formattedDate = `${year}-${month}-${day}`;
 
-  const [isLiked, setIsLiked] = useState(false);
-
-  useEffect(() => {
-    const checkReaction = async () => {
-      if (post || post?.reactions) {
-        const foundReaction = post.reactions.find(
-          (reaction) => reaction.userid === data._id
-        );
-
-        setIsLiked(foundReaction ? true : false);
-      }
-    };
-
-    checkReaction();
-  }, [post, data?._id]);
-
   const hundleLike = async () => {
     try {
       const data = await axios.post(`/api/post/like/${post?._id}`);
@@ -140,14 +124,16 @@ export default function Post({ post }) {
         <div className="flex items-center space-x-5">
           <div
             onClick={hundleLike}
-            className="w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl"
+            className={`w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
+              post?.reactions?.some((reaction) => reaction.userid === data?._id)
+                ? "text-red-500"
+                : ""
+            }`}
           >
             <span className="px-4 text-lg">{post?.reactions?.length}</span>
-
-            <CgHeart
-              className={`inline-block ${isLiked ? "text-red-500" : ""}`}
-            />
+            <CgHeart className="inline-block" />
           </div>
+
           <Link
             className="w-6/12 text-center bg-slate-950 p-1 rounded-xl"
             href={`/post/${post?._id}`}
