@@ -75,7 +75,7 @@ export default function Post({ post }) {
 
   useEffect(() => {
     const checkReaction = async () => {
-      if (!post || !post.reactions) return;
+      if (!post || !post?.reactions) return;
 
       const foundReaction = post.reactions.find(
         (reaction) => reaction.userid === data._id
@@ -85,7 +85,7 @@ export default function Post({ post }) {
     };
 
     checkReaction();
-  }, [post, data._id]);
+  }, [post, data?._id]);
 
   const hundleLike = async () => {
     try {
