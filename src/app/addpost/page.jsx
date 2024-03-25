@@ -81,7 +81,7 @@ export default function page() {
         textcolor: "",
       });
 
-      if (response) {
+      if (response?.data.statusCode === 200) {
         router.push("/feed");
         console.log("Post added successfully!");
       } else {
