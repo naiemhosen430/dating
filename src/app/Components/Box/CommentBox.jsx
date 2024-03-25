@@ -51,8 +51,8 @@ export default function CommentBox({ comment }) {
   const formattedDate = `${year}-${month}-${day}`;
   return (
     <>
-      <div className="bg-slate-950 p-5">
-        <div className="flex items-center p-4">
+      <div className="bg-slate-950">
+        <div className="flex p-4">
           <div className="w-/12 text-center">
             <Link href={`/profile/${comment?.userid}`}>
               <img
@@ -62,7 +62,7 @@ export default function CommentBox({ comment }) {
               />
             </Link>
           </div>
-          <div className="w-10/12">
+          <div className="w-10/12 px-4">
             <Link href={`/profile/${comment?.userid}`}>
               <h5 className="text-slate-400">{profile?.name}</h5>
             </Link>
@@ -75,7 +75,7 @@ export default function CommentBox({ comment }) {
             </p>
           </div>
         </div>
-        <h6 className="text-slate-500">{formattedDate}</h6>
+        <h6 className="text-slate-500 text-xs">{formattedDate}</h6>
       </div>
     </>
   );
