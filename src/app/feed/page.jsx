@@ -166,7 +166,7 @@ export default function page() {
                   </div>
                 </div>
               </>
-            ) : allPost.length === 0 ? (
+            ) : allPost?.length === 0 ? (
               <h1 className="text-4xl text-white p-5 text-center my-20">
                 There is no post
               </h1>
