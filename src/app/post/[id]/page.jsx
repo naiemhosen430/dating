@@ -169,12 +169,14 @@ export default function page() {
           <div
             onClick={hundleLike}
             className={`w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
-              post?.reactions?.some((reaction) => reaction.userid === data?._id)
+              postInfo?.reactions?.some(
+                (reaction) => reaction.userid === data?._id
+              )
                 ? "text-red-500"
                 : ""
             }`}
           >
-            <span className="px-4 text-lg">{post?.reactions?.length}</span>
+            <span className="px-4 text-lg">{postInfo?.reactions?.length}</span>
             <CgHeart className="inline-block" />
           </div>
 
