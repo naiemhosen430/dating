@@ -101,41 +101,69 @@ export default function Page() {
             <MdHelp className="inline-block" />
           </div>
         </div>
-
         <div className="overflow-y w-full lg:w-6/12 m-auto z-30 custom-chat-field">
           {chatData ? (
-            chatData
-              .slice()
-              .reverse()
-              .map((msg) => {
-                // Use slice() to create a copy of the array before reversing
-                const date = new Date(msg.msgtime);
-                const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
-                  date.getMonth() + 1
-                }/${date.getFullYear()}`;
+            chatData.length !== 0 ? (
+              chatData
+                .slice()
+                .reverse()
+                .map((msg) => {
+                  const date = new Date(msg.msgtime);
+                  const formattedTime = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${
+                    date.getMonth() + 1
+                  }/${date.getFullYear()}`;
 
-                return (
-                  <div
-                    className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
-                    key={msg._id}
-                  >
-                    <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
-                      <h1 className="text-white py-1">
-                        {msg.message ? (
-                          msg.message
-                        ) : (
-                          <AiFillLike className="text-4xl text-white" />
-                        )}
-                      </h1>
-                      <h6 className="text-slate-700 text-xs p-1">
-                        {formattedTime}
-                      </h6>
+                  return (
+                    <div
+                      className={`p-2 ${msg.id === me._id ? "text-right" : ""}`}
+                      key={msg._id}
+                    >
+                      <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
+                        <h1 className="text-white py-1">
+                          {msg.message ? (
+                            msg.message
+                          ) : (
+                            <AiFillLike className="text-4xl text-white" />
+                          )}
+                        </h1>
+                        <h6 className="text-slate-700 text-xs p-1">
+                          {formattedTime}
+                        </h6>
+                      </div>
                     </div>
-                  </div>
-                );
-              })
+                  );
+                })
+            ) : (
+              <h1 className="py-60 text-center">No chat. Start texting</h1>
+            )
           ) : (
-            <h1 className="py-60 text-center">No chat. Start texting</h1>
+            // Loading effect
+            <>
+              <div className="p-2 text-right">
+                <div className="inline-block loadingbig w-8/12 bg-slate-900 rounded-xl p-2 px-3 text-white">
+                  <h1 className="text-white loading py-1"></h1>
+                  <h6 className="text-slate-700 loading text-xs p-1"></h6>
+                </div>
+              </div>
+              <div className="p-2">
+                <div className="inline-block loadingbig w-4/12 bg-slate-900 rounded-xl p-2 px-3 text-white">
+                  <h1 className="text-white loading py-1"></h1>
+                  <h6 className="text-slate-700 loading text-xs p-1"></h6>
+                </div>
+              </div>
+              <div className="p-2 text-right">
+                <div className="inline-block loadingbig w-4/12 bg-slate-900 rounded-xl p-2 px-3 text-white">
+                  <h1 className="text-white loading py-1"></h1>
+                  <h6 className="text-slate-700 loading text-xs p-1"></h6>
+                </div>
+              </div>
+              <div className="p-2">
+                <div className="inline-block loadingbig w-8/12 bg-slate-900 rounded-xl p-2 px-3 text-white">
+                  <h1 className="text-white loading py-1"></h1>
+                  <h6 className="text-slate-700 loading text-xs p-1"></h6>
+                </div>
+              </div>
+            </>
           )}
           <div ref={messagesEndRef} />{" "}
           {/* Reference to the bottom of the message container */}
