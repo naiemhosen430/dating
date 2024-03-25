@@ -42,6 +42,8 @@ export default function page() {
     fatchData();
   }, [postInfo]);
 
+  console.log({ postInfo });
+
   if (!profile) {
     return (
       <>
