@@ -68,7 +68,7 @@ export default function CommentBox({ singleComment }) {
             <p className="py-2 text-white">{singleComment?.message}</p>
           </div>
         </div>
-        <h5>{formattedDate}</h5>
+        <h6>{formattedDate}</h6>
       </div>
     </>
   );
