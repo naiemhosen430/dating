@@ -75,13 +75,13 @@ export default function Post({ post }) {
 
   useEffect(() => {
     const checkReaction = async () => {
-      if (!post || !post?.reactions) return;
+      if (post || post?.reactions) {
+        const foundReaction = post.reactions.find(
+          (reaction) => reaction.userid === data._id
+        );
 
-      const foundReaction = post.reactions.find(
-        (reaction) => reaction.userid === data._id
-      );
-
-      setIsLiked(foundReaction ? true : false);
+        setIsLiked(foundReaction ? true : false);
+      }
     };
 
     checkReaction();
