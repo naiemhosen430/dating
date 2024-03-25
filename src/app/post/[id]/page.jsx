@@ -150,7 +150,7 @@ export default function page() {
               No comment yet !
             </h1>
           ) : (
-            postInfo?.map((singleComment) => (
+            postInfo?.comments?.map((singleComment) => (
               <CommentBox comment={singleComment} />
             ))
           )}
