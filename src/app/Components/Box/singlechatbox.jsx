@@ -5,21 +5,33 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 
 export default function Singlechatbox({ chat, myid }) {
-  const { profileInfo, setMyfriendid } = useContext(MineContext);
+  const [profileInfo, setProfileInfo] = useState(null);
 
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
-  setMyfriendid(profileInfo);
-  console.log({ aaaa: myfriendid[0] });
+
+  useEffect(() => {
+    const fatchData = async () => {
+      await axios
+        .get(`/api/profile/${myfriendid}`)
+        .then((data) => {
+          setProfileInfo(data.data.data);
+        })
+        .catch((err) => {
+          setProfileInfo("none");
+          console.log(err);
+        });
+    };
+
+    fatchData();
+  }, [myfriendid]);
+  console.log({ aaaa: profileInfo });
 
   if (!profileInfo || !myfriendid[0]) {
     return (
       <>
         <div className="flex items-center loadingbig justify-center p-2 px-1">
           <div className="w-2/12 flex items-center rounded-full pb-1">
-            <div
-              className="w-12 h-12 loading rounded-full inline-block"
-
-            ></div>
+            <div className="w-12 h-12 loading rounded-full inline-block"></div>
           </div>
           <div className="w-10/12">
             <h1 className="text-sm loading px-2"></h1>
