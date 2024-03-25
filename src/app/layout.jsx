@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const fatchData = async () => {
-      await get
+      await axios
         .get(`/api/post`)
         .then((data) => {
           setAllPost(data.data.data);

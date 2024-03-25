@@ -13,6 +13,8 @@ export default function page() {
     text: "",
   });
 
+  console.log({allPost});
+
   return (
     <>
       {/* options  */}
@@ -47,7 +49,7 @@ export default function page() {
         {/* post */}
         <div className="lg:flex p-4 space-x-2">
           <div className="lg:w-7/12">
-            {allPost ? (
+            {!allPost ? (
               <>
                 <div className="p-2 my-5 loadingbig">
                   {/* header */}
