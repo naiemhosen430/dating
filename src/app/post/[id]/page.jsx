@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { CgArrowLeft } from "react-icons/cg";
+import { CgArrowLeft, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function page() {
@@ -28,7 +28,7 @@ export default function page() {
   useEffect(() => {
     const fatchData = async () => {
       await axios
-        .get(`/api/profile/${postInfo.userid}`)
+        .get(`/api/profile/${postInfo?.userid}`)
         .then((data) => {
           setProfile(data.data.data);
         })
