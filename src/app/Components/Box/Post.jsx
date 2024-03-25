@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { CgComment, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
