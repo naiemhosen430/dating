@@ -101,7 +101,7 @@ export default function Page() {
             <MdHelp className="inline-block" />
           </div>
         </div>
-        <div className="overflow-y w-full lg:w-6/12 m-auto z-30 custom-chat-field">
+        <div className="overflow-y-auto w-full lg:w-6/12 m-auto z-30 custom-chat-field">
           {chatData ? (
             chatData.length !== 0 ? (
               chatData
