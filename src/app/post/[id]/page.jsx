@@ -77,7 +77,7 @@ export default function page() {
   }
 
   //   format time
-  const createdAt = new Date(postInfo.createdAt);
+  const createdAt = new Date(postInfo?.createdAt);
 
   const year = createdAt.getFullYear();
   const month = String(createdAt.getMonth() + 1).padStart(2, "0");
@@ -127,7 +127,7 @@ export default function page() {
 
         {/* content */}
         <div className="py-14 text-white rounded-lg text-center my-2 p-4 bg-slate-800">
-          <p>{postInfo.postcontent}</p>
+          <p>{postInfo?.postcontent}</p>
         </div>
 
         {/* footer */}
