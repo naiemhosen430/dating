@@ -8,6 +8,7 @@ import { MdHelp } from "react-icons/md";
 
 export default function Post({ post }) {
   const [profileInfo, setProfileInfo] = useState(null);
+  const [postInfo, setPostInfo] = useState(null);
   const { data } = useContext(MineContext);
 
   useEffect(() => {
