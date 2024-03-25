@@ -5,7 +5,7 @@ import { CgComment, CgHeart } from "react-icons/cg";
 import { LiaDoveSolid } from "react-icons/lia";
 import { MdHelp } from "react-icons/md";
 
-export default function Post() {
+export default function Post({ post }) {
   return (
     <>
       <div className="p-2">
@@ -22,7 +22,7 @@ export default function Post() {
           </div>
           <div className="w-8/12">
             <h1 className="text-xl text-white font-bold">
-              <Link href={"/profile/id"}>Rodela</Link>
+              <Link href={"/profile/id"}></Link>
             </h1>
             <h1 className="text-sm text-slate-600 font-bold">2 days ago</h1>
           </div>
@@ -33,15 +33,17 @@ export default function Post() {
 
         {/* content */}
         <div className="py-4 text-slate-600">
-          <p>Hello how are you everyone!</p>
+          <p>{post.postcontent}</p>
         </div>
 
         {/* footer */}
         <div className="flex items-center space-x-5">
-          <div className="w-6/12 text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+          <div className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+            <span>{post?.reactions.length}</span>
             <CgHeart className="inline-block" />
           </div>
-          <div className="w-6/12 text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+          <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
+            <span>{post?.reactions.length}</span>
             <CgComment className="inline-block" />
           </div>
         </div>

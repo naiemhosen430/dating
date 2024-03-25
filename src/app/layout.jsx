@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
   const [chats, setChats] = useState(null);
   const [profileInfo, setProfileInfo] = useState(null);
   const [myfriendid, setMyfriendid] = useState(null);
+  const [allPost, setAllPost] = useState(null);
 
   // Fetch website information on component mount
   useEffect(() => {
@@ -47,7 +48,6 @@ export default function RootLayout({ children }) {
   }, []);
 
   useEffect(() => {
-
     const fatchData = async () => {
       await axios
         .get(`/api/profile/${myfriendid}`)
@@ -60,10 +60,24 @@ export default function RootLayout({ children }) {
         });
     };
 
-      fatchData();
-
-
+    fatchData();
   }, [myfriendid]);
+
+  useEffect(() => {
+    const fatchData = async () => {
+      await get
+        .get(`/api/post`)
+        .then((data) => {
+          setAllPost(data.data.data);
+        })
+        .catch((err) => {
+          setAllPost([]);
+          console.log(err);
+        });
+    };
+
+    fatchData();
+  }, []);
 
   return (
     <html lang="en">
@@ -77,6 +91,7 @@ export default function RootLayout({ children }) {
               setChats,
               profileInfo,
               setMyfriendid,
+              allPost,
             }}
           >
             {children}
