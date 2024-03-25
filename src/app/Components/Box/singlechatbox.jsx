@@ -1,5 +1,6 @@
 "use client";
 import { MineContext } from "@/Context/MineContext";
+import { db } from "@/app/firebaseConfig";
 import axios from "axios";
 import { ref } from "firebase/database";
 import Link from "next/link";
