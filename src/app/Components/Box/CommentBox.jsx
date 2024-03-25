@@ -6,7 +6,6 @@ import { FaHeart } from "react-icons/fa";
 
 export default function CommentBox({ comment }) {
   const [profile, setProfile] = useState(null);
-  console.log(comment);
 
   useEffect(() => {
     const fatchData = async () => {
@@ -51,7 +50,7 @@ export default function CommentBox({ comment }) {
   const formattedDate = `${year}-${month}-${day}`;
   return (
     <>
-      <div className="bg-slate-950">
+      <div className="bg-slate-950 rounded-md">
         <div className="flex p-4">
           <div className="w-/12 text-center">
             <Link href={`/profile/${comment?.userid}`}>
@@ -75,7 +74,7 @@ export default function CommentBox({ comment }) {
             </p>
           </div>
         </div>
-        <h6 className="text-slate-500 text-xs">{formattedDate}</h6>
+        <h6 className="text-slate-500 p-2text-xs">{formattedDate}</h6>
       </div>
     </>
   );

@@ -1,12 +1,14 @@
 "use client";
+import { MineContext } from "@/Context/MineContext";
 import axios from "axios";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CgComment, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function Post({ post }) {
   const [profileInfo, setProfileInfo] = useState(null);
+  const { data } = useContext(MineContext);
 
   useEffect(() => {
     const fatchData = async () => {
@@ -24,7 +26,7 @@ export default function Post({ post }) {
     fatchData();
   }, [post?.userid]);
 
-  if (!profileInfo) {
+  if (!profileInfo || !data) {
     return (
       <>
         <div className="p-2 my-10 loadingbig">
@@ -68,6 +70,22 @@ export default function Post({ post }) {
   const day = String(createdAt.getDate()).padStart(2, "0");
 
   const formattedDate = `${year}-${month}-${day}`;
+
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    const checkReaction = async () => {
+      if (!post || !post.reactions) return;
+
+      const foundReaction = post.reactions.find(
+        (reaction) => reaction.userid === data._id
+      );
+
+      setIsLiked(foundReaction ? true : false);
+    };
+
+    checkReaction();
+  }, [post, data._id]);
   return (
     <>
       <div className="p-0">
@@ -111,15 +129,18 @@ export default function Post({ post }) {
         {/* footer */}
         <div className="flex items-center space-x-5">
           <div className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl">
-            <span>{post?.reactions?.length}</span>
-            <CgHeart className="inline-block" />
+            <span className="px-4 text-lg">{post?.reactions?.length}</span>
+
+            <CgHeart
+              className={`inline-block ${isLiked ? "text-red-500" : ""}`}
+            />
           </div>
           <Link
             className="w-6/12 hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"
             href={`/post/${post?._id}`}
           >
             <div className="text-xl flex justify-center items-center cursor-pointer">
-              <span>{post?.comments?.length}</span>
+              <span className="px-4 text-lg">{post?.comments?.length}</span>
               <CgComment className="inline-block" />
             </div>
           </Link>

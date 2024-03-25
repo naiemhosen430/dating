@@ -86,16 +86,25 @@ export default function page() {
     setCommentText(event.target.value);
   };
 
+  const hundleLike = async () => {
+    try {
+      const data = await axios.post(`/api/post/like/${postInfo?._id}`);
+
+      setPostInfo(data.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const sendComment = async () => {
     try {
-      await axios.post(`/api/post/comment/${postInfo?._id}`, {
+      const data = await axios.post(`/api/post/comment/${postInfo?._id}`, {
         message: commentText,
       });
 
       setCommentText("");
 
-      const postData = await axios.get(`/api/post/${id}`);
-      setPostInfo(postData.data.data);
+      setPostInfo(data.data.data);
     } catch (error) {
       console.error(error);
     }

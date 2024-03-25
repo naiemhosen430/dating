@@ -8,7 +8,6 @@ import { MdHelp } from "react-icons/md";
 
 export default function page() {
   const { id } = useParams();
-  console.log(id)
   const [profileInfo, setProfileInfo] = useState([]);
   const [interesta, setinteresta] = useState([]);
   useEffect(() => {
