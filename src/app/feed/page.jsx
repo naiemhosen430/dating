@@ -63,7 +63,7 @@ export default function page() {
         </div>
 
         {/* post */}
-        <div className="lg:flex p-4 space-x-2">
+        <div className="lg:flex space-x-2">
           <div className="lg:w-7/12">
             {!allPost ? (
               <>
