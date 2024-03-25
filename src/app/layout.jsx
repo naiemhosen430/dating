@@ -48,7 +48,6 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
 
-    if (myfriendid){
     const fatchData = async () => {
       await axios
         .get(`/api/profile/${myfriendid}`)
@@ -62,10 +61,9 @@ export default function RootLayout({ children }) {
     };
 
       fatchData();
-    }
+
 
   }, [myfriendid]);
-  console.log({myfriendid})
 
   return (
     <html lang="en">
