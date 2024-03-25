@@ -171,7 +171,7 @@ export default function page() {
                 There is no post
               </h1>
             ) : (
-              allPost.map((post) => (
+              allPost?.map((post) => (
                 <>
                   <Post key={post._id} post={post} />
                 </>
