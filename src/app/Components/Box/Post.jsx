@@ -140,7 +140,7 @@ export default function Post({ post }) {
         <div className="flex items-center space-x-5">
           <div
             onClick={hundleLike}
-            className="w-6/12 flex justify-center items-center text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"
+            className="w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl"
           >
             <span className="px-4 text-lg">{post?.reactions?.length}</span>
 
@@ -149,7 +149,7 @@ export default function Post({ post }) {
             />
           </div>
           <Link
-            className="w-6/12 hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"
+            className="w-6/12 text-center bg-slate-950 p-1 rounded-xl"
             href={`/post/${post?._id}`}
           >
             <div className="text-xl flex justify-center items-center cursor-pointer">
