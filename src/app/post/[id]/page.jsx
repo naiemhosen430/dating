@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { CgArrowLeft, CgComment, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
+import { FaHeart } from "react-icons/fa";
 
 export default function page() {
   const { id } = useParams();
@@ -193,7 +194,7 @@ export default function page() {
             onClick={sendComment}
             className="p-2 rounded-r-2xl bg-slate-950 text-slate-400 w-2/12"
           >
-            Send
+            {commentText ? Send : <FaHeart />}
           </button>
         </div>
       </div>

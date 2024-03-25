@@ -2,15 +2,16 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { FaHeart } from "react-icons/fa";
 
-export default function CommentBox({ singleComment }) {
+export default function CommentBox({ comment }) {
   const [profile, setProfile] = useState(null);
-  console.log(singleComment);
+  console.log(comment);
 
   useEffect(() => {
     const fatchData = async () => {
       await axios
-        .get(`/api/profile/${singleComment?.userid}`)
+        .get(`/api/profile/${comment?.userid}`)
         .then((data) => {
           setProfile(data.data.data);
         })
@@ -20,7 +21,7 @@ export default function CommentBox({ singleComment }) {
         });
     };
     fatchData();
-  }, [singleComment]);
+  }, [comment]);
 
   if (!profile) {
     return (
@@ -41,7 +42,7 @@ export default function CommentBox({ singleComment }) {
   }
 
   //   format time
-  const createdAt = new Date(singleComment?.cmnttime);
+  const createdAt = new Date(comment?.cmnttime);
 
   const year = createdAt.getFullYear();
   const month = String(createdAt.getMonth() + 1).padStart(2, "0");
@@ -53,7 +54,7 @@ export default function CommentBox({ singleComment }) {
       <div className="bg-slate-950 p-5">
         <div className="flex items-center p-4">
           <div className="w-/12 text-center">
-            <Link href={`/profile/${singleComment?.userid}`}>
+            <Link href={`/profile/${comment?.userid}`}>
               <img
                 className="w-8 h-8 rounded-full inline-block"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhHGR8bTVzFRi4LjAKEbCXe3Nm7wSxh3H3g&usqp=CAU"
@@ -62,10 +63,16 @@ export default function CommentBox({ singleComment }) {
             </Link>
           </div>
           <div className="w-10/12">
-            <Link href={`/profile/${singleComment?.userid}`}>
+            <Link href={`/profile/${comment?.userid}`}>
               <h5 className="text-slate-400">{profile?.name}</h5>
             </Link>
-            <p className="py-2 text-white">{singleComment?.message}</p>
+            <p className="py-2 text-white">
+              {comment?.message ? (
+                comment?.message
+              ) : (
+                <FaHeart className="text-5xl text-black shadow-xl" />
+              )}
+            </p>
           </div>
         </div>
         <h6 className="text-slate-500">{formattedDate}</h6>
