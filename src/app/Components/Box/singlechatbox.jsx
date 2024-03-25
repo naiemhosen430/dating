@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ref, onValue } from "firebase/database"; // Import onValue from Firebase
@@ -27,7 +27,8 @@ export default function Singlechatbox({ chat, myid }) {
   }, [myfriendid]);
 
   useEffect(() => {
-    if (!chat) return; // Check if chat exists
+    if (!chat) return;
+    console.log(chat._id);
     const chatRef = ref(db, "conversations/" + chat._id);
 
     const unsubscribe = onValue(chatRef, (snapshot) => {
@@ -40,12 +41,29 @@ export default function Singlechatbox({ chat, myid }) {
         setOutChat([]);
       }
     });
-
-    // Clean up function
-    return () => unsubscribe();
-  }, [chat]);
+  }, []);
 
   const lastMessage = outChat ? outChat[outChat.length - 1] : null;
+
+  if (!profileInfo || !myfriendid[0]) {
+    return (
+      <>
+        <div className="flex items-center loadingbig justify-center p-2 px-1">
+          <div className="w-2/12 flex items-center rounded-full pb-1">
+            <div className="w-12 h-12 loading rounded-full inline-block"></div>
+          </div>
+          <div className="w-10/12">
+            <h1 className="text-sm loading px-2"></h1>
+            <h1 className="text-xs loading px-2 text-red-500"></h1>
+            <h1 className="text-xs loading px-2 text-red-400 text-right flex">
+              <span className="w-8/12 loading text-left text-base block"></span>
+              <span className="text-xs loading text-right w-4/12 block text-red-500"></span>
+            </h1>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center p-2 px-1" key={chat.id}>
