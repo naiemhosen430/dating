@@ -20,16 +20,14 @@ export default function Page() {
 
   useEffect(() => {
     const fetchChatData = async () => {
-      let chatidd = ""
+      let chatidd = "";
       try {
         const response = await axios.post(`/api/chat/${id}`);
         const { friend, me, data } = response.data;
         setFriend(friend);
         setMe(me);
         setMsgData(data);
-        chatidd = data._id
-        if (!friend || !me || !msgdata) {
-        }
+        chatidd = data._id;
 
         const chatRef = ref(db, "conversations/" + msgdata?._id || chatidd);
         const chatSnapshot = await get(chatRef);
@@ -80,9 +78,7 @@ export default function Page() {
         msgtime: Date.now(),
       };
       await set(newMessageRef, newMessageData);
-      await axios.put(`/api/chat/update/${msgdata?._id}`, {
-        lastmessage: messageInput,
-      });
+
       setMessageInput("");
     } catch (error) {
       console.error("Error sending message:", error);
