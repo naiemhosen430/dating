@@ -4,13 +4,19 @@ import User from "@/models/userModel";
 import { dbconnect } from "@/utils/mongo";
 
 export async function POST(NextRequest) {
+  const myData = getDetaFromToken();
+  const idwithparams = NextRequest.url.split("chat/")[1];
+  const id = idwithparams.split("?")[0];
+  const queryString = idwithparams.split("?")[1];
+
+  let recently = "";
+  if (queryString) {
+    const params = new URLSearchParams(queryString);
+    recently = params.get("recently") || "";
+  }
+
   await dbconnect();
   try {
-    const myData = getDetaFromToken();
-    const idwithparams = NextRequest.url.split("chat/")[1];
-    const id = idwithparams.split("/")[0];
-    const recently = idwithparams.split("/")[1].split("recently=")[1] || "";
-
     // Check if a chat with the given IDs exists
     const checkUser = await Chat.findOne({
       $or: [
@@ -19,9 +25,7 @@ export async function POST(NextRequest) {
       ],
     });
 
-    console.log({ checkUser });
-
-    const me = await User.findOne({ _id: myData.id }).select("-password");
+    const me = await User.findOne({ _id: myData.id || "" }).select("-password");
     const friend = await User.findOne({ _id: id }).select("-password");
 
     if (checkUser) {

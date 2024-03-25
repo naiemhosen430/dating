@@ -25,18 +25,10 @@ export default function page() {
               </Link>
             </h1>
             <div className=" space-x-4 flex">
-            <div className="inline-block loading w-8 h-8 rounded-full">
-
-</div>
-          <div className="inline-block loading w-8 h-8 rounded-full">
-
-          </div>
-          <div className="inline-block loading w-8 h-8 rounded-full">
-
-          </div>
-          <div className="inline-block loading w-8 h-8 rounded-full">
-
-          </div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
             </div>
           </div>
 
@@ -51,18 +43,10 @@ export default function page() {
               </Link>
             </h1>
             <div className=" space-x-4 flex">
-            <div className="inline-block loading w-8 h-8 rounded-full">
-
-</div>
-          <div className="inline-block loading w-8 h-8 rounded-full">
-
-          </div>
-          <div className="inline-block loading w-8 h-8 rounded-full">
-
-          </div>
-          <div className="inline-block loading w-8 h-8 rounded-full">
-
-          </div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
+              <div className="inline-block loading w-8 h-8 rounded-full"></div>
             </div>
           </div>
 

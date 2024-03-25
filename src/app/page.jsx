@@ -158,7 +158,7 @@ export default function Home() {
   useEffect(() => {
     const fatchData = async () => {
       if (newFriendId) {
-        await axios.post(`/api/chat/${newFriendId}/?recently=yes`);
+        await axios.post(`/api/chat/${newFriendId}`);
         await axios
           .get(`/api/profile/${newFriendId}`)
           .then((data) => {

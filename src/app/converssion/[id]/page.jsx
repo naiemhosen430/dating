@@ -21,7 +21,7 @@ export default function Page() {
   useEffect(() => {
     const fetchChatData = async () => {
       try {
-        const response = await axios.post(`/api/chat/${id}`);
+        const response = await axios.post(`/api/chat/${id}/?recently=yes`);
         const { friend, me, data } = response.data;
         setFriend(friend);
         setMe(me);
