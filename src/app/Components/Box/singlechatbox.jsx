@@ -55,13 +55,24 @@ export default function Singlechatbox({ chat, myid }) {
 
   const formattime = (time) => {
     const date = new Date(time);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-indexed
-    const day = date.getDate().toString().padStart(2, "0");
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const now = new Date();
+    const diff = now - date;
 
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+
+    if (months > 0) {
+      return `${months}m ago`;
+    } else if (days > 0) {
+      return `${days}d ago`;
+    } else if (hours > 0) {
+      return `${hours}h ago`;
+    } else {
+      return `${minutes}m ago`;
+    }
   };
 
   if (!profileInfo || !myfriendid[0]) {
@@ -106,8 +117,11 @@ export default function Singlechatbox({ chat, myid }) {
             <h1 className="text-xs px-2 text-red-500">active 11 m ago</h1>
             <h1 className="text-xs px-2 text-red-400 text-right flex">
               <span className="w-8/12 text-left text-xs block">
-                {lastmsg?.message}
+                {lastmsg?.message && lastmsg.message.length > 29
+                  ? `${lastmsg.message.substring(0, 29)}...`
+                  : lastmsg?.message}
               </span>
+
               <span className="text-xs text-right w-4/12 block text-red-500">
                 {lastmsg ? formattime(lastmsg?.msgtime) : ""}
               </span>
