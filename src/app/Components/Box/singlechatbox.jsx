@@ -37,9 +37,11 @@ export default function Singlechatbox({ chat, myid }) {
         const chatObj = snapshot.val();
         const chatArr = Object.values(chatObj);
         setOutChat(chatArr);
+        setlastmsg(chatArr[chatArr.length - 1]); // Set last message here
       } else {
         console.log("No chat data found.");
         setOutChat([]);
+        setlastmsg(null); // Set last message to null if no data found
       }
     };
 
@@ -51,8 +53,6 @@ export default function Singlechatbox({ chat, myid }) {
     };
   }, [chat]);
 
-  const lastMessage = outChat ? outChat[outChat.length - 1] : null;
-  setlastmsg(lastMessage);
   const formattime = (time) => {
     const date = new Date(time);
     const year = date.getFullYear();
