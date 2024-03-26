@@ -31,7 +31,7 @@ export default function page() {
     fetchMypostData();
   }, []);
 
-  console.log(allMyPost)
+  console.log(allMyPost);
   return (
     <>
       <div className="p-2">
