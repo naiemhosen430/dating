@@ -177,7 +177,7 @@ export default function page() {
             }`}
           >
             <span className="px-4 text-lg">{postInfo?.reactions?.length}</span>
-            {post?.reactions?.some(
+            {postInfo?.reactions?.some(
               (reaction) => reaction.userid === data?._id
             ) ? (
               <CgHeart className="text-white inline-block" />
