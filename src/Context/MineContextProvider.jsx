@@ -45,7 +45,6 @@ const MineContextProvider = ({ children }) => {
 
   fetchMypostData();
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -155,7 +154,7 @@ const MineContextProvider = ({ children }) => {
         setAllMyPost,
         allfriendPost,
         setAllfriendPost,
-        fetchMypostData
+        fetchMypostData,
       }}
     >
       {children}
