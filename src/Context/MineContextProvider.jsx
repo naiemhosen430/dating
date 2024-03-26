@@ -58,7 +58,7 @@ const MineContextProvider = ({ children }) => {
     };
 
     fetchData();
-  }, [myfriendid]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,7 +74,7 @@ const MineContextProvider = ({ children }) => {
     };
 
     fetchData();
-  }, [allPost]);
+  }, []);
 
   // Function to add a new post
   const handleAddPost = async (postContent, selectedOptions) => {
