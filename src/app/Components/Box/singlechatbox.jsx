@@ -121,7 +121,7 @@ export default function Singlechatbox({ chat, myid }) {
                   <span className="px-1 text-red-400 text-xs">You:</span>
                 )}
                 {lastmsg?.message && lastmsg.message.length > 29
-                  ? `${lastmsg.message.substring(0, 24)}...`
+                  ? `${lastmsg.message.substring(0, 20)}...`
                   : lastmsg?.message}
                 {(!lastmsg?.message || lastmsg?.message === "") && (
                   <AiFillLike className="text-white inline-block" />
