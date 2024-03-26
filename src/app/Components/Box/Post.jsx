@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useState, useEffect, useContext } from "react";
 import { CgComment, CgHeart } from "react-icons/cg";
+import { FaHeart } from "react-icons/fa";
 import { MdHelp } from "react-icons/md";
 
 export default function Post({ post }) {
@@ -127,12 +128,18 @@ export default function Post({ post }) {
             onClick={hundleLike}
             className={`w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
               post?.reactions?.some((reaction) => reaction.userid === data?._id)
-                ? "text-red-500"
+                ? "bg-red-500"
                 : ""
             }`}
           >
             <span className="px-4 text-lg">{post?.reactions?.length}</span>
-            <CgHeart className="inline-block" />
+            {post?.reactions?.some(
+              (reaction) => reaction.userid === data?._id
+            ) ? (
+              <CgHeart className="text-white inline-block" />
+            ) : (
+              <FaHeart className="text-white inline-block " />
+            )}
           </div>
 
           <Link

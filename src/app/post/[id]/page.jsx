@@ -172,12 +172,18 @@ export default function page() {
               postInfo?.reactions?.some(
                 (reaction) => reaction.userid === data?._id
               )
-                ? "text-red-500"
+                ? "bg-red-500"
                 : ""
             }`}
           >
             <span className="px-4 text-lg">{postInfo?.reactions?.length}</span>
-            <CgHeart className="inline-block" />
+            {post?.reactions?.some(
+              (reaction) => reaction.userid === data?._id
+            ) ? (
+              <CgHeart className="text-white inline-block" />
+            ) : (
+              <FaHeart className="text-white inline-block" />
+            )}
           </div>
 
           <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer text-center bg-slate-950 p-1 rounded-xl">
