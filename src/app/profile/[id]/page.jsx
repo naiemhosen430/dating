@@ -1,12 +1,14 @@
 "use client";
+import { MineContext } from "@/Context/MineContextProvider";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function page() {
+  const { fetchfriendpostData } = useContext(MineContext);
   const { id } = useParams();
   const [profileInfo, setProfileInfo] = useState([]);
   const [interesta, setinteresta] = useState([]);
