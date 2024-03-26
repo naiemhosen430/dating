@@ -22,11 +22,18 @@ export async function POST(NextRequest) {
 
     await newPost.save();
 
-    const postdata = await Post.find();
+    const postdata = await Post.aggregate([
+      { $match: {} }, // Match all documents (posts)
+      { $sample: { size: 50 } }, // Select a random sample of 50 posts
+      { $sort: { createdAt: -1 } }, // Sort the sampled posts by createdAt field in descending order (recent posts first)
+    ]);
+
+    const myPost = await Post.find({userid:myInfo.id})
 
     return Response.json({
       statusCode: 200,
       data: postdata,
+      myPost,
       message: "Post Added",
     });
   } catch (error) {

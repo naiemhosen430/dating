@@ -14,9 +14,24 @@ const MineContextProvider = ({ children }) => {
   const [profileInfo, setProfileInfo] = useState(null);
   const [myfriendid, setMyfriendid] = useState(null);
   const [allPost, setAllPost] = useState(null);
+  const [allMyPost, setAllMyPost] = useState(null);
   const [error, setError] = useState("");
 
   // Fetch website information on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseMyData = await axios.get(`/api/post/mypost`);
+        setAllMyPost(responseMyData.data.data);
+      } catch (error) {
+        setData("");
+        console.error({ error });
+      }
+    };
+
+    fetchData();
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -95,6 +110,7 @@ const MineContextProvider = ({ children }) => {
 
       if (response?.data.statusCode === 200) {
         setAllPost(response?.data.data);
+        setAllMyPost(response?.data.myPost);
         router.push("/feed");
         console.log("Post added successfully!");
       } else {
@@ -121,6 +137,8 @@ const MineContextProvider = ({ children }) => {
         setMyfriendid,
         setAllPost,
         handleAddPost,
+        allMyPost,
+        setAllMyPost,
       }}
     >
       {children}

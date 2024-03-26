@@ -6,10 +6,9 @@ import ButtonBer from "../Components/Shared/ButtonBer";
 import Link from "next/link";
 import { IoMdAdd } from "react-icons/io";
 import { MineContext } from "@/Context/MineContextProvider";
-import axios from "axios";
 
 export default function page() {
-  const { allPost, setAllPost } = useContext(MineContext);
+  const { allPost } = useContext(MineContext);
   const [text, setText] = useState({
     text: "",
   });
