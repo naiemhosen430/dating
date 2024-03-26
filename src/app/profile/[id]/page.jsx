@@ -25,6 +25,9 @@ export default function page() {
     fatchData();
   }, []);
 
+  useEffect(()=>{
+    fetchfriendpostData(profileInfo?._id)
+  },[profileInfo?._id])
   return (
     <>
       <div className="p-2">

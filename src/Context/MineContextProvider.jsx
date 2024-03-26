@@ -19,19 +19,15 @@ const MineContextProvider = ({ children }) => {
   const [error, setError] = useState("");
 
   // Fetch website information on component mount
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseMyData = await axios.get(`/api/post/friendpost`);
-        setAllfriendPost(responseMyData.data.data);
-      } catch (error) {
-        setAllfriendPost("");
-        console.error({ error });
-      }
-    };
-
-    fetchData();
-  }, []);
+  const fetchfriendpostData = async (id) => {
+    try {
+      const responseMyData = await axios.get(`/api/post/friendpost${id}`);
+      setAllfriendPost(responseMyData.data.data);
+    } catch (error) {
+      setAllfriendPost("");
+      console.error({ error });
+    }
+  };
 
   const fetchMypostData = async () => {
     try {
@@ -42,7 +38,6 @@ const MineContextProvider = ({ children }) => {
       console.error({ error });
     }
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -154,6 +149,7 @@ const MineContextProvider = ({ children }) => {
         allfriendPost,
         setAllfriendPost,
         fetchMypostData,
+        fetchfriendpostData,
       }}
     >
       {children}
