@@ -80,7 +80,15 @@ export default function ChatBox() {
           {chats?.length === 0 ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map((chat) => <Singlechatbox chat={chat} myid={data?._id} />)
+            chats
+              .sort((a, b) => {
+                const timeA = a.lastmsg?.msgtime || 0;
+                const timeB = b.lastmsg?.msgtime || 0;
+                return timeB - timeA;
+              })
+              .map((chat) => (
+                <Singlechatbox key={chat._id} chat={chat} myid={data._id} />
+              ))
           )}
         </div>
       </div>

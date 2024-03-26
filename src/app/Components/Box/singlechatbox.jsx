@@ -118,7 +118,7 @@ export default function Singlechatbox({ chat, myid }) {
             <h1 className="text-xs px-2 text-red-400 text-right flex">
               <span className="w-8/12 text-left text-xs block">
                 {lastmsg?.message && lastmsg.message.length > 29
-                  ? `${lastmsg.message.substring(0, 29)}...`
+                  ? `${lastmsg.message.substring(0, 24)}...`
                   : lastmsg?.message}
               </span>
 
