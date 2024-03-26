@@ -63,6 +63,22 @@ export default function RootLayout({ children }) {
     fatchData();
   }, [myfriendid]);
 
+  useEffect(() => {
+    const fatchData = async () => {
+      await axios
+        .get(`/api/post`)
+        .then((data) => {
+          setAllPost(data.data.data);
+        })
+        .catch((err) => {
+          setAllPost([]);
+          console.log(err);
+        });
+    };
+
+    fatchData();
+  }, [allPost]);
+
   return (
     <html lang="en">
       <body className={inter.className}>
