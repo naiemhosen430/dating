@@ -57,7 +57,7 @@ export default function page() {
   ]);
 
   // Function to handle adding a new post
-  const handleSubmit = () => {
+  const handleAddPostClient = () => {
     handleAddPost(postContent, selectedOptions);
     // Reset input fields after submitting
     setPostContent("");

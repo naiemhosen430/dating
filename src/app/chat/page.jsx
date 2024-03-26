@@ -4,8 +4,8 @@ import RecentlyBox from "../Components/Box/RecentlyBox";
 import InterestBox from "../Components/Box/InterestBox";
 import ChatBox from "../Components/Box/ChatBox";
 import ButtonBer from "../Components/Shared/ButtonBer";
-import { MineContext } from "@/Context/MineContextProvider";
 import Link from "next/link";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function page() {
   const { chats, setChats, data } = useContext(MineContext);
