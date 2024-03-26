@@ -52,6 +52,8 @@ export default function Singlechatbox({ chat, myid }) {
 
   const lastMessage = outChat ? outChat[outChat.length - 1] : null;
 
+  console.log(lastMessage);
+
   if (!profileInfo || !myfriendid[0]) {
     return (
       <>
