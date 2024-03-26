@@ -33,19 +33,18 @@ const MineContextProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseMyData = await axios.get(`/api/post/mypost`);
-        setAllMyPost(responseMyData.data.data);
-      } catch (error) {
-        setAllMyPost("");
-        console.error({ error });
-      }
-    };
+  const fetchMypostData = async () => {
+    try {
+      const responseMyData = await axios.get(`/api/post/mypost`);
+      setAllMyPost(responseMyData.data.data);
+    } catch (error) {
+      setAllMyPost("");
+      console.error({ error });
+    }
+  };
 
-    fetchData();
-  }, []);
+  fetchMypostData();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -156,6 +155,7 @@ const MineContextProvider = ({ children }) => {
         setAllMyPost,
         allfriendPost,
         setAllfriendPost,
+        fetchMypostData
       }}
     >
       {children}
