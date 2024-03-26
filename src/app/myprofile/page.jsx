@@ -8,7 +8,7 @@ import { MdHelp } from "react-icons/md";
 import Post from "../Components/Box/Post";
 
 export default function page() {
-  const { allMyPost,fetchMypostData } = useContext(MineContext);
+  const { allMyPost, fetchMypostData } = useContext(MineContext);
   const [profileInfo, setProfileInfo] = useState([]);
   const [interesta, setinteresta] = useState([]);
   useEffect(() => {
@@ -28,10 +28,8 @@ export default function page() {
   }, []);
 
   useEffect(() => {
-    await fetchMypostData()
+    fetchMypostData();
   }, []);
-
-
 
   return (
     <>
