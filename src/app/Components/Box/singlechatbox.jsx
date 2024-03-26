@@ -5,7 +5,7 @@ import { ref, onValue, off } from "firebase/database";
 import { db } from "@/app/firebaseConfig";
 import Link from "next/link";
 
-export default function Singlechatbox({ chat, myid }) {
+export default function Singlechatbox({ chat, myid, updateSortBy }) {
   const [profileInfo, setProfileInfo] = useState(null);
   const [outChat, setOutChat] = useState(null);
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
@@ -52,6 +52,8 @@ export default function Singlechatbox({ chat, myid }) {
       off(chatRef, "value", handleSnapshot);
     };
   }, [chat]);
+
+  updateSortBy(lastmsg?.msgtime);
 
   const formattime = (time) => {
     const date = new Date(time);
@@ -120,6 +122,9 @@ export default function Singlechatbox({ chat, myid }) {
                 {lastmsg?.message && lastmsg.message.length > 29
                   ? `${lastmsg.message.substring(0, 24)}...`
                   : lastmsg?.message}
+                {(!lastmsg?.message || lastmsg?.message === "") && (
+                  <AiFillLike className="text-white inline-block" />
+                )}
               </span>
 
               <span className="text-xs text-right w-4/12 block text-red-500">

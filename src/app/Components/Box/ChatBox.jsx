@@ -1,12 +1,17 @@
 "use client";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import Singlechatbox from "./singlechatbox";
 import { MineContext } from "@/Context/MineContextProvider";
 
 export default function ChatBox() {
   const { chats, setChats, data } = useContext(MineContext);
+
+  const [sortBy, setSortBy] = useState("");
+
+  const updateSortBy = (value) => {
+    setSortBy(value);
+  };
 
   if (!data || !chats) {
     return (
@@ -80,15 +85,13 @@ export default function ChatBox() {
           {chats?.length === 0 ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats
-              .sort((a, b) => {
-                const timeA = a.lastmsg?.msgtime || 0;
-                const timeB = b.lastmsg?.msgtime || 0;
-                return timeB - timeA;
-              })
-              .map((chat) => (
-                <Singlechatbox key={chat._id} chat={chat} myid={data._id} />
-              ))
+            chats?.map((chat) => (
+              <Singlechatbox
+                chat={chat}
+                updateSortBy={updateSortBy}
+                myid={data?._id}
+              />
+            ))
           )}
         </div>
       </div>
