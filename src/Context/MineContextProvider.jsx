@@ -21,7 +21,7 @@ const MineContextProvider = ({ children }) => {
   // Fetch website information on component mount
   const fetchfriendpostData = async (id) => {
     try {
-      const responseMyData = await axios.get(`/api/post/friendpost${id}`);
+      const responseMyData = await axios.get(`/api/post/friendpost/${id}`);
       setAllfriendPost(responseMyData.data.data);
     } catch (error) {
       setAllfriendPost("");
