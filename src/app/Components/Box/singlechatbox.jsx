@@ -9,6 +9,7 @@ export default function Singlechatbox({ chat, myid }) {
   const [profileInfo, setProfileInfo] = useState(null);
   const [outChat, setOutChat] = useState(null);
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
+  const [lastmsg,setlastmsg]=useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,8 +52,21 @@ export default function Singlechatbox({ chat, myid }) {
   }, [chat]);
 
   const lastMessage = outChat ? outChat[outChat.length - 1] : null;
+  setlastmsg(lastMessage)
+const formattime = (time)=>{
 
-  console.log(lastMessage);
+  const date = new Date(time);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+  
+  
+
 
   if (!profileInfo || !myfriendid[0]) {
     return (
@@ -96,10 +110,11 @@ export default function Singlechatbox({ chat, myid }) {
             <h1 className="text-xs px-2 text-red-500">active 11 m ago</h1>
             <h1 className="text-xs px-2 text-red-400 text-right flex">
               <span className="w-8/12 text-left text-xs block">
-                {lastMessage?.lastmessage}
+                {lastmsg?.lastmessage}
               </span>
               <span className="text-xs text-right w-4/12 block text-red-500">
-                5 m ago
+                {formattime(lastmsg?.msgtime)}
+
               </span>
             </h1>
           </Link>
