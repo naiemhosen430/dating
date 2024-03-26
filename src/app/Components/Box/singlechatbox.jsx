@@ -8,18 +8,19 @@ import { AiFillLike } from "react-icons/ai";
 
 export default function Singlechatbox({ chat, myid }) {
   const [profileInfo, setProfileInfo] = useState(null);
-  const [outChat, setOutChat] = useState(null);
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
   const [lastmsg, setlastmsg] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/profile/${myfriendid}`);
-        setProfileInfo(response.data.data);
-      } catch (err) {
-        setProfileInfo(null);
-        console.error(err);
+      if (!profileInfo) {
+        try {
+          const response = await axios.get(`/api/profile/${myfriendid}`);
+          setProfileInfo(response.data.data);
+        } catch (err) {
+          setProfileInfo(null);
+          console.error(err);
+        }
       }
     };
 
@@ -37,12 +38,10 @@ export default function Singlechatbox({ chat, myid }) {
       if (snapshot.exists()) {
         const chatObj = snapshot.val();
         const chatArr = Object.values(chatObj);
-        setOutChat(chatArr);
-        setlastmsg(chatArr[chatArr.length - 1]); // Set last message here
+        setlastmsg(chatArr[chatArr.length - 1]);
       } else {
         console.log("No chat data found.");
-        setOutChat([]);
-        setlastmsg(null); // Set last message to null if no data found
+        setlastmsg(null);
       }
     };
 
