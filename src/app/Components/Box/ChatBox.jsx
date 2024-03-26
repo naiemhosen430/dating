@@ -7,12 +7,6 @@ import { MineContext } from "@/Context/MineContextProvider";
 export default function ChatBox() {
   const { chats, setChats, data } = useContext(MineContext);
 
-  const [sortBy, setSortBy] = useState("");
-
-  const updateSortBy = (value) => {
-    setSortBy(value);
-  };
-
   if (!data || !chats) {
     return (
       <>
@@ -85,13 +79,7 @@ export default function ChatBox() {
           {chats?.length === 0 ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map((chat) => (
-              <Singlechatbox
-                chat={chat}
-                updateSortBy={updateSortBy}
-                myid={data?._id}
-              />
-            ))
+            chats?.map((chat) => <Singlechatbox chat={chat} myid={data?._id} />)
           )}
         </div>
       </div>

@@ -6,7 +6,7 @@ import { db } from "@/app/firebaseConfig";
 import Link from "next/link";
 import { AiFillLike } from "react-icons/ai";
 
-export default function Singlechatbox({ chat, myid, updateSortBy }) {
+export default function Singlechatbox({ chat, myid }) {
   const [profileInfo, setProfileInfo] = useState(null);
   const [outChat, setOutChat] = useState(null);
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
@@ -54,7 +54,6 @@ export default function Singlechatbox({ chat, myid, updateSortBy }) {
     };
   }, [chat]);
 
-  updateSortBy(lastmsg?.msgtime);
 
   const formattime = (time) => {
     const date = new Date(time);
