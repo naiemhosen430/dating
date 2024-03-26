@@ -8,7 +8,7 @@ import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function page() {
-  const { fetchfriendpostData } = useContext(MineContext);
+  const { fetchfriendpostData, allfriendPost } = useContext(MineContext);
   const { id } = useParams();
   const [profileInfo, setProfileInfo] = useState([]);
   const [interesta, setinteresta] = useState([]);
@@ -27,9 +27,9 @@ export default function page() {
     fatchData();
   }, []);
 
-  useEffect(()=>{
-    fetchfriendpostData(profileInfo?._id)
-  },[profileInfo?._id])
+  useEffect(() => {
+    fetchfriendpostData(profileInfo?._id);
+  }, [profileInfo?._id]);
   return (
     <>
       <div className="p-2">
@@ -76,9 +76,145 @@ export default function page() {
           </div>
 
           {/* post */}
-          <div className="p-10 text-slate-600 text-lg">There is no post</div>
+          {/* post */}
+          <div className="lg:flex space-x-2">
+            <div className="lg:w-7/12">
+              {!allfriendPost ? (
+                <>
+                  <div className="p-2 my-5 loadingbig">
+                    {/* header */}
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2/12 text-center">
+                        <Link
+                          className="w-10 m-auto h-10 loading rounded-full block"
+                          href={""}
+                        ></Link>
+                      </div>
+                      <div className="w-8/12">
+                        <h1 className="text-xl loading text-white font-bold">
+                          <Link href={""}></Link>
+                        </h1>
+                        <h1 className="text-sm loading text-slate-600 font-bold"></h1>
+                      </div>
+                      <div className="w-2/12 loading text-2xl text-center"></div>
+                    </div>
+
+                    {/* content */}
+                    <div className="py-4 text-slate-600">
+                      <p className="py-10 loadingbig"></p>
+                    </div>
+
+                    {/* footer */}
+                    <div className="flex items-center space-x-5">
+                      <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                      <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                    </div>
+                  </div>
+                  <div className="p-2 my-5 loadingbig">
+                    {/* header */}
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2/12 text-center">
+                        <Link
+                          className="w-10 m-auto h-10 loading rounded-full block"
+                          href={""}
+                        ></Link>
+                      </div>
+                      <div className="w-8/12">
+                        <h1 className="text-xl loading text-white font-bold">
+                          <Link href={""}></Link>
+                        </h1>
+                        <h1 className="text-sm loading text-slate-600 font-bold"></h1>
+                      </div>
+                      <div className="w-2/12 loading text-2xl text-center"></div>
+                    </div>
+
+                    {/* content */}
+                    <div className="py-4 text-slate-600">
+                      <p className="py-10 loadingbig"></p>
+                    </div>
+
+                    {/* footer */}
+                    <div className="flex items-center space-x-5">
+                      <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                      <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                    </div>
+                  </div>
+                  <div className="p-2 my-5 loadingbig">
+                    {/* header */}
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2/12 text-center">
+                        <Link
+                          className="w-10 m-auto h-10 loading rounded-full block"
+                          href={""}
+                        ></Link>
+                      </div>
+                      <div className="w-8/12">
+                        <h1 className="text-xl loading text-white font-bold">
+                          <Link href={""}></Link>
+                        </h1>
+                        <h1 className="text-sm loading text-slate-600 font-bold"></h1>
+                      </div>
+                      <div className="w-2/12 loading text-2xl text-center"></div>
+                    </div>
+
+                    {/* content */}
+                    <div className="py-4 text-slate-600">
+                      <p className="py-10 loadingbig"></p>
+                    </div>
+
+                    {/* footer */}
+                    <div className="flex items-center space-x-5">
+                      <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                      <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                    </div>
+                  </div>
+                  <div className="p-2 my-5 loadingbig">
+                    {/* header */}
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2/12 text-center">
+                        <Link
+                          className="w-10 m-auto h-10 loading rounded-full block"
+                          href={""}
+                        ></Link>
+                      </div>
+                      <div className="w-8/12">
+                        <h1 className="text-xl loading text-white font-bold">
+                          <Link href={""}></Link>
+                        </h1>
+                        <h1 className="text-sm loading text-slate-600 font-bold"></h1>
+                      </div>
+                      <div className="w-2/12 loading text-2xl text-center"></div>
+                    </div>
+
+                    {/* content */}
+                    <div className="py-4 text-slate-600">
+                      <p className="py-10 loadingbig"></p>
+                    </div>
+
+                    {/* footer */}
+                    <div className="flex items-center space-x-5">
+                      <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                      <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                    </div>
+                  </div>
+                </>
+              ) : allfriendPost?.length === 0 ? (
+                <h1 className="text-4xl text-white p-5 text-center my-20">
+                  There is no post
+                </h1>
+              ) : (
+                allfriendPost?.map((post) => (
+                  <>
+                    <Post key={post._id} post={post} />
+                  </>
+                ))
+              )}
+            </div>
+            <div className="w-5/12 lg:inline-block hidden">Hello</div>
+          </div>
         </div>
       </div>
+
       <div className="fixed w-full bottom-0">
         <Link
           className="text-xl block w-12/12 m-auto text-center p-2  font-bold text-black bg-slate-400"
