@@ -54,7 +54,6 @@ export default function Singlechatbox({ chat, myid }) {
     };
   }, [chat]);
 
-
   const formattime = (time) => {
     const date = new Date(time);
     const now = new Date();
