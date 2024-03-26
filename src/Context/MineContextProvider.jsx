@@ -43,7 +43,6 @@ const MineContextProvider = ({ children }) => {
     }
   };
 
-  fetchMypostData();
 
   useEffect(() => {
     const fetchData = async () => {
