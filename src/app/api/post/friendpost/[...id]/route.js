@@ -1,13 +1,12 @@
-import getDetaFromToken from "@/helper/getDetaFromToken";
 import Post from "@/models/post.model";
 import { dbconnect } from "@/utils/mongo";
 
 export async function GET(NextRequest) {
   dbconnect();
   try {
-    const myInfo = getDetaFromToken();
+    const id = Request.url.split("friendpost/")[1];
 
-    const postdata = await Post.findOne({ userid: myInfo.id }).sort({
+    const postdata = await Post.findOne({ userid: id }).sort({
       createdAt: 1,
     });
 

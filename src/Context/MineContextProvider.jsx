@@ -15,16 +15,31 @@ const MineContextProvider = ({ children }) => {
   const [myfriendid, setMyfriendid] = useState(null);
   const [allPost, setAllPost] = useState(null);
   const [allMyPost, setAllMyPost] = useState(null);
+  const [allfriendPost, setAllfriendPost] = useState(null);
   const [error, setError] = useState("");
 
   // Fetch website information on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const responseMyData = await axios.get(`/api/post/friendpost`);
+        setAllfriendPost(responseMyData.data.data);
+      } catch (error) {
+        setAllfriendPost("");
+        console.error({ error });
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const responseMyData = await axios.get(`/api/post/mypost`);
         setAllMyPost(responseMyData.data.data);
       } catch (error) {
-        setData("");
+        setAllMyPost("");
         console.error({ error });
       }
     };
@@ -139,6 +154,8 @@ const MineContextProvider = ({ children }) => {
         handleAddPost,
         allMyPost,
         setAllMyPost,
+        allfriendPost,
+        setAllfriendPost,
       }}
     >
       {children}
