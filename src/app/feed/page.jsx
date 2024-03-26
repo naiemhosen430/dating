@@ -14,21 +14,21 @@ export default function page() {
     text: "",
   });
 
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/post`)
-        .then((data) => {
-          setAllPost(data.data.data);
-        })
-        .catch((err) => {
-          setAllPost([]);
-          console.log(err);
-        });
-    };
+  // useEffect(() => {
+  //   const fatchData = async () => {
+  //     await axios
+  //       .get(`/api/post`)
+  //       .then((data) => {
+  //         setAllPost(data.data.data);
+  //       })
+  //       .catch((err) => {
+  //         setAllPost([]);
+  //         console.log(err);
+  //       });
+  //   };
 
-    fatchData();
-  }, []);
+  //   fatchData();
+  // }, []);
 
   return (
     <>
