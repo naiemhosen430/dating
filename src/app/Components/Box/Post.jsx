@@ -136,9 +136,9 @@ export default function Post({ post }) {
             {post?.reactions?.some(
               (reaction) => reaction.userid === data?._id
             ) ? (
-              <CgHeart className="text-white inline-block" />
-            ) : (
               <FaHeart className="text-white inline-block " />
+            ) : (
+              <CgHeart className="text-white inline-block" />
             )}
           </div>
 
