@@ -6,6 +6,13 @@ export async function GET(NextRequest) {
   try {
     const id = Request.url.split("friendpost/")[1];
 
+    if (!id) {
+      return Response.json({
+        statusCode: 498,
+        message: "Unauthorized",
+      });
+    }
+
     const postdata = await Post.findOne({ userid: id }).sort({
       createdAt: 1,
     });

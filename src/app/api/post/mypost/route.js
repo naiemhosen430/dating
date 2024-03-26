@@ -5,7 +5,13 @@ import { dbconnect } from "@/utils/mongo";
 export async function GET(NextRequest) {
   dbconnect();
   try {
-    const myInfo = getDetaFromToken();
+    let myInfo = getDetaFromToken();
+    if (!myInfo) {
+      return Response.json({
+        statusCode: 498,
+        message: "Unauthorized",
+      });
+    }
 
     const postdata = await Post.findOne({ userid: myInfo.id }).sort({
       createdAt: 1,
