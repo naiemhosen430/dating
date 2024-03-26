@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
+import Post from "../Components/Box/Post";
 
 export default function page() {
   const { allMyPost } = useContext(MineContext);
