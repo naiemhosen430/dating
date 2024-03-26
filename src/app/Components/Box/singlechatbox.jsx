@@ -93,7 +93,7 @@ export default function Singlechatbox({ chat, myid }) {
             <h1 className="text-sm px-2">{profileInfo?.name}</h1>
             <h1 className="text-xs px-2 text-red-500">active 11 m ago</h1>
             <h1 className="text-xs px-2 text-red-400 text-right flex">
-              <span className="w-8/12 text-left text-base block">
+              <span className="w-8/12 text-left text-sm block">
                 {lastMessage?.lastmessage}
               </span>
               <span className="text-xs text-right w-4/12 block text-red-500">

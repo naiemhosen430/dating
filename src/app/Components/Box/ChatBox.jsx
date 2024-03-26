@@ -67,7 +67,7 @@ export default function ChatBox() {
                 </h1>
                 <h1 className="text-xs px-2 text-red-500"></h1>
                 <h1 className="text-xs px-2 text-red-400 text-right flex">
-                  <span className="w-8/12 text-left text-base block">
+                  <span className="w-8/12 text-left text-sm block">
                     Hello, need hellp?
                   </span>
                   <span className="text-xs text-right w-4/12 block text-red-500">
