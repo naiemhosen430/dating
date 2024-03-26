@@ -22,8 +22,11 @@ export async function POST(NextRequest) {
 
     await newPost.save();
 
+    const postdata = await Post.find();
+
     return Response.json({
       statusCode: 200,
+      data: postdata,
       message: "Post Added",
     });
   } catch (error) {

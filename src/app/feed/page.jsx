@@ -6,30 +6,12 @@ import ButtonBer from "../Components/Shared/ButtonBer";
 import Link from "next/link";
 import { IoMdAdd } from "react-icons/io";
 import { MineContext } from "@/Context/MineContext";
-import axios from "axios";
 
 export default function page() {
-  const { data } = useContext(MineContext);
-  const [allPost, setAllPost] = useState(null);
+  const { allPost } = useContext(MineContext);
   const [text, setText] = useState({
     text: "",
   });
-
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/post`)
-        .then((data) => {
-          setAllPost(data.data.data);
-        })
-        .catch((err) => {
-          setAllPost([]);
-          console.log(err);
-        });
-    };
-
-    fatchData();
-  }, []);
 
   return (
     <>

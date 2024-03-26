@@ -23,8 +23,10 @@ export async function POST(Request) {
     );
 
     const postdata = await Post.findOne({ _id: id });
+    const alldata = await Post.find();
 
     return Response.json({
+      alldata,
       data: postdata,
       message: "Succes unlike",
       statusCode: 200,
@@ -47,9 +49,11 @@ export async function POST(Request) {
   );
 
   const postdata = await Post.findOne({ _id: id });
+  const alldata = await Post.find();
 
   return Response.json({
     data: postdata,
+    alldata,
     message: "Your reaction has been added to this post.",
     statusCode: 200,
   });

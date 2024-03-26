@@ -92,6 +92,7 @@ export default function RootLayout({ children }) {
               profileInfo,
               setMyfriendid,
               allPost,
+              setAllPost,
             }}
           >
             {children}

@@ -10,7 +10,7 @@ import { FaHeart } from "react-icons/fa";
 import { MineContext } from "@/Context/MineContext";
 
 export default function page() {
-  const { data } = useContext(MineContext);
+  const { data, setAllPost } = useContext(MineContext);
   const { id } = useParams();
   const [postInfo, setPostInfo] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -91,6 +91,7 @@ export default function page() {
       const data = await axios.post(`/api/post/like/${postInfo?._id}`);
 
       setPostInfo(data.data.data);
+      setAllPost(data.data.alldata);
     } catch (error) {
       console.error(error);
     }
@@ -101,8 +102,8 @@ export default function page() {
       const data = await axios.post(`/api/post/comment/${postInfo?._id}`, {
         message: commentText,
       });
-
       setCommentText("");
+      setAllPost(data.data.alldata);
 
       setPostInfo(data.data.data);
     } catch (error) {

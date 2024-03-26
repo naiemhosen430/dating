@@ -9,8 +9,7 @@ import { MdHelp } from "react-icons/md";
 
 export default function Post({ post }) {
   const [profileInfo, setProfileInfo] = useState(null);
-  const [postInfo, setPostInfo] = useState(null);
-  const { data } = useContext(MineContext);
+  const { data, setAllPost } = useContext(MineContext);
 
   useEffect(() => {
     const fatchData = async () => {
@@ -77,7 +76,7 @@ export default function Post({ post }) {
     try {
       const data = await axios.post(`/api/post/like/${post?._id}`);
 
-      setPostInfo(data.data.data);
+      setAllPost(data.data.alldata);
     } catch (error) {
       console.error(error);
     }

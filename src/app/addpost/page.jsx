@@ -1,12 +1,14 @@
 "use client";
+import { MineContext } from "@/Context/MineContext";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 
 export default function page() {
+  const { setAllPost } = useContext(MineContext);
   const router = useRouter();
   const [postContent, setPostContent] = useState("");
   const [error, setError] = useState("");
@@ -80,6 +82,8 @@ export default function page() {
         bgcolor: "",
         textcolor: "",
       });
+
+      setAllPost(response?.data.data);
 
       if (response?.data.statusCode === 200) {
         router.push("/feed");
