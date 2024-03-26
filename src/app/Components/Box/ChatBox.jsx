@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Singlechatbox from "./singlechatbox";
-import { MineContext } from "@/Context/MineContext";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function ChatBox() {
   const { chats, setChats, data } = useContext(MineContext);

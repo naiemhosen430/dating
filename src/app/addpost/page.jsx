@@ -1,19 +1,17 @@
 "use client";
-import { MineContext } from "@/Context/MineContext";
-import axios from "axios";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
+import Link from "next/link";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function page() {
-  const { setAllPost } = useContext(MineContext);
-  const router = useRouter();
+  const { handleAddPost } = useContext(MineContext);
+
   const [postContent, setPostContent] = useState("");
   const [error, setError] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [interestOption, setInterestOption] = useState([
+  const [interestOption] = useState([
     "Anime",
     "BTS",
     "Horror-Movies",
@@ -58,42 +56,20 @@ export default function page() {
     "Culinary",
   ]);
 
-  // for interest
+  // Function to handle adding a new post
+  const handleSubmit = () => {
+    handleAddPost(postContent, selectedOptions);
+    // Reset input fields after submitting
+    setPostContent("");
+    setSelectedOptions([]);
+  };
+
+  // Function to handle checkbox change
   const handleCheckboxChange = (option) => {
     if (selectedOptions.includes(option)) {
       setSelectedOptions(selectedOptions.filter((item) => item !== option));
     } else {
-      -+setSelectedOptions([...selectedOptions, option]);
-    }
-  };
-
-  const handleAddPost = async () => {
-    try {
-      if (!postContent.trim()) {
-        setError("Post content is required");
-        return;
-      }
-
-      const response = await axios.post("/api/post/add", {
-        content: postContent,
-        tags: selectedOptions,
-        hidefrom: [],
-        mentions: [],
-        bgcolor: "",
-        textcolor: "",
-      });
-
-      setAllPost(response?.data.data);
-
-      if (response?.data.statusCode === 200) {
-        router.push("/feed");
-        console.log("Post added successfully!");
-      } else {
-        setError("Failed to add post");
-      }
-    } catch (error) {
-      console.error("Error adding post:", error);
-      setError("Failed to add post");
+      setSelectedOptions([...selectedOptions, option]);
     }
   };
 
@@ -159,7 +135,7 @@ export default function page() {
         <div className="py-3 fixed bottom-5 bg-black w-full text-center">
           <button
             className="p-2 px-5 text-white inline-block rounded-lg bg-slate-400 font-bold"
-            onClick={handleAddPost}
+            onClick={handleAddPostClient}
           >
             Add Post
           </button>

@@ -1,5 +1,5 @@
 "use client";
-import { MineContext } from "@/Context/MineContext";
+import { MineContext } from "@/Context/MineContextProvider";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState, useEffect, useContext } from "react";

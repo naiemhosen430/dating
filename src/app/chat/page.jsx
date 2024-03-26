@@ -4,7 +4,7 @@ import RecentlyBox from "../Components/Box/RecentlyBox";
 import InterestBox from "../Components/Box/InterestBox";
 import ChatBox from "../Components/Box/ChatBox";
 import ButtonBer from "../Components/Shared/ButtonBer";
-import { MineContext } from "@/Context/MineContext";
+import { MineContext } from "@/Context/MineContextProvider";
 import Link from "next/link";
 
 export default function page() {

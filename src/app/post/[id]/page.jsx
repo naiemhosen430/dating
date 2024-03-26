@@ -7,7 +7,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft, CgComment, CgHeart } from "react-icons/cg";
 import { MdHelp } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
-import { MineContext } from "@/Context/MineContext";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function page() {
   const { data, setAllPost } = useContext(MineContext);

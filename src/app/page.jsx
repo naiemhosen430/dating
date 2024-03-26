@@ -8,7 +8,7 @@ import { FaMale } from "react-icons/fa";
 import { FaFemale } from "react-icons/fa";
 
 import { FaPowerOff } from "react-icons/fa6";
-import { MineContext } from "@/Context/MineContext";
+import { MineContext } from "@/Context/MineContextProvider";
 import {
   push,
   ref,
