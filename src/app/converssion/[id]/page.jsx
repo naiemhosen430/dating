@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { MdHelp, MdSend } from "react-icons/md";
 import { AiFillLike } from "react-icons/ai";
@@ -8,8 +8,10 @@ import Link from "next/link";
 import { db } from "@/app/firebaseConfig";
 import { ref, get, set, push, off } from "firebase/database";
 import { usePathname } from "next/navigation";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function Page() {
+  const { setPandingMsg } = useContext(MineContext);
   const [me, setMe] = useState(null);
   const [msgdata, setMsgData] = useState(null);
   const [friend, setFriend] = useState(null);
@@ -47,6 +49,7 @@ export default function Page() {
             const chatObj = snapshot.val();
             const chatArr = Object.values(chatObj);
             setChatData(chatArr);
+            setPandingMsg(chatArr.length)
           } else {
             console.log("No chat data found.");
             setChatData([]);
