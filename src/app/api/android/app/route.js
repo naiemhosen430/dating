@@ -1,25 +1,23 @@
 import fs from 'fs';
 import path from 'path';
 
-export default async function handler(req, res) {
-  if (req.method !== 'GET' && req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed', statusCode: 405 });
-  }
-
+export async function getHandler(req, res) {
   const filePath = path.join(process.cwd(), 'src', 'app', 'assets', 'zane.apk');
 
-  // Check if the file exists
   if (!fs.existsSync(filePath)) {
     return res.status(404).json({ message: 'File not found', statusCode: 404 });
   }
 
-  // Set headers for file download
-  res.setHeader('Content-Disposition', 'attachment; filename="zane.apk"');
-  res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+  try {
+    const fileContent = fs.readFileSync(filePath);
 
-  // Read the file and serve it
-  fs.createReadStream(filePath).pipe(res);
+    res.setHeader('Content-Disposition', 'attachment; filename="zane.apk"');
+    res.setHeader('Content-Type', 'application/vnd.android.package-archive');
 
-  // Return success message
-  return res.status(200).json({ message: 'Download successful', statusCode: 200 });
+    res.send(fileContent);
+
+  } catch (error) {
+    console.error('Error occurred while serving file:', error);
+    return res.status(500).json({ message: 'Internal Server Error', statusCode: 500 });
+  }
 }

@@ -31,7 +31,7 @@ export default function page() {
             id="text"
             onChange={(event) => {
               setText({
-                ...text, // Corrected from ...userInfo to ...text
+                ...text, 
                 [event.target.name]: event.target.value,
               });
             }}
