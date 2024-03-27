@@ -1,14 +1,16 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ref, onValue, off } from "firebase/database";
 import { db } from "@/app/firebaseConfig";
 import Link from "next/link";
 import { AiFillLike } from "react-icons/ai";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function Singlechatbox({ chat, myid }) {
+  const { pandingMsg } = useContext(MineContext);
   const [profileInfo, setProfileInfo] = useState(null);
-  const [pandingMsg,setPandingMsg]=useState(0)
+  const [pandingMsgShow,setPandingMsgShow]=useState(0)
   const myfriendid = chat?.chatids.filter((item) => item !== myid);
   const [lastmsg, setlastmsg] = useState(null);
 
@@ -39,6 +41,7 @@ export default function Singlechatbox({ chat, myid }) {
       if (snapshot.exists()) {
         const chatObj = snapshot.val();
         const chatArr = Object.values(chatObj);
+        setPandingMsgShow(chatArr.length - pandingMsgShow)
         setlastmsg(chatArr[chatArr.length - 1]);
       } else {
         console.log("No chat data found.");
@@ -117,7 +120,7 @@ export default function Singlechatbox({ chat, myid }) {
             <h1 className="text-sm px-2">{profileInfo?.name}</h1>
             <h1 className="text-xs px-2 text-red-500">active 11 m ago</h1>
             <h1 className="text-xs px-2 text-red-400 text-right flex">
-              <span className="text-xs text-white">{pandingMsg === 0 ? "" : pandingMsg}</span>
+              <span className="text-xs text-white">{pandingMsgShow === 0 ? "" : pandingMsgShow}</span>
               <span className="w-8/12 text-left text-xs block">
                 {lastmsg?.id === myid && (
                   <span className="px-1 text-red-400 text-xs">You:</span>

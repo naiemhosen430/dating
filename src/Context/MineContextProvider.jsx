@@ -16,6 +16,7 @@ const MineContextProvider = ({ children }) => {
   const [allPost, setAllPost] = useState(null);
   const [allMyPost, setAllMyPost] = useState(null);
   const [allfriendPost, setAllfriendPost] = useState(null);
+  const [pandingMsg, setPandingMsg] = useState(null);
   const [error, setError] = useState("");
 
   // Fetch website information on component mount
@@ -150,6 +151,8 @@ const MineContextProvider = ({ children }) => {
         setAllfriendPost,
         fetchMypostData,
         fetchfriendpostData,
+        pandingMsg, 
+        setPandingMsg
       }}
     >
       {children}
