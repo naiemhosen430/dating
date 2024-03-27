@@ -41,7 +41,7 @@ export default function Singlechatbox({ chat, myid }) {
       if (snapshot.exists()) {
         const chatObj = snapshot.val();
         const chatArr = Object.values(chatObj);
-        setPandingMsgShow(chatArr.length - pandingMsgShow)
+        setPandingMsgShow(chatArr.length - pandingMsg)
         setlastmsg(chatArr[chatArr.length - 1]);
       } else {
         console.log("No chat data found.");
