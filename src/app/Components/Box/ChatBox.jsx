@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Singlechatbox from "./singlechatbox";
 import { MineContext } from "@/Context/MineContextProvider";
+import { useLongPress } from "react-use";
 
 export default function ChatBox() {
   const { chats, setChats, data } = useContext(MineContext);
@@ -32,6 +33,11 @@ export default function ChatBox() {
     );
   }
 
+  const handleLongPress = () => {
+    // Add your long press event logic here
+    alert("Long press detected!");
+  };
+  const longPressEvent = useLongPress(handleLongPress, { delay: 1000 }); 
   return (
     <>
       <div className="w-full rounded-2xl">
@@ -80,7 +86,7 @@ export default function ChatBox() {
           {chats?.length === 0 ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map((chat) => <Singlechatbox chat={chat} myid={data?._id} />)
+            chats?.map((chat) => <Singlechatbox chat={chat} {...longPressEvent} myid={data?._id} />)
           )}
         </div>
       </div>
