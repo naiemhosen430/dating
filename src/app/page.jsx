@@ -256,7 +256,7 @@ export default function Home() {
         </div>
         <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
           <div className="h-screen w-screen">
-            <div className="flex justify-center">
+            <div className="flex fixed z-30 justify-center">
               <textarea
                 className="p-2 text-sm font-bold disabled custom-windo-height-text block bg-slate-800 w-5/12 rounded-lg border m-2"
                 value={friendmessage.mymessage}
@@ -270,7 +270,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="fixed bottom-5 w-full">
+            <div className="fixed z-20 bottom-5 w-full">
               <div className="flex justify-center">
                 <div className="w-6/12 text-center">
                   {newFriend?.gender === "male" ? (
