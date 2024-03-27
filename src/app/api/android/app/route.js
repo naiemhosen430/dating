@@ -2,6 +2,10 @@ import fs from 'fs';
 import path from 'path';
 
 export default async function handler(req, res) {
+  if (req.method !== 'GET' && req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed', statusCode: 405 });
+  }
+
   const filePath = path.join(process.cwd(), 'src', 'app', 'assets', 'zane.apk');
 
   // Check if the file exists
