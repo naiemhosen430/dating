@@ -83,7 +83,7 @@ export default function Post({ post }) {
   };
   return (
     <>
-      <div className="p-0">
+      <div className="p-0 my-2">
         {/* header */}
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
@@ -96,12 +96,12 @@ export default function Post({ post }) {
             </Link>
           </div>
           <div className="w-8/12">
-            <h1 className="text-xl text-white font-bold">
+            <h1 className="text-sm text-white font-bold">
               <Link href={`/profile/${profileInfo._id}`}>
                 {profileInfo.name}
               </Link>
             </h1>
-            <h1 className="text-sm text-slate-600 font-bold">
+            <h1 className="text-xs text-slate-600 font-bold">
               {formattedDate}
             </h1>
           </div>

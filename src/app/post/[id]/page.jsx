@@ -148,10 +148,10 @@ export default function page() {
             </Link>
           </div>
           <div className="w-8/12">
-            <h1 className="text-xl text-white font-bold">
+            <h1 className="text-sm text-white font-bold">
               <Link href={`/profile/${profile._id}`}>{profile.name}</Link>
             </h1>
-            <h1 className="text-sm text-slate-600 font-bold">
+            <h1 className="text-xs text-slate-600 font-bold">
               {formattedDate}
             </h1>
           </div>
