@@ -220,7 +220,7 @@ export default function page() {
             onClick={sendComment}
             className="p-2 rounded-r-2xl bg-slate-950 text-slate-400 w-2/12"
           >
-            {commentText ? Send : <FaHeart />}
+            {commentText ? "Send" : <FaHeart />}
           </button>
         </div>
       </div>
