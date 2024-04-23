@@ -204,7 +204,6 @@ export default function page() {
               <CommentBox comment={singleComment} />
             ))
           )}
-          {/* h */}
         </div>
 
         {/* Comment Input */}

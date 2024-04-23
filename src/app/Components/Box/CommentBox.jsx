@@ -74,7 +74,7 @@ export default function CommentBox({ comment }) {
             </p>
           </div>
         </div>
-        <h6 className="text-slate-500 p-2text-xs">{formattedDate}</h6>
+        <h6 className="text-slate-500 p-2 text-xs">{formattedDate}</h6>
       </div>
     </>
   );
