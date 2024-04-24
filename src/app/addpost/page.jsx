@@ -2,14 +2,13 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { CgArrowLeft } from "react-icons/cg";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { MineContext } from "@/Context/MineContextProvider";
 
 export default function page() {
-  const { handleAddPost } = useContext(MineContext);
+  const { handleAddPost, error, setError } = useContext(MineContext);
 
-  const [postContent, setPostContent] = useState("");
-  const [error, setError] = useState("");
+  const [postContent, setPostContent] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [interestOption] = useState([
     "Anime",
@@ -58,10 +57,14 @@ export default function page() {
 
   // Function to handle adding a new post
   const handleAddPostClient = () => {
-    handleAddPost(postContent, selectedOptions);
-    // Reset input fields after submitting
-    setPostContent("");
-    setSelectedOptions([]);
+    if (postContent && selectedOptions?.length !== 0) {
+      handleAddPost(postContent, selectedOptions);
+      // Reset input fields after submitting
+      setPostContent("");
+      setSelectedOptions([]);
+    } else {
+      setError("All field required!");
+    }
   };
 
   // Function to handle checkbox change
@@ -85,7 +88,7 @@ export default function page() {
           <Link href={""}>Share Moment</Link>
         </div>
         <div className="w-4/12 text-right">
-          <MdHelp className="inline-block" />
+          <BsThreeDotsVertical className="inline-block" />
         </div>
       </div>
 
@@ -102,7 +105,6 @@ export default function page() {
             value={postContent}
             onChange={(e) => {
               setPostContent(e.target.value);
-              setError("");
             }}
             cols="30"
             rows="6"

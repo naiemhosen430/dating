@@ -5,29 +5,14 @@ import Link from "next/link";
 import React, { useState, useEffect, useContext } from "react";
 import { CgComment, CgHeart } from "react-icons/cg";
 import { FaHeart } from "react-icons/fa";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import Avater from "./Avater";
 
 export default function Post({ post }) {
-  const [profileInfo, setProfileInfo] = useState(null);
-  const { data, setAllPost } = useContext(MineContext);
+  const { data, setAllPost, allPost, lilLoader, setLilLoader } =
+    useContext(MineContext);
 
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/profile/${post?.userid}`)
-        .then((data) => {
-          setProfileInfo(data.data.data);
-        })
-        .catch((err) => {
-          setProfileInfo("none");
-          console.log(err);
-        });
-    };
-
-    fatchData();
-  }, [post?.userid]);
-
-  if (!profileInfo || !data) {
+  if (!data || !post) {
     return (
       <>
         <div className="p-2 my-10 loadingbig">
@@ -40,7 +25,7 @@ export default function Post({ post }) {
               ></Link>
             </div>
             <div className="w-8/12">
-              <h1 className="text-xl loading text-white font-bold">
+              <h1 className="text-sm loading text-white font-bold">
                 <Link href={""}></Link>
               </h1>
               <h1 className="text-sm loading text-slate-600 font-bold"></h1>
@@ -55,8 +40,8 @@ export default function Post({ post }) {
 
           {/* footer */}
           <div className="flex items-center space-x-5">
-            <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
-            <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+            <div className="w-6/12 text-sm loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+            <div className="w-6/12 loading text-sm cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
           </div>
         </div>
       </>
@@ -73,10 +58,25 @@ export default function Post({ post }) {
   const formattedDate = `${year}-${month}-${day}`;
 
   const hundleLike = async () => {
+    setLilLoader(true);
     try {
       const data = await axios.post(`/api/post/like/${post?._id}`);
+      const updatedPost = data?.data?.data;
+      const profile = post?.profile;
 
-      setAllPost(data.data.alldata);
+      const newUpdatedPost = {
+        ...updatedPost,
+        profile,
+      };
+
+      const updatedPosts = allPost.map((postItem) => {
+        if (postItem._id === newUpdatedPost._id) {
+          return newUpdatedPost;
+        }
+        return postItem;
+      });
+
+      setAllPost(updatedPosts);
     } catch (error) {
       console.error(error);
     }
@@ -87,18 +87,28 @@ export default function Post({ post }) {
         {/* header */}
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
-            <Link href={`/profile/${profileInfo._id}`}>
-              <img
+            <Link href={`/profile/${post?.profile?._id}`}>
+              <div className="w-10 m-auto h-10 rounded-full block">
+                <Avater text={post?.profile?.name} />
+              </div>
+              {/* <img
                 className="w-10 m-auto h-10 rounded-full block"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhHGR8bTVzFRi4LjAKEbCXe3Nm7wSxh3H3g&usqp=CAU"
                 alt=""
-              />
+              /> */}
             </Link>
           </div>
           <div className="w-8/12">
             <h1 className="text-sm text-white font-bold">
-              <Link href={`/profile/${profileInfo._id}`}>
-                {profileInfo.name}
+              <Link href={`/profile/${post?.profile?._id}`}>
+                {post?.profile?.name}
+                {post?.profile?._id === "65fd48a78af4b8a1e16a7b1d" ? (
+                  <span className="px-2 text-xs text-slate-800">
+                    (Zane official)
+                  </span>
+                ) : (
+                  ""
+                )}
               </Link>
             </h1>
             <h1 className="text-xs text-slate-600 font-bold">
@@ -106,7 +116,7 @@ export default function Post({ post }) {
             </h1>
           </div>
           <div className="w-2/12 text-2xl text-center">
-            <MdHelp className="inline-block" />
+            <BsThreeDotsVertical className="inline-block" />
           </div>
         </div>
 
@@ -125,7 +135,7 @@ export default function Post({ post }) {
         <div className="flex items-center space-x-5">
           <div
             onClick={hundleLike}
-            className={`w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
+            className={`w-6/12 flex justify-center items-center text-sm cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
               post?.reactions?.some((reaction) => reaction.userid === data?._id)
                 ? "bg-red-500"
                 : ""
@@ -145,7 +155,7 @@ export default function Post({ post }) {
             className="w-6/12 text-center bg-slate-950 p-1 rounded-xl"
             href={`/post/${post?._id}`}
           >
-            <div className="text-xl flex justify-center items-center cursor-pointer">
+            <div className="text-sm flex justify-center items-center cursor-pointer">
               <span className="px-4 text-lg">{post?.comments?.length}</span>
               <CgComment className="inline-block" />
             </div>

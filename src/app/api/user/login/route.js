@@ -46,9 +46,8 @@ export async function POST(NextRequest) {
 
     return Response.json({
       statusCode: 200,
-      data: token,
+      token,
+      data: checkUser,
     });
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }

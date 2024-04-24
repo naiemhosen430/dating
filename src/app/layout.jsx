@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-screen overflow-hidden">
+        <div className="w-screen bg-black overflow-hidden">
           <MineContextProvider>{children}</MineContextProvider>
         </div>
       </body>

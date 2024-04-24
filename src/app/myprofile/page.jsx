@@ -4,34 +4,16 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import Post from "../Components/Box/Post";
 
 export default function page() {
-  const { allMyPost, fetchMypostData } = useContext(MineContext);
-  const [profileInfo, setProfileInfo] = useState([]);
-  const [interesta, setinteresta] = useState([]);
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get("/api/me")
-        .then((data) => {
-          setProfileInfo(data.data.data);
-          setinteresta(data.data.data.interest);
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    fatchData();
-  }, []);
+  const { fetchfriendpostData, allfriendPost, data } = useContext(MineContext);
 
-  useEffect(() => {
-    fetchMypostData();
-  }, []);
+  if (data?._id) {
+    fetchfriendpostData(data?._id);
+  }
 
-  console.log(allMyPost);
   return (
     <>
       <div className="p-2">
@@ -43,7 +25,7 @@ export default function page() {
             </Link>
           </div>
           <div className="w-6/12 text-right">
-            <MdHelp className="inline-block" />
+            <BsThreeDotsVertical className="inline-block" />
           </div>
         </div>
 
@@ -54,20 +36,18 @@ export default function page() {
             src="https://t4.ftcdn.net/jpg/01/97/15/87/360_F_197158744_1NBB1dEAHV2j9xETSUClYqZo7SEadToU.jpg"
             alt=""
           />
-          <h1 className="text-xl font-bold p-1 text-white">
-            {profileInfo.name}
-          </h1>
+          <h1 className="text-xl font-bold p-1 text-white">{data?.name}</h1>
           <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-            <span className="inline-block">{profileInfo.age} / </span>
-            <span className="inline-block"> {profileInfo.gender}</span>
+            <span className="inline-block">{data?.age} / </span>
+            <span className="inline-block"> {data?.gender}</span>
           </div>
           <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
-            <span className="inline-block">{profileInfo.country}</span>
+            <span className="inline-block">{data?.country}</span>
           </div>
 
           {/* tag */}
           <div className="w-10/12 space-x-2 space-y-2 py-5 lg:6/12 m-auto">
-            {interesta.map((i) => (
+            {data?.interesta?.map((i) => (
               <span
                 key={i}
                 className="inline-block p-1 text-xs px-3 rounded-2xl bg-slate-800"
@@ -80,7 +60,7 @@ export default function page() {
           {/* post */}
           <div className="lg:flex space-x-2">
             <div className="lg:w-7/12">
-              {!allMyPost ? (
+              {!allfriendPost ? (
                 <>
                   <div className="p-2 my-5 loadingbig">
                     {/* header */}
@@ -199,12 +179,12 @@ export default function page() {
                     </div>
                   </div>
                 </>
-              ) : allMyPost?.length === 0 ? (
-                <h1 className="text-4xl text-white p-5 text-center my-20">
-                  There is no post
+              ) : allfriendPost?.length === 0 ? (
+                <h1 className="text-sm text-white p-5 text-center my-20">
+                  You don't have post
                 </h1>
               ) : (
-                allMyPost?.map((post) => (
+                allfriendPost?.reverse().map((post) => (
                   <>
                     <Post key={post._id} post={post} />
                   </>

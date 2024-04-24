@@ -1,15 +1,14 @@
 "use client";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import Singlechatbox from "./singlechatbox";
 import { MineContext } from "@/Context/MineContextProvider";
-import { useLongPress } from "react-use";
 
 export default function ChatBox() {
   const { chats, setChats, data } = useContext(MineContext);
+  const friendChat = chats?.filter((chat) => chat.type === "friend");
 
-  if (!data || !chats) {
+  if (!data || !friendChat || !chats) {
     return (
       <>
         <div className="w-full rounded-2xl">
@@ -20,27 +19,16 @@ export default function ChatBox() {
             </Link>
           </h1>
           <div className="space-y-2">
-            {chats?.length === 0 ? (
-              <h1 className="py-10 text-center">No chats found</h1>
-            ) : (
-              chats?.map((chat) => (
-                <Singlechatbox chat={chat} myid={data?._id} />
-              ))
-            )}
+            <h1 className="py-10 text-center">No chats found</h1>
           </div>
         </div>
       </>
     );
   }
 
-  const handleLongPress = () => {
-    // Add your long press event logic here
-    alert("Long press detected!");
-  };
-  const longPressEvent = useLongPress(handleLongPress, { delay: 1000 }); 
   return (
     <>
-      <div className="w-full rounded-2xl">
+      <div className="w-full rounded-2xl pb-40">
         <h1 className="text-slate-500 p-1 px-2 flex items-center">
           <span className="block w-6/12">Friend and chat</span>
           <Link className="block w-6/12 text-right text-slate-600" href="">
@@ -48,7 +36,7 @@ export default function ChatBox() {
           </Link>
         </h1>
         <div className="space-y-2">
-          <div className="flex items-center justify-center p-2 px-1">
+          {/* <div className="flex items-center justify-center p-2 px-1">
             <div className="w-2/12 flex items-center rounded-full pb-1">
               <Link
                 className="block"
@@ -82,11 +70,20 @@ export default function ChatBox() {
                 </h1>
               </Link>
             </div>
-          </div>
-          {chats?.length === 0 ? (
+          </div> */}
+          {friendChat?.length === 0 || !friendChat ? (
             <h1 className="py-10 text-center">No chats found</h1>
           ) : (
-            chats?.map((chat) => <Singlechatbox chat={chat} {...longPressEvent} myid={data?._id} />)
+            friendChat
+              ?.slice()
+              ?.sort((a, b) => {
+                const lastMsgTimeA =
+                  a.chatArr?.[a.chatArr.length - 1]?.msgtime || 0;
+                const lastMsgTimeB =
+                  b.chatArr?.[b.chatArr.length - 1]?.msgtime || 0;
+                return lastMsgTimeB - lastMsgTimeA;
+              })
+              ?.map((chat) => <Singlechatbox chat={chat} myid={data?._id} />)
           )}
         </div>
       </div>

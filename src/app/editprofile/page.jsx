@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { useRouter } from "next/navigation";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 export default function page() {
   const router = useRouter();
@@ -32,9 +32,7 @@ export default function page() {
           });
           setSelectedOptions(data.data.data.interest);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fatchData();
   }, []);
@@ -134,12 +132,8 @@ export default function page() {
               seterrmessage(data.data.message);
             }
           })
-          .catch((error) => {
-            console.log(error);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+          .catch((error) => {});
+      } catch (error) {}
     } else {
       seterrmessage("Choose interest!");
     }
@@ -155,7 +149,7 @@ export default function page() {
           </Link>
         </div>
         <div className="w-6/12 text-right">
-          <MdHelp className="inline-block" />
+          <BsThreeDotsVertical className="inline-block" />
         </div>
       </div>
       <h1 className="text-slate-600 text-sm bg-slate-900 text-center ">
@@ -269,7 +263,7 @@ export default function page() {
             onClick={editProfile}
             className="block p-2 px-4 w-full bg-slate-600 my-2 text-black font-bold rounded-md"
           >
-            Next
+            Update Profile
           </button>
         </div>
       </div>

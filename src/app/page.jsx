@@ -6,6 +6,8 @@ import { IoClose } from "react-icons/io5";
 import { GiBarStool } from "react-icons/gi";
 import { FaMale } from "react-icons/fa";
 import { FaFemale } from "react-icons/fa";
+import Image from "next/image";
+import zane from "@/app/assets/zane.jpg";
 
 import { FaPowerOff } from "react-icons/fa6";
 import { MineContext } from "@/Context/MineContextProvider";
@@ -27,17 +29,28 @@ export default function Home() {
   if (!data) {
     return (
       <>
-        <Menu />
-        <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
+        <div className="h-screen w-screen flex bg-[#275973] justify-center items-center">
           {/* Content when meeting each other or looking for others */}
-          <div className="h-screen w-screen cursor-pointer">
-            <div className="p-5 text-2xl font-bold custom-windo-height bg-slate-800 w-9/12 lg:w-4/12 rounded-lg border m-auto">
-              <h1> loading....</h1>
-              <p className="text-sm text-slate-500 p-4"></p>
+          <div className="w-6/12 lg:w-3/12 m-auto">
+            <Image
+              src={zane}
+              width={500}
+              layout="responsive"
+              height={500}
+              alt="Zane"
+            />
+
+            <div className="flex justify-center mt-8">
+              <div className="flex">
+                <div className="dot bg-white" />
+                <div className="dot animate-delay-100 bg-white" />
+                <div className="dot animate-delay-200 bg-white" />
+                <div className="dot animate-delay-300 bg-white" />
+                <div className="dot animate-delay-400 bg-white" />
+              </div>
             </div>
           </div>
         </div>
-        <ButtonBer />
       </>
     );
   }
@@ -121,7 +134,6 @@ export default function Home() {
   const searchPeople = async () => {
     const searchingRef = ref(db, "searching/");
     try {
-      // Set your ID directly under the "searching" directory
       await set(child(searchingRef, data?._id), data?._id);
     } catch (error) {
       console.error("Error setting data to searching:", error.message);
@@ -159,14 +171,9 @@ export default function Home() {
     const fatchData = async () => {
       if (newFriendId) {
         await axios.post(`/api/chat/${newFriendId}`);
-        await axios
-          .get(`/api/profile/${newFriendId}`)
-          .then((data) => {
-            setNewFriend(data.data.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        await axios.get(`/api/profile/${newFriendId}`).then((data) => {
+          setNewFriend(data.data.data);
+        });
       }
     };
     fatchData();
@@ -375,7 +382,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <ButtonBer /> {/* Render the ButtonBer component */}
+          <ButtonBer />
         </>
       )}
     </>

@@ -27,10 +27,8 @@ export async function POST(Request) {
   );
 
   const postdata = await Post.findOne({ _id: id });
-  const alldata = await Post.find();
 
   return Response.json({
-    alldata,
     data: postdata,
     message: "success",
     statusCode: 200,

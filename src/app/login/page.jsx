@@ -1,11 +1,13 @@
 "use client";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function page() {
+  const { setData } = useContext(MineContext);
   const router = useRouter();
   const [interestOption, setInterestOption] = useState([
     "Anime",
@@ -109,12 +111,8 @@ export default function page() {
             }
             setNameBox(false);
           })
-          .catch((error) => {
-            console.log(error);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+          .catch((error) => {});
+      } catch (error) {}
     } else {
       seterrmessage("Email is required!");
     }
@@ -180,12 +178,8 @@ export default function page() {
               seterrmessage(data.data.message);
             }
           })
-          .catch((error) => {
-            console.log(error);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+          .catch((error) => {});
+      } catch (error) {}
     } else {
       seterrmessage("Choose interest!");
     }
@@ -200,18 +194,15 @@ export default function page() {
         .post("/api/user/login", loginuserInfo)
         .then((data) => {
           if (data.data.statusCode === 200) {
-            Cookies.set("accesstoken", data.data.data, { expires: 36500 });
+            Cookies.set("accesstoken", data.data.token, { expires: 36500 });
+            setData(data?.data?.data);
             router.push("/");
           } else {
             seterrmessage(data.data.message);
           }
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+        .catch((error) => {});
+    } catch (error) {}
   };
 
   // for interest
@@ -276,12 +267,8 @@ export default function page() {
           }
           setNameBox(false);
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+        .catch((error) => {});
+    } catch (error) {}
   };
 
   return (

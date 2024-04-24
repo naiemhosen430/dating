@@ -1,11 +1,12 @@
 "use client";
 import { MineContext } from "@/Context/MineContextProvider";
+import Post from "@/app/Components/Box/Post";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 export default function page() {
   const { fetchfriendpostData, allfriendPost } = useContext(MineContext);
@@ -20,16 +21,15 @@ export default function page() {
           setProfileInfo(data.data.data);
           setinteresta(data.data.data.interest);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fatchData();
   }, []);
 
-  useEffect(() => {
+  if (profileInfo?._id) {
     fetchfriendpostData(profileInfo?._id);
-  }, [profileInfo?._id]);
+  }
+
   return (
     <>
       <div className="p-2">
@@ -41,7 +41,7 @@ export default function page() {
             </Link>
           </div>
           <div className="w-6/12 text-right">
-            <MdHelp className="inline-block" />
+            <BsThreeDotsVertical className="inline-block" />
           </div>
         </div>
 
@@ -199,11 +199,11 @@ export default function page() {
                   </div>
                 </>
               ) : allfriendPost?.length === 0 ? (
-                <h1 className="text-4xl text-white p-5 text-center my-20">
+                <h1 className="text-sm text-white p-5 text-center my-20">
                   There is no post
                 </h1>
               ) : (
-                allfriendPost?.map((post) => (
+                allfriendPost?.reverse().map((post) => (
                   <>
                     <Post key={post._id} post={post} />
                   </>
@@ -217,7 +217,7 @@ export default function page() {
 
       <div className="fixed w-full bottom-0">
         <Link
-          className="text-xl block w-12/12 m-auto text-center p-2  font-bold text-black bg-slate-400"
+          className="text-lg block w-12/12 m-auto text-center p-2  font-bold text-black bg-slate-400"
           href={`/converssion/${profileInfo?._id}`}
         >
           Talk with {profileInfo?.name}

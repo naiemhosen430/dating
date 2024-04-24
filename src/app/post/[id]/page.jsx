@@ -5,47 +5,19 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft, CgComment, CgHeart } from "react-icons/cg";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { MineContext } from "@/Context/MineContextProvider";
+import Avater from "@/app/Components/Box/Avater";
 
 export default function page() {
-  const { data, setAllPost } = useContext(MineContext);
+  const { data, setAllPost, allPost } = useContext(MineContext);
   const { id } = useParams();
-  const [postInfo, setPostInfo] = useState(null);
-  const [profile, setProfile] = useState(null);
   const [commentText, setCommentText] = useState("");
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/post/${id}`)
-        .then((data) => {
-          setPostInfo(data.data.data);
-        })
-        .catch((err) => {
-          setPostInfo("none");
-          console.log(err);
-        });
-    };
-    fatchData();
-  }, []);
 
-  useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get(`/api/profile/${postInfo?.userid}`)
-        .then((data) => {
-          setProfile(data.data.data);
-        })
-        .catch((err) => {
-          setProfile("none");
-          console.log(err);
-        });
-    };
-    fatchData();
-  }, [postInfo]);
+  const postInfo = allPost?.find((post) => post._id === id);
 
-  if (!profile) {
+  if (!postInfo) {
     return (
       <>
         <div className="p-2 my-10 loadingbig">
@@ -58,7 +30,7 @@ export default function page() {
               ></Link>
             </div>
             <div className="w-8/12">
-              <h1 className="text-xl loading text-white font-bold">
+              <h1 className="text-sm loading text-white font-bold">
                 <Link href={""}></Link>
               </h1>
               <h1 className="text-sm loading text-slate-600 font-bold"></h1>
@@ -73,8 +45,8 @@ export default function page() {
 
           {/* footer */}
           <div className="flex items-center space-x-5">
-            <div className="w-6/12 text-xl loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
-            <div className="w-6/12 loading text-xl cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+            <div className="w-6/12 text-sm loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+            <div className="w-6/12 loading text-sm cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
           </div>
         </div>
       </>
@@ -89,9 +61,22 @@ export default function page() {
   const hundleLike = async () => {
     try {
       const data = await axios.post(`/api/post/like/${postInfo?._id}`);
+      const updatedPost = data?.data?.data;
+      const profile = postInfo?.profile;
 
-      setPostInfo(data.data.data);
-      setAllPost(data.data.alldata);
+      const newUpdatedPost = {
+        ...updatedPost,
+        profile,
+      };
+
+      const updatedPosts = allPost.map((postItem) => {
+        if (postItem._id === newUpdatedPost._id) {
+          return newUpdatedPost;
+        }
+        return postItem;
+      });
+
+      setAllPost(updatedPosts);
     } catch (error) {
       console.error(error);
     }
@@ -102,10 +87,25 @@ export default function page() {
       const data = await axios.post(`/api/post/comment/${postInfo?._id}`, {
         message: commentText,
       });
-      setCommentText("");
-      setAllPost(data.data.alldata);
 
-      setPostInfo(data.data.data);
+      setCommentText("");
+
+      const updatedPost = data?.data?.data;
+      const profile = postInfo?.profile;
+
+      const newUpdatedPost = {
+        ...updatedPost,
+        profile,
+      };
+
+      const updatedPosts = allPost.map((postItem) => {
+        if (postItem._id === newUpdatedPost._id) {
+          return newUpdatedPost;
+        }
+        return postItem;
+      });
+
+      setAllPost(updatedPosts);
     } catch (error) {
       console.error(error);
     }
@@ -131,7 +131,7 @@ export default function page() {
             </Link>
           </div>
           <div className="w-6/12 text-right">
-            <MdHelp className="inline-block" />
+            <BsThreeDotsVertical className="inline-block" />
           </div>
         </div>
       </div>
@@ -139,24 +139,34 @@ export default function page() {
         {/* header */}
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
-            <Link href={`/profile/${profile}`}>
-              <img
+            <Link href={`/profile/${postInfo?.profile?._id}`}>
+              <Avater text={postInfo?.profile?.name} />
+              {/* <img
                 className="w-10 m-auto h-10 rounded-full block"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhHGR8bTVzFRi4LjAKEbCXe3Nm7wSxh3H3g&usqp=CAU"
                 alt=""
-              />
+              /> */}
             </Link>
           </div>
           <div className="w-8/12">
             <h1 className="text-sm text-white font-bold">
-              <Link href={`/profile/${profile._id}`}>{profile.name}</Link>
+              <Link href={`/profile/${postInfo?.profile._id}`}>
+                {postInfo?.profile.name}
+                {postInfo?.profile?._id === "65fd48a78af4b8a1e16a7b1d" ? (
+                  <span className="px-2 text-xs text-slate-800">
+                    (Zane official)
+                  </span>
+                ) : (
+                  ""
+                )}
+              </Link>
             </h1>
             <h1 className="text-xs text-slate-600 font-bold">
               {formattedDate}
             </h1>
           </div>
           <div className="w-2/12 text-2xl text-center">
-            <MdHelp className="inline-block" />
+            <BsThreeDotsVertical className="inline-block" />
           </div>
         </div>
 
@@ -169,7 +179,7 @@ export default function page() {
         <div className="flex items-center space-x-5">
           <div
             onClick={hundleLike}
-            className={`w-6/12 flex justify-center items-center text-xl cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
+            className={`w-6/12 flex justify-center items-center text-sm cursor-pointer text-center bg-slate-950 p-1 rounded-xl ${
               postInfo?.reactions?.some(
                 (reaction) => reaction.userid === data?._id
               )
@@ -187,7 +197,7 @@ export default function page() {
             )}
           </div>
 
-          <div className="w-6/12 text-xl flex justify-center items-center cursor-pointer text-center bg-slate-950 p-1 rounded-xl">
+          <div className="w-6/12 text-sm flex justify-center items-center cursor-pointer text-center bg-slate-950 p-1 rounded-xl">
             <span>{postInfo?.comments?.length}</span>
             <CgComment className="inline-block" />
           </div>
@@ -204,6 +214,7 @@ export default function page() {
               <CommentBox comment={singleComment} />
             ))
           )}
+          {/* h */}
         </div>
 
         {/* Comment Input */}

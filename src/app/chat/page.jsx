@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import RecentlyBox from "../Components/Box/RecentlyBox";
 import InterestBox from "../Components/Box/InterestBox";
 import ChatBox from "../Components/Box/ChatBox";
@@ -7,9 +7,38 @@ import ButtonBer from "../Components/Shared/ButtonBer";
 import Link from "next/link";
 import { MineContext } from "@/Context/MineContextProvider";
 import { CgSearch } from "react-icons/cg";
+import { db } from "@/app/firebaseConfig";
+import { ref, get, set, push, off, onValue, remove } from "firebase/database";
 
 export default function page() {
   const { chats, setChats, data } = useContext(MineContext);
+
+  useEffect(() => {
+    async function updateNtfData() {
+      try {
+        if (data) {
+          const ntfRef = ref(db, "ntf/" + data?._id);
+          const snapshot = await get(ntfRef);
+          const existingNtfData = snapshot.val() || {};
+          if (existingNtfData) {
+            const updatedMsgUnseen = 0;
+            await set(ntfRef, {
+              ...existingNtfData,
+              msgUnseen: updatedMsgUnseen,
+              id: null,
+              msgtime: Date.now(),
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error updating ntf data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    updateNtfData();
+  }, [data]);
 
   if (!data || !chats) {
     return (
@@ -20,7 +49,7 @@ export default function page() {
               <span className="block w-6/12">Recently</span>
               <Link
                 className="block w-6/12 loading text-right text-slate-600"
-                href={"/recently"}
+                href={"/"}
               >
                 <span></span>
               </Link>
@@ -38,7 +67,7 @@ export default function page() {
               <span className="block w-6/12">Interests</span>
               <Link
                 className="block w-6/12 loading text-right text-slate-600"
-                href={"/interests"}
+                href={"/"}
               >
                 <span></span>
               </Link>
@@ -62,6 +91,7 @@ export default function page() {
             <div className="space-y-2"></div>
           </div>
         </div>
+        <ButtonBer />
       </>
     );
   }

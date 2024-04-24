@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
+import Avater from "./Avater";
 
 export default function CommentBox({ comment }) {
   const [profile, setProfile] = useState(null);
@@ -16,7 +17,6 @@ export default function CommentBox({ comment }) {
         })
         .catch((err) => {
           setProfile("none");
-          console.log(err);
         });
     };
     fatchData();
@@ -52,13 +52,16 @@ export default function CommentBox({ comment }) {
     <>
       <div className="bg-slate-950 rounded-md">
         <div className="flex p-4">
-          <div className="w-/12 text-center">
+          <div className="w-2/12 text-center">
             <Link href={`/profile/${comment?.userid}`}>
-              <img
+              <div className=" bg-slate-900 rounded-full inline-block">
+                <Avater text={profile?.name} />
+              </div>
+              {/* <img
                 className="w-8 h-8 rounded-full inline-block"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhHGR8bTVzFRi4LjAKEbCXe3Nm7wSxh3H3g&usqp=CAU"
                 alt=""
-              />
+              /> */}
             </Link>
           </div>
           <div className="w-10/12 px-4">
@@ -74,7 +77,7 @@ export default function CommentBox({ comment }) {
             </p>
           </div>
         </div>
-        <h6 className="text-slate-500 p-2 text-xs">{formattedDate}</h6>
+        <h6 className="text-slate-500 px-4 p-2text-xs">{formattedDate}</h6>
       </div>
     </>
   );

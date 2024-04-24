@@ -20,9 +20,7 @@ export default function page() {
         .then((data) => {
           setUsers(data.data.data);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     };
     fatchData();
   }, [text]);

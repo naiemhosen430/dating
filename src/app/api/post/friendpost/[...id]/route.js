@@ -1,8 +1,8 @@
 import Post from "@/models/post.model";
 import { dbconnect } from "@/utils/mongo";
 
-export async function GET(NextRequest) {
-  dbconnect();
+export async function GET(Request) {
+  await dbconnect();
   try {
     const id = Request.url.split("friendpost/")[1];
 
@@ -13,14 +13,12 @@ export async function GET(NextRequest) {
       });
     }
 
-    const postdata = await Post.findOne({ userid: id }).sort({
-      createdAt: 1,
-    });
+    const postdata = await Post.find({ userid: id });
 
     return Response.json({
       statusCode: 200,
-      data: postdata,
-      message: "Post Added",
+      data: postdata?.reverse(),
+      message: "Success ",
     });
   } catch (error) {
     return Response.json({

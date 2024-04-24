@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { MdHelp, MdOutlineNotificationsNone } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -12,16 +11,10 @@ export default function Menu() {
   const [interesta, setinteresta] = useState([]);
   useEffect(() => {
     const fatchData = async () => {
-      await axios
-        .get("/api/me")
-        .then((data) => {
-          setProfileInfo(data.data.data);
-          setinteresta(data.data.data.interest);
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      await axios.get("/api/me").then((data) => {
+        setProfileInfo(data.data.data);
+        setinteresta(data.data.data.interest);
+      });
     };
     fatchData();
   }, []);

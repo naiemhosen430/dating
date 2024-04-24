@@ -8,7 +8,7 @@ export async function GET(req) {
 
   try {
     const chats = await Chat.find({ chatids: { $in: [myData.id] } })
-      .sort({ updatedAt: -1 }) // Sort by last updated date in descending order
+      .sort({ updatedAt: -1 })
       .exec();
 
     return Response.json({

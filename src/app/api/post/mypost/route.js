@@ -2,8 +2,8 @@ import getDetaFromToken from "@/helper/getDetaFromToken";
 import Post from "@/models/post.model";
 import { dbconnect } from "@/utils/mongo";
 
-export async function GET(NextRequest) {
-  dbconnect();
+export async function GET() {
+  await dbconnect();
   try {
     let myInfo = getDetaFromToken();
     if (!myInfo) {
@@ -13,14 +13,12 @@ export async function GET(NextRequest) {
       });
     }
 
-    const postdata = await Post.findOne({ userid: myInfo.id }).sort({
-      createdAt: 1,
-    });
+    const postdata = await Post.find({ userid: myInfo?.id });
 
     return Response.json({
       statusCode: 200,
       data: postdata,
-      message: "Post Added",
+      message: "Success",
     });
   } catch (error) {
     return Response.json({

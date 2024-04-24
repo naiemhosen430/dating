@@ -10,9 +10,7 @@ export async function dbconnect() {
     mongoose.connection.setMaxListeners(500);
     mongoose.connect(process.env.MONGODB_URL, options);
     const connection = mongoose.connection;
-    connection.on("connected", () => {
-      console.log("db connected");
-    });
+    connection.on("connected", () => {});
     return true;
   } catch (error) {
     console.error(error);

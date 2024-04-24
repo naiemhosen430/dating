@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { CgArrowLeft } from "react-icons/cg";
-import { MdHelp } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 export default function page() {
   return (
@@ -13,7 +13,7 @@ export default function page() {
           </Link>
         </div>
         <div className="w-6/12 text-right">
-          <MdHelp className="inline-block" />
+          <BsThreeDotsVertical className="inline-block" />
         </div>
       </div>
       <div className="p-5 overflow-y-auto h-screen pb-10">

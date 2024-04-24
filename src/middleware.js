@@ -25,7 +25,9 @@ export const config = {
     "/converssion",
     "/feed",
     "/people",
+    "/people:path",
     "/myprofile",
     "/profile",
+    "/profile:path",
   ],
 };

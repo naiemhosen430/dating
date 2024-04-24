@@ -1,110 +1,103 @@
+import getDetaFromToken from "@/helper/getDetaFromToken";
+import Chat from "@/models/chat.Model";
 import User from "@/models/userModel";
-import bcrypt from "bcryptjs";
-const jwt = require("jsonwebtoken");
 import { dbconnect } from "@/utils/mongo";
 
-export async function POST(NextRequest) {
+export async function PUT(NextRequest) {
   await dbconnect();
   try {
-    function generateRandomEmail(exampleWord) {
-      const domains = [
-        "gmail.com",
-        "yahoo.com",
-        "outlook.com",
-        "hotmail.com",
-        "aol.com",
-      ];
-      const timestamp = Date.now().toString().slice(-5);
-      const domain = domains[Math.floor(Math.random() * domains.length)];
-      const username = timestamp + exampleWord;
-
-      return username + "@" + domain;
+    const myData = getDetaFromToken();
+    if (!myData) {
+      return Response.json(
+        {
+          message: "Something wrong",
+          statusCode: 498,
+        },
+        { status: 498 }
+      );
     }
 
-    const exampleWord = "example";
-    const exampleemail = generateRandomEmail(exampleWord);
+    const id = NextRequest.url.split("addfriend/")[1];
 
-    const data = await NextRequest.json();
-
-    const checkUser = await User.findOne({ email: data.email }).select(
-      "password email"
+    const updatedUser = await User.updateOne(
+      { _id: id },
+      { $push: { friends: myData.id } }
     );
 
-    if (!checkUser || checkUser.password == "") {
-      const userObj = {
-        name: data.name,
-        email: data.email || exampleemail,
-        password: data.password,
-        age: data.age,
-        gender: data.gender,
-        country: data.country,
-        interest: data.interest,
-      };
-      const user = await User.create(userObj);
-      return Response.json({
-        statusCode: 404,
-        id: user._id,
-        email: user.email,
-        message:
-          "You don't have account. Now set the password to create account",
-      });
+    if (!updatedUser) {
+      return Response.json(
+        {
+          message: "Something wrong",
+          statusCode: 498,
+        },
+        { status: 498 }
+      );
     }
 
-    return Response.json({
-      message: "You have an account. Now enter the password to continue",
-      email: checkUser.email,
-      statusCode: 200,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+    const updatemine = await User.updateOne(
+      { _id: myData?.id },
+      { $push: { friends: id } }
+    );
 
-export async function PUT(NextRequest) {
-  try {
-    await dbconnect();
-    const data = await NextRequest.json();
+    if (!updatemine) {
+      return Response.json(
+        {
+          message: "Something wrong",
+          statusCode: 498,
+        },
+        { status: 498 }
+      );
+    }
 
-    const hashPass = bcrypt.hashSync(data.password, 10);
-
-    console.log({ data });
-    await User.updateOne(
-      { email: data.email },
+    const updatechat = await Chat.updateOne(
+      {
+        $or: [
+          { chatids: { $all: [id, myData.id] } },
+          { chatids: { $all: [myData.id, id] } },
+        ],
+      },
       {
         $set: {
-          name: data.name,
-          email: data.email,
-          password: hashPass,
-          age: data.age,
-          gender: data.gender,
-          country: data.country,
-          interest: data.interest,
+          type: "friend",
         },
       }
     );
-    const user = await User.findOne({ email: data.email }).select(
-      "_id role email"
-    );
 
-    const secretKey = process.env.TOKEN_SECRET;
-    const userData = {
-      userId: user._id,
-      email: user.email,
-      role: user.role,
-    };
-    const expirationTimestamp =
-      Math.floor(Date.now() / 1000) + 100 * 365 * 24 * 60 * 60;
-    const token = jwt.sign(
-      { ...userData, exp: expirationTimestamp },
-      secretKey
-    );
+    const chatu = await Chat.findOne({
+      $or: [
+        { chatids: { $all: [id, myData.id] } },
+        { chatids: { $all: [myData.id, id] } },
+      ],
+    });
 
+    if (!updatechat) {
+      return Response.json(
+        {
+          message: "Something wrong",
+          statusCode: 498,
+        },
+        { status: 498 }
+      );
+    }
+
+    const me = await User.findOne({ _id: myData.id });
+    const friend = await User.findOne({ _id: id });
+
+    // Return success message and newly created chat object
     return Response.json({
+      message: "Successfull",
+      data: chatu,
+      me: me,
+      friend,
       statusCode: 200,
-      message: "success",
-      data: token,
     });
   } catch (error) {
-    console.log(error);
+    return Response.json(
+      {
+        message: "Something wrong",
+        statusCode: 498,
+      },
+      { status: 498 }
+    );
   }
 }
