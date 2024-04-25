@@ -64,8 +64,8 @@ export default function page() {
     }
 
     const hundleAddPicture = () => {
-        if(!picture.name || picture.link || picture.tag){
-            axios.post("/api/picture", picture)
+        if(!pictureState.name || pictureState.link || pictureState.tag){
+            axios.post("/api/picture", pictureState)
             .then((data)=>{
                 if (data,data.statusCode === 200){
                     setAllImages([...allImages , data,data.data])
@@ -97,10 +97,10 @@ export default function page() {
                           <input
                             className="p-2 px-4 lg:text-lg text-sm block w-full border rounded-lg shadow-md"
                             id="name"
-                            value={picture?.name}
+                            value={pictureState?.name}
                             onChange={(e) =>
                               setPictureState({
-                                ...picture,
+                                ...pictureState,
                                 name: e.target.value,
                               })
                             }
@@ -124,7 +124,7 @@ export default function page() {
                             value={pictureState.link}
                             onChange={(e) =>
                               setPictureState({
-                                ...picture,
+                                ...pictureState,
                                 quantity: parseInt(e.target.value),
                               })
                             }
@@ -147,7 +147,7 @@ export default function page() {
                             value={pictureState.tag}
                             onChange={(e) =>
                               setPictureState({
-                                ...picture,
+                                ...pictureState,
                                 quantity: parseInt(e.target.value),
                               })
                             }
