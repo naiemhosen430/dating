@@ -5,17 +5,17 @@ import { dbconnect } from "@/utils/mongo";
 export async function POST(NextRequest) {
   await dbconnect();
   try {
-    const data = await NextRequest.json();
+    const Reqdata = await NextRequest.json();
 
     const myInfo = getDetaFromToken();
     await User.updateOne(
       { email: myInfo.email },
       {
-        $set: data,
+        $set: Reqdata,
       }
     );
 
-    const data = await User.findOne({ email: myInfo.email });
+    const data = await User.findOne({email: myInfo.email});
 
     return Response.json({
       statusCode: 200,
