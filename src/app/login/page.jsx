@@ -83,6 +83,7 @@ export default function page() {
 
   // onclick
   const openEmail = async () => {
+
     if (userInfo.email !== "") {
       try {
         await axios
@@ -240,6 +241,7 @@ export default function page() {
 
   // for quick login
   const hundleQuickLogin = async () => {
+
     try {
       await axios
         .post("/api/user/create", userInfo)
