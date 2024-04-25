@@ -27,6 +27,7 @@ export default function page() {
           setUserInfo({
             name: data.data.data.name,
             age: data.data.data.age,
+            profilepicture: data.data.data.profilepicture,
             country: data.data.data.country,
             interest: data.data.data.interest,
           });
@@ -156,8 +157,14 @@ export default function page() {
         {errmessage}
       </h1>
 
-      {/* name */}
-      <div className="p-2 lg:px-10 px-5">
+      {/* profile pic */}
+      <div className="p-2 lg:px-10 text-center px-5">
+        <img className="inline-block rounded-full h-52 w-52" src={userInfo?.profilepicture} alt="" />
+        <Link className="text-xs text-slate-500 border rounded-2xl my-2" href={'/addprofilepic'}>Change Picture</Link>
+      </div>
+
+            {/* name */}
+            <div className="p-2 lg:px-10 px-5">
         <label className="block p-2 text-xl text-slate-500" htmlFor="name">
           What is your name?
         </label>
