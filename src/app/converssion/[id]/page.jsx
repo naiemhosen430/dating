@@ -143,6 +143,14 @@ export default function Page() {
     } catch (error) {}
   };
 
+  const unfriendHundler = async () =>{
+    alert("we are working on this frature")
+  }
+  
+  const blockHundler = async () =>{
+    alert("we are working on this frature")
+  }
+
   const updateNotification = async (ntfRef, chatidd) => {
     try {
       const snapshot = await get(ntfRef);
@@ -209,10 +217,22 @@ export default function Page() {
     <>
       {oprionBoxState && (
         <div className="w-screen h-screen z-40 fixed top-0 flex justify-center items-center rounded-lg bg-gradient-to-t from-slate-800">
-          <div className="bg-black p-5 w-10/12 lg:w-4/12 rounded-lg">
+          <div className="bg-black p-5 w-12/12 lg:w-4/12 rounded-lg">
             <button
               onClick={deleChatHundler}
-              className="p-2 w-full px-4 hover:bg-slate-900 rounded-md"
+              className="p-2 w-full px-4 hover:bg-slate-900 my-2 text-sm rounded-md"
+            >
+              Delete Chat
+            </button>
+            <button
+              onClick={unfriendHundler}
+              className="p-2 w-full px-4 hover:bg-slate-900 my-2 text-sm rounded-md"
+            >
+              Unfriend
+            </button>
+            <button
+              onClick={blockHundler}
+              className="p-2 w-full px-4 hover:bg-slate-900 my-2 text-sm rounded-md"
             >
               Block
             </button>
