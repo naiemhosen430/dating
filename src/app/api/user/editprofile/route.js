@@ -15,8 +15,11 @@ export async function POST(NextRequest) {
       }
     );
 
+    const data = await User.findOne({ email: myInfo.email });
+
     return Response.json({
       statusCode: 200,
+      data,
       message: "Profile has updated",
     });
   } catch (error) {

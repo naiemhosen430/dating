@@ -1,18 +1,30 @@
 'use client'
 import { MineContext } from '@/Context/MineContextProvider';
 import axios from 'axios';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { CgSearch } from 'react-icons/cg';
 
 export default function page() {
-    const {  data } = useContext(MineContext);
+    const {  data,setData } = useContext(MineContext);
     if (!data){
         return (
             <h1 className="text-white text-center text-xl py-10">Loading....</h1>
         )
     }
+
     const [text, setText] = useState("");
     const [allImages, setAllImages] = useState(null);
+
+    useEffect(()=>{
+        const fatchData = async () => {
+            axios.get(`/api/picture`).then((res)=>{
+                if (res.data.statusCode === 200) {
+                    setAllImages(res.data.data)
+                }
+            })
+        }
+        fatchData()
+    },[])
 
     // for update profile pic 
     const updateProfilepic = async (link) => {
@@ -21,6 +33,7 @@ export default function page() {
             profilepicture: link
         }).then((res)=>{
             if (res.data.statusCode === 200) {
+                setData(res.data.data)
                 router.push("/");
             }
         })
@@ -39,7 +52,7 @@ export default function page() {
                 onChange={(event) => {
                 setText(event.target.value);
                 }}
-                placeholder="Search for person or post"
+                placeholder="Search for picture"
             />
 
                 <div className="text-2xl block w-2/12 text-center">
@@ -49,7 +62,7 @@ export default function page() {
             </div>
 
             <div className='p-2 text-center'>
-                {allImages ? <h1 className="text-white text-center text-xl py-10">Loading images....</h1>: (
+                {!allImages ? <h1 className="text-white text-center text-xl py-10">Loading images....</h1>: (
                     allImages?.map((item)=>(
                         <img className='inline-block w-5/12 m-2' onClick={()=> updateProfilepic(item?.link)} src={item?.link} alt="no image" />
                     ))

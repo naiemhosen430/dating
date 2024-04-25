@@ -159,13 +159,16 @@ export default function page() {
 
       {/* profile pic */}
       <div className="p-2 lg:px-10 text-center px-5">
-        <img className="inline-block rounded-full h-52 w-52" src={userInfo?.profilepicture} alt="" />
-        <Link className="text-xs text-slate-500 border rounded-2xl my-2" href={'/addprofilepic'}>Change Picture</Link>
+        <img className="inline-block rounded-full h-32 w-32" src={userInfo?.profilepicture} alt="" />
+        <div>
+          <Link className="text-xs text-slate-500 border p-1 px-2 rounded-2xl my-2" href={'/addprofilepic'}>Change Picture</Link>
+        </div>
+
       </div>
 
             {/* name */}
             <div className="p-2 lg:px-10 px-5">
-        <label className="block p-2 text-xl text-slate-500" htmlFor="name">
+        <label className="block p-2 text-lg text-slate-500" htmlFor="name">
           What is your name?
         </label>
         <input
@@ -186,7 +189,7 @@ export default function page() {
 
       {/* age */}
       <div className="p-2 lg:px-10 px-5">
-        <label className="block p-2 text-xl text-slate-500" htmlFor="name">
+        <label className="block p-2 text-lg text-slate-500" htmlFor="name">
           What is your age?
         </label>
         <select
@@ -216,7 +219,7 @@ export default function page() {
 
       {/* gender and country */}
       <div className="p-2 lg:px-10 px-5">
-        <label className="block p-2 text-xl text-slate-500" htmlFor="country">
+        <label className="block p-2 text-lg text-slate-500" htmlFor="country">
           What is your Country?
         </label>
         <select
