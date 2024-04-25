@@ -1,12 +1,14 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { useRouter } from "next/navigation";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { MineContext } from "@/Context/MineContextProvider";
 
 export default function page() {
+  const {  data,setData } = useContext(MineContext);
   const router = useRouter();
   const [errmessage, seterrmessage] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -20,23 +22,15 @@ export default function page() {
   });
   const [interesta, setinteresta] = useState([]);
   useEffect(() => {
-    const fatchData = async () => {
-      await axios
-        .get("/api/me")
-        .then((data) => {
           setUserInfo({
-            name: data.data.data.name,
-            age: data.data.data.age,
-            profilepicture: data.data.data.profilepicture,
-            country: data.data.data.country,
-            interest: data.data.data.interest,
+            name: data.name,
+            age: data.age,
+            profilepicture: data.profilepicture,
+            country: data.country,
+            interest: data.interest,
           });
-          setSelectedOptions(data.data.data.interest);
-        })
-        .catch((err) => {});
-    };
-    fatchData();
-  }, []);
+          setSelectedOptions(data.interest);
+  }, [data]);
 
   // for interest
   const handleCheckboxChange = (option) => {
@@ -128,6 +122,7 @@ export default function page() {
           .post("/api/user/editprofile", userInfo)
           .then((data) => {
             if (data.data.statusCode === 200) {
+              setData(data.data.data)
               router.push("/");
             } else {
               seterrmessage(data.data.message);
