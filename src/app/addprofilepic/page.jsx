@@ -28,16 +28,23 @@ export default function page() {
 
     // for update profile pic 
     const updateProfilepic = async (link) => {
+        const confirmed = confirm("Are you sure you want to update your profile picture?");
+        
+        if (!confirmed) {
+            return;
+        }
+    
         axios.post(`/api/user/editprofile`, {
             ...data,
             profilepicture: link
         }).then((res)=>{
             if (res.data.statusCode === 200) {
-                setData(res.data.data)
+                setData(res.data.data);
                 router.push("/");
             }
-        })
+        });
     }
+    
     
   return (
     <>
