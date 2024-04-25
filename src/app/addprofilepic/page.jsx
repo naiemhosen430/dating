@@ -17,7 +17,7 @@ export default function page() {
     const [allImages, setAllImages] = useState(null);
     const [error, setError] = useState(null);
       // for picture action
-  const [picture, setPictureState] = useState({
+  const [pictureState, setPictureState] = useState({
     name: null,
     link: null,
     tag: null,
