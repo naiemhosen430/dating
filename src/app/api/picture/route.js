@@ -27,10 +27,11 @@ export async function GET() {
   
       const data = await NextRequest.json();
 
-    const user = await Picture.create(data);
+    const postedData = await Picture.create(data);
 
     return Response.json({
         statusCode: 200,
+        data:user,
         message:
         "Success",
     },{
