@@ -2,84 +2,98 @@
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { CgSearch } from 'react-icons/cg';
-
 import { MineContext } from '@/Context/MineContextProvider';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
     const router = useRouter();
-  const { data, setData } = useContext(MineContext);
-  const [text, setText] = useState('');
-  const [adPicturePopup, setAdPicturePopup] = useState(false);
-  const [allImages, setAllImages] = useState(null);
-  const [error, setError] = useState(null);
-  const [pictureState, setPictureState] = useState({
-    name: '',
-    link: '',
-    tag: '',
-  });
+    const { data, setData } = useContext(MineContext);
+    const [text, setText] = useState('');
+    const [adPicturePopup, setAdPicturePopup] = useState(false);
+    const [allImages, setAllImages] = useState(null);
+    const [error, setError] = useState(null);
+    const [pictureState, setPictureState] = useState({
+        name: '',
+        link: '',
+        tag: '',
+    });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get('/api/picture');
-        if (res.data.statusCode === 200) {
-          setAllImages(res.data.data);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('/api/picture');
+                if (res.data.statusCode === 200) {
+                    setAllImages(res.data.data);
+                }
+            } catch (error) {
+                setError('Error fetching images.');
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const updateProfilePic = async (link) => {
+        const confirmed = window.confirm('Are you sure you want to update your profile picture?');
+
+        if (!confirmed) {
+            return;
         }
-      } catch (error) {
-        setError('Error fetching images.');
-      }
+
+        try {
+            const res = await axios.post('/api/user/editprofile', {
+                ...data,
+                profilepicture: link,
+            });
+            if (res.data.statusCode === 200) {
+                setData(res.data.data);
+                router.push('/');
+            }
+        } catch (error) {
+            setError('Error updating profile picture.');
+        }
     };
 
-    fetchData();
-  }, []);
+    const toggleAddPicturePopup = () => {
+        setAdPicturePopup(!adPicturePopup);
+    };
 
-  const updateProfilePic = async (link) => {
-    const confirmed = window.confirm('Are you sure you want to update your profile picture?');
-
-    if (!confirmed) {
-      return;
-    }
-
-    try {
-      const res = await axios.post('/api/user/editprofile', {
-        ...data,
-        profilepicture: link,
-      });
-      if (res.data.statusCode === 200) {
-        setData(res.data.data);
-        router.push('/');
-      }
-    } catch (error) {
-      setError('Error updating profile picture.');
-    }
-  };
-
-  const toggleAddPicturePopup = () => {
-    setAdPicturePopup(!adPicturePopup);
-  };
-
-  const handleAddPicture = () => {
-    if (!pictureState.name || !pictureState.link || !pictureState.tag) {
-      setError('Please fill out all fields.');
-      return;
-    }
-
-    axios
-      .post('/api/picture', pictureState)
-      .then((response) => {
-        console.log(response)
-        if (response.data.statusCode === 200) {
-          setAllImages([...allImages, response.data.data]);
-          setAdPicturePopup(false);
+    const handleAddPicture = () => {
+        if (!pictureState.name || !pictureState.link || !pictureState.tag) {
+            setError('Please fill out all fields.');
+            return;
         }
-      })
-      .catch((error) => {
-        setError('Error adding picture.');
-      });
-  };
 
-  console.log(allImages)
+        axios
+            .post('/api/picture', pictureState)
+            .then((response) => {
+                console.log(response)
+                if (response.data.statusCode === 200) {
+                    setAllImages([...allImages, response.data.data]);
+                    setAdPicturePopup(false);
+                }
+            })
+            .catch((error) => {
+                setError('Error adding picture.');
+            });
+    };
+
+    const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop !==
+            document.documentElement.offsetHeight
+        ) {
+            return;
+        }
+
+        // Fetch more images
+        fetchData();
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
   return (
     <>
