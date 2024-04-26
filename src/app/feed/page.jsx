@@ -59,8 +59,8 @@ export default function Page() {
   const addScrollListener = () => {
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = scrollRef.current;
-      if (scrollHeight - (scrollTop + clientHeight) < 20) {
-        fetchData();
+      if (scrollHeight - (scrollTop + clientHeight) < 40) { 
+        fetchData(); 
       }
     };
     scrollRef.current.addEventListener("scroll", handleScroll);
@@ -68,6 +68,7 @@ export default function Page() {
       scrollRef.current.removeEventListener("scroll", handleScroll);
     };
   };
+  
 
   return (
     <>
