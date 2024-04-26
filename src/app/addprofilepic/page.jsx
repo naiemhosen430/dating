@@ -77,6 +77,8 @@ export default function Page() {
       });
   };
 
+  console.log(allImages)
+
   return (
     <>
       {adPicturePopup && (
