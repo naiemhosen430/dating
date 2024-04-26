@@ -20,8 +20,8 @@ export default function Page() {
   }, []);
 
   const fetchData = async () => {
-    if (!loading) { // Only fetch if loading state is false
-      setLoading(true); // Set loading state to true
+    if (!loading) { 
+      setLoading(true); 
       try {
         const postData = await axios.get(`/api/post`);
         const actualData = postData.data.data;
@@ -48,7 +48,7 @@ export default function Page() {
         console.error("Error fetching data:", error);
         // Handle error
       } finally {
-        setLoading(false); // Set loading state to false after fetching is done
+        setLoading(false); 
       }
     }
   };
@@ -60,9 +60,9 @@ export default function Page() {
         fetchData();
       }
     };
-    window.addEventListener("scroll", handleScroll); // Attach event listener to window
+    window.addEventListener("scroll", handleScroll); 
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Remove event listener on cleanup
+      window.removeEventListener("scroll", handleScroll);
     };
   };
 
