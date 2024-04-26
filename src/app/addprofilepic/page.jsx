@@ -104,6 +104,8 @@ export default function Page() {
             });
     };
 
+    console.log(allImages)
+
     return (
         <>
             {adPicturePopup && (
@@ -112,12 +114,25 @@ export default function Page() {
                 </div>
             )}
             <div>
-                <div className="rounded-full bg-slate-900 flex items-center justify-center sticky top-1">
-                    {/* Search Input */}
-                </div>
-                <div className="p-2 text-center">
-                    {/* Add Picture Button */}
-                </div>
+            <div className="rounded-full bg-slate-900 flex items-center justify-center sticky top-1">
+            <input
+                className="lg:text-xl text-sm p-2 px-4 rounded-full bg-slate-900 text-teal-50 w-10/12"
+                type="search"
+                name="text"
+                id="text"
+                value={text}
+                onChange={(event) => setText(event.target.value)}
+                placeholder="Search for picture"
+            />
+            <div className="text-2xl block w-2/12 text-center">
+                <CgSearch className="inline-block text-slate-600" />
+            </div>
+        </div>
+        <div className="p-2 text-center">
+            <button className="text-xs text-slate-500 border p-1 px-2 rounded-2xl my-2" onClick={toggleAddPicturePopup}>
+                Add Picture
+            </button>
+        </div>
                 <h1 className="text-white text-center text-xs py-5">Select a picture and click on it to add it as your profile picture.</h1>
                 <div className="p-2 text-center">
                     {/* Images List */}
