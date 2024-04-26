@@ -4,6 +4,8 @@ import axios from 'axios';
 import { CgSearch } from 'react-icons/cg';
 import { MineContext } from '@/Context/MineContextProvider';
 import { useRouter } from 'next/navigation';
+import { IoArrowBack } from 'react-icons/io5';
+import Link from 'next/link';
 
 export default function Page() {
     const router = useRouter();
@@ -115,6 +117,11 @@ export default function Page() {
             )}
             <div>
             <div className="rounded-full bg-slate-900 flex items-center justify-center sticky top-1">
+            <div className="text-2xl block w-2/12 text-center">
+              <Link href={"/my/profile"}>
+                <IoArrowBack className="inline-block text-white" />
+              </Link>
+            </div>
             <input
                 className="lg:text-xl text-sm p-2 px-4 rounded-full bg-slate-900 text-teal-50 w-10/12"
                 type="search"
@@ -124,9 +131,7 @@ export default function Page() {
                 onChange={(event) => setText(event.target.value)}
                 placeholder="Search for picture"
             />
-            <div className="text-2xl block w-2/12 text-center">
-                <CgSearch className="inline-block text-slate-600" />
-            </div>
+
         </div>
         <div className="p-2 text-center">
             <button className="text-xs text-slate-500 border p-1 px-2 rounded-2xl my-2" onClick={toggleAddPicturePopup}>
