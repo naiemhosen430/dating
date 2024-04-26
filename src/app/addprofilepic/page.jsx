@@ -66,6 +66,7 @@ export default function Page() {
     axios
       .post('/api/picture', pictureState)
       .then((response) => {
+        console.log(response)
         if (response.data.statusCode === 200) {
           setAllImages([...allImages, response.data.data]);
           setAdPicturePopup(false);
@@ -82,14 +83,14 @@ export default function Page() {
         <div className="fixed justify-center py-5 items-start overflow-y-auto top-0 left-0 bg-gradient-to-r z-50 from-blue-500 to-transparent h-screen w-screen">
           <div className="lg:w-8/12 w-12/12 text-center bg-white opacity-100 m-auto p-10 rounded-2xl shadow-2xl">
             <div className="">
-              <h1 className="font-bold text-2xl py-5">Add image</h1>
+              <h1 className="font-bold text-black text-2xl py-5">Add image</h1>
               <div className="lg:w-full m-auto">
                 <div className="py-4 lg:w-5/12 px-4">
                   <label className="p-2 lg:text-lg text-sm block" htmlFor="name">
                     Image name
                   </label>
                   <input
-                    className="p-2 px-4 lg:text-lg text-sm block w-full border rounded-lg shadow-md"
+                    className="p-2 px-4 text-black lg:text-lg text-sm block w-full border rounded-lg shadow-md"
                     id="name"
                     value={pictureState.name}
                     onChange={(e) => setPictureState({ ...pictureState, name: e.target.value })}
@@ -103,7 +104,7 @@ export default function Page() {
                     Image link
                   </label>
                   <input
-                    className="p-2 px-4 lg:text-lg text-sm block w-full border rounded-lg shadow-md"
+                    className="p-2 px-4 text-black lg:text-lg text-sm block w-full border rounded-lg shadow-md"
                     id="link"
                     value={pictureState.link}
                     onChange={(e) => setPictureState({ ...pictureState, link: e.target.value })}
@@ -117,7 +118,7 @@ export default function Page() {
                     Image tag
                   </label>
                   <input
-                    className="p-2 px-4 lg:text-lg text-sm block w-full border rounded-lg shadow-md"
+                    className="p-2 px-4 text-black lg:text-lg text-sm block w-full border rounded-lg shadow-md"
                     id="tag"
                     value={pictureState.tag}
                     onChange={(e) => setPictureState({ ...pictureState, tag: e.target.value })}

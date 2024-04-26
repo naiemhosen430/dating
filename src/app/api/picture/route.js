@@ -18,7 +18,9 @@ export async function GET() {
     });
   
 
-    } catch (error) {}
+    } catch (error) {
+      return Response.json({ message:error?.message }, { status: 498 })
+    }
   }
 
   export async function POST(NextRequest) {
@@ -31,7 +33,7 @@ export async function GET() {
 
     return Response.json({
         statusCode: 200,
-        data:user,
+        data:postedData,
         message:
         "Success",
     },{
@@ -39,5 +41,7 @@ export async function GET() {
     });
   
 
-    } catch (error) {}
+    } catch (error) {
+      return Response.json({ message:error?.message }, { status: 498 })
+    }
   }
