@@ -104,7 +104,7 @@ export default function Page() {
               </h1>
             )}
             {loading && (
-              <h1 className="text-white text-xl text-center p-4">
+              <h1 className="text-white text-xl text-center p-4 pb-48">
                 Loading more posts....
               </h1>
             )}

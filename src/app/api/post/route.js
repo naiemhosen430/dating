@@ -8,7 +8,7 @@ export async function GET(req) {
     // Aggregate to get 50 random and recent posts
     const randomAndRecentPosts = await Post.aggregate([
       { $match: {} }, 
-      { $sample: { size: 3 } }, 
+      { $sample: { size: 10 } }, 
       { $sort: { createdAt: -1 } }, 
     ]);
 
