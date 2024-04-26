@@ -21,37 +21,38 @@ export default function Page() {
 
   const fetchData = async () => {
     if (!loading) {
-      setLoading(true);
+      setLoading(true); 
       try {
         const postData = await axios.get(`/api/post`);
         const actualData = postData.data.data;
         let newPosts = [];
-
+  
         if (actualData && actualData.length !== 0) {
           for (const post of actualData) {
             if (post?.userid) {
               const profileData = await axios.get(`/api/profile/${post?.userid}`);
               const profile = profileData.data.data;
-
+  
               const postWithProfile = {
                 ...post,
                 profile,
               };
-
+  
               newPosts.push(postWithProfile);
             }
           }
         }
-
-        setAllPost((prevData) => [...prevData, ...newPosts]); // Concatenate new posts
+  
+        setAllPost((prevData) => [...prevData, ...newPosts]); 
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error
       } finally {
-        setLoading(false);
+        setLoading(false); 
       }
     }
   };
+  
 
   const addScrollListener = () => {
     const handleScroll = () => {
