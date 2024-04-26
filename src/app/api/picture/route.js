@@ -5,9 +5,8 @@ export async function GET(request) {
   await dbconnect();
   try {
       let data;
-      if (request.query.search) {
-          // If search query parameter is provided, find images matching name or tag
-          const searchRegex = new RegExp(request.query.search, 'i');
+      if (request?.query?.tag) {
+          const searchRegex = new RegExp(request?.query?.tag, 'i');
           data = await Picture.find({
               $or: [
                   { name: { $regex: searchRegex } },
@@ -15,7 +14,6 @@ export async function GET(request) {
               ]
           }).limit(20);
       } else {
-          // If no search query parameter is provided, get a random sample of 20 pictures
           data = await Picture.aggregate([{ $sample: { size: 20 } }]);
       }
 
