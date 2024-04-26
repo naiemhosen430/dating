@@ -17,7 +17,7 @@ export default function Page() {
   useEffect(() => {
     fetchData();
     addScrollListener();
-  }, []);
+  }, [addScrollListener]);
 
   const fetchData = async () => {
     if (!loading) {
