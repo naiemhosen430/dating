@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { CgSearch } from "react-icons/cg";
@@ -31,9 +30,7 @@ export default function Page() {
         if (actualData && actualData.length !== 0) {
           for (const post of actualData) {
             if (post?.userid) {
-              const profileData = await axios.get(
-                `/api/profile/${post?.userid}`
-              );
+              const profileData = await axios.get(`/api/profile/${post?.userid}`);
               const profile = profileData.data.data;
 
               const postWithProfile = {
@@ -63,11 +60,12 @@ export default function Page() {
         fetchData(); 
       }
     };
-    scrollRef.current.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll); // Attach event listener to window
     return () => {
-      scrollRef.current.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll); // Remove event listener on cleanup
     };
   };
+
   
 
   return (

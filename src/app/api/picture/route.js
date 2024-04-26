@@ -6,7 +6,7 @@ export async function GET() {
     try {
   
       const data = await Picture.aggregate([
-        { $sample: { size: 500 } } 
+        { $sample: { size: 20 } } 
       ]);
       
 
