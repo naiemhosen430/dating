@@ -5,8 +5,10 @@ export async function GET() {
     await dbconnect();
     try {
   
-
-    const data = await Picture.find();
+      const data = await Picture.aggregate([
+        { $sample: { size: 1 } } 
+      ]);
+      
 
     return Response.json({
         statusCode: 200,
