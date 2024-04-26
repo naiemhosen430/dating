@@ -185,7 +185,7 @@ export default function Page() {
             <div>
             <div className="rounded-full bg-slate-900 flex items-center justify-center sticky top-1">
             <div className="text-2xl block w-2/12 text-center">
-              <Link href={"/my/profile"}>
+              <Link href={"/editprofile"}>
                 <IoArrowBack className="inline-block text-white" />
               </Link>
             </div>
