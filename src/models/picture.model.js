@@ -13,9 +13,9 @@ const pictureSchema = Schema(
       default: "",
     },
     tag: {
-      type: Array,
+      type: String,
       required: true,
-      default: [],
+      default: "",
     },
   
   },

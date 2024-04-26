@@ -17,11 +17,11 @@ export default function Page() {
         link: '',
         tag: '',
     });
-    const [loading, setLoading] = useState(false); // Add loading state
+    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
         fetchData();
-    }, [text]); // Fetch data when text changes
+    }, [text]); 
 
     const debounce = (func, delay) => {
         let timer;
@@ -33,7 +33,6 @@ export default function Page() {
 
     const fetchData = debounce(async () => {
         if (text.trim() === '') {
-            // If search text is empty, fetch all images
             try {
                 setLoading(true); // Set loading state to true
                 const res = await axios.get('/api/picture');
@@ -46,9 +45,8 @@ export default function Page() {
                 setLoading(false); // Set loading state to false
             }
         } else {
-            // If search text is not empty, fetch images by tag
             try {
-                setLoading(true); // Set loading state to true
+                setLoading(true); 
                 const res = await axios.get(`/api/picture?tag=${text}`);
                 if (res.data.statusCode === 200) {
                     setAllImages(res.data.data);
@@ -56,10 +54,10 @@ export default function Page() {
             } catch (error) {
                 setError('Error fetching images.');
             } finally {
-                setLoading(false); // Set loading state to false
+                setLoading(false); 
             }
         }
-    }, 300); // Debounce time in milliseconds
+    }, 300); 
 
     const updateProfilePic = async (link) => {
         const confirmed = window.confirm('Are you sure you want to update your profile picture?');
