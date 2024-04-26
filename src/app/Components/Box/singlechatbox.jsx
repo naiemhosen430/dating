@@ -99,7 +99,7 @@ export default function Singlechatbox({ chat, myid }) {
         <div className="w-2/12 flex items-center rounded-full pb-1">
           <Link className="block" href={`/profile/${chat.profileInfo?._id}`}>
             <div className="w-12 h-12  bg-slate-900 rounded-full inline-block">
-              <Avater text={chat?.profileInfo?.name} />
+              <Avater text={chat?.profileInfo?.profilepicture} />
             </div>
             {/* <img
               className="w-12 h-12 rounded-full inline-block"

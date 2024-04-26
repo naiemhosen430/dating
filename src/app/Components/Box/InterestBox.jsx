@@ -155,7 +155,7 @@ export default function InterestBox() {
               <div className="inline-block w-8 h-8 rounded-full">
                 <Link href={`/converssion/${chat?.profileInfo?._id}`}>
                   <div className=" bg-slate-900 rounded-full inline-block">
-                    <Avater text={chat?.profileInfo?.name} />
+                    <Avater text={chat?.profileInfo?.profilepicture} />
                   </div>
 
                   {/* <img

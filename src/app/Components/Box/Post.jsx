@@ -89,7 +89,7 @@ export default function Post({ post }) {
           <div className="w-2/12 text-center">
             <Link href={`/profile/${post?.profile?._id}`}>
               <div className="w-10 m-auto h-10 rounded-full block">
-                <Avater text={post?.profile?.name} />
+                <Avater text={post?.profile?.profilepicture} />
               </div>
               {/* <img
                 className="w-10 m-auto h-10 rounded-full block"

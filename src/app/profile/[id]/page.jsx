@@ -49,7 +49,7 @@ export default function page() {
         <div className="text-center">
           <img
             className="w-20 h-20 inline-block m-4 mb-2 rounded-full"
-            src="https://t4.ftcdn.net/jpg/01/97/15/87/360_F_197158744_1NBB1dEAHV2j9xETSUClYqZo7SEadToU.jpg"
+            src={profileInfo?.profilepicture}
             alt=""
           />
           <h1 className="text-xl font-bold p-1 text-white">

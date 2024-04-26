@@ -81,7 +81,7 @@ export default function Page() {
                   </h1>
                   <div className="inline-block w-24 h-24 rounded-full">
                     <div className="flex items-center justify-center bg-slate-900 w-24 h-24 rounded-full">
-                      <Avater text={user?.name} />
+                      <Avater text={user?.profilepicture} />
                     </div>
                   </div>
                   <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">

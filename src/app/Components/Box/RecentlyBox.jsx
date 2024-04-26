@@ -47,7 +47,7 @@ export default function RecentlyBox() {
             randomChat?.map((chat) => (
               <div className="inline-block w-8 h-8 rounded-full">
                 <Link href={`/converssion/${chat?.profileInfo?._id}`}>
-                  <Avater text={chat?.profileInfo?.name} />
+                  <Avater text={chat?.profileInfo?.profilepicture} />
                   {/* <img
                     className="block h-full w-full rounded-full"
                     src={

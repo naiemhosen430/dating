@@ -23,8 +23,10 @@ import {
 } from "firebase/database";
 import { db } from "./firebaseConfig";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const { data } = useContext(MineContext);
   if (!data) {
     return (
@@ -53,6 +55,10 @@ export default function Home() {
         </div>
       </>
     );
+  }
+
+  if (data?.profilepicture === ""){
+    router.push('/addprofilepic');
   }
 
   const [searchpplbox, setSearchpplbox] = useState(false);

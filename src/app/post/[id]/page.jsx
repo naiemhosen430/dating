@@ -140,7 +140,7 @@ export default function page() {
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
             <Link href={`/profile/${postInfo?.profile?._id}`}>
-              <Avater text={postInfo?.profile?.name} />
+              <Avater text={postInfo?.profile?.profilepicture} />
               {/* <img
                 className="w-10 m-auto h-10 rounded-full block"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfhHGR8bTVzFRi4LjAKEbCXe3Nm7wSxh3H3g&usqp=CAU"

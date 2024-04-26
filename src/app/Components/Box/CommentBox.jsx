@@ -55,7 +55,7 @@ export default function CommentBox({ comment }) {
           <div className="w-2/12 text-center">
             <Link href={`/profile/${comment?.userid}`}>
               <div className=" bg-slate-900 rounded-full inline-block">
-                <Avater text={profile?.name} />
+                <Avater text={profile?.profilepicture} />
               </div>
               {/* <img
                 className="w-8 h-8 rounded-full inline-block"

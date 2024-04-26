@@ -4,8 +4,10 @@ import axios from 'axios';
 import { CgSearch } from 'react-icons/cg';
 
 import { MineContext } from '@/Context/MineContextProvider';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+    const router = useRouter();
   const { data, setData } = useContext(MineContext);
   const [text, setText] = useState('');
   const [adPicturePopup, setAdPicturePopup] = useState(false);
