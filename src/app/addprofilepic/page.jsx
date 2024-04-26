@@ -175,6 +175,7 @@ export default function Page() {
             Add Picture
           </button>
         </div>
+        <h1 className="text-white text-center text-xs py-5">Select a picture and click on it to add it as your profile picture.</h1>
         <div className="p-2 text-center">
           {!allImages ? (
             <h1 className="text-white text-center text-xl py-10">Loading images....</h1>
