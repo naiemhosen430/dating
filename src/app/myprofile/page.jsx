@@ -36,6 +36,9 @@ export default function page() {
             src={data?.profilepicture}
             alt=""
           />
+                  <div>
+          <Link className="text-xs text-slate-500 border p-1 px-2 rounded-2xl my-2" href={'/addprofilepic'}>Change Picture</Link>
+        </div>
           <h1 className="text-xl font-bold p-1 text-white">{data?.name}</h1>
           <div className="flex w-10/12 m-auto items-center text-slate-500 justify-center">
             <span className="inline-block">{data?.age} / </span>
