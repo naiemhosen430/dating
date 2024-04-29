@@ -92,7 +92,6 @@ export default function Home() {
 
   useEffect(() => {
     if (!newFriend) {
-      // Exit early if newFriend is null or undefined
       return;
     }
 
@@ -103,7 +102,7 @@ export default function Home() {
       if (newMessage) {
         setFriendmessage(newMessage);
       } else {
-        setLeaveedboxshow(false);
+        setLeaveedboxshow(true);
       }
     };
 
@@ -373,9 +372,8 @@ export default function Home() {
 
       {mainlbox && (
         <>
-          <Menu /> {/* Render the Menu component */}
+          <Menu />
           <div className="h-screen w-screen bg-image-container lg:bg-cover text-center bg-contain bg-bottom pt-20">
-            {/* Content when meeting each other or looking for others */}
             <div
               onClick={searchPeople}
               className="h-screen w-screen cursor-pointer"

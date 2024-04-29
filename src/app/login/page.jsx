@@ -79,7 +79,7 @@ export default function page() {
   const [gencon, setgencon] = useState(false);
   const [interest, setInterest] = useState(false);
   const [Finish, setFinish] = useState(false);
-  const [errmessage, seterrmessage] = useState("");
+  const [errmessage, seterrmessage] = useState(null);
 
   // onclick
   const openEmail = async () => {
@@ -275,345 +275,354 @@ export default function page() {
 
   return (
     <>
-      <div className="lg:p-20 md:p-10">
-        <div className="lg:w-4/12 md:w-8/12 h-screen lg:h-full m-auto bg-slate-900 shadow-xl">
-          <h1 className="text-2xl font-bold p-5 text-center">Zane</h1>
-          <h1 className="text-slate-600 text-sm bg-slate-900 text-center ">
-            {errmessage}
-          </h1>
-          {/* email */}
-          {Email && (
-            <div className="p-2 lg:px-10 px-5">
-              <label
-                className="block p-2 text-lg text-slate-500"
-                htmlFor="email"
-              >
-                <h1 className="text-xl text-white p-4 text-center">
-                  Welcome Back
-                </h1>
-                To continue write your email
-              </label>
-              <input
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="Email"
-                onChange={(event) => {
-                  setUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-                type="email"
-                name="email"
-                id="email"
-              />
-              <button
-                onClick={openEmail}
-                className="block p-2 px-4 w-full bg-slate-600 my-5 text-black font-bold rounded-md"
-              >
-                Next
-              </button>
-              <h1 className="text-xl text-white p-4 text-center">Or</h1>
-              <button
-                onClick={hundleQuickLogin}
-                className="block p-2 px-4 w-full bg-slate-600 my-5 text-black font-bold rounded-md"
-              >
-                Quick Login
-              </button>
-              <div className="p-4 mt-10 text-slate-500 text-sm">
-                Read Our{" "}
-                <Link
-                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
-                  href={"/privecy-policy"}
-                >
-                  Privecy-Policy{" "}
-                </Link>
-                and{" "}
-                <Link
-                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
-                  href={"/term-service"}
-                >
-                  Term-Service
-                </Link>
-              </div>
-            </div>
-          )}
+      <div className="lg:p-20 md:p-10 lg:flex">
+        <div className="lg:w-6/12 hidden lg:block p-4 border border-red-500">
+          <h1 className="text-4xl font-bold text-white">About Zane Chat</h1>
+          <p className="text-lg font-bold text-red-400">Zane is a socila media platform deceloped by MD Naiem Hosen. This application has developed for meet friend and play game with strangers not for dating. You are welcome to Zane.</p>
+        </div>
+        <div className="lg:w-6/12">
 
-          {/* password */}
-          {Password && (
-            <div className="p-2 lg:px-10 px-5">
-              <label
-                className="block p-2 text-xl text-slate-500"
-                htmlFor="password"
-              >
-                What is your password?
-              </label>
-              <input
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="Password"
-                onChange={(event) => {
-                  setUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-                type="password"
-                name="password"
-                id="password"
-              />
-              <button
-                onClick={openPassword}
-                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
-              >
-                Next
-              </button>
-              <div className="p-4 mt-10 text-slate-500 text-sm">
-                Read Our{" "}
-                <Link
-                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
-                  href={"/privecy-policy"}
-                >
-                  Privecy-Policy{" "}
-                </Link>
-                and{" "}
-                <Link
-                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
-                  href={"/term-service"}
-                >
-                  Term-Service
-                </Link>
-              </div>
-            </div>
-          )}
-
-          {/* login password */}
-          {loginPassword && (
-            <div className="p-2 lg:px-10 px-5">
-              <label
-                className="block p-2 text-xl text-slate-500"
-                htmlFor="password"
-              >
-                Enter your password to login
-              </label>
-              <input
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="password"
-                onChange={(event) => {
-                  setLoginUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-                type="text"
-                name="password"
-                id="password"
-              />
-              <button
-                onClick={loginForPassword}
-                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
-              >
-                Next
-              </button>
-              <div className="p-4 mt-10 text-slate-500 text-sm">
-                Read Our{" "}
-                <Link
-                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
-                  href={"/privecy-policy"}
-                >
-                  Privecy-Policy{" "}
-                </Link>
-                and{" "}
-                <Link
-                  className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
-                  href={"/term-service"}
-                >
-                  Term-Service
-                </Link>
-              </div>
-            </div>
-          )}
-
-          {/* name */}
-          {nameBox && (
-            <div className="p-2 lg:px-10 px-5">
-              <label
-                className="block p-2 text-xl text-slate-500"
-                htmlFor="name"
-              >
-                What is your name?
-              </label>
-              <input
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                placeholder="Name"
-                onChange={(event) => {
-                  setUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-                type="text"
-                name="name"
-                id="name"
-              />
-              <button
-                onClick={showagebox}
-                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
-              >
-                Next
-              </button>
-            </div>
-          )}
-
-          {/* age */}
-          {ageBox && (
-            <div className="p-2 lg:px-10 px-5">
-              <label
-                className="block p-2 text-xl text-slate-500"
-                htmlFor="name"
-              >
-                What is your age?
-              </label>
-              <select
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                name="age"
-                id="age"
-                onChange={(event) => {
-                  setUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-                value={userInfo.age}
-              >
-                <option selected value="">
-                  Select
-                </option>
-                {ageArray.map((age) => (
-                  <>
-                    <option key={age} value={age}>
-                      {age}
-                    </option>
-                  </>
-                ))}
-              </select>
-              <button
-                onClick={openGenCon}
-                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
-              >
-                Next
-              </button>
-            </div>
-          )}
-
-          {/* gender and country */}
-          {gencon && (
-            <div className="p-2 lg:px-10 px-5">
-              <label
-                className="block p-2 text-xl text-slate-500"
-                htmlFor="country"
-              >
-                What is your Country?
-              </label>
-              <select
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                name="country"
-                id="country"
-                onChange={(event) => {
-                  setUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-                value={userInfo.country}
-              >
-                <option selected value="">
-                  Select
-                </option>
-                {countries.map((country) => (
-                  <>
-                    <option key={country.cca2} value={country.name.common}>
-                      {country.name.common}
-                    </option>
-                  </>
-                ))}
-              </select>
-
-              {/* gender */}
-              <label
-                className="block p-2 text-xl text-slate-500"
-                htmlFor="gender"
-              >
-                What is your gender?
-              </label>
-              <select
-                className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
-                name="gender"
-                id="gender"
-                onChange={(event) => {
-                  setUserInfo({
-                    ...userInfo,
-                    [event.target.name]: event.target.value,
-                  });
-                }}
-              >
-                <option value="" selected>
-                  Select
-                </option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-
-              <button
-                onClick={openIntarest}
-                className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
-              >
-                Next
-              </button>
-            </div>
-          )}
-
-          {/* Interest */}
-          {interest && (
-            <div className="p-2 lg:px-10 overflow-y-auto h-screen space-x-2 space-y-2 pb-52">
-              <h1 className="text-xl text-white font-bold p-4 text-center">
-                Choose your interest
-              </h1>
-              {interestOption.map((item) => (
+          <div className="lg:w-8/12 md:w-8/12 h-screen lg:h-full m-auto bg-slate-900 shadow-xl">
+            <h1 className="text-2xl font-bold p-5 text-center">Zane</h1>
+            {errmessage && 
+            <h1 className="border border-red-500 mx-10 flex items-center rounded-lg text-xs bg-red-950 text-white shadow-xl bg-transparent p-2 text-center ">
+              {errmessage}
+            </h1>}
+            {/* email */}
+            {Email && (
+              <div className="p-2 lg:px-10 px-5">
                 <label
-                  key={item}
-                  className={` inline-block rounded-3xl p-1 text-xs px-3 ${
-                    selectedOptions.includes(item)
-                      ? "bg-red-500 "
-                      : "bg-slate-800"
-                  } text-slate-50`}
+                  className="block p-2 text-lg text-slate-500"
+                  htmlFor="email"
                 >
-                  <input
-                    className="text-sm text-white hidden font-bold p-1 px-2 rounded-xl bg-slate-800"
-                    type="checkbox"
-                    checked={selectedOptions.includes(item)}
-                    onChange={() => handleCheckboxChange(item)}
-                  />
-                  {item}
+                  <h1 className="text-xl text-white p-4 text-center">
+                    Welcome Back
+                  </h1>
+                  To continue write your email
                 </label>
-              ))}
-              <div className="block fixed bottom-0 pb-14 left-0 w-full bg-slate-900 text-center">
+                <input
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  placeholder="Email"
+                  onChange={(event) => {
+                    setUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  type="email"
+                  name="email"
+                  id="email"
+                />
                 <button
-                  onClick={createid}
-                  className="bg-slate-600 my-2 p-2 w-6/12 m-auto inline-block text-black font-bold rounded-md"
+                  onClick={openEmail}
+                  className="block p-2 px-4 w-full bg-slate-600 my-5 text-black font-bold rounded-md"
                 >
-                  Filish
+                  Next
+                </button>
+                <h1 className="text-xl text-white p-4 text-center">Or</h1>
+                <button
+                  onClick={hundleQuickLogin}
+                  className="block p-2 px-4 w-full bg-slate-600 my-5 text-black font-bold rounded-md"
+                >
+                  Quick Login
+                </button>
+                <div className="p-4 mt-10 text-slate-500 text-sm">
+                  Read Our{" "}
+                  <Link
+                    className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                    href={"/privecy-policy"}
+                  >
+                    Privecy-Policy{" "}
+                  </Link>
+                  and{" "}
+                  <Link
+                    className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                    href={"/term-service"}
+                  >
+                    Term-Service
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* password */}
+            {Password && (
+              <div className="p-2 lg:px-10 px-5">
+                <label
+                  className="block p-2 text-xl text-slate-500"
+                  htmlFor="password"
+                >
+                  What is your password?
+                </label>
+                <input
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  placeholder="Password"
+                  onChange={(event) => {
+                    setUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                <button
+                  onClick={openPassword}
+                  className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+                >
+                  Next
+                </button>
+                <div className="p-4 mt-10 text-slate-500 text-sm">
+                  Read Our{" "}
+                  <Link
+                    className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                    href={"/privecy-policy"}
+                  >
+                    Privecy-Policy{" "}
+                  </Link>
+                  and{" "}
+                  <Link
+                    className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                    href={"/term-service"}
+                  >
+                    Term-Service
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* login password */}
+            {loginPassword && (
+              <div className="p-2 lg:px-10 px-5">
+                <label
+                  className="block p-2 text-xl text-slate-500"
+                  htmlFor="password"
+                >
+                  Enter your password to login
+                </label>
+                <input
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  placeholder="password"
+                  onChange={(event) => {
+                    setLoginUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  type="text"
+                  name="password"
+                  id="password"
+                />
+                <button
+                  onClick={loginForPassword}
+                  className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+                >
+                  Next
+                </button>
+                <div className="p-4 mt-10 text-slate-500 text-sm">
+                  Read Our{" "}
+                  <Link
+                    className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                    href={"/privecy-policy"}
+                  >
+                    Privecy-Policy{" "}
+                  </Link>
+                  and{" "}
+                  <Link
+                    className="text-slate-600 hover:underline no-underline pb-2 hover:text-slate-500"
+                    href={"/term-service"}
+                  >
+                    Term-Service
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* name */}
+            {nameBox && (
+              <div className="p-2 lg:px-10 px-5">
+                <label
+                  className="block p-2 text-xl text-slate-500"
+                  htmlFor="name"
+                >
+                  What is your name?
+                </label>
+                <input
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  placeholder="Name"
+                  onChange={(event) => {
+                    setUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  type="text"
+                  name="name"
+                  id="name"
+                />
+                <button
+                  onClick={showagebox}
+                  className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+                >
+                  Next
                 </button>
               </div>
-            </div>
-          )}
+            )}
 
-          {!Email && (
-            <button
-              onClick={backToRegister}
-              className="block p-2 px-4 w-full my-20 text-slate-500 font-bold rounded-md"
-            >
-              Back to register
-            </button>
-          )}
+            {/* age */}
+            {ageBox && (
+              <div className="p-2 lg:px-10 px-5">
+                <label
+                  className="block p-2 text-xl text-slate-500"
+                  htmlFor="name"
+                >
+                  What is your age?
+                </label>
+                <select
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  name="age"
+                  id="age"
+                  onChange={(event) => {
+                    setUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  value={userInfo.age}
+                >
+                  <option selected value="">
+                    Select
+                  </option>
+                  {ageArray.map((age) => (
+                    <>
+                      <option key={age} value={age}>
+                        {age}
+                      </option>
+                    </>
+                  ))}
+                </select>
+                <button
+                  onClick={openGenCon}
+                  className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+
+            {/* gender and country */}
+            {gencon && (
+              <div className="p-2 lg:px-10 px-5">
+                <label
+                  className="block p-2 text-xl text-slate-500"
+                  htmlFor="country"
+                >
+                  What is your Country?
+                </label>
+                <select
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  name="country"
+                  id="country"
+                  onChange={(event) => {
+                    setUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                  value={userInfo.country}
+                >
+                  <option selected value="">
+                    Select
+                  </option>
+                  {countries.map((country) => (
+                    <>
+                      <option key={country.cca2} value={country.name.common}>
+                        {country.name.common}
+                      </option>
+                    </>
+                  ))}
+                </select>
+
+                {/* gender */}
+                <label
+                  className="block p-2 text-xl text-slate-500"
+                  htmlFor="gender"
+                >
+                  What is your gender?
+                </label>
+                <select
+                  className="text-lg text-white font-bold block p-2 px-4 rounded-xl bg-slate-950 w-full"
+                  name="gender"
+                  id="gender"
+                  onChange={(event) => {
+                    setUserInfo({
+                      ...userInfo,
+                      [event.target.name]: event.target.value,
+                    });
+                  }}
+                >
+                  <option value="" selected>
+                    Select
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+
+                <button
+                  onClick={openIntarest}
+                  className="block p-2 px-4 w-full bg-slate-600 my-10 text-black font-bold rounded-md"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+
+            {/* Interest */}
+            {interest && (
+              <div className="p-2 lg:px-10 overflow-y-auto h-screen space-x-2 space-y-2 pb-52">
+                <h1 className="text-xl text-white font-bold p-4 text-center">
+                  Choose your interest
+                </h1>
+                {interestOption.map((item) => (
+                  <label
+                    key={item}
+                    className={` inline-block rounded-3xl p-1 text-xs px-3 ${
+                      selectedOptions.includes(item)
+                        ? "bg-red-500 "
+                        : "bg-slate-800"
+                    } text-slate-50`}
+                  >
+                    <input
+                      className="text-sm text-white hidden font-bold p-1 px-2 rounded-xl bg-slate-800"
+                      type="checkbox"
+                      checked={selectedOptions.includes(item)}
+                      onChange={() => handleCheckboxChange(item)}
+                    />
+                    {item}
+                  </label>
+                ))}
+                <div className="block fixed bottom-0 pb-14 left-0 w-full bg-slate-900 text-center">
+                  <button
+                    onClick={createid}
+                    className="bg-slate-600 my-2 p-2 w-6/12 m-auto inline-block text-black font-bold rounded-md"
+                  >
+                    Filish
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {!Email && (
+              <button
+                onClick={backToRegister}
+                className="block p-2 px-4 w-full my-20 text-slate-500 font-bold rounded-md"
+              >
+                Back to register
+              </button>
+            )}
+          </div>
+
         </div>
       </div>
     </>

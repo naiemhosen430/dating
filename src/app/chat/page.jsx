@@ -33,7 +33,6 @@ export default function page() {
       } catch (error) {
         console.error("Error updating ntf data:", error);
       } finally {
-        setLoading(false);
       }
     }
 
