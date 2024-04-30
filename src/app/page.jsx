@@ -102,7 +102,7 @@ export default function Home() {
       if (newMessage) {
         setFriendmessage(newMessage);
       } else {
-        setLeaveedboxshow(true);
+        setLeaveedboxshow(false);
       }
     };
 
