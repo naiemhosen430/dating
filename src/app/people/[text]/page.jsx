@@ -80,7 +80,7 @@ export default function Page() {
                     )}
                   </h1>
                   <div className="inline-block w-24 h-24 rounded-full">
-                    <div className="flex items-center justify-center bg-slate-900 w-24 h-24 rounded-full">
+                    <div className="flex items-center justify-center bg-slate-900 w-24 h-24 rounded-full overflow-hidden">
                       <Avater text={user?.profilepicture} />
                     </div>
                   </div>
