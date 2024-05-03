@@ -64,6 +64,7 @@ const MineContextProvider = ({ children }) => {
         const chatDataResponse = await axios.get("/api/chat");
         const chatData = chatDataResponse.data.data || null;
         if (chatData && chatData.length !== 0) {
+          console.log({chatData})
           for (const chat of chatData) {
             const otherUserId = chat?.chatids?.find((id) => id !== data?._id);
             try {
