@@ -63,6 +63,7 @@ const MineContextProvider = ({ children }) => {
       try {
         const chatDataResponse = await axios.get("/api/chat");
         const chatData = chatDataResponse.data.data || null;
+        console.log({chatData})
         if (chatData && chatData.length !== 0) {
           console.log({chatData})
           for (const chat of chatData) {
@@ -201,7 +202,7 @@ const MineContextProvider = ({ children }) => {
     if (myfriendid) {
       fetchData();
     }
-  }, []);
+  }, [myfriendid]);
 
   // useEffect(() => {
   //   if (data) {
