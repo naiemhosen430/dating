@@ -59,44 +59,43 @@ const MineContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchChatData = async () => {
-      let newChats = [];
       try {
         const chatDataResponse = await axios.get("/api/chat");
-        const chatData = chatDataResponse.data.data || null;
-        console.log({chatData})
-        if (chatData && chatData.length !== 0) {
-          console.log({chatData})
-          for (const chat of chatData) {
+        const chatData = chatDataResponse.data.data || [];
+        
+        if (chatData.length !== 0) {
+          const updatedChats = await Promise.all(chatData.map(async (chat) => {
             const otherUserId = chat?.chatids?.find((id) => id !== data?._id);
             try {
               if (otherUserId) {
-                const profileResponse = await axios.get(
-                  `/api/profile/${otherUserId}`
-                );
+                const profileResponse = await axios.get(`/api/profile/${otherUserId}`);
                 const profileData = profileResponse.data.data;
-
-                const chatWithProfile = {
+                
+                return {
                   ...chat,
                   profileInfo: profileData,
                 };
-
-                newChats.push(chatWithProfile);
               }
             } catch (error) {
               console.error(error);
+              return chat;
             }
-          }
+            return chat;
+          }));
+          
+          setChats(updatedChats);
+        } else {
+          setChats([]);
         }
-
-        setChats(newChats);
       } catch (err) {
         console.error(err);
         setChats(null);
       }
     };
-
+  
     fetchChatData();
   }, [data]);
+  
 
   useEffect(() => {
     if (data && setChats) {
