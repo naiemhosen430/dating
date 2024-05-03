@@ -140,9 +140,9 @@ const MineContextProvider = ({ children }) => {
                   };
 
                   const updatedChats = [
-                    ...chats.slice(0, indexToUpdate),
+                    ...chats.slice(0, indexToUpdate - 1),
                     updatedChat,
-                    ...chats.slice(indexToUpdate + 1),
+                    ...chats.slice(indexToUpdate + 1, chats.length),
                   ];
 
                   setChats(updatedChats);
@@ -150,16 +150,10 @@ const MineContextProvider = ({ children }) => {
                 break;
 
               case "delete":
-                const indexToDelete = chats?.findIndex(
-                  (chatItem) => chatItem?.id === chatId
+                const updatedChats = chats?.filter(
+                  (item) => item._id !== chatId
                 );
-
-                if (indexToDelete !== -1) {
-                  const updatedChats = chats?.filter(
-                    (_, index) => index !== indexToDelete
-                  );
-                  setChats(updatedChats);
-                }
+                setChats(updatedChats);
                 break;
 
               default:
@@ -167,8 +161,7 @@ const MineContextProvider = ({ children }) => {
             }
           };
 
-          const isChat = chats?.find((chatItem) => chatItem._id === id);
-          console.log(isChat);
+          const isChat = chats?.find((chatItem) => chatItem._id === chatId);
           const isAlreadyfnd = chats?.find(
             (chatItem) => chatItem?.friendaction === friendaction
           );
