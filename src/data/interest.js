@@ -1,6 +1,6 @@
 
 
-export default interestOption = [
+export const interestOption = [
     "Anime",
     "BTS",
     "Horror-Movies",
