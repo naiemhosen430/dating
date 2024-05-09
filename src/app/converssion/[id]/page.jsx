@@ -153,7 +153,7 @@ export default function Page() {
         const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
         await set(ntfRef, {
           ...existingNtfData,
-          neMsgData: `${existingNtfData.neMsgData}chatid:${chatidd},friendid:${data?._id}|`,
+          neMsgData: `${existingNtfData.neMsgData ? existingNtfData.neMsgData : ""}chatid:${chatidd},friendid:${data?._id}|`,
           msgUnseen: updatedMsgUnseen,
           msgtime: Date.now(),
         });
