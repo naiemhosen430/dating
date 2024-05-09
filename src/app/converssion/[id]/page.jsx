@@ -120,7 +120,7 @@ export default function Page() {
             ...existingNtfData,
             friendactiondata: JSON.stringify({
                 ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
-                chatId: response?.data?.data?._id,
+                friendid: response?.data?.data?._id,
                 action: "friend"
             }),
         });

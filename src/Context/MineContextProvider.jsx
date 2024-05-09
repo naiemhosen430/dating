@@ -126,7 +126,7 @@ console.log({msg})
         switch (data?.action) {
           case "friend":
             const indexToUpdate = chats?.findIndex(
-              (chatItem) => chatItem?._id === data?.chatId
+              (chatItem) => chatItem?._id === data?.friendid
             );
 
             if (indexToUpdate) {
@@ -147,7 +147,7 @@ console.log({msg})
 
           case "delete":
             const updatedChats = chats?.filter(
-              (item) => item._id !== data?.chatId
+              (item) => item._id !== data?.friendid
             );
             setChats(updatedChats);
             break;
@@ -170,7 +170,7 @@ console.log({msg})
 
           if ( neMsgData && neMsgData.length !== 0){
             neMsgData?.map((msg)=>{
-              if (msg && typeof(msg) === 'string') {
+              if (msg) {
                 try {
                     fetchProfileData(JSON.parse(msg), ntfData?.msgtime);
                 } catch (error) {
@@ -182,7 +182,7 @@ console.log({msg})
 
           if ( friendactiondata && friendactiondata.length !== 0){
             friendactiondata?.map((action)=>{
-              if (data && typeof(data) === 'string') {
+              if (data) {
                 try {
                   updateFriendState(JSON.parse(data));
                 } catch (error) {
