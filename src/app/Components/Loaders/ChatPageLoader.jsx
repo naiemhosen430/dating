@@ -1,5 +1,6 @@
 import React from 'react'
 import ButtonBer from '../Shared/ButtonBer'
+import Link from 'next/link'
 
 export default function ChatPageLoader() {
   return (
