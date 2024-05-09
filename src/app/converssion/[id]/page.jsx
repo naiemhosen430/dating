@@ -118,9 +118,12 @@ export default function Page() {
           const existingNtfData = snapshot.val();
           await set(ntfRef, {
             ...existingNtfData,
-            friendactiondata: `${existingNtfData?.friendactiondata ? existingNtfData?.friendactiondata : "" }chatId:${response?.data?.data?._id},action:friend|`,
-            friendaction: "friend",
-          });
+            friendactiondata: JSON.stringify({
+                ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
+                chatId: response?.data?.data?._id,
+                action: "friend"
+            }),
+        });
         } else {
         }
 
@@ -153,7 +156,14 @@ export default function Page() {
         const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
         await set(ntfRef, {
           ...existingNtfData,
-          neMsgData: `${existingNtfData.neMsgData ? existingNtfData.neMsgData : ""}chatid:${chatidd},friendid:${data?._id}|`,
+          neMsgData: JSON.stringify([
+            ...(existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []),
+            {
+                chatid: chatidd,
+                friendid: data?._id
+            }
+          ]),
+        
           msgUnseen: updatedMsgUnseen,
           msgtime: Date.now(),
         });
