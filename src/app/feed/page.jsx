@@ -69,7 +69,7 @@ export default function Page() {
   return (
     <>
       <div className="fixed bottom-32 right-4">
-        <Link href="/addpost">
+        <Link href="/ntf">
           <IoIosNotifications className="text-4xl block bg-black text-teal-50 p-2 my-5 rounded-full shadow-2xl" />
         </Link>
         <Link href="/addpost">
