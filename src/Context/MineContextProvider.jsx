@@ -164,10 +164,10 @@ console.log({msg})
           const ntfData = snapshot.val();
           console.log(ntfData)
           console.log(ntfData?.neMsgData)
-          const neMsgData = JSON.parse(ntfData?.neMsgData)
+          const neMsgData = ntfData?.neMsgData ? JSON.parse(ntfData?.neMsgData) : []
           console.log(neMsgData)
           console.log(ntfData?.friendactiondata)
-          const friendactiondata = JSON.parse(ntfData?.friendactiondata)
+          const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
           console.log({friendactiondata})
           setPandingMsg(ntfData.msgUnseen);
 
