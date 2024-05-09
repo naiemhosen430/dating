@@ -154,7 +154,7 @@ export default function InterestBox() {
             randomChat?.map((chat) => (
               <div className="inline-block w-8 h-8 rounded-full">
                 <Link href={`/converssion/${chat?.profileInfo?._id}`}>
-                  <div className=" bg-slate-900 rounded-full inline-block">
+                  <div className=" bg-slate-900 w-10 h-10 rounded-full inline-block">
                     <Avater text={chat?.profileInfo?.profilepicture} />
                   </div>
 

@@ -139,6 +139,7 @@ export default function page() {
         {/* header */}
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
+            <div className="w-10 h-10 rounded-full">
             <Link href={`/profile/${postInfo?.profile?._id}`}>
               <Avater text={postInfo?.profile?.profilepicture} />
               {/* <img
@@ -147,6 +148,7 @@ export default function page() {
                 alt=""
               /> */}
             </Link>
+            </div>
           </div>
           <div className="w-8/12">
             <h1 className="text-sm text-white font-bold">
