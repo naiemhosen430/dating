@@ -112,22 +112,7 @@ const MineContextProvider = ({ children }) => {
           const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
 
 
-          if (neMsgData && neMsgData.length !== 0){
-            console.log({neMsgData})
-            neMsgData?.map((msg)=>{
-              updateReciveMessage(msg, ntfData?.msgtime);
-            })
-          }
-
-          if (friendactiondata && friendactiondata.length !== 0){
-            console.log({friendactiondata})
-            friendactiondata?.map((action)=>{
-              updateFriendState(action);
-            })
-          }
-
-          setPandingMsg(ntfData.msgUnseen);
-
+          
       // functions 
       const updateReciveMessage = async (msg,time) => {
         console.log(" i am addfriend")
@@ -183,6 +168,24 @@ const MineContextProvider = ({ children }) => {
             break;
         }
       };
+      
+
+          if (neMsgData && neMsgData.length !== 0){
+            console.log({neMsgData})
+            neMsgData?.map((msg)=>{
+              updateReciveMessage(msg, ntfData?.msgtime);
+            })
+          }
+
+          if (friendactiondata && friendactiondata.length !== 0){
+            console.log({friendactiondata})
+            friendactiondata?.map((action)=>{
+              updateFriendState(action);
+            })
+          }
+
+          setPandingMsg(ntfData.msgUnseen);
+
 
 
 
