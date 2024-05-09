@@ -163,7 +163,9 @@ const MineContextProvider = ({ children }) => {
           const ntfData = snapshot.val();
           console.log(ntfData)
           const neMsgData = ntfData?.neMsgData?.split("|");
+          console.log(neMsgData)
           const friendactiondata = ntfData.friendactiondata.split("|");
+          console.log(friendactiondata)
           setPandingMsg(ntfData.msgUnseen);
 
           if ( neMsgData && neMsgData.length !== 0){
