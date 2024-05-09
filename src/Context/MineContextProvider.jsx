@@ -162,16 +162,12 @@ console.log({msg})
       const handleNotificationChange = (snapshot) => {
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
-          console.log(ntfData)
-          console.log(ntfData?.neMsgData)
           const neMsgData = ntfData?.neMsgData ? JSON.parse(ntfData?.neMsgData) : []
-          console.log(neMsgData)
-          console.log(ntfData?.friendactiondata)
           const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
-          console.log({friendactiondata})
           setPandingMsg(ntfData.msgUnseen);
 
-          if (neMsgData){
+          if (neMsgData && neMsgData.length === 0){
+            console.log({neMsgData})
             neMsgData?.map((msg)=>{
               if (msg) {
                 try {
@@ -183,7 +179,8 @@ console.log({msg})
             })
           }
 
-          if (friendactiondata){
+          if (friendactiondata && friendactiondata.length === 0){
+            console.log({friendactiondata})
             friendactiondata?.map((action)=>{
               if (action) {
                 try {
