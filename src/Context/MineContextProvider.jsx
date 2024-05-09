@@ -103,8 +103,13 @@ const MineContextProvider = ({ children }) => {
 
       // functions 
       const fetchProfileData = async (msg,time) => {
-        console.log(msg)
-        const ntfObj = await JSON.parse(msg ? msg : "")
+        if (msg && typeof(msg) === 'string') {
+          try {
+              ntfObj = JSON.parse(msg);
+          } catch (error) {
+              console.error("Error parsing JSON:", error);
+          }
+        }
         console.log(ntfObj)
         try {
           const profileResponse = await axios.get(`/api/profile/${ntfObj?.friendid}`);
@@ -125,7 +130,13 @@ const MineContextProvider = ({ children }) => {
       
       const updateFriendState = async (data) => {
         console.log(data)
-        const action = await JSON.parse(data ? data : "")
+        if (data && typeof(data) === 'string') {
+          try {
+            action = JSON.parse(data);
+          } catch (error) {
+              console.error("Error parsing JSON:", error);
+          }
+        }
         console.log(action)
         switch (action?.action) {
           case "friend":
