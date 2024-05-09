@@ -176,8 +176,14 @@ export default function Page() {
     }
   };
 
-  const OpenOption = () => {
-    setOprionBoxState(true);
+  const toggleOption = () => {
+    if (oprionBoxState){
+
+      setOprionBoxState(false);
+    }else{
+
+      setOprionBoxState(true);
+    }
   };
 
 
@@ -185,7 +191,7 @@ export default function Page() {
   return (
     <>
       {oprionBoxState && (
-        <ProfileActionPopup chatData={chatData} />
+        <ProfileActionPopup chatData={chatData} toggleOption={toggleOption} />
       )}
 
       <div className="lg:w-6/12 w-12/12 m-auto z-40 h-screen bg-slate-950">
@@ -202,7 +208,7 @@ export default function Page() {
           </div>
           <div className="w-2/12 text-right">
             <BsThreeDotsVertical
-              onClick={OpenOption}
+              onClick={toggleOption}
               className="inline-block"
             />
           </div>

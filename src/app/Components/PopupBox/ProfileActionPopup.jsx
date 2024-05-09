@@ -4,8 +4,10 @@ import { db } from "@/app/firebaseConfig";
 import { ref, get, set, push, off, onValue, remove } from "firebase/database";
 import { MineContext } from '@/Context/MineContextProvider';
 import { useContext } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ProfileActionPopup({chatData}) {
+export default function ProfileActionPopup({chatData, toggleOption}) {
+  const router = useRouter();
   const { chats, setChats, data } = useContext(MineContext);
     const deleChatHundler = async () => {
         try {
@@ -65,6 +67,13 @@ export default function ProfileActionPopup({chatData}) {
               className="p-2 w-full px-4 hover:bg-slate-900 my-2 text-sm rounded-md"
             >
               Block
+            </button>
+
+            <button
+              onClick={toggleOption}
+              className="p-2 w-full px-4 hover:bg-slate-800 bg-slate-900 my-2 text-sm rounded-md"
+            >
+              Cencel
             </button>
           </div>
         </div>
