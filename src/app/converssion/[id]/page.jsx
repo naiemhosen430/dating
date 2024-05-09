@@ -240,7 +240,7 @@ export default function Page() {
                         }`}
                         key={msg._id}
                       >
-                        <div className="inline-block bg-slate-900 w-11/12 rounded-xl p-2 px-3 text-white">
+                        <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
                           <h1 className="text-white py-1">
                             {msg.message ? (
                               msg.message
