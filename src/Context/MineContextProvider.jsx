@@ -103,8 +103,8 @@ const MineContextProvider = ({ children }) => {
 
       // functions 
       const fetchProfileData = async (msg,time) => {
+        let ntfObj
         if (msg && typeof(msg) === 'string') {
-          let ntfObj
           try {
               ntfObj = JSON.parse(msg);
           } catch (error) {
@@ -132,6 +132,7 @@ const MineContextProvider = ({ children }) => {
       const updateFriendState = async (data) => {
         console.log(data)
         if (data && typeof(data) === 'string') {
+          let action
           try {
             action = JSON.parse(data);
           } catch (error) {
