@@ -103,23 +103,15 @@ const MineContextProvider = ({ children }) => {
 
       // functions 
       const fetchProfileData = async (msg,time) => {
-        let ntfObj
-        if (msg && typeof(msg) === 'string') {
-          try {
-              ntfObj = JSON.parse(msg);
-          } catch (error) {
-              console.error("Error parsing JSON:", error);
-          }
-        }
-        console.log(ntfObj)
+console.log(msg)
         try {
-          const profileResponse = await axios.get(`/api/profile/${ntfObj?.friendid}`);
+          const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
           const profileData = profileResponse.data.data;
           const newChat = {
-            chatids: [data._id, ntfObj?.friendid],
+            chatids: [data._id, msg?.friendid],
             createdAt: time,
             type: "random",
-            _id: ntfObj?.chatid,
+            _id: msg?.chatid,
             profileInfo: profileData,
           };
           setChats((prevChats) => [...prevChats, newChat]);
@@ -131,25 +123,16 @@ const MineContextProvider = ({ children }) => {
       
       const updateFriendState = async (data) => {
         console.log(data)
-        let action
-        if (data && typeof(data) === 'string') {
-          try {
-            action = JSON.parse(data);
-          } catch (error) {
-              console.error("Error parsing JSON:", error);
-          }
-        }
-        console.log(action)
-        switch (action?.action) {
+        switch (data?.action) {
           case "friend":
             const indexToUpdate = chats?.findIndex(
-              (chatItem) => chatItem?._id === action?.chatId
+              (chatItem) => chatItem?._id === data?.chatId
             );
 
             if (indexToUpdate) {
               const updatedChat = {
                 ...chats[indexToUpdate],
-                type: action?.action,
+                type: data?.action,
               };
 
               const updatedChats = [
@@ -164,7 +147,7 @@ const MineContextProvider = ({ children }) => {
 
           case "delete":
             const updatedChats = chats?.filter(
-              (item) => item._id !== action?.chatId
+              (item) => item._id !== data?.chatId
             );
             setChats(updatedChats);
             break;
@@ -185,13 +168,25 @@ const MineContextProvider = ({ children }) => {
 
           if ( neMsgData && neMsgData.length !== 0){
             neMsgData?.map((msg)=>{
-              fetchProfileData(msg, ntfData?.msgtime);
+              if (msg && typeof(msg) === 'string') {
+                try {
+                    fetchProfileData(JSON.parse(msg), ntfData?.msgtime);
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
+              }
             })
           }
 
           if ( friendactiondata && friendactiondata.length !== 0){
             friendactiondata?.map((action)=>{
-              updateFriendState(action);
+              if (data && typeof(data) === 'string') {
+                try {
+                  updateFriendState(JSON.parse(data));
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
+              }
             })
           }
 
