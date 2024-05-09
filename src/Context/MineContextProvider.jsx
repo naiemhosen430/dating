@@ -163,7 +163,9 @@ console.log({msg})
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
           const neMsgData = ntfData?.neMsgData ? JSON.parse(ntfData?.neMsgData) : []
+          console.log({neMsgData})
           const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
+          console.log({friendactiondata})
           setPandingMsg(ntfData.msgUnseen);
 
           if (neMsgData && neMsgData.length === 0){
