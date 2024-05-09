@@ -1,8 +1,12 @@
+'use client'
 import axios from 'axios';
 import { db } from "@/app/firebaseConfig";
 import { ref, get, set, push, off, onValue, remove } from "firebase/database";
+import { MineContext } from '@/Context/MineContextProvider';
+import { useContext } from 'react';
 
-export default function ProfileActionPopup() {
+export default function ProfileActionPopup({chatData}) {
+  const { chats, setChats, data } = useContext(MineContext);
     const deleChatHundler = async () => {
         try {
           const response = await axios.delete(`/api/chat/delete/${chatData?._id}`);

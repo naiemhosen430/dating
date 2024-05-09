@@ -185,7 +185,7 @@ export default function Page() {
   return (
     <>
       {oprionBoxState && (
-        <ProfileActionPopup />
+        <ProfileActionPopup chatData={chatData} />
       )}
 
       <div className="lg:w-6/12 w-12/12 m-auto z-40 h-screen bg-slate-950">
