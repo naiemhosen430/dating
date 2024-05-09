@@ -45,7 +45,7 @@ export default function RecentlyBox() {
             <h1 className="text-xs text-center">No chats found</h1>
           ) : (
             randomChat?.map((chat) => (
-              <div className="inline-block w-8 h-8 rounded-full">
+              <div className="inline-block w-8 h-8 overflow-hidden rounded-full">
                 <Link href={`/converssion/${chat?.profileInfo?._id}`}>
                   <Avater text={chat?.profileInfo?.profilepicture} />
                   {/* <img

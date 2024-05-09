@@ -88,7 +88,7 @@ export default function Post({ post }) {
         <div className="flex items-center space-x-2">
           <div className="w-2/12 text-center">
             <Link href={`/profile/${post?.profile?._id}`}>
-              <div className="w-10 m-auto h-10 rounded-full block">
+              <div className="w-10 m-auto h-10 overflow-hidden rounded-full block">
                 <Avater text={post?.profile?.profilepicture} />
               </div>
               {/* <img
