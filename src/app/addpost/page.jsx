@@ -4,62 +4,18 @@ import Link from "next/link";
 import { CgArrowLeft } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MineContext } from "@/Context/MineContextProvider";
+import interestOption from './../../data/interest';
 
 export default function page() {
   const { handleAddPost, error, setError } = useContext(MineContext);
 
   const [postContent, setPostContent] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [interestOption] = useState([
-    "Anime",
-    "BTS",
-    "Horror-Movies",
-    "Coding",
-    "Music",
-    "Fitness",
-    "Travel",
-    "Gaming",
-    "Art",
-    "Books",
-    "Photography",
-    "Fashion",
-    "Food",
-    "Movies",
-    "Tech",
-    "Sports",
-    "Pets",
-    "Yoga",
-    "DIY",
-    "Dance",
-    "Cooking",
-    "Gardening",
-    "Crafts",
-    "Podcasts",
-    "Writing",
-    "Social-Media",
-    "Reading",
-    "Hiking",
-    "Sustainability",
-    "Finance",
-    "Volunteering",
-    "Comedy",
-    "Space",
-    "Marketing",
-    "Blockchain",
-    "Genealogy",
-    "Minimalism",
-    "Woodworking",
-    "Motorsports",
-    "Foraging",
-    "Astrophotography",
-    "Culinary",
-  ]);
 
   // Function to handle adding a new post
   const handleAddPostClient = () => {
     if (postContent && selectedOptions?.length !== 0) {
       handleAddPost(postContent, selectedOptions);
-      // Reset input fields after submitting
       setPostContent("");
       setSelectedOptions([]);
     } else {

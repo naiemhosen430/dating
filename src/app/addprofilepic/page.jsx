@@ -44,7 +44,7 @@ export default function Page() {
             } catch (error) {
                 setError('Error fetching images.');
             } finally {
-                setLoading(false); // Set loading state to false
+                setLoading(false);
             }
         } else {
             try {
@@ -106,7 +106,6 @@ export default function Page() {
             });
     };
 
-    console.log(allImages)
 
     return (
         <>
