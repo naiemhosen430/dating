@@ -104,6 +104,7 @@ const MineContextProvider = ({ children }) => {
       // functions 
       const fetchProfileData = async (msg,time) => {
         if (msg && typeof(msg) === 'string') {
+          let ntfObj
           try {
               ntfObj = JSON.parse(msg);
           } catch (error) {
