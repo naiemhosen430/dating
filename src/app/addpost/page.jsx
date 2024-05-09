@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CgArrowLeft } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MineContext } from "@/Context/MineContextProvider";
-import interestOption from './../../data/interest';
+import {interestOption} from './../../data/interest';
 
 export default function page() {
   const { handleAddPost, error, setError } = useContext(MineContext);
