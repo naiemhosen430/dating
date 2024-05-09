@@ -103,7 +103,7 @@ const MineContextProvider = ({ children }) => {
 
       // functions 
       const fetchProfileData = async (msg,time) => {
-console.log(msg)
+console.log({msg})
         try {
           const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
           const profileData = profileResponse.data.data;
@@ -122,7 +122,7 @@ console.log(msg)
 
       
       const updateFriendState = async (data) => {
-        console.log(data)
+        console.log({data})
         switch (data?.action) {
           case "friend":
             const indexToUpdate = chats?.findIndex(
@@ -163,7 +163,9 @@ console.log(msg)
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
           const neMsgData = ntfData?.neMsgData?.split("|");
+          console.log(ntfData?.friendactiondata)
           const friendactiondata = ntfData?.friendactiondata?.split("|");
+          console.log({friendactiondata})
           setPandingMsg(ntfData.msgUnseen);
 
           if ( neMsgData && neMsgData.length !== 0){
