@@ -101,9 +101,36 @@ const MineContextProvider = ({ children }) => {
     if (data && setChats) {
       const ntfRef = ref(db, "ntf/" + data?._id);
 
+
+
+
+
+      const handleNotificationChange = (snapshot) => {
+        if (snapshot.exists()) {
+          const ntfData = snapshot.val();
+          const neMsgData = ntfData?.neMsgData ? JSON.parse(ntfData?.neMsgData) : []
+          const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
+
+
+          if (neMsgData && neMsgData.length !== 0){
+            console.log({neMsgData})
+            neMsgData?.map((msg)=>{
+              updateReciveMessage(msg, ntfData?.msgtime);
+            })
+          }
+
+          if (friendactiondata && friendactiondata.length !== 0){
+            console.log({friendactiondata})
+            friendactiondata?.map((action)=>{
+              updateFriendState(action);
+            })
+          }
+
+          setPandingMsg(ntfData.msgUnseen);
+
       // functions 
-      const fetchProfileData = async (msg,time) => {
-console.log({msg})
+      const updateReciveMessage = async (msg,time) => {
+        console.log(" i am addfriend")
         try {
           const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
           const profileData = profileResponse.data.data;
@@ -122,7 +149,7 @@ console.log({msg})
 
       
       const updateFriendState = async (data) => {
-        console.log({data})
+        console.log(" i am message")
         switch (data?.action) {
           case "friend":
             const indexToUpdate = chats?.findIndex(
@@ -156,47 +183,6 @@ console.log({msg})
             break;
         }
       };
-
-
-
-      const handleNotificationChange = (snapshot) => {
-        if (snapshot.exists()) {
-          const ntfData = snapshot.val();
-          const neMsgData = ntfData?.neMsgData ? JSON.parse(ntfData?.neMsgData) : []
-          console.log({neMsgData})
-          const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
-          console.log({friendactiondata})
-          setPandingMsg(ntfData.msgUnseen);
-
-          if (neMsgData && neMsgData.length === 0){
-            console.log({neMsgData})
-            neMsgData?.map((msg)=>{
-              if (msg) {
-                try {
-                    fetchProfileData(msg, ntfData?.msgtime);
-                } catch (error) {
-                    console.error("Error parsing JSON:", error);
-                }
-              }
-            })
-          }
-
-          if (friendactiondata && friendactiondata.length === 0){
-            console.log({friendactiondata})
-            friendactiondata?.map((action)=>{
-              if (action) {
-                try {
-                  updateFriendState(action);
-                } catch (error) {
-                    console.error("Error parsing JSON:", error);
-                }
-              }
-            })
-          }
-
-
-
-
 
 
 
