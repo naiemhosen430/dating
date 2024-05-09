@@ -131,8 +131,8 @@ const MineContextProvider = ({ children }) => {
       
       const updateFriendState = async (data) => {
         console.log(data)
+        let action
         if (data && typeof(data) === 'string') {
-          let action
           try {
             action = JSON.parse(data);
           } catch (error) {
