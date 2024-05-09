@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { off, onValue, ref } from "firebase/database";
+import { off, onValue, ref, set } from "firebase/database";
 import { db } from "@/app/firebaseConfig";
 
 export const MineContext = createContext();
@@ -128,6 +128,15 @@ const MineContextProvider = ({ children }) => {
             profileInfo: profileData,
           };
           setChats((prevChats) => [...prevChats, newChat]);
+
+          const updatednotif = (ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []).filter((item) => item.friendid !== data?._id);
+
+          await set(ntfRef, {
+            ...ntfData,
+            neMsgData: JSON.stringify(updatednotif),
+          });
+          
+
         } catch (error) {
           console.error(error);
         }
@@ -156,6 +165,13 @@ const MineContextProvider = ({ children }) => {
 
               setChats(updatedChats);
             }
+
+            const updatednotif = (ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []).filter((item) => item.friendid !== data?._id);
+
+            await set(ntfRef, {
+              ...ntfData,
+              friendactiondata: JSON.stringify(updatednotif),
+          });
             break;
 
           case "delete":
