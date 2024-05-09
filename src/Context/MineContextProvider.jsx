@@ -162,8 +162,10 @@ console.log({msg})
       const handleNotificationChange = (snapshot) => {
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
+          console.log(ntfData?.neMsgData)
           const neMsgData = JSON.parse(ntfData?.neMsgData)
           console.log(neMsgData)
+          console.log(ntfData?.friendactiondata)
           const friendactiondata = JSON.parse(ntfData?.friendactiondata)
           console.log({friendactiondata})
           setPandingMsg(ntfData.msgUnseen);
