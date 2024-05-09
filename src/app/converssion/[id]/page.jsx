@@ -118,11 +118,13 @@ export default function Page() {
           const existingNtfData = snapshot.val();
           await set(ntfRef, {
             ...existingNtfData,
-            friendactiondata: JSON.stringify({
+            friendactiondata: JSON.stringify([
                 ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
-                friendid: response?.data?.data?._id,
-                action: "friend"
-            }),
+                {
+                  friendid: response?.data?.data?._id,
+                  action: "friend"
+                }
+            ]),
         });
         } else {
         }
