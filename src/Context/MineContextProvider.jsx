@@ -103,7 +103,7 @@ const MineContextProvider = ({ children }) => {
 
       // functions 
       const fetchProfileData = async (msg,time) => {
-        const ntfObj = JSON.parse(msg)
+        const ntfObj = JSON.parse(msg ? msg : "")
         console.log(ntfObj)
         try {
           const profileResponse = await axios.get(`/api/profile/${ntfObj?.friendid}`);
@@ -123,7 +123,7 @@ const MineContextProvider = ({ children }) => {
 
       
       const updateFriendState = async (data) => {
-        const action = JSON.parse(data)
+        const action = JSON.parse(data ? data : "")
         console.log(action)
         switch (action?.action) {
           case "friend":
