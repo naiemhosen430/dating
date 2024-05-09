@@ -151,19 +151,14 @@ export default function Page() {
       const snapshot = await get(ntfRef);
       if (snapshot.exists()) {
         const existingNtfData = snapshot.val();
-        const updatedMsgUnseen = (existingNtfData.msgUnseen || 0) + 1;
         await set(ntfRef, {
           ...existingNtfData,
-          newMsgId: chatidd,
-          id: data._id,
-          msgUnseen: updatedMsgUnseen,
+          neMsgData: `${existingNtfData.neMsgData}|chatid:${chatidd},friendid:${data?._id}`,
           msgtime: Date.now(),
         });
       } else {
         const newNtfData = {
-          newMsgId: chatidd,
-          id: data._id,
-          msgUnseen: 1,
+          neMsgData: `${existingNtfData.neMsgData}|chatid:${chatidd},friendid:${data?._id}`,
           msgtime: Date.now(),
         };
         await set(ntfRef, newNtfData);
