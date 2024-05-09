@@ -161,6 +161,7 @@ const MineContextProvider = ({ children }) => {
       const handleNotificationChange = (snapshot) => {
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
+          console.log(ntfData)
           const neMsgData = ntfData?.neMsgData?.split("|");
           const friendactiondata = ntfData.friendactiondata.split("|");
           setPandingMsg(ntfData.msgUnseen);
