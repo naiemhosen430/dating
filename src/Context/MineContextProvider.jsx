@@ -101,79 +101,89 @@ const MineContextProvider = ({ children }) => {
     if (data && setChats) {
       const ntfRef = ref(db, "ntf/" + data?._id);
 
+      // functions 
+      const fetchProfileData = async (msg,time) => {
+        const ntfObj = JSON.parse(msg)
+        try {
+          const profileResponse = await axios.get(`/api/profile/${ntfObj?.friendid}`);
+          const profileData = profileResponse.data.data;
+          const newChat = {
+            chatids: [data._id, ntfObj?.friendid],
+            createdAt: time,
+            type: "random",
+            _id: ntfObj?.chatid,
+            profileInfo: profileData,
+          };
+          setChats((prevChats) => [...prevChats, newChat]);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      
+      const updateFriendState = async (action) => {
+        switch (action?.action) {
+          case "friend":
+            const indexToUpdate = chats?.findIndex(
+              (chatItem) => chatItem?._id === action?.chatId
+            );
+
+            if (indexToUpdate) {
+              const updatedChat = {
+                ...chats[indexToUpdate],
+                type: action?.action,
+              };
+
+              const updatedChats = [
+                ...chats.slice(0, indexToUpdate - 1),
+                updatedChat,
+                ...chats.slice(indexToUpdate + 1, chats.length),
+              ];
+
+              setChats(updatedChats);
+            }
+            break;
+
+          case "delete":
+            const updatedChats = chats?.filter(
+              (item) => item._id !== action?.chatId
+            );
+            setChats(updatedChats);
+            break;
+
+          default:
+            break;
+        }
+      };
+
+
+
       const handleNotificationChange = (snapshot) => {
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
-          const chatId = ntfData.newMsgId;
-          const friendaction = ntfData.friendaction;
+          const neMsgData = ntfData?.neMsgData?.split("|");
+          const friendactiondata = ntfData.friendactiondata.split("|");
           setPandingMsg(ntfData.msgUnseen);
 
-          const id = ntfData.id;
-
-          const fetchProfileData = async (chatId, id) => {
-            try {
-              const profileResponse = await axios.get(`/api/profile/${id}`);
-              const profileData = profileResponse.data.data;
-              const newChat = {
-                chatids: [data._id, id],
-                createdAt: ntfData?.msgtime,
-                type: "random",
-                _id: chatId,
-                profileInfo: profileData,
-              };
-              setChats((prevChats) => [...prevChats, newChat]);
-            } catch (error) {
-              console.error(error);
-            }
-          };
-
-          const updateFriendState = async (chatId, action) => {
-            switch (action) {
-              case "friend":
-                const indexToUpdate = chats?.findIndex(
-                  (chatItem) => chatItem?._id === chatId
-                );
-
-                if (indexToUpdate !== -1) {
-                  const updatedChat = {
-                    ...chats[indexToUpdate],
-                    type: action,
-                  };
-
-                  const updatedChats = [
-                    ...chats.slice(0, indexToUpdate - 1),
-                    updatedChat,
-                    ...chats.slice(indexToUpdate + 1, chats.length),
-                  ];
-
-                  setChats(updatedChats);
-                }
-                break;
-
-              case "delete":
-                const updatedChats = chats?.filter(
-                  (item) => item._id !== chatId
-                );
-                setChats(updatedChats);
-                break;
-
-              default:
-                break;
-            }
-          };
-
-          const isChat = chats?.find((chatItem) => chatItem._id === chatId);
-          const isAlreadyfnd = chats?.find(
-            (chatItem) => chatItem?.friendaction === friendaction
-          );
-
-          if (!isChat) {
-            fetchProfileData(chatId, id);
+          if ( neMsgData && neMsgData.length !== 0){
+            neMsgData?.map((msg)=>{
+              fetchProfileData(msg, ntfData?.msgtime);
+            })
           }
 
-          if (!isAlreadyfnd && isChat) {
-            updateFriendState(chatId, friendaction);
+          if ( friendactiondata && friendactiondata.length !== 0){
+            friendactiondata?.map((action)=>{
+              updateFriendState(action);
+            })
           }
+
+
+
+
+
+
+
+
         }
       };
 

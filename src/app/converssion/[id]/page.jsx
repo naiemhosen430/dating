@@ -109,7 +109,6 @@ export default function Page() {
       const response = await axios.put(`/api/user/addfriend/${id}`);
       if (response?.data) {
         const newCreatedChat = response?.data.data;
-        const chatidd = response?.data?.data?._id;
         const profileInfo = response?.data.friend;
 
         const ntfRef = ref(db, "ntf/" + response?.data?.friend?._id);
@@ -119,7 +118,7 @@ export default function Page() {
           const existingNtfData = snapshot.val();
           await set(ntfRef, {
             ...existingNtfData,
-            newMsgId: chatidd,
+            friendactiondata: `${existingNtfData?.friendactiondata ? existingNtfData?.friendactiondata : "" }chatId:${response?.data?.data?._id},action:friend|`,
             friendaction: "friend",
           });
         } else {
@@ -151,14 +150,19 @@ export default function Page() {
       const snapshot = await get(ntfRef);
       if (snapshot.exists()) {
         const existingNtfData = snapshot.val();
+        const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
         await set(ntfRef, {
           ...existingNtfData,
-          neMsgData: `${existingNtfData.neMsgData}|chatid:${chatidd},friendid:${data?._id}`,
+          neMsgData: `${existingNtfData.neMsgData}chatid:${chatidd},friendid:${data?._id}|`,
+          msgUnseen: updatedMsgUnseen,
           msgtime: Date.now(),
         });
+
+
       } else {
         const newNtfData = {
-          neMsgData: `${existingNtfData.neMsgData}|chatid:${chatidd},friendid:${data?._id}`,
+          neMsgData: `chatid:${chatidd},friendid:${data?._id}|`,
+          msgUnseen: 1,
           msgtime: Date.now(),
         };
         await set(ntfRef, newNtfData);
