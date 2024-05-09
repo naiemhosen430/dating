@@ -162,17 +162,17 @@ console.log({msg})
       const handleNotificationChange = (snapshot) => {
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
-          const neMsgData = ntfData?.neMsgData?.split("|");
-          console.log(ntfData?.friendactiondata)
-          const friendactiondata = ntfData?.friendactiondata?.split("|");
+          const neMsgData = JSON.parse(ntfData?.neMsgData)
+          console.log(neMsgData)
+          const friendactiondata = JSON.parse(ntfData?.friendactiondata)
           console.log({friendactiondata})
           setPandingMsg(ntfData.msgUnseen);
 
-          if ( neMsgData && neMsgData.length !== 0){
+          if (neMsgData){
             neMsgData?.map((msg)=>{
               if (msg) {
                 try {
-                    fetchProfileData(JSON.parse(msg), ntfData?.msgtime);
+                    fetchProfileData(msg, ntfData?.msgtime);
                 } catch (error) {
                     console.error("Error parsing JSON:", error);
                 }
@@ -180,11 +180,11 @@ console.log({msg})
             })
           }
 
-          if ( friendactiondata && friendactiondata.length !== 0){
+          if (friendactiondata){
             friendactiondata?.map((action)=>{
-              if (data) {
+              if (action) {
                 try {
-                  updateFriendState(JSON.parse(data));
+                  updateFriendState(action);
                 } catch (error) {
                     console.error("Error parsing JSON:", error);
                 }
