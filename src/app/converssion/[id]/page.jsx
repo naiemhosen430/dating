@@ -156,8 +156,7 @@ export default function Page() {
       if (snapshot.exists()) {
         const existingNtfData = snapshot.val();
         const haventf = existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []
-        console.log({haventf})
-        const alreadyhave = (existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []).find((item) => item.friendid !== data?._id);
+        const alreadyhave = haventf.find((item) => item.friendid !== data?._id);
         console.log({alreadyhave})
         if (!alreadyhave){
           const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
