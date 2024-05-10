@@ -131,6 +131,7 @@ const MineContextProvider = ({ children }) => {
               _id: msg?.chatid,
               profileInfo: profileData,
             };
+            console.log({"hi":"i ammm"})
             setChats((prevChats) => [...prevChats, newChat]);
   
   
@@ -199,14 +200,12 @@ const MineContextProvider = ({ children }) => {
 
 
           if (neMsgData && neMsgData.length !== 0){
-            console.log({neMsgData})
             neMsgData?.map((msg)=>{
               updateReciveMessage(msg, ntfData?.msgtime);
             })
           }
 
           if (friendactiondata && friendactiondata.length !== 0){
-            console.log({friendactiondata})
             friendactiondata?.map((action)=>{
               updateFriendState(action);
             })
