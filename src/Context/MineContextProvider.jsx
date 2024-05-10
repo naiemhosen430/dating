@@ -116,7 +116,13 @@ const MineContextProvider = ({ children }) => {
           
       // functions 
       const updateReciveMessage = async (msg,time) => {
-        console.log(" i am message")
+
+        const checkChat = chats.find((chat)=> chat._id === msg?.chatid)
+
+        if (checkChat){
+          return false
+        }
+
         try {
           const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
           const profileData = profileResponse.data.data;
@@ -128,6 +134,8 @@ const MineContextProvider = ({ children }) => {
             profileInfo: profileData,
           };
           setChats((prevChats) => [...prevChats, newChat]);
+
+
 
           const updatednotif = (ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []).filter((item) => item.friendid !== data?._id);
 
