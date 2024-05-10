@@ -144,8 +144,7 @@ const MineContextProvider = ({ children }) => {
             const haventf = ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []
             console.log({haventf})
             const updatednotif = haventf.filter((item) => {
-              console.log(item.friendid, data?._id)
-              item.friendid !== data?._id
+              item.friendid !== msg?.friendid
             });
   
             console.log({updatednotif})
