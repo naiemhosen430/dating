@@ -136,22 +136,15 @@ const MineContextProvider = ({ children }) => {
             };
             setChats((prevChats) => [...prevChats, newChat]);
   
-  
 
-            console.log(ntfData.neMsgData)
-            console.log(JSON.parse(ntfData.neMsgData))
             
             const haventf = ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []
-            console.log({haventf})
             const updatednotif = haventf.filter((item) => {
-              console.log(item.friendid, msg?.friendid)
               item.friendid !== msg?.friendid
             });
   
             
-            console.log(data?._id)
             const ntfRef = ref(db, "ntf/" + data?._id);
-            console.log(ntfData.neMsgData)
 
             await set(ntfRef, {
               ...ntfData,
@@ -190,7 +183,10 @@ const MineContextProvider = ({ children }) => {
               setChats(updatedChats);
             }
 
-            const updatednotif = (ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []).filter((item) => item.friendid !== data?._id);
+            const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
+            const updatednotif = haventf.filter((item) => item.friendid !== data?.friendid);
+
+            const ntfRef = ref(db, "ntf/" + data?._id);
 
             await set(ntfRef, {
               ...ntfData,
