@@ -98,7 +98,8 @@ const MineContextProvider = ({ children }) => {
   
 
   useEffect(() => {
-    if (data && setChats) {
+    if (data && chats) {
+
       const ntfRef = ref(db, "ntf/" + data?._id);
 
 
@@ -118,6 +119,8 @@ const MineContextProvider = ({ children }) => {
       const updateReciveMessage = async (msg,time) => {
 
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
+        console.log(chats)
+        console.log(data)
 
         if (!checkChat){
           try {
@@ -225,7 +228,7 @@ const MineContextProvider = ({ children }) => {
     }
 
     // update chatid and id to database null
-  }, [data, setChats]);
+  }, [data, chats]);
 
   useEffect(() => {
     const fetchData = async () => {
