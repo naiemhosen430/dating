@@ -148,7 +148,9 @@ const MineContextProvider = ({ children }) => {
               item.friendid !== msg?.friendid
             });
   
-            console.log({updatednotif})
+            
+            console.log(data?._id)
+            const ntfRef = ref(db, "ntf/" + data?._id);
 
             await set(ntfRef, {
               ...ntfData,
