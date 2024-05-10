@@ -116,6 +116,8 @@ export default function Page() {
         const snapshot = await get(ntfRef);
         if (snapshot.exists()) {
           const existingNtfData = snapshot.val();
+
+
           await set(ntfRef, {
             ...existingNtfData,
             friendactiondata: JSON.stringify([

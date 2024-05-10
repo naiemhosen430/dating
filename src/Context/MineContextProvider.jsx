@@ -160,9 +160,9 @@ const MineContextProvider = ({ children }) => {
 
       
       const updateFriendState = async (data) => {
-        console.log(" i am addfirend")
         switch (data?.action) {
           case "friend":
+            console.log(chats)
             const indexToUpdate = chats?.findIndex(
               (chatItem) => chatItem?._id === data?.friendid
             );
@@ -180,14 +180,18 @@ const MineContextProvider = ({ children }) => {
             }
 
             const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
+            console.log({haventf})
             const updatednotif = haventf.filter((item) => item.friendid !== data?.friendid);
+
+            console.log({updatednotif})
 
             const ntfRef = ref(db, "ntf/" + data?._id);
 
             await set(ntfRef, {
               ...ntfData,
               friendactiondata: JSON.stringify(updatednotif),
-          });
+            });
+            console.log("hello");
             break;
 
           case "delete":
