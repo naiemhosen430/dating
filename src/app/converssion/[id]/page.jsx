@@ -155,20 +155,23 @@ export default function Page() {
       const snapshot = await get(ntfRef);
       if (snapshot.exists()) {
         const existingNtfData = snapshot.val();
-        const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
-        await set(ntfRef, {
-          ...existingNtfData,
-          neMsgData: JSON.stringify([
-            ...(existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []),
-            {
-                chatid: chatidd,
-                friendid: data?._id
-            }
-          ]),
-        
-          msgUnseen: updatedMsgUnseen,
-          msgtime: Date.now(),
-        });
+        const alreadyhave = (existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []).find((item) => item.friendid !== data?._id);
+        if (!alreadyhave){
+          const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
+          await set(ntfRef, {
+            ...existingNtfData,
+            neMsgData: JSON.stringify([
+              ...(existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []),
+              {
+                  chatid: chatidd,
+                  friendid: data?._id
+              }
+            ]),
+          
+            msgUnseen: updatedMsgUnseen,
+            msgtime: Date.now(),
+          });
+        }
 
 
       } else {
