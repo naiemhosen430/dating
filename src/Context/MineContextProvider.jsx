@@ -151,6 +151,7 @@ const MineContextProvider = ({ children }) => {
             
             console.log(data?._id)
             const ntfRef = ref(db, "ntf/" + data?._id);
+            console.log(ntfData.neMsgData)
 
             await set(ntfRef, {
               ...ntfData,
