@@ -156,12 +156,9 @@ export default function Page() {
       if (snapshot.exists()) {
         const existingNtfData = snapshot.val();
         const haventf = existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []
-        console.log({haventf})
         const alreadyhave = haventf.find((item) => {
-          console.log(item.friendid, data?._id)
-          item.friendid !== data?._id
+          item.friendid === data?._id
         });
-        console.log({alreadyhave})
         if (!alreadyhave){
           const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
           await set(ntfRef, {
