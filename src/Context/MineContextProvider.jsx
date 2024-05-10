@@ -109,6 +109,7 @@ const MineContextProvider = ({ children }) => {
       const handleNotificationChange = (snapshot) => {
         if (snapshot.exists()) {
           const ntfData = snapshot.val();
+          console.log({ntfData})
           const neMsgData = ntfData?.neMsgData ? JSON.parse(ntfData?.neMsgData) : []
           const friendactiondata = ntfData?.friendactiondata ? JSON.parse(ntfData?.friendactiondata) : []
           
