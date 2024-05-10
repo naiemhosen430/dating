@@ -118,7 +118,9 @@ const MineContextProvider = ({ children }) => {
       // functions 
       const updateReciveMessage = async (msg,time) => {
 
+        console.log({chats})
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
+        console.log({checkChat})
 
         if (!checkChat){
           try {
