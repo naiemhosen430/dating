@@ -177,7 +177,7 @@ const MineContextProvider = ({ children }) => {
                 type: data?.action,
               };
 
-              setChats({...newChatList, ...updatedChat});
+              setChats([...newChatList, {...updatedChat}]);
             }
 
             const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
