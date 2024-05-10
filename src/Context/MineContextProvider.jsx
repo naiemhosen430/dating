@@ -166,6 +166,7 @@ const MineContextProvider = ({ children }) => {
             const indexToUpdate = chats?.findIndex(
               (chatItem) => chatItem?._id === data?.friendid
             );
+            console.log(indexToUpdate)
 
             if (indexToUpdate) {
               const newChatList = chats?.filter(
@@ -176,7 +177,7 @@ const MineContextProvider = ({ children }) => {
                 type: data?.action,
               };
 
-              setChats({...newChatList, updatedChat});
+              setChats({...newChatList, ...updatedChat});
             }
 
             const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
