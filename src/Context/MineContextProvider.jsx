@@ -133,12 +133,11 @@ const MineContextProvider = ({ children }) => {
               _id: msg?.chatid,
               profileInfo: profileData,
             };
-            console.log({"hi":"i ammm"})
             setChats((prevChats) => [...prevChats, newChat]);
   
   
-            console.log({"hi":"before"})
 
+            console.log(ntfData.neMsgData)
             console.log(JSON.parse(ntfData.neMsgData))
   
             const updatednotif = (ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []).filter((item) => item.friendid !== data?._id);
