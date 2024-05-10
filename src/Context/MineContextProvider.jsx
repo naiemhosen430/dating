@@ -119,35 +119,34 @@ const MineContextProvider = ({ children }) => {
 
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
 
-        if (checkChat){
-          return false
+        if (!checkChat){
+          try {
+            const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
+            const profileData = profileResponse.data.data;
+            const newChat = {
+              chatids: [data._id, msg?.friendid],
+              createdAt: time,
+              type: "random",
+              _id: msg?.chatid,
+              profileInfo: profileData,
+            };
+            setChats((prevChats) => [...prevChats, newChat]);
+  
+  
+  
+            const updatednotif = (ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []).filter((item) => item.friendid !== data?._id);
+  
+            await set(ntfRef, {
+              ...ntfData,
+              neMsgData: JSON.stringify(updatednotif),
+            });
+            
+  
+          } catch (error) {
+            console.error(error);
+          }
         }
 
-        try {
-          const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
-          const profileData = profileResponse.data.data;
-          const newChat = {
-            chatids: [data._id, msg?.friendid],
-            createdAt: time,
-            type: "random",
-            _id: msg?.chatid,
-            profileInfo: profileData,
-          };
-          setChats((prevChats) => [...prevChats, newChat]);
-
-
-
-          const updatednotif = (ntfData.neMsgData ? JSON.parse(ntfData.neMsgData) : []).filter((item) => item.friendid !== data?._id);
-
-          await set(ntfRef, {
-            ...ntfData,
-            neMsgData: JSON.stringify(updatednotif),
-          });
-          
-
-        } catch (error) {
-          console.error(error);
-        }
       };
 
       
