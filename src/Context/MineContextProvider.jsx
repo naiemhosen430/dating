@@ -121,7 +121,6 @@ const MineContextProvider = ({ children }) => {
 
         console.log({chats})
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
-        console.log({checkChat})
 
         if (!checkChat){
           try {
@@ -169,18 +168,15 @@ const MineContextProvider = ({ children }) => {
             );
 
             if (indexToUpdate) {
+              const newChatList = chats?.filter(
+                (chatItem) => chatItem?._id !== data?.friendid
+              );
               const updatedChat = {
                 ...chats[indexToUpdate],
                 type: data?.action,
               };
 
-              const updatedChats = [
-                ...chats.slice(0, indexToUpdate - 1),
-                updatedChat,
-                ...chats.slice(indexToUpdate + 1, chats.length),
-              ];
-
-              setChats(updatedChats);
+              setChats({...newChatList, updatedChat});
             }
 
             const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
