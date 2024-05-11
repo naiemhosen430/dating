@@ -120,13 +120,16 @@ export default function Page() {
           console.log("step 4")
           const existingNtfData = snapshot.val();
           
+          console.log({existingNtfData})
+          console.log({ntfRef})
+          console.log(data._id)
 
           await set(ntfRef, {
             ...existingNtfData,
             friendactiondata: JSON.stringify([
                 ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
                 {
-                  friendid: response?.data?.data?._id,
+                  friendid: data?._id,
                   action: "friend"
                 }
             ]),
