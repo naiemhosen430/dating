@@ -190,9 +190,11 @@ const MineContextProvider = ({ children }) => {
             break;
 
           case "unfriend":
+            console.log({gettedData})
             const updatedChats = chats?.filter(
               (item) => item?.profileInfo?._id !== gettedData?.friendid
             );
+            console.log({updatedChats})
             setChats(updatedChats);
 
             
