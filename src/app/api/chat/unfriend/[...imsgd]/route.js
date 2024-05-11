@@ -45,6 +45,6 @@ export async function DELETE(NextRequest, res) {
       statusCode: 200,
     });
   } catch (error) {
-    console.error("Error:", error);
+    return Response.json({ message: error?.message }, { status: 498 });
   }
 }

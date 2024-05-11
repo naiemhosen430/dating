@@ -17,10 +17,6 @@ export async function GET(req) {
       statusCode: 200,
     });
   } catch (error) {
-    console.error("Error fetching chats:", error);
-    return Response.json({
-      message: "Failed to fetch chats",
-      statusCode: 500,
-    });
+    return Response.json({ message: error?.message }, { status: 498 });
   }
 }
