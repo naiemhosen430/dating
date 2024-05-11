@@ -160,9 +160,12 @@ export default function Page() {
 
 
   const updateNotification = async (ntfRef, chatidd) => {
+    console.log("hello")
     try {
       const snapshot = await get(ntfRef);
+      console.log({snapshot})
       if (snapshot.exists()) {
+        console.log("hello have")
         const existingNtfData = snapshot.val();
         const haventf = existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []
         const alreadyhave = haventf.find((item) => {
@@ -195,12 +198,18 @@ export default function Page() {
 
 
       } else {
-        const newNtfData = {
-          neMsgData: `chatid:${chatidd},friendid:${data?._id}|`,
+        console.log("hello not have")
+        await set(ntfRef, {
+          neMsgData: JSON.stringify([
+            {
+                chatid: chatidd,
+                friendid: data?._id
+            }
+          ]),
+        
           msgUnseen: 1,
           msgtime: Date.now(),
-        };
-        await set(ntfRef, newNtfData);
+        });
       }
     } catch (error) {
       console.error(
