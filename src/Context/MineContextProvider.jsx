@@ -161,6 +161,7 @@ const MineContextProvider = ({ children }) => {
       const updateFriendState = async (gettedData) => {
         switch (gettedData?.action) {
           case "friend":
+            console.log("i am add friend")
             const indexToUpdate = chats?.findIndex(
               (chatItem) => chatItem?._id === gettedData?.friendid
             );
@@ -190,6 +191,7 @@ const MineContextProvider = ({ children }) => {
             break;
 
           case "unfriend":
+            console.log("i am unfriend")
             const updatedChats = chats?.filter(
               (item) => item._id !== gettedData?.friendid
             );
