@@ -18,7 +18,7 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
               setChats(chats.filter((chat) => chat?._id !== chatData._id));
             });
     
-            const ntfRef = ref(db, "ntf/" + id);
+            const ntfRef = ref(db, "ntf/" + chatData?.profileInfo?._id);
     
             const snapshot = await get(ntfRef);
               if (snapshot.exists()) {
@@ -28,8 +28,8 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
                   friendactiondata: JSON.stringify([
                       ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
                       {
-                        friendid: response?.data?.data?._id,
-                        action: "friend"
+                        friendid: data?._id,
+                        action: "unfriend"
                       }
                   ]),
               });

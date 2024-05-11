@@ -162,11 +162,9 @@ const MineContextProvider = ({ children }) => {
       const updateFriendState = async (gettedData) => {
         switch (gettedData?.action) {
           case "friend":
-            console.log(chats)
             const indexToUpdate = chats?.findIndex(
               (chatItem) => chatItem?._id === gettedData?.friendid
             );
-            console.log(indexToUpdate)
 
             if (indexToUpdate) {
               const newChatList = chats?.filter(
@@ -180,26 +178,34 @@ const MineContextProvider = ({ children }) => {
               setChats([...newChatList, {...updatedChat}]);
             }
 
-            const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
-            console.log({haventf})
-            const updatednotif = haventf.filter((item) => item.friendid !== gettedData?.friendid);
+            const haventf2 = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
+            const updatednotif2 = haventf2.filter((item) => item.friendid !== gettedData?.friendid);
             
             
-            console.log(data?._id)
             const ntfRef = ref(db, "ntf/" + data?._id);
             
             await set(ntfRef, {
               ...ntfData,
-              friendactiondata: JSON.stringify(updatednotif),
+              friendactiondata: JSON.stringify(updatednotif2),
             });
-            console.log("hello");
             break;
 
-          case "delete":
+          case "unfriend":
             const updatedChats = chats?.filter(
               (item) => item._id !== gettedData?.friendid
             );
             setChats(updatedChats);
+
+            
+            const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
+            const updatednotif = haventf.filter((item) => item.friendid !== gettedData?.friendid);
+
+            const ntfRef2 = ref(db, "ntf/" + data?._id);
+            
+            await set(ntfRef2, {
+              ...ntfData,
+              friendactiondata: JSON.stringify(updatednotif),
+            });
             break;
 
           default:
