@@ -9,9 +9,9 @@ import { useRouter } from 'next/navigation';
 export default function ProfileActionPopup({chatData, toggleOption}) {
   const router = useRouter();
   const { chats, setChats, data } = useContext(MineContext);
-    const deleChatHundler = async () => {
+    const unfriendhundler = async () => {
         try {
-          const response = await axios.delete(`/api/chat/delete/${chatData?._id}`);
+          const response = await axios.delete(`/api/chat/unfriend/${chatData?._id}`);
           if (response?.data) {
             const chatRef = ref(db, "conversations/" + chatData?._id);
             remove(chatRef).then(() => {
@@ -60,7 +60,7 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
           <div className="bg-black p-5 w-12/12 lg:w-4/12 rounded-lg">
             {chatData?.type === "friend" ? (
             <button
-              onClick={deleChatHundler}
+              onClick={unfriendhundler}
               className="p-2 w-full px-4 hover:bg-slate-900 my-2 text-sm rounded-md"
             >
               Unfriend

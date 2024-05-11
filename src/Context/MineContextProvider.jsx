@@ -159,22 +159,22 @@ const MineContextProvider = ({ children }) => {
       };
 
       
-      const updateFriendState = async (data) => {
-        switch (data?.action) {
+      const updateFriendState = async (gettedData) => {
+        switch (gettedData?.action) {
           case "friend":
             console.log(chats)
             const indexToUpdate = chats?.findIndex(
-              (chatItem) => chatItem?._id === data?.friendid
+              (chatItem) => chatItem?._id === gettedData?.friendid
             );
             console.log(indexToUpdate)
 
             if (indexToUpdate) {
               const newChatList = chats?.filter(
-                (chatItem) => chatItem?._id !== data?.friendid
+                (chatItem) => chatItem?._id !== gettedData?.friendid
               );
               const updatedChat = {
                 ...chats[indexToUpdate],
-                type: data?.action,
+                type: gettedData?.action,
               };
 
               setChats([...newChatList, {...updatedChat}]);
@@ -182,12 +182,12 @@ const MineContextProvider = ({ children }) => {
 
             const haventf = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
             console.log({haventf})
-            const updatednotif = haventf.filter((item) => item.friendid !== data?.friendid);
-
-            console.log({updatednotif})
-
+            const updatednotif = haventf.filter((item) => item.friendid !== gettedData?.friendid);
+            
+            
+            console.log(data?._id)
             const ntfRef = ref(db, "ntf/" + data?._id);
-
+            
             await set(ntfRef, {
               ...ntfData,
               friendactiondata: JSON.stringify(updatednotif),
@@ -197,7 +197,7 @@ const MineContextProvider = ({ children }) => {
 
           case "delete":
             const updatedChats = chats?.filter(
-              (item) => item._id !== data?.friendid
+              (item) => item._id !== gettedData?.friendid
             );
             setChats(updatedChats);
             break;
