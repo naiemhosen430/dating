@@ -27,6 +27,7 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
               const existingNtfData = snapshot.val();
               console.log(existingNtfData)
               console.log(ntfRef)
+              console.log(data?._id)
               await set(ntfRef, {
                 ...existingNtfData,
                 friendactiondata: JSON.stringify([
@@ -37,6 +38,7 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
                     }
                 ]),
             });
+            console.log("hello")
 
             router.push("/chat");
             setOprionBoxState(false);
