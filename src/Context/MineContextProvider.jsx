@@ -29,7 +29,6 @@ const MineContextProvider = ({ children }) => {
       setAllfriendPost(responseMyData.data.data);
     } catch (error) {
       setAllfriendPost([]);
-      console.error({ error });
     }
   };
 
@@ -39,7 +38,6 @@ const MineContextProvider = ({ children }) => {
       setAllMyPost(responseMyData.data.data);
     } catch (error) {
       setAllMyPost([]);
-      console.error({ error });
     }
   };
 
@@ -50,7 +48,6 @@ const MineContextProvider = ({ children }) => {
         setData(responseMyData.data.data);
       } catch (error) {
         setData("");
-        console.error({ error });
       }
     };
 
@@ -77,7 +74,6 @@ const MineContextProvider = ({ children }) => {
                 };
               }
             } catch (error) {
-              console.error(error);
               return chat;
             }
             return chat;
@@ -88,7 +84,6 @@ const MineContextProvider = ({ children }) => {
           setChats([]);
         }
       } catch (err) {
-        console.error(err);
         setChats(null);
       }
     };
@@ -118,7 +113,6 @@ const MineContextProvider = ({ children }) => {
       // functions 
       const updateReciveMessage = async (msg,time) => {
 
-        console.log({chats})
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
 
         if (!checkChat){
@@ -151,7 +145,6 @@ const MineContextProvider = ({ children }) => {
             
   
           } catch (error) {
-            console.error(error);
           }
         }
 
@@ -161,14 +154,13 @@ const MineContextProvider = ({ children }) => {
       const updateFriendState = async (gettedData) => {
         switch (gettedData?.action) {
           case "friend":
-            console.log("i am add friend")
             const indexToUpdate = chats?.findIndex(
               (chatItem) => chatItem?._id === gettedData?.friendid
             );
 
             if (indexToUpdate) {
               const newChatList = chats?.filter(
-                (chatItem) => chatItem?._id !== gettedData?.friendid
+                (chatItem) => chatItem?.profileInfo?._id !== gettedData?.friendid
               );
               const updatedChat = {
                 ...chats[indexToUpdate],
@@ -191,9 +183,8 @@ const MineContextProvider = ({ children }) => {
             break;
 
           case "unfriend":
-            console.log("i am unfriend")
             const updatedChats = chats?.filter(
-              (item) => item._id !== gettedData?.friendid
+              (item) => item?.profileInfo?._id !== gettedData?.friendid
             );
             setChats(updatedChats);
 
@@ -327,7 +318,6 @@ const MineContextProvider = ({ children }) => {
         setError("Failed to add post");
       }
     } catch (error) {
-      console.error("Error adding post:", error);
       setError("Failed to add post");
     }
   };

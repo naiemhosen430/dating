@@ -18,16 +18,12 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
               setChats(chats.filter((chat) => chat?._id !== chatData._id));
             });
 
-            console.log(chatData?.profileInfo?._id)
     
             const ntfRef = ref(db, "ntf/" + chatData?.profileInfo?._id);
     
             const snapshot = await get(ntfRef);
             if (snapshot.exists()) {
               const existingNtfData = snapshot.val();
-              console.log(existingNtfData)
-              console.log(ntfRef)
-              console.log(data?._id)
               await set(ntfRef, {
                 ...existingNtfData,
                 friendactiondata: JSON.stringify([
@@ -38,7 +34,6 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
                     }
                 ]),
             });
-            console.log("hello")
 
             router.push("/chat");
             setOprionBoxState(false);

@@ -108,21 +108,15 @@ export default function Page() {
     try {
       const response = await axios.put(`/api/user/addfriend/${id}`);
       if (response?.data) {
-        console.log("step 1")
         const newCreatedChat = response?.data.data;
         const profileInfo = response?.data.friend;
         
         const ntfRef = ref(db, "ntf/" + response?.data?.friend?._id);
-        console.log("step 2")
         
         const snapshot = await get(ntfRef);
         if (snapshot.exists()) {
-          console.log("step 4")
           const existingNtfData = snapshot.val();
           
-          console.log({existingNtfData})
-          console.log({ntfRef})
-          console.log(data._id)
 
           await set(ntfRef, {
             ...existingNtfData,
@@ -134,7 +128,6 @@ export default function Page() {
                 }
             ]),
           });
-          console.log("step 5")
         } else {
         }
 
@@ -160,20 +153,15 @@ export default function Page() {
 
 
   const updateNotification = async (ntfRef, chatidd) => {
-    console.log("hello")
     try {
       const snapshot = await get(ntfRef);
-      console.log({snapshot})
       if (snapshot.exists()) {
-        console.log("hello have")
         const existingNtfData = snapshot.val();
         const haventf = existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []
         const alreadyhave = haventf.find((item) => {
-          console.log(item.friendid, data?._id)
           item.friendid === data?._id
         });
         const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
-        console.log({alreadyhave})
         if (!alreadyhave){
           await set(ntfRef, {
             ...existingNtfData,
@@ -198,7 +186,6 @@ export default function Page() {
 
 
       } else {
-        console.log("hello not have")
         await set(ntfRef, {
           neMsgData: JSON.stringify([
             {
