@@ -17,25 +17,29 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
             remove(chatRef).then(() => {
               setChats(chats.filter((chat) => chat?._id !== chatData._id));
             });
+
+            console.log(chatData?.profileInfo?._id)
     
             const ntfRef = ref(db, "ntf/" + chatData?.profileInfo?._id);
     
             const snapshot = await get(ntfRef);
-              if (snapshot.exists()) {
-                const existingNtfData = snapshot.val();
-                await set(ntfRef, {
-                  ...existingNtfData,
-                  friendactiondata: JSON.stringify([
-                      ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
-                      {
-                        friendid: data?._id,
-                        action: "unfriend"
-                      }
-                  ]),
-              });
-              
-              router.push("/chat");
-              setOprionBoxState(false);
+            if (snapshot.exists()) {
+              const existingNtfData = snapshot.val();
+              console.log(existingNtfData)
+              console.log(ntfRef)
+              await set(ntfRef, {
+                ...existingNtfData,
+                friendactiondata: JSON.stringify([
+                    ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
+                    {
+                      friendid: data?._id,
+                      action: "unfriend"
+                    }
+                ]),
+            });
+
+            router.push("/chat");
+            setOprionBoxState(false);
 
 
             } else {
