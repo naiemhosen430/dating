@@ -7,7 +7,7 @@ export async function DELETE(NextRequest, res) {
   // Assuming 'res' is your Express response object
   await dbconnect();
   try {
-    const id = NextRequest.url.split("delete/")[1];
+    const id = NextRequest.url.split("unfriend/")[1];
     const myData = getDetaFromToken();
 
     // delete oparation
