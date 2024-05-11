@@ -157,6 +157,10 @@ const MineContextProvider = ({ children }) => {
             const indexToUpdate = chats?.findIndex(
               (chatItem) => chatItem?._id === gettedData?.friendid
             );
+            console.log({chats})
+
+            console.log({indexToUpdate})
+            console.log({gettedData})
 
             if (indexToUpdate) {
               const newChatList = chats?.filter(
@@ -166,6 +170,9 @@ const MineContextProvider = ({ children }) => {
                 ...chats[indexToUpdate],
                 type: gettedData?.action,
               };
+
+              console.log({newChatList})
+              console.log({updatedChat})
 
               setChats([...newChatList, {...updatedChat}]);
             }
