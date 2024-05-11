@@ -33,7 +33,9 @@ export default function ProfileActionPopup({chatData, toggleOption}) {
                       }
                   ]),
               });
-
+              
+              router.push("/chat");
+              setOprionBoxState(false);
 
 
             } else {
