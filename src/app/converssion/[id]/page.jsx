@@ -108,15 +108,18 @@ export default function Page() {
     try {
       const response = await axios.put(`/api/user/addfriend/${id}`);
       if (response?.data) {
+        console.log("step 1")
         const newCreatedChat = response?.data.data;
         const profileInfo = response?.data.friend;
-
+        
         const ntfRef = ref(db, "ntf/" + response?.data?.friend?._id);
-
+        console.log("step 2")
+        
         const snapshot = await get(ntfRef);
         if (snapshot.exists()) {
+          console.log("step 4")
           const existingNtfData = snapshot.val();
-
+          
 
           await set(ntfRef, {
             ...existingNtfData,
@@ -127,7 +130,8 @@ export default function Page() {
                   action: "friend"
                 }
             ]),
-        });
+          });
+          console.log("step 5")
         } else {
         }
 
