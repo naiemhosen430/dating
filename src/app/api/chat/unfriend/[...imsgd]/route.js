@@ -12,13 +12,13 @@ export async function DELETE(NextRequest, res) {
 
     // delete oparation
     const chatdata = await Chat.findOne({ _id: id });
-    const friendid = chatdata?.chatids?.filter((cid)=> cid)
+    const friendid = chatdata?.chatids?.filter((cid)=> cid !== myData.id)
     await Chat.deleteOne({ _id: id });
 
     const myInfo = await User.findOne({_id: myData.id})
-    const friendInfo = await User.findOne({_id: id})
+    const friendInfo = await User.findOne({_id: friendid[0]})
 
-    const myfriends = myInfo?.friends?.filter((fid)=> fid !== id)
+    const myfriends = myInfo?.friends?.filter((fid)=> fid !== friendid[0])
 
     await User.updateOne({_id: myData.id},{
       $set: {
@@ -26,9 +26,9 @@ export async function DELETE(NextRequest, res) {
       }
     }) 
 
-    const friendfriends = myInfo?.friends?.filter((fid)=> fid !== id)
+    const friendfriends = friendInfo?.friends?.filter((fid)=> fid !== myData.id)
 
-    await User.updateOne({_id: myData.id},{
+    await User.updateOne({_id: friendid[0]},{
       $set: {
         friends: friendfriends
       }
