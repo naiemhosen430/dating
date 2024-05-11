@@ -155,12 +155,9 @@ const MineContextProvider = ({ children }) => {
         switch (gettedData?.action) {
           case "friend":
             const indexToUpdate = chats?.find(
-              (chatItem) => chatItem?._id === gettedData?.friendid
+              (chatItem) => chatItem?.profileInfo?._id === gettedData?.friendid
             );
-            console.log({chats})
 
-            console.log({indexToUpdate})
-            console.log({gettedData})
 
             if (indexToUpdate) {
               const newChatList = chats?.filter(
@@ -171,8 +168,6 @@ const MineContextProvider = ({ children }) => {
                 type: gettedData?.action,
               };
 
-              console.log({newChatList})
-              console.log({updatedChat})
 
               setChats([...newChatList, {...updatedChat}]);
             }
