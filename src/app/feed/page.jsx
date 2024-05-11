@@ -38,12 +38,11 @@ export default function Page() {
                 profile,
               };
 
-              newPosts.push(postWithProfile);
+              setAllPost((prevData) => [...prevData, postWithProfile]); 
             }
           }
         }
 
-        setAllPost((prevData) => [...prevData, ...newPosts]); // Concatenate new posts
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error

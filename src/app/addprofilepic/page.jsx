@@ -95,7 +95,6 @@ export default function Page() {
         axios
             .post('/api/picture', pictureState)
             .then((response) => {
-                console.log(response);
                 if (response.data.statusCode === 200) {
                     setAllImages([...allImages, response.data.data]);
                     setAdPicturePopup(false);
