@@ -98,9 +98,35 @@ export default function Page() {
             {allPost && allPost.length > 0 ? (
               allPost.map((post) => <Post key={post._id} post={post} />)
             ) : (
-              <h1 className="text-white text-xl text-center p-4">
-                No posts available
-              </h1>
+              <div className="p-2 my-10 loadingbig">
+              {/* header */}
+              <div className="flex items-center space-x-2">
+                <div className="w-2/12 text-center">
+                  <Link
+                    className="w-10 m-auto h-10 loading rounded-full block"
+                    href={""}
+                  ></Link>
+                </div>
+                <div className="w-8/12">
+                  <h1 className="text-sm loading text-white font-bold">
+                    <Link href={""}></Link>
+                  </h1>
+                  <h1 className="text-sm loading text-slate-600 font-bold"></h1>
+                </div>
+                <div className="w-2/12 loading text-2xl text-center"></div>
+              </div>
+    
+              {/* content */}
+              <div className="py-4 text-slate-600">
+                <p className="py-10 loadingbig"></p>
+              </div>
+    
+              {/* footer */}
+              <div className="flex items-center space-x-5">
+                <div className="w-6/12 text-sm loading cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+                <div className="w-6/12 loading text-sm cursor-pointer hover:bg-slate-600 text-center bg-slate-950 p-1 rounded-xl"></div>
+              </div>
+            </div>
             )}
             {loading && (
               <h1 className="text-white text-xl text-center p-4 pb-48">
