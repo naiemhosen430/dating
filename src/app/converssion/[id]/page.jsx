@@ -166,10 +166,12 @@ export default function Page() {
         const existingNtfData = snapshot.val();
         const haventf = existingNtfData.neMsgData ? JSON.parse(existingNtfData.neMsgData) : []
         const alreadyhave = haventf.find((item) => {
+          console.log(item.friendid, data?._id)
           item.friendid === data?._id
         });
+        const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
+        console.log({alreadyhave})
         if (!alreadyhave){
-          const updatedMsgUnseen = (existingNtfData.msgUnseencount || 0) + 1;
           await set(ntfRef, {
             ...existingNtfData,
             neMsgData: JSON.stringify([
@@ -180,6 +182,12 @@ export default function Page() {
               }
             ]),
           
+            msgUnseen: updatedMsgUnseen,
+            msgtime: Date.now(),
+          });
+        }else{
+          await set(ntfRef, {
+            ...existingNtfData,
             msgUnseen: updatedMsgUnseen,
             msgtime: Date.now(),
           });
