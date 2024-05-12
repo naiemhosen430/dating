@@ -7,6 +7,11 @@ const ntfSchema = Schema(
       required: true,
       default: "",
     },
+    ownerid: {
+      type: String,
+      required: true,
+      default: "",
+    },
     hostid: {
       type: String,
       required: true,

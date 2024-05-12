@@ -83,6 +83,7 @@ export default function Post({ post }) {
         const ntfresponse = await axios.post(`/api/ntf`, {
           host: data?.name,
           hostid: data?._id,
+          ownerid: profile?._id,
           picture: data?.profilepicture,
           action: "liked",
           content: `${data?.name} has liked in ${post.postcontent.slice(0, 20)}`,

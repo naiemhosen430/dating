@@ -32,7 +32,7 @@ export async function GET() {
 
       const myInfo = getDetaFromToken();
 
-      const allNyf = await Ntf.find({hostid:myInfo?.id});
+      const allNyf = await Ntf.find({ownerid:myInfo?.id});
 
       return Response.json({
       statusCode: 200,
