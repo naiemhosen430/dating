@@ -36,7 +36,7 @@ export async function GET() {
 
       return Response.json({
       statusCode: 200,
-      data: allNyf,
+      data: allNyf?.reverse(),
       message: "Successfully",
       });
   } catch (error) {
