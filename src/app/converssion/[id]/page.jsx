@@ -151,6 +151,55 @@ export default function Page() {
   };
 
 
+    // for send request
+    const sendRequesy = async () => {
+      try {
+        const response = await axios.put(`/api/user/sendrequest/${id}`);
+        if (response?.data) {
+          const mydata = response?.data.data;
+          const friendinfo = response?.data.friend;
+          
+          const ntfRef = ref(db, "ntf/" + friendinfo?._id);
+          
+          const snapshot = await get(ntfRef);
+          if (snapshot.exists()) {
+            const existingNtfData = snapshot.val();
+            
+  
+            await set(ntfRef, {
+              ...existingNtfData,
+              friendactiondata: JSON.stringify([
+                  ...(existingNtfData.friendactiondata ? JSON.parse(existingNtfData.friendactiondata) : []),
+                  {
+                    friendid: data?._id,
+                    action: "sendfriendreq"
+                  }
+              ]),
+            });
+          } else {
+          }
+  
+          const chatWithProfile = {
+            ...chatData,
+            profileInfo: mydata,
+          };
+  
+          const updatedChats = chats.map((chatItem) => {
+            if (chatItem._id === chatWithProfile?._id) {
+              return chatWithProfile;
+            }
+            return chatWithProfile;
+          });
+  
+          setChats(updatedChats);
+  
+        }
+      } catch (error) {}
+    };
+  
+
+
+
 
   const updateNotification = async (ntfRef, chatidd) => {
     try {
@@ -250,12 +299,25 @@ export default function Page() {
                 {chatData?.type === "friend" ? (
                   ""
                 ) : (
+                  chatData?.profileInfo?.friendrequest?.find((id)=> id === data?._id) ? 
+                  <div className="p-2 px-4 m-2 mx-4 rounded-xl bg-slate-800 flex justify-around items-center">
+                  <h1 className="text-sm text-white ">
+                    Do you want to accept as friends?
+                  </h1>
+                  <button
+                    onClick={addFriend}
+                    className="bg-slate-500 text-xs block p-2 px-4 text-white rounded-full"
+                  >
+                    Accept
+                  </button>
+                  </div>
+                  :
                   <div className="p-2 px-4 m-2 mx-4 rounded-xl bg-slate-800 flex justify-around items-center">
                     <h1 className="text-sm text-white ">
                       Do you want to add each other as friends?
                     </h1>
                     <button
-                      onClick={addFriend}
+                      onClick={sendRequesy}
                       className="bg-slate-500 text-xs block p-2 px-4 text-white rounded-full"
                     >
                       Add

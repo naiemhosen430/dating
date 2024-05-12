@@ -202,6 +202,33 @@ const MineContextProvider = ({ children }) => {
             });
             break;
 
+
+          case "sendfriendreq":
+            const updatedChatssendreq = chats.map((chatItem) => {
+              if (chatItem?.profileInfo?._id === gettedData?.friendid) {
+                return {
+                  ...chatItem,
+                  profileInfo:{
+                    friendrequest: [...chatData?.profileInfo?.friendrequest, data?._id]
+                  }
+                };
+              }
+              return chatItem;
+            });
+            setChats(updatedChatssendreq);
+
+            
+            const haventf3 = ntfData.friendactiondata ? JSON.parse(ntfData.friendactiondata) : []
+            const updatednotif3 = haventf3.filter((item) => item.friendid !== gettedData?.friendid);
+
+            const ntfRef3 = ref(db, "ntf/" + data?._id);
+            
+            await set(ntfRef3, {
+              ...ntfData,
+              friendactiondata: JSON.stringify(updatednotif3),
+            });
+            break;
+  
           default:
             break;
         }

@@ -47,6 +47,11 @@ const userSchema = Schema(
       required: false,
       default: [],
     },
+    friendrequest: {
+      type: Array,
+      required: false,
+      default: [],
+    },
     rendom: {
       type: Array,
       required: false,
