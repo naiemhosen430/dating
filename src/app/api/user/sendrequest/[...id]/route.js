@@ -24,30 +24,6 @@ export async function PUT(NextRequest) {
       { $push: { friendrequest: myData.id } }
     );
 
-    if (!updatedUser) {
-      return Response.json(
-        {
-          message: "Something wrong",
-          statusCode: 498,
-        },
-        { status: 498 }
-      );
-    }
-
-    const updatemine = await User.updateOne(
-      { _id: myData?.id },
-      { $push: { friendrequest: id } }
-    );
-
-    if (!updatemine) {
-      return Response.json(
-        {
-          message: "Something wrong",
-          statusCode: 498,
-        },
-        { status: 498 }
-      );
-    }
 
 
     const me = await User.findOne({ _id: myData.id });
