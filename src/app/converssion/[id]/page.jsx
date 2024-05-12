@@ -178,21 +178,7 @@ export default function Page() {
             });
           } else {
           }
-  
-          const chatWithProfile = {
-            ...chatData,
-            profileInfo: mydata,
-          };
-  
-          const updatedChats = chats.map((chatItem) => {
-            if (chatItem._id === chatWithProfile?._id) {
-              return chatWithProfile;
-            }
-            return chatWithProfile;
-          });
-  
-          setChats(updatedChats);
-  
+
         }
       } catch (error) {}
     };
