@@ -26,23 +26,23 @@ export async function POST(NextRequest) {
     }
   }
 
-export async function GET(NextRequest) {
-dbconnect();
-try {
+export async function GET() {
+  dbconnect();
+  try {
 
-    const myInfo = getDetaFromToken();
+      const myInfo = getDetaFromToken();
 
-    const allNyf = Ntf.find({hostid:myInfo?.id});
+      const allNyf = await Ntf.find({hostid:myInfo?.id});
 
-    return Response.json({
-    statusCode: 200,
-    data: allNyf,
-    message: "Successfully",
-    });
-} catch (error) {
-    return Response.json({
-    statusCode: 498,
-    message: error.message,
-    });
-}
+      return Response.json({
+      statusCode: 200,
+      data: allNyf,
+      message: "Successfully",
+      });
+  } catch (error) {
+      return Response.json({
+      statusCode: 498,
+      message: error.message,
+      });
+  }
 }
