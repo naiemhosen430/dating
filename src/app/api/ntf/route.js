@@ -42,7 +42,7 @@ try {
 } catch (error) {
     return Response.json({
     statusCode: 498,
-    message: "Server error",
+    message: error.message,
     });
 }
 }
