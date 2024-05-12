@@ -204,7 +204,7 @@ const MineContextProvider = ({ children }) => {
 
 
           case "sendfriendreq":
-            const updatedChatssendreq = chats.map((chatItem) => {
+            const updatedChatssendreq = chats?.filter((chatItem) => {
               if (chatItem?.profileInfo?._id === gettedData?.friendid) {
                 return {
                   ...chatItem,
@@ -215,6 +215,7 @@ const MineContextProvider = ({ children }) => {
               }
               return chatItem;
             });
+            console.log({updatedChatssendreq})
             setChats(updatedChatssendreq);
 
             

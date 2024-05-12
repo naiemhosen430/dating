@@ -19,9 +19,9 @@ export default function Page() {
   const [messageInput, setMessageInput] = useState("");
   const id = usePathname().split("converssion/")[1];
   const messagesEndRef = useRef(null);
-  const idString = id.toString();
+  const idString = id?.toString();
   const chatData = chats?.find(
-    (chat) => chat?.profileInfo?._id.toString() === idString
+    (chat) => chat?.profileInfo?._id?.toString() === idString
   );
 
   useEffect(() => {
