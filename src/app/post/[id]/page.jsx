@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
 import { CgArrowLeft, CgComment, CgHeart } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { db } from "@/app/firebaseConfig";
+import { ref, get, set, push, off, onValue, remove } from "firebase/database";
 import { FaHeart } from "react-icons/fa";
 import { MineContext } from "@/Context/MineContextProvider";
 import Avater from "@/app/Components/Box/Avater";
@@ -84,13 +86,18 @@ export default function page() {
 
   const sendComment = async () => {
     try {
-      const data = await axios.post(`/api/post/comment/${postInfo?._id}`, {
+      const response = await axios.post(`/api/post/comment/${postInfo?._id}`, {
         message: commentText,
       });
 
-      setCommentText("");
+      if (response?.data){
 
-      const updatedPost = data?.data?.data;
+
+
+
+        
+
+      const updatedPost = response?.data?.data;
       const profile = postInfo?.profile;
 
       const newUpdatedPost = {
@@ -106,6 +113,80 @@ export default function page() {
       });
 
       setAllPost(updatedPosts);
+
+
+
+
+
+
+        const ntfresponse = await axios.post(`/api/ntf`, {
+          host: data?.name,
+          hostid: data?._id,
+          ownerid: profile?._id,
+          picture: data?.profilepicture,
+          action: "commented",
+          content: `${commentText.slice(0, 10)} in ${postInfo.postcontent.slice(0, 20)}`,
+          link: `/post/${postInfo?._id}`,
+        });
+
+        
+
+        if (ntfresponse?.data){
+          
+          const ntfRef = ref(db, "ntf/" + profile._id);
+    
+          try {
+            const snapshot = await get(ntfRef);
+            if (snapshot.exists()) {
+              const existingNtfData = snapshot.val();
+              const updatedntfUnseen = (existingNtfData.ntfUnseencount || 0) + 1;
+              await set(ntfRef, {
+                ...existingNtfData,
+                neNtfData: JSON.stringify([
+                  ...(existingNtfData.neNtfData ? JSON.parse(existingNtfData.neNtfData) : []),
+                  {
+                      friendid: data?._id,
+                      msg: `${data?.name} has liked your post`
+                  }
+                ]),
+              
+                ntfUnseen: updatedntfUnseen,
+                msgtime: Date.now(),
+              });
+      
+      
+            } else {
+              await set(ntfRef, {
+                neNtfData: JSON.stringify([
+                  {
+                    friendid: data?._id,
+                    msg: `${data?.name} has liked your post`
+                  }
+                ]),
+              
+                ntfUnseen: 1,
+                msgtime: Date.now(),
+              });
+
+            }
+
+      setCommentText("");
+
+          } catch (error) {
+            console.error(
+              "Error checking or updating notification collection:",
+              error
+            );
+          }
+
+        }
+
+
+
+
+
+      }
+
     } catch (error) {
       console.error(error);
     }
