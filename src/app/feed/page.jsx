@@ -72,7 +72,7 @@ export default function Page() {
         {pandingNtf === 0 ? (
                 ""
               ) : (
-                <span className="text-xs mt-[-40px] top-0 bg-black text-white font-bold rounded-full p-1 px-2 ntftop">
+                <span className="text-xs top-0 bg-black text-white font-bold rounded-full p-1 px-2 ntftop">
                   {pandingNtf}
                 </span>
               )}
