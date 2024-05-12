@@ -137,10 +137,10 @@ export default function Post({ post }) {
 
 
 
+        setAllPost(updatedPosts);
       }
 
 
-      setAllPost(updatedPosts);
     } catch (error) {
       console.error(error);
     }
