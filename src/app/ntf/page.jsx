@@ -44,7 +44,7 @@ useEffect(()=>{
     </div>
     <div>
       {!ntfs || ntfs?.length === 0 ? (
-        <h1 className="py-60 text-center">No chat. Start texting</h1>
+        <h1 className="py-60 text-center">No notification have</h1>
       ) : (
         ntfs?.map((ntf) => (
           <Link key={ntf._id} href={ntf?.link}>

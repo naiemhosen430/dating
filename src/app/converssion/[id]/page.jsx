@@ -320,11 +320,15 @@ export default function Page() {
                     return (
                       <div
                         className={`p-2 ${
-                          msg.id === data._id ? "text-right" : ""
+                          msg.id === data._id ? "text-right ps-10" : "pr-10"
                         }`}
                         key={msg._id}
                       >
-                        <div className="inline-block bg-slate-900 rounded-xl p-2 px-3 text-white">
+                        <div
+                              className={`p-2 ${
+                                msg.id === data._id ? "bg-slate-900" : "bg-slate-700"
+                              } inline-block rounded-xl p-2 px-3 text-white`}
+                        >
                           <h1 className="text-white py-1">
                             {msg.message ? (
                               msg.message
@@ -345,7 +349,7 @@ export default function Page() {
             )
           ) : (
             // Loading effect
-            <h1 className="py-60 text-center">No chat. Start texting</h1>
+            <h1 className="py-60 text-center">Chat is loading....</h1>
           )}
           <div ref={messagesEndRef} />{" "}
           {/* Reference to the bottom of the message container */}
