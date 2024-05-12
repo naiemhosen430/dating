@@ -5,6 +5,7 @@ import { MineContext } from "@/Context/MineContextProvider";
 import { CgArrowLeft, CgSearch } from "react-icons/cg";
 import axios from "axios";
 import { updateNtfData } from "@/firebase/ntf";
+import Avater from "../Components/Box/Avater";
 
 export default function page() {
   const { setPandingNtf, data } = useContext(MineContext);
@@ -51,7 +52,7 @@ useEffect(()=>{
             <div className="flex items-center justify-center p-2 px-1">
               <div className="w-2/12 flex items-center rounded-full pb-1">
                 <div className="w-12 h-12 overflow-hidden bg-slate-900 rounded-full inline-block">
-                  <Avatar text={ntf?.picture} />
+                  <Avater text={ntf?.picture} />
                 </div>
               </div>
               <div className="w-10/12">
