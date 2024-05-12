@@ -19,9 +19,18 @@ export async function PUT(NextRequest) {
 
     const id = NextRequest.url.split("addfriend/")[1];
 
+    const mydatafapi = await User.findOne({ _id: myData.id });
+    const frienddata = await User.findOne({ _id: id });
+
+    const mysendreq = mydatafapi?.friendrequest?.filter((fid)=> fid !== id)
+    const friendsendreq = frienddata?.friendrequest?.filter((fid)=> fid !== myData.id)
+
+    const myfriendid = [...mydatafapi?.friends, id]
+    const friendfriendid = [...frienddata?.friends, myData.id]
+
     const updatedUser = await User.updateOne(
       { _id: id },
-      { $push: { friends: myData.id } }
+      { $set: { friends: friendfriendid, friendrequest: friendsendreq } }
     );
 
     if (!updatedUser) {
@@ -36,7 +45,7 @@ export async function PUT(NextRequest) {
 
     const updatemine = await User.updateOne(
       { _id: myData?.id },
-      { $push: { friends: id } }
+      { $set: { friends: myfriendid, friendrequest: mysendreq } }
     );
 
     if (!updatemine) {
