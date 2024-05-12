@@ -172,9 +172,10 @@ export default function page() {
           .put("/api/user/create", userInfo)
           .then((data) => {
             if (data.data.statusCode === 200) {
-              Cookies.set("accesstoken", data.data.data, { expires: 36500 });
-              setInterest(false);
+              Cookies.set("accesstoken", data.data.token, { expires: 36500 });
+              setData(data?.data?.data);
               router.push("/");
+              setInterest(false);
             } else {
               seterrmessage(data.data.message);
             }

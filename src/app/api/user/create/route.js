@@ -79,9 +79,7 @@ export async function PUT(NextRequest) {
         },
       }
     );
-    const user = await User.findOne({ email: data.email }).select(
-      "_id role email"
-    );
+    const user = await User.findOne({ email: data.email })
 
     const secretKey = process.env.TOKEN_SECRET;
     const userData = {
@@ -99,7 +97,8 @@ export async function PUT(NextRequest) {
     return Response.json({
       statusCode: 200,
       message: "success",
-      data: token,
+      data: user,
+      token,
     });
   } catch (error) {}
 }
