@@ -9,7 +9,7 @@ import { MineContext } from "@/Context/MineContextProvider";
 import ButtonBer from "../Components/Shared/ButtonBer";
 
 export default function Page() {
-  const { allPost, setAllPost } = useContext(MineContext);
+  const { allPost, setAllPost, pandingNtf } = useContext(MineContext);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef();
@@ -69,6 +69,13 @@ export default function Page() {
     <>
       <div className="fixed bottom-32 right-4">
         <Link href="/ntf">
+        {pandingNtf === 0 ? (
+                ""
+              ) : (
+                <span className="text-xs mt-[-40px] top-0 bg-black text-white font-bold rounded-full p-1 px-2 ntftop">
+                  {pandingNtf}
+                </span>
+              )}
           <IoIosNotifications className="text-4xl block bg-black text-teal-50 p-2 my-5 rounded-full shadow-2xl" />
         </Link>
         <Link href="/addpost">

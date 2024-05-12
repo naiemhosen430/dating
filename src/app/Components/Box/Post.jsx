@@ -6,6 +6,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { CgComment, CgHeart } from "react-icons/cg";
 import { FaHeart } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { db } from "@/app/firebaseConfig";
+import { ref, get, set, push, off, onValue, remove } from "firebase/database";
 import Avater from "./Avater";
 
 export default function Post({ post }) {
@@ -60,21 +62,83 @@ export default function Post({ post }) {
   const hundleLike = async () => {
     setLilLoader(true);
     try {
-      const data = await axios.post(`/api/post/like/${post?._id}`);
-      const updatedPost = data?.data?.data;
-      const profile = post?.profile;
+      const response = await axios.post(`/api/post/like/${post?._id}`);
+      if (response?.data){
+        const updatedPost = response?.data?.data;
+        const profile = post?.profile;
+  
+        const newUpdatedPost = {
+          ...updatedPost,
+          profile,
+        };
+  
+        const updatedPosts = allPost.filter((postItem) => {
+          if (postItem._id === newUpdatedPost._id) {
+            return newUpdatedPost;
+          }
+          return postItem;
+        });
 
-      const newUpdatedPost = {
-        ...updatedPost,
-        profile,
-      };
 
-      const updatedPosts = allPost.map((postItem) => {
-        if (postItem._id === newUpdatedPost._id) {
-          return newUpdatedPost;
+        const ntfresponse = await axios.post(`/api/ntf`, {
+          host: data?.name,
+          hostid: data?._id,
+          picture: data?.profilepicture,
+          action: "liked",
+          content: `${data?.name} has liked in ${post.postcontent.slice(0, 20)}`,
+          link: `/post/${post?._id}`,
+        });
+
+        if (ntfresponse?.data){
+          
+          const ntfRef = ref(db, "ntf/" + profile._id);
+    
+          try {
+            const snapshot = await get(ntfRef);
+            if (snapshot.exists()) {
+              const existingNtfData = snapshot.val();
+              const updatedntfUnseen = (existingNtfData.ntfUnseencount || 0) + 1;
+              await set(ntfRef, {
+                ...existingNtfData,
+                neNtfData: JSON.stringify([
+                  ...(existingNtfData.neNtfData ? JSON.parse(existingNtfData.neNtfData) : []),
+                  {
+                      friendid: data?._id,
+                      msg: `${data?.name} has liked your post`
+                  }
+                ]),
+              
+                ntfUnseen: updatedntfUnseen,
+                msgtime: Date.now(),
+              });
+      
+      
+            } else {
+              await set(ntfRef, {
+                neNtfData: JSON.stringify([
+                  {
+                    friendid: data?._id,
+                    msg: `${data?.name} has liked your post`
+                  }
+                ]),
+              
+                ntfUnseen: 1,
+                msgtime: Date.now(),
+              });
+            }
+          } catch (error) {
+            console.error(
+              "Error checking or updating notification collection:",
+              error
+            );
+          }
+
         }
-        return postItem;
-      });
+
+
+
+      }
+
 
       setAllPost(updatedPosts);
     } catch (error) {

@@ -7,7 +7,7 @@ import { LiaUserFriendsSolid } from "react-icons/lia";
 import { MdChat } from "react-icons/md";
 
 export default function ButtonBer() {
-  const { pandingMsg } = useContext(MineContext);
+  const { pandingMsg, pandingNtf } = useContext(MineContext);
   return (
     <>
       <div className="fixed bottom-0 w-full lg:p-6 p-5 px-2">
@@ -17,6 +17,13 @@ export default function ButtonBer() {
               href={"/feed"}
               className="flex py-2 items-center justify-center space-x-2 hover:bg-slate-800 rounded-2xl hover:text-yellow-50 text-slate-500 text-sm"
             >
+                            {pandingNtf === 0 ? (
+                ""
+              ) : (
+                <span className="text-xs mt-[-40px] top-0 bg-black text-white font-bold rounded-full p-1 px-2 ntftop">
+                  {pandingNtf}
+                </span>
+              )}
               <CgFeed /> <span>Feed</span>
             </Link>
           </div>

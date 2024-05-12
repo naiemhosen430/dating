@@ -20,8 +20,9 @@ const MineContextProvider = ({ children }) => {
   const [lilLoader, setLilLoader] = useState(null);
   const [allfriendPost, setAllfriendPost] = useState(null);
   const [pandingMsg, setPandingMsg] = useState(0);
+  const [pandingNtf, setPandingNtf] = useState(0);
   const [error, setError] = useState(null);
-
+  
   // Fetch website information on component mount
   const fetchfriendpostData = async (id) => {
     try {
@@ -249,6 +250,7 @@ const MineContextProvider = ({ children }) => {
           }
 
           setPandingMsg(ntfData.msgUnseen);
+          setPandingNtf(ntfData.ntfUnseen);
 
 
 
@@ -375,6 +377,8 @@ const MineContextProvider = ({ children }) => {
         fetchfriendpostData,
         pandingMsg,
         setPandingMsg,
+        pandingNtf,
+        setPandingNtf,
         error,
         setError,
         lilLoader,
