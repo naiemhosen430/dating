@@ -68,7 +68,7 @@ export default function Page() {
   return (
     <>
       <div className="fixed bottom-32 right-4">
-        <Link href="/ntf">
+        <Link href="/ntf" className="text-4xl block bg-black text-teal-50 p-2 my-5 rounded-full shadow-2xl">
         {pandingNtf === 0 ? (
                 ""
               ) : (
@@ -76,7 +76,7 @@ export default function Page() {
                   {pandingNtf}
                 </span>
               )}
-          <IoIosNotifications className="text-4xl block bg-black text-teal-50 p-2 my-5 rounded-full shadow-2xl" />
+          <IoIosNotifications />
         </Link>
         <Link href="/addpost">
           <IoMdAdd className="text-4xl block bg-black text-teal-50 p-2 rounded-full shadow-2xl" />
