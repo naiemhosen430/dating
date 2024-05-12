@@ -209,7 +209,7 @@ const MineContextProvider = ({ children }) => {
                 return {
                   ...chatItem,
                   profileInfo:{
-                    friendrequest: [...chatData?.profileInfo?.friendrequest, data?._id]
+                    friendrequest: [...chatItem?.profileInfo?.friendrequest, data?._id]
                   }
                 };
               }
