@@ -5,15 +5,15 @@ import InterestBox from "../Components/Box/InterestBox";
 import ChatBox from "../Components/Box/ChatBox";
 import ButtonBer from "../Components/Shared/ButtonBer";
 import { MineContext } from "@/Context/MineContextProvider";
-import { updateNtfData } from "@/firebase/ntf";
 import ChatPageLoader from "../Components/Loaders/ChatPageLoader";
 import SearchBar from "../Components/Shared/SearchBar";
+import { updateMsgData } from "@/firebase/ntf";
 
 export default function page() {
   const { chats, data } = useContext(MineContext);
 
   useEffect(() => {
-    updateNtfData(data);
+    updateMsgData(data);
   }, [data]);
 
   if (!data || !chats) {

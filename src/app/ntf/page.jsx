@@ -4,11 +4,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { MineContext } from "@/Context/MineContextProvider";
 import { CgArrowLeft, CgSearch } from "react-icons/cg";
 import axios from "axios";
+import { updateNtfData } from "@/firebase/ntf";
 
 export default function page() {
-  const { setPandingNtf } = useContext(MineContext);
+  const { setPandingNtf, data } = useContext(MineContext);
   const [ntfs, setNtf] = useState([])
 
+  useEffect(() => {
+    updateNtfData(data);
+  }, [data]);
+  
+useEffect(()=>{
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -22,6 +28,9 @@ export default function page() {
       setLoading(false);
     }
   };
+
+  fetchData()
+},[])
 
 
   return (
@@ -39,12 +48,29 @@ export default function page() {
 
         {ntfs.map((ntf) => (
               <Link key={ntf._id} href={ntf?.link}>
-                <div className="block w-full m-4 rounded-2xl shadow-lg p-3 bg-slate-950 text-center">
-                  <h1 className="text-sm text-white font-bold p-1">
-                    `${ntf?.host}, ${ntf?.action}`
-                  </h1>
 
+
+
+                <div className="flex items-center justify-center p-2 px-1">
+                  <div className="w-2/12 flex items-center rounded-full pb-1">
+                      <div className="w-12 h-12 overflow-hidden bg-slate-900 rounded-full inline-block">
+                        <Avater text={ntf?.picture} />
+                      </div>
+
+                  </div>
+                  <div className="w-10/12">
+                      <h1 className="text-sm px-2">
+                      `${ntf?.host}, ${ntf?.action}`
+                      </h1>
+                      <h1 className="text-xs px-2 text-red-400 text-right flex">
+                        {ntf?.content}
+                      </h1>
+                  </div>
                 </div>
+
+
+
+
               </Link>
             ))}
 
