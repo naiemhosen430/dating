@@ -31,6 +31,28 @@ useEffect(()=>{
   fetchData()
 },[])
 
+const formattime = (time) => {
+  const date = new Date(time);
+  const now = new Date();
+  const diff = now - date;
+
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30);
+
+  if (months > 0) {
+    return `${months}m ago`;
+  } else if (days > 0) {
+    return `${days}d ago`;
+  } else if (hours > 0) {
+    return `${hours}h ago`;
+  } else {
+    return `${minutes}m ago`;
+  }
+};
+
 
   return (
 <>
@@ -49,14 +71,22 @@ useEffect(()=>{
       ) : (
         ntfs?.map((ntf) => (
           <Link key={ntf._id} href={ntf?.link}>
-            <div className="flex items-center justify-center p-2 px-1">
-              <div className="w-2/12 flex items-center rounded-full pb-1">
+            <div className="flex items-center justify-center p-2 m-3 mx-4 bg-slate-900 px-1">
+              <div className="w-2/12 flex items-center justify-end rounded-full pb-1">
                 <div className="w-12 h-12 overflow-hidden bg-slate-900 rounded-full inline-block">
                   <Avater text={ntf?.picture} />
                 </div>
               </div>
               <div className="w-10/12">
                 <h1 className="text-sm px-2">{`${ntf?.host}, ${ntf?.action}`}</h1>
+            <h1 className="text-xs px-2 text-red-400 text-right flex">
+              <span className="w-8/12 text-left text-xs block">
+              {ntf?.content}
+              </span>
+              <span className="text-xs text-right w-4/12 block text-red-500">
+                {(ntf?.createdAt)}
+              </span>
+            </h1>
                 <h1 className="text-xs px-2 text-red-400 text-right flex">
                   {ntf?.content}
                 </h1>
