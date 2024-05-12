@@ -9,7 +9,7 @@ import Avater from "../Components/Box/Avater";
 
 export default function page() {
   const { setPandingNtf, data } = useContext(MineContext);
-  const [ntfs, setNtf] = useState([])
+  const [ntfs, setNtf] = useState(null)
 
   useEffect(() => {
     updateNtfData(data);
@@ -20,7 +20,7 @@ useEffect(()=>{
     try {
       const response = await axios.get(`/api/ntf`);
       if (response?.data){
-        setNtf((prevNtf) => [...prevNtf, ...response.data.data]);
+        setNtf([...ntfs || [], ...response.data.data]);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
