@@ -16,7 +16,6 @@ export default function Page() {
 
   useEffect(() => {
     fetchData();
-    addScrollListener();
   }, []);
 
   const fetchData = async () => {
@@ -43,7 +42,9 @@ export default function Page() {
           }
         }
 
+        setLoading(false); 
       } catch (error) {
+        setLoading(false); 
         console.error("Error fetching data:", error);
         // Handle error
       } finally {
@@ -52,18 +53,6 @@ export default function Page() {
     }
   };
 
-  const addScrollListener = () => {
-    const handleScroll = () => {
-      const { scrollTop, clientHeight, scrollHeight } = scrollRef.current;
-      if (scrollHeight - (scrollTop + clientHeight) < 40) {
-        fetchData();
-      }
-    };
-    window.addEventListener("scroll", handleScroll); 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  };
 
   return (
     <>
@@ -136,8 +125,9 @@ export default function Page() {
             </div>
             )}
             {loading && (
-              <h1 className="text-white text-xl text-center p-4 pb-48">
-                Loading more posts....
+              <h1  onClick={fetchData} className="text-white bg-slate-600 text-xl text-center p-4 pb-48">
+                {loading ? "Loading More Post ...." : "Click to Load more posts"}
+                
               </h1>
             )}
           </div>
