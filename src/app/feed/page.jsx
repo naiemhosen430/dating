@@ -124,12 +124,10 @@ export default function Page() {
               </div>
             </div>
             )}
-            {loading && (
-              <h1  onClick={fetchData} className="text-white bg-slate-600 text-xl text-center p-4 pb-48">
+              <h1  onClick={fetchData} className="text-white bg-slate-700 text-xl text-center p-4 mb-48">
                 {loading ? "Loading More Post ...." : "Click to Load more posts"}
                 
               </h1>
-            )}
           </div>
           <div className="w-5/12 lg:inline-block hidden">Hello</div>
         </div>
