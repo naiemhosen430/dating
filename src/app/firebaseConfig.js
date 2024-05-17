@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC9hixFRETX6wlshBUB9PWbHmlU4LgGR_U",
-  authDomain: "zane-3723d.firebaseapp.com",
-  databaseURL: "https://zane-3723d-default-rtdb.firebaseio.com",
-  projectId: "zane-3723d",
-  storageBucket: "zane-3723d.appspot.com",
-  messagingSenderId: "1006487651032",
-  appId: "1:1006487651032:web:a4395adbf0d8fa2784cdad",
+  apiKey: "AIzaSyCtendmKKrU8am76hpD3sPuWbxcoYImZNI",
+  authDomain: "zanechat-32cb4.firebaseapp.com",
+  projectId: "zanechat-32cb4",
+  storageBucket: "zanechat-32cb4.appspot.com",
+  messagingSenderId: "961097199266",
+  appId: "1:961097199266:web:64138a75abcdf1ceabb1fb",
+  measurementId: "G-0010FVQFQC"
 };
 
 const app = initializeApp(firebaseConfig);
