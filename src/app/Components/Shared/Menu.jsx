@@ -143,6 +143,13 @@ export default function Menu() {
               Privecy-Policy
             </Link>
             <Link
+              className="text-slate-500 hover:text-white px-4 py-2 block rounded-md"
+              onClick={toggleMenu}
+              href={""}
+            >
+              Download Zane Latest App
+            </Link>
+            <Link
               className="text-slate-500 my-4 bg-slate-800 rounded-lg shadow-md hover:text-white px-4 py-2 block hover:bg-slate-500 text-center"
               href={"/login"}
               onClick={toggleMenu}
