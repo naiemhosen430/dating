@@ -24,18 +24,7 @@ const MineContextProvider = ({ children }) => {
   const [pandingNtf, setPandingNtf] = useState(0);
   const [error, setError] = useState(null);
 
-  // request for permission 
-  useEffect(() => {
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission().then(permission => {
-        if (permission === 'granted') {
-          console.log('Notification permission granted.');
-        } else {
-          console.log('Notification permission denied.');
-        }
-      });
-    }
-  }, []);
+
 
   
   // Fetch website information on component mount
