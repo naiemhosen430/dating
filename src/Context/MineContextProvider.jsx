@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { off, onValue, ref, set } from "firebase/database";
 import { db } from "@/app/firebaseConfig";
+import { showNotification } from "@/utils/sendNotification";
 
 export const MineContext = createContext();
 
@@ -22,6 +23,20 @@ const MineContextProvider = ({ children }) => {
   const [pandingMsg, setPandingMsg] = useState(0);
   const [pandingNtf, setPandingNtf] = useState(0);
   const [error, setError] = useState(null);
+
+  // request for permission 
+  useEffect(() => {
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Notification permission granted.');
+        } else {
+          console.log('Notification permission denied.');
+        }
+      });
+    }
+  }, []);
+
   
   // Fetch website information on component mount
   const fetchfriendpostData = async (id) => {
@@ -114,11 +129,14 @@ const MineContextProvider = ({ children }) => {
       // functions 
       const updateReciveMessage = async (msg,time) => {
 
+        
+        
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
-
+        await showNotification(`${checkChat?.profilename} messaged you`, `${checkChat?.profileInfo?.name} has send you a message.`)
         if (!checkChat){
           try {
             const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
+            await showNotification(`${profileResponse?.name} messaged you`, `${profileResponse?.name} has send you a message.`)
             const profileData = profileResponse.data.data;
             const newChat = {
               chatids: [data._id, msg?.friendid],
@@ -158,6 +176,7 @@ const MineContextProvider = ({ children }) => {
             const indexToUpdate = chats?.find(
               (chatItem) => chatItem?.profileInfo?._id === gettedData?.friendid
             );
+            await showNotification("friend request accepted.", `${indexToUpdate?.name} has accepted your friend request.`)
 
 
             if (indexToUpdate) {
@@ -186,6 +205,7 @@ const MineContextProvider = ({ children }) => {
             break;
 
           case "unfriend":
+
             const updatedChats = chats?.filter(
               (item) => item?.profileInfo?._id !== gettedData?.friendid
             );
@@ -205,6 +225,11 @@ const MineContextProvider = ({ children }) => {
 
 
           case "sendfriendreq":
+            const indexToUpdate2 = chats?.find(
+              (chatItem) => chatItem?.profileInfo?._id === gettedData?.friendid
+            );
+            await showNotification("friend request send.", `${indexToUpdate2?.name} has send you friend request.`)
+
             const updatedChatssendreq = chats?.filter((chatItem) => {
               if (chatItem?.profileInfo?._id === gettedData?.friendid) {
                 return {
