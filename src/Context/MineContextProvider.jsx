@@ -132,7 +132,7 @@ const MineContextProvider = ({ children }) => {
         
         
         const checkChat = chats?.find((chat)=> chat._id === msg?.chatid)
-        await showNotification(`${checkChat?.profilename} messaged you`, `${checkChat?.profileInfo?.name} has send you a message.`)
+        await showNotification(`${checkChat?.profileInfo?.name} messaged you`, `${checkChat?.profileInfo?.name} has send you a message.`)
         if (!checkChat){
           try {
             const profileResponse = await axios.get(`/api/profile/${msg?.friendid}`);
@@ -166,7 +166,12 @@ const MineContextProvider = ({ children }) => {
           } catch (error) {
           }
         }
-
+        const ntfRef3 = ref(db, "ntf/" + data?._id);
+            
+        await set(ntfRef3, {
+          ...ntfData,
+          neMsgData: JSON.stringify([]),
+        });
       };
 
       
